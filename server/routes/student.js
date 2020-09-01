@@ -8,9 +8,8 @@ const auth = require("../middleware/auth");
 
 const Student = require("../models/Student");
 
-router.get("/", (req, res) => {
-  const students = Student.find();
-  res.send(students);
+router.get("/", auth, async (req, res) => {
+  console.log(req.body.data);
 });
 
 router.post("/add", async (req, res) => {
@@ -23,6 +22,7 @@ router.post("/add", async (req, res) => {
   } else {
     const name = firstName + " " + lastName;
     let password = genRandPass();
+    console.log(`password: ${password}`);
     const salt = await bcrypt.genSalt();
     password = await bcrypt.hash(password, salt);
     const student = new Student({ name, email, studentClass, password });
@@ -37,8 +37,21 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.post("/login", auth, async (req, res) => {
-  console.log(req.body.data);
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const user = await Student.findOne({ email });
+  const passMatches = await bcrypt.compare(password, user.password);
+  if (passMatches) {
+    const payload = {
+      data: {
+        id: user.id,
+      },
+    };
+    const token = jwt.sign(payload, process.env.JWT_SECRET);
+    res.send(token);
+  } else {
+    res.status(400).send("Wrong credentials");
+  }
 });
 
 module.exports = router;
