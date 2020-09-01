@@ -4,6 +4,7 @@ const StudentSchema = mongoose.Schema({
   email: String,
   password: String,
   studentClass: String,
+  rank: { type: String, default: "0" },
 });
 
 module.exports = mongoose.model("student", StudentSchema);
