@@ -1,4 +1,6 @@
 const { Router } = require("express");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 router = Router();
 
 const { trimObj, genRandPass } = require("../utils/common");
@@ -10,13 +12,22 @@ router.get("/", (req, res) => {
   res.send(students);
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   let obj = req.body;
   obj = trimObj(obj);
   const { firstName, lastName, email, studentClass } = obj;
-  const name = firstName + " " + lastName;
-  const pass = genRandPass();
-  console.log(name, email, studentClass, pass);
+  const stu = await Student.findOne({ email });
+  if (stu) {
+    res.status(400).send("User already exists");
+  } else {
+    const name = firstName + " " + lastName;
+    let password = genRandPass();
+    const salt = await bcrypt.genSalt();
+    password = await bcrypt.hash(password, salt);
+    const student = new Student({ name, email, studentClass, password });
+    await student.save();
+    res.send(student);
+  }
 });
 
 module.exports = router;
