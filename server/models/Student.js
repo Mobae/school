@@ -6,4 +6,4 @@ const StudentSchema = mongoose.Schema({
   class: String,
 });
 
-mongoose.model("student", StudentSchema);
+module.exports = mongoose.model("student", StudentSchema);

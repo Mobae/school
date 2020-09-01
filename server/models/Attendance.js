@@ -4,4 +4,4 @@ const AttendanceSchema = mongoose.Schema({
   status: String,
 });
 
-mongoose.model("attendance", AttendanceSchema);
+module.exports = mongoose.model("attendance", AttendanceSchema);
