@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 router = Router();
 
 const { trimObj, genRandPass } = require("../utils/common");
+const auth = require("../middleware/auth");
 
 const Student = require("../models/Student");
 
@@ -12,7 +13,7 @@ router.get("/", (req, res) => {
   res.send(students);
 });
 
-router.post("/", async (req, res) => {
+router.post("/add", async (req, res) => {
   let obj = req.body;
   obj = trimObj(obj);
   const { firstName, lastName, email, studentClass } = obj;
@@ -26,8 +27,18 @@ router.post("/", async (req, res) => {
     password = await bcrypt.hash(password, salt);
     const student = new Student({ name, email, studentClass, password });
     await student.save();
-    res.send(student);
+    const payload = {
+      data: {
+        id: student.id,
+      },
+    };
+    const token = jwt.sign(payload, process.env.JWT_SECRET);
+    res.send(token);
   }
+});
+
+router.post("/login", auth, async (req, res) => {
+  console.log(req.body.data);
 });
 
 module.exports = router;
