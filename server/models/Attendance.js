@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const UserSchema = mongoose.Schema({
+const AttendanceSchema = mongoose.Schema({
   date: Date,
   status: String,
 });
 
-mongoose.model("attendance", AttendanceSchema);
+module.exports = mongoose.model("attendance", AttendanceSchema);
