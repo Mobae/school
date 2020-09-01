@@ -18,19 +18,30 @@ const Profile = () => {
         />
         <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
       </Appbar.Header>
-      <View style={styles.avatar_icon}>
-        <Avatar.Icon size={150} icon="account" />
+      <View style={styles.profile_info}>
+        <View>
+          <Avatar.Icon size={150} icon="account" style={styles.avatar_icon} />
+        </View>
+        <View style={{ marginLeft: 30 }}>
+          <Text>Abhishek Singh Dhakad</Text>
+          <Text>Class Assigned: 2nd</Text>
+        </View>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  profile_info: {
+    padding: 20,
+    display: 'flex',
+    flexDirection: 'row',
+  },
   appbar_content: {
     // alignItems: 'center',
   },
   avatar_icon: {
-    padding: 20,
+    backgroundColor: '#4F8670',
   },
 });
 
