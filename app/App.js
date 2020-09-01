@@ -1,12 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Profile from './components/profile/Profile';
+import { Button } from 'react-native-paper';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Profile />
+      <Text>This Is A Button</Text>
+      <Button
+        icon="camera"
+        mode="contained"
+        color=""
+        onPress={() => console.log('Pressed')}
+      >
+        Press me
+      </Button>
       <StatusBar style="auto" />
     </View>
   );
@@ -15,8 +23,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    backgroundColor: 'skyblue',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
