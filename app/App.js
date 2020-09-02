@@ -1,20 +1,14 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Provider as PaperProvider } from "react-native-paper";
-import { Button } from "react-native-paper";
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Profile from './components/profile/Profile';
+import AllStudentsAttendance from './components/profile/AllStudentsAttendance';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Hello World</Text>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => console.log("Pressed")}
-      >
-        Press me
-      </Button>
+      {/* <Profile /> */}
+      <AllStudentsAttendance />
       <StatusBar style="auto" />
     </View>
   );
@@ -23,8 +17,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "skyblue",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });
