@@ -15,6 +15,39 @@ router.get("/", auth, async (req, res) => {
   console.log(req.body.data);
 });
 
+router.get("/student/:studentId", async(req, res) => {
+  try {
+    const student = await Student.findById(req.params.studentId);
+
+    return res.status(200).json({
+      'sucess': true,
+      'data': student
+    });
+  } catch (err) {
+    return res.status(404).json({
+      'sucess': false,
+      'error': err
+    });
+  }
+});
+
+router.get("/teacher/:teacherId", async(req, res) => {
+  try {
+    const teacher = await Teacher.findById(req.params.teacherId);
+    console.log(teacher);
+
+    return res.status(200).json({
+      'success': true,
+      'data': teacher
+    })
+  } catch (err) {
+    return res.status(404).json({
+      'sucess': false,
+      'error': err
+    });
+  }
+})
+
 router.post("/update/student", async(req, res) => {
   try {
       const studentId = req.body.studentId;
@@ -97,7 +130,7 @@ router.post("/add", async (req, res) => {
       const token = jwt.sign(payload, process.env.JWT_SECRET);
       res.send(token);
     } else if (rank === "1") {
-      const teacher = new Teacher({ name, email, teacherClass, password });
+      const teacher = new Teacher({ name, email, password });
       await teacher.save();
       const payload = {
         data: {

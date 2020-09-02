@@ -25,8 +25,9 @@ router.post('/add', async(req, res) => {
     } catch (err) {
         console.log(err);
         res.status(500).json({
-            sucess: false,
-            data: 'Server error'
+            'sucess': false,
+            'data': 'Server error',
+            'err': err
         })
     }
 });
@@ -36,16 +37,28 @@ router.post("/classTeacher", async(req, res) => {
         const class_ = await Class.findById(req.body.class);
         const teacher = await Teacher.findById(req.body.classTeacher);
 
+        // Removing class from old class teacher's model
+        if(class_.classTeacher){
+            const oldClassTeacher = await Class.findById(class_.classTeacher);
+            oldClassTeacher.teacherClass = null;
+            oldClassTeacher.save();
+        }
+        // Adding this class to new class teacher's model
         teacher.teacherClass = class_.id;
         teacher.save();
-
+        // Adding new teacher to this class
         class_.classTeacher = req.body.classTeacher;
         class_.save();
 
         return res.status(200).json({ 'class': class_ });
 
     } catch(err) {
-        
+        console.log(err);
+        res.status(500).json({
+            'sucess': false,
+            'data': 'Server error',
+            'err': err
+        })
     }
 })
 

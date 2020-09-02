@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const connectDB = () => {
   mongoose
-    // .connect(process.env.MONGO_URI, {
-    .connect('mongodb+srv://ajay123:ajay123@transactions-puvlf.mongodb.net/mobae?retryWrites=true&w=majority', {
+    .connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
