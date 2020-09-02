@@ -54,6 +54,10 @@ router.post("/add", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  if (!email || !password) {
+    res.status(400).json({ msg: "Invalid credentials" });
+    return;
+  }
   const user = await Student.findOne({ email });
   const passMatches = await bcrypt.compare(password, user.password);
   if (passMatches) {
@@ -65,7 +69,7 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign(payload, process.env.JWT_SECRET);
     res.json({ token });
   } else {
-    res.status(400).json({ msg: "Wrong credentials" });
+    res.status(400).json({ msg: "Invalid credentials" });
   }
 });
 

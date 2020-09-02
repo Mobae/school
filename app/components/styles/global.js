@@ -2,8 +2,13 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  input: {
-    margin: 7,
+  view: {
+    margin: 12,
+  },
+  headline: {
+    margin: 12,
+    marginTop: 15,
+    fontSize: 30,
   },
 });
 

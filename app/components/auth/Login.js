@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { Title, TextInput, Button } from "react-native-paper";
+import { Headline, TextInput, Button } from "react-native-paper";
 import { Formik } from "formik";
 
 import globalStyles from "../styles/global";
@@ -8,12 +8,7 @@ import globalStyles from "../styles/global";
 const Login = () => {
   const handleSubmit = async (values) => {
     const { email, password } = values;
-    // await fetch("http://8db19f8be448.ngrok.io/auth/login", {
-    //   method: "GET",
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data));
-    fetch("http://8db19f8be448.ngrok.io/student/login", {
+    fetch("http://92306d213199.ngrok.io/student/login", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -26,47 +21,41 @@ const Login = () => {
       .catch((err) => console.log(err));
   };
   return (
-    <Formik
-      initialValues={{ email: "", password: "" }}
-      onSubmit={(values) => handleSubmit(values)}
-    >
-      {({ handleChange, handleBlur, handleSubmit, values }) => (
-        <View style={styles.view}>
-          <TextInput
-            style={globalStyles.input}
-            mode="outlined"
-            label="Email"
-            onChangeText={handleChange("email")}
-            onBlur={handleBlur("email")}
-            value={values.email}
-          />
-          <TextInput
-            style={globalStyles.input}
-            mode="outlined"
-            label="Password"
-            onChangeText={handleChange("password")}
-            onBlur={handleBlur("password")}
-            value={values.password}
-          />
-          <Button
-            style={globalStyles.input}
-            onPress={handleSubmit}
-            title="Submit"
-            mode="contained"
-          >
-            Submit
-          </Button>
-        </View>
-      )}
-    </Formik>
+    <Fragment>
+      <Headline style={globalStyles.headline}>Login</Headline>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values) => handleSubmit(values)}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values }) => (
+          <View style={globalStyles.view}>
+            <TextInput
+              mode="outlined"
+              label="Email"
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
+              value={values.email}
+            />
+            <TextInput
+              mode="outlined"
+              label="Password"
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
+              value={values.password}
+            />
+            <Button
+              style={{ marginTop: 15 }}
+              onPress={handleSubmit}
+              title="Submit"
+              mode="contained"
+            >
+              Submit
+            </Button>
+          </View>
+        )}
+      </Formik>
+    </Fragment>
   );
 };
-
-const styles = StyleSheet.create({
-  view: {
-    margin: 5,
-    marginTop: 20,
-  },
-});
 
 export default Login;
