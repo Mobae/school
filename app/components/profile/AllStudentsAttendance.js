@@ -66,14 +66,13 @@ const AllStudentsAttendance = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
-  title: {
-    alignSelf: 'center',
+  container: {
     marginTop: 35,
   },
-  name_cell: {
-    // width: 100,
+  title: {
+    alignSelf: 'center',
   },
+  name_cell: {},
 });
 
 export default AllStudentsAttendance;
