@@ -68,50 +68,45 @@ router.post("/update/teacher", async(req, res) => {
 })
 
 router.post("/add", async (req, res) => {
-  try {
-    let obj = req.body;
-    obj = trimObj(obj);
-    const { firstName, lastName, email, studentClass, rank, teacherClass } = obj;
-    const stu = await Student.findOne({ email });
-    const tea = await Teacher.findOne({ email });
-    if (stu || tea) {
-      res.status(400).send("User already exists");
-    } else {
-      const name = firstName + " " + lastName;
-      let password = genRandPass();
-      console.log(`password: ${password}`);
-      const salt = await bcrypt.genSalt();
-      password = await bcrypt.hash(password, salt);
-      if (rank === "0") {
-        const student = new Student({ name, email, studentClass, password });
+  let obj = req.body;
+  obj = trimObj(obj);
+  const { firstName, lastName, email, studentClass, rank, teacherClass } = obj;
+  const stu = await Student.findOne({ email });
+  const tea = await Teacher.findOne({ email });
+  if (stu || tea) {
+    res.status(400).send("User already exists");
+  } else {
+    const name = firstName + " " + lastName;
+    let password = genRandPass();
+    console.log(`password: ${password}`);
+    const salt = await bcrypt.genSalt();
+    password = await bcrypt.hash(password, salt);
+    if (rank === "0") {
+      const student = new Student({ name, email, studentClass, password });
 
-        const class_ = await Class.findById(studentClass);
-        class_.students.push({ student: student.id });
-        class_.save();
+      const class_ = await Class.findById(studentClass);
+      class_.students.push({ student: student.id });
+      class_.save();
 
-        await student.save();
-        const payload = {
-          data: {
-            id: student.id,
-          },
-        };
-        const token = jwt.sign(payload, process.env.JWT_SECRET);
-        res.send(token);
-      } else if (rank === "1") {
-        const teacher = new Teacher({ name, email, teacherClass, password });
-        await teacher.save();
-        const payload = {
-          data: {
-            id: teacher.id,
-          },
-        };
-        const token = jwt.sign(payload, process.env.JWT_SECRET);
-        res.send(token);
-      }
+      await student.save();
+      const payload = {
+        data: {
+          id: student.id,
+        },
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      res.send(token);
+    } else if (rank === "1") {
+      const teacher = new Teacher({ name, email, teacherClass, password });
+      await teacher.save();
+      const payload = {
+        data: {
+          id: teacher.id,
+        },
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      res.send(token);
     }
-  } catch(err) {
-    console.log(err);
-    return res.json(err);
   }
 });
 
