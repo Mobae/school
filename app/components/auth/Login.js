@@ -6,10 +6,30 @@ import { Formik } from "formik";
 import globalStyles from "../styles/global";
 
 const Login = () => {
+  const handleSubmit = async (values) => {
+    console.log(values);
+    await fetch("http://8db19f8be448.ngrok.io/auth/login", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+    // fetch("192.168.1.4:5000/student/add", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: values,
+    // })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((err) => console.log(err));
+  };
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => handleSubmit(values)}
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (
         <View style={styles.view}>
