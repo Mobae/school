@@ -7,24 +7,23 @@ import globalStyles from "../styles/global";
 
 const Login = () => {
   const handleSubmit = async (values) => {
-    console.log(values);
-    await fetch("http://8db19f8be448.ngrok.io/auth/login", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-    // fetch("192.168.1.4:5000/student/add", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: values,
+    const { email, password } = values;
+    // await fetch("http://8db19f8be448.ngrok.io/auth/login", {
+    //   method: "GET",
     // })
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => console.log(err));
+    //   .then((response) => response.json())
+    //   .then((data) => console.log(data));
+    fetch("http://8db19f8be448.ngrok.io/student/login", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   };
   return (
     <Formik

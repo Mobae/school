@@ -20,7 +20,7 @@ router.post("/add", async (req, res) => {
   const stu = await Student.findOne({ email });
   const tea = await Teacher.findOne({ email });
   if (stu || tea) {
-    res.status(400).send("User already exists");
+    res.status(400).json({ msg: "User already exists" });
   } else {
     const name = firstName + " " + lastName;
     let password = genRandPass();
@@ -47,7 +47,7 @@ router.post("/add", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.send(token);
+      res.json({ token });
     }
   }
 });
@@ -63,9 +63,9 @@ router.post("/login", async (req, res) => {
       },
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
-    res.send(token);
+    res.json({ token });
   } else {
-    res.status(400).send("Wrong credentials");
+    res.status(400).json({ msg: "Wrong credentials" });
   }
 });
 
