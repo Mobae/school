@@ -67,7 +67,7 @@ const AllStudentsAttendance = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 35,
+    // marginTop: 35,
   },
   title: {
     alignSelf: 'center',

@@ -9,7 +9,7 @@ const Profile = () => {
 
   return (
     <View>
-      <Appbar.Header style={{ backgroundColor: '#3B547E' }}>
+      {/* <Appbar.Header style={{ backgroundColor: '#3B547E' }}>
         <Appbar.BackAction icon="chevron-left" onPress={_goBack} />
         <Appbar.Content
           title="Profile"
@@ -17,7 +17,7 @@ const Profile = () => {
           style={styles.appbar_content}
         />
         <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
-      </Appbar.Header>
+      </Appbar.Header> */}
       <View style={styles.profile_info}>
         <View>
           <Avatar.Icon size={150} icon="account" style={styles.avatar_icon} />
