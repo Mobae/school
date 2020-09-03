@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Avatar } from 'react-native-paper';
+import { Avatar, Button } from 'react-native-paper';
 import Attendance from './Attendance';
+import AllStudentAttendance from './AllStudentsAttendance';
 
-const Profile = () => {
-  const press = () => console.log('Pressed');
-
+const Profile = ({ navigation }) => {
   return (
-    <View>
+    <Fragment>
       <View style={styles.profile_info}>
         <View>
           <Avatar.Icon size={150} icon="account" style={styles.avatar_icon} />
@@ -17,12 +16,12 @@ const Profile = () => {
           <Text>Class Assigned: 2nd</Text>
         </View>
       </View>
-      <View onPress={press}>
-        <TouchableOpacity>
+      <View>
+        <TouchableOpacity onPress={() => navigation.push('Attendance')}>
           <Attendance />
         </TouchableOpacity>
       </View>
-    </View>
+    </Fragment>
   );
 };
 

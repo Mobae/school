@@ -12,7 +12,8 @@ export default function App() {
   return (
     <Fragment>
       <View style={styles.container}>
-        <TopBar />
+        {/* <ProfileStack /> */}
+        {/* <TopBar /> */}
         {/* <Home /> */}
         {/* <Profile /> */}
         {/* <AllStudentsAttendance /> */}

@@ -1,22 +1,35 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { Text, IconButton } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 import Home from '../routes/Home';
 import Profile from '../profile/Profile';
 import AllStudentAttendance from '../profile/AllStudentsAttendance';
 import AddAttendance from '../profile/AddAttendence';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-const HomeScreen = () => {
-  return <Home />;
-};
-
-const ProfileScreen = () => {
-  return <Profile />;
-};
+import { createStackNavigator } from '@react-navigation/stack';
 
 const Tab = createBottomTabNavigator();
+
+const ProfileStack = createStackNavigator();
+const HomeStack = createStackNavigator();
+
+const HomeStackScreen = () => {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen name="Home" component={Home} />
+    </HomeStack.Navigator>
+  );
+};
+
+const ProfileStackScreen = () => {
+  return (
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen name="Profile" component={Profile} />
+      <ProfileStack.Screen name="Attendance" component={AllStudentAttendance} />
+    </ProfileStack.Navigator>
+  );
+};
 
 const BottomNav = () => {
   return (
@@ -39,8 +52,8 @@ const BottomNav = () => {
           inactiveTintColor: 'gray',
         }}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
+        <Tab.Screen name="Home" component={HomeStackScreen} />
+        <Tab.Screen name="Profile" component={ProfileStackScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
