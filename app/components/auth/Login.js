@@ -1,25 +1,21 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Headline, TextInput, Button } from "react-native-paper";
 import { Formik } from "formik";
 
+import { AuthContext } from "../../context/AuthContext";
+
 import globalStyles from "../styles/global";
 
 const Login = () => {
+  const { LogIn, authState } = useContext(AuthContext);
   const handleSubmit = async (values) => {
     const { email, password } = values;
-    fetch("http://92306d213199.ngrok.io/student/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    LogIn({ email, password });
   };
+  useEffect(() => {
+    console.log(authState);
+  }, [authState]);
   return (
     <Fragment>
       <Headline style={globalStyles.headline}>Login</Headline>
