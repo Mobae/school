@@ -11,39 +11,79 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
+import DatePicker from 'react-native-datepicker';
 
 const AddAttendence = () => {
   const [checked, setChecked] = React.useState(0);
-  
+  const [date, setDate] = React.useState(CurrentDate);
   const [visible, setVisible] = React.useState(false);
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
+
+  var today = new Date(),
+    CurrentDate =
+      today.getDate() +
+      '-' +
+      (today.getMonth() + 1) +
+      '-' +
+      today.getFullYear();
+
   return (
     <React.Fragment>
       <PaperProvider>
         <View>
           <Portal>
             <Dialog visible={visible} onDismiss={hideDialog}>
-              <Dialog.Title>Alert</Dialog.Title>
+              <Dialog.Title>Alert !!!</Dialog.Title>
               <Dialog.Content>
-                <Paragraph>This is simple dialog</Paragraph>
+                <Paragraph style={styles.byline}>Are you sure?</Paragraph>
               </Dialog.Content>
               <Dialog.Actions>
-                <Button onPress={hideDialog}>Done</Button>
+                <Button onPress={hideDialog} style={styles.yes}>
+                  Yes
+                </Button>
               </Dialog.Actions>
             </Dialog>
           </Portal>
         </View>
-
+        <View style={{ marginLeft: 120 }}>
+          <DatePicker
+            style={{ width: 180, marginTop: 40, alignItems: 'center' }}
+            date={date}
+            androidMode='default'
+            format='DD-MM-YYYY'
+            minDate='01-01-2000'
+            maxDate='31-12-2050'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
+            iconSource={(uri = require('../../calender.png'))}
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 3,
+                marginLeft: 18,
+              },
+              dateInput: {
+                margin: 50,
+                borderRadius: 10,
+              },
+            }}
+            onDateChange={(date) => {
+              setDate(date);
+            }}
+          />
+        </View>
         <Chip
           icon='content-save'
           onPress={() => showDialog()}
           style={styles.chip}
-          // mode='outlined'
+          mode='outlined'
           selectedColor='blue'
         >
           Save
         </Chip>
+
         <View style={styles.header}>
           <DataTable>
             <DataTable.Header>
@@ -137,9 +177,6 @@ const AddAttendence = () => {
 };
 
 const styles = StyleSheet.create({
-  header: {
-    paddingTop: 30,
-  },
   present: {
     paddingLeft: 235,
   },
@@ -160,9 +197,14 @@ const styles = StyleSheet.create({
   },
   chip: {
     justifyContent: 'flex-end',
-    // paddingLeft: 270,
-    color: 'white',
-    marginTop: 30,
+    marginTop: 10,
+  },
+  yes: {
+    paddingRight: 10,
+    marginBottom: 10,
+  },
+  byline: {
+    fontWeight: 'bold',
   },
 });
 
