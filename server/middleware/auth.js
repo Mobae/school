@@ -1,13 +1,30 @@
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const Student = require("../models/Student");
+const Teacher = require("../models/Teacher");
+const Admin = require("../models/Admin");
 
 module.exports = async function (req, res, next) {
   const token = req.get("auth-token");
   const { data } = jwt.verify(token, process.env.JWT_SECRET);
   const id = data.id;
-  const student = await Student.findById(id);
-  req.body.data = student;
-  next();
+  let user = await Student.findById(id);
+  if (user) {
+    req.body.data = user;
+    next();
+  }
+  user = await Teacher.findById(id);
+  if (user) {
+    req.body.data = user;
+    next();
+  }
+  user = await Admin.findById(id);
+  if (user) {
+    req.body.data = user;
+    console.log(user);
+    next();
+  }
+  if (!user) {
+    res.status(401).json({ msg: "Unauthorized" });
+  }
 };

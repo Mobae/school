@@ -10,6 +10,7 @@ const auth = require("../middleware/auth");
 const Student = require("../models/Student");
 const Teacher = require("../models/Teacher");
 const Class = require("../models/Class");
+const Admin = require("../models/Admin");
 
 router.get("/", auth, async (req, res) => {
   console.log(req.body.data);
@@ -136,6 +137,16 @@ router.post("/add", async (req, res) => {
       const payload = {
         data: {
           id: teacher.id,
+        },
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      res.json({ token });
+    } else if (rank === "2") {
+      const admin = new Admin({ name, email, password, rank });
+      await admin.save();
+      const payload = {
+        data: {
+          id: admin.id,
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
