@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import Profile from "./components/profile/Profile";
-import AllStudentsAttendance from "./components/profile/AllStudentsAttendance";
-import Home from "./components/layouts/Home";
-import BottomNav from "./components/layouts/BottomNav";
-import TopBar from "./components/layouts/TopBar";
-import Login from "./components/auth/Login";
+import React, { Fragment } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+import Profile from './components/profile/Profile';
+import AllStudentsAttendance from './components/profile/AllStudentsAttendance';
+import Home from './components/routes/Home';
+import BottomNav from './components/layouts/BottomNav';
+import TopBar from './components/layouts/TopBar';
+// import Login from './components/auth/Login';
 
 export default function App() {
   return (
@@ -16,9 +16,9 @@ export default function App() {
         {/* <Home /> */}
         {/* <Profile /> */}
         {/* <AllStudentsAttendance /> */}
-        <Login></Login>
+        {/* <Login></Login> */}
         <StatusBar style="auto" />
-        {/* <BottomNav /> */}
+        <BottomNav />
       </View>
     </Fragment>
   );
@@ -27,6 +27,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
 });

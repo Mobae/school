@@ -1,23 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Appbar, Avatar } from 'react-native-paper';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Avatar } from 'react-native-paper';
+import Attendance from './Attendance';
 
 const Profile = () => {
-  const _goBack = () => console.log('Went back');
-
-  const _handleMore = () => console.log('Shown more');
+  const press = () => console.log('Pressed');
 
   return (
     <View>
-      {/* <Appbar.Header style={{ backgroundColor: '#3B547E' }}>
-        <Appbar.BackAction icon="chevron-left" onPress={_goBack} />
-        <Appbar.Content
-          title="Profile"
-          subtitle="Teacher"
-          style={styles.appbar_content}
-        />
-        <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
-      </Appbar.Header> */}
       <View style={styles.profile_info}>
         <View>
           <Avatar.Icon size={150} icon="account" style={styles.avatar_icon} />
@@ -26,6 +16,11 @@ const Profile = () => {
           <Text>Abhishek Singh Dhakad</Text>
           <Text>Class Assigned: 2nd</Text>
         </View>
+      </View>
+      <View onPress={press}>
+        <TouchableOpacity>
+          <Attendance />
+        </TouchableOpacity>
       </View>
     </View>
   );
