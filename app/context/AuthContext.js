@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
-  const url = "http://a9e75bce43cb.ngrok.io";
+  const url = "http://8ade73aa9ab6.ngrok.io";
   const initialState = { isLoggedIn: false, jwt: "", user: {} };
   const [authState, setAuthState] = useState(initialState);
 
@@ -13,10 +13,8 @@ const AuthContextProvider = (props) => {
     try {
       let data = await axios.post(url + "/student/login", values);
       console.log(data.data);
-      setAuthState({ ...authState, jwt: data.data.token });
+      setAuthState({ ...authState, isLoggedIn: true, jwt: data.data.token });
       await AsyncStorage.setItem("@jwt", authState.jwt);
-      const i = await AsyncStorage.getItem("@jwt");
-      console.log(`async: ${i}`);
     } catch (error) {
       console.log(error);
     }
