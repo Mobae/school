@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import { AuthContext } from "../context/AuthContext";
 import Login from "./auth/Login";
-import Home from "./layouts/Home";
+import Home from "./routes/Home";
 
 const Stack = createStackNavigator();
 

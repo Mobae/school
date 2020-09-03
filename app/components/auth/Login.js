@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { Headline, TextInput, Button } from "react-native-paper";
 import { Formik } from "formik";
 
