@@ -118,58 +118,6 @@ const AddAttendence = () => {
                 </View>
               </DataTable.Cell>
             </DataTable.Row>
-            {/* <DataTable.Row>
-              <DataTable.Cell style={styles.name}>Aditya</DataTable.Cell>
-              <DataTable.Cell style={styles.present}>
-                <View style={styles.RadioButton}>
-                  <RadioButton
-                    value='present'
-                    status={checked === 'present' ? 'checked' : 'unchecked'}
-                    onPress={() => setChecked('present')}
-                    color='green'
-                    uncheckedColor='grey'
-                  />
-                </View>
-              </DataTable.Cell>
-              <DataTable.Cell>
-                <View style={styles.RadioButtonAb}>
-                  <RadioButton
-                    style={{ paddingRight: 20 }}
-                    value='present'
-                    status={checked === 'absent' ? 'checked' : 'unchecked'}
-                    onPress={() => setChecked('absent')}
-                    color='red'
-                    uncheckedColor='grey'
-                  />
-                </View>
-              </DataTable.Cell>
-            </DataTable.Row>
-            <DataTable.Row>
-              <DataTable.Cell style={styles.name}>Aryan</DataTable.Cell>
-              <DataTable.Cell style={styles.present}>
-                <View style={styles.RadioButton}>
-                  <RadioButton
-                    value='present'
-                    status={checked === 'present' ? 'checked' : 'unchecked'}
-                    onPress={() => setChecked('present')}
-                    color='green'
-                    uncheckedColor='grey'
-                  />
-                </View>
-              </DataTable.Cell>
-              <DataTable.Cell>
-                <View style={styles.RadioButtonAb}>
-                  <RadioButton
-                    style={{ paddingRight: 20 }}
-                    value='present'
-                    status={checked === 'absent' ? 'checked' : 'unchecked'}
-                    onPress={() => setChecked('absent')}
-                    color='red'
-                    uncheckedColor='grey'
-                  />
-                </View>
-              </DataTable.Cell>
-            </DataTable.Row> */}
           </DataTable>
         </View>
       </PaperProvider>
