@@ -1,29 +1,33 @@
-import React, { Fragment } from "react";
+import React, { useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import Profile from "./components/profile/Profile";
-import AllStudentsAttendance from "./components/profile/AllStudentsAttendance";
-import Home from "./components/layouts/Home";
-// import BottomNav from "./components/layouts/BottomNav";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
 import TopBar from "./components/layouts/TopBar";
 import Login from "./components/auth/Login";
+import Home from "./components/layouts/Home";
 
 import AuthContextProvider from "./context/AuthContext";
+import Main from "./components/Main";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <AuthContextProvider>
-      <Fragment>
-        <View style={styles.container}>
+      {/* <NavigationContainer>
+        <Stack.Navigator>
+          <View style={styles.container}>
           <TopBar />
-          {/* <Home /> */}
-          {/* <Profile /> */}
-          {/* <AllStudentsAttendance /> */}
+          <Stack.Screen component={Login} name="Login" />
+          <Stack.Screen component={Home} name="Home" />
           <Login></Login>
           <StatusBar style="auto" />
-          {/* <BottomNav /> */}
-        </View>
-      </Fragment>
+          </View>
+        </Stack.Navigator>
+      </NavigationContainer> */}
+      <Main />
     </AuthContextProvider>
   );
 }

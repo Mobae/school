@@ -13,7 +13,7 @@ const AuthContextProvider = (props) => {
     try {
       let data = await axios.post(url + "/student/login", values);
       console.log(data.data);
-      setAuthState({ ...authState, jwt: data.data.token });
+      setAuthState({ ...authState, isLoggedIn: true, jwt: data.data.token });
       await AsyncStorage.setItem("@jwt", authState.jwt);
     } catch (error) {
       console.log(error);
