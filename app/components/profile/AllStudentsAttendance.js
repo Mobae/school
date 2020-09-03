@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Title, DataTable } from 'react-native-paper';
+import AttendancePage from './AttendancePage';
 
 const AllStudentsAttendance = () => {
   return (
-    <View style={styles.container}>
-      <Title style={styles.title}>Attendance</Title>
+    <Fragment>
       <DataTable>
         <DataTable.Header>
           <DataTable.Title>Student Name</DataTable.Title>
@@ -60,8 +60,9 @@ const AllStudentsAttendance = () => {
           label="1-2 of 6"
         />
       </DataTable>
+      <AttendancePage />
       <StatusBar style="auto" />
-    </View>
+    </Fragment>
   );
 };
 

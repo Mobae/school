@@ -27,6 +27,7 @@ const ProfileStackScreen = () => {
     <ProfileStack.Navigator>
       <ProfileStack.Screen name="Profile" component={Profile} />
       <ProfileStack.Screen name="Attendance" component={AllStudentAttendance} />
+      <ProfileStack.Screen name="Add Attedance" component={AddAttendance} />
     </ProfileStack.Navigator>
   );
 };
