@@ -56,7 +56,7 @@ const AddAttendence = () => {
             maxDate='31-12-2050'
             confirmBtnText='Confirm'
             cancelBtnText='Cancel'
-            // iconSource={(uri = require('../../calender.png'))}
+            iconSource={(uri = require('../../calender.png'))}
             customStyles={{
               dateIcon: {
                 position: 'absolute',
@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
   absent: {
     justifyContent: 'flex-end',
     position: 'relative',
+    width: '20px',
   },
   RadioButtonAb: {
     width: 35,
