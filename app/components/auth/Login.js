@@ -13,9 +13,6 @@ const Login = () => {
     const { email, password } = values;
     LogIn({ email, password });
   };
-  useEffect(() => {
-    console.log(authState);
-  }, [authState]);
   return (
     <Fragment>
       <Headline style={globalStyles.headline}>Login</Headline>
