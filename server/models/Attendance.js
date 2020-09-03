@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 const Student = require("./Student");
 
 const AttendanceSchema = mongoose.Schema({
-  studentId: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: "Student" 
+  studentId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Student",
   },
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   status: String,
 });

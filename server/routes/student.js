@@ -15,71 +15,73 @@ router.get("/", auth, async (req, res) => {
   console.log(req.body.data);
 });
 
-router.get("/student/:studentId", async(req, res) => {
+router.get("/student/:studentId", async (req, res) => {
   try {
     const student = await Student.findById(req.params.studentId);
 
     return res.status(200).json({
-      'sucess': true,
-      'data': student
+      sucess: true,
+      data: student,
     });
   } catch (err) {
     return res.status(404).json({
-      'sucess': false,
-      'error': err
+      sucess: false,
+      error: err,
     });
   }
 });
 
-router.get("/teacher/:teacherId", async(req, res) => {
+router.get("/teacher/:teacherId", async (req, res) => {
   try {
     const teacher = await Teacher.findById(req.params.teacherId);
     console.log(teacher);
 
     return res.status(200).json({
-      'success': true,
-      'data': teacher
-    })
+      success: true,
+      data: teacher,
+    });
   } catch (err) {
     return res.status(404).json({
-      'sucess': false,
-      'error': err
+      sucess: false,
+      error: err,
     });
   }
-})
+});
 
-router.post("/update/student", async(req, res) => {
+router.post("/update/student", async (req, res) => {
   try {
-      const studentId = req.body.studentId;
-      const student = await Student.findById(studentId);
+    const studentId = req.body.studentId;
+    const student = await Student.findById(studentId);
 
-      if(req.body.classId){
-        const oldClass = await Class.findById(student.studentClass);
-        oldClass.students = oldClass.students.filter((student) => student == studentId);
-        oldClass.save();
+    if (req.body.classId) {
+      const oldClass = await Class.findById(student.studentClass);
+      oldClass.students = oldClass.students.filter(
+        (student) => student == studentId
+      );
+      oldClass.save();
 
-        const class_ = await Class.findById(req.body.classId);
-        class_.students.push({ student: student.id });
-        class_.save();
-      }
+      const class_ = await Class.findById(req.body.classId);
+      class_.students.push({ student: student.id });
+      class_.save();
+    }
 
-      const newStudent = await student.updateOne({
-        name: req.body.name || student.name,
-        email: req.body.email || student.email,
-        studentClass: req.body.classId || student.studentClass
-      })
-      student.save();
-      return res.status(201).json({
-        'sucess': true,
-        'student': newStudent
-      })
+    const newStudent = await student.updateOne({
+      name: req.body.name || student.name,
+      email: req.body.email || student.email,
+      studentClass: req.body.classId || student.studentClass,
+    });
+    student.save();
+    return res.status(201).json({
+      sucess: true,
+      student: newStudent,
+    });
   } catch (err) {
     console.log(err);
     return res.json(err);
   }
 });
 
-router.post("/update/teacher", async(req, res) => {
+router.post("/update/teacher", async (req, res) => {
   try {
     const teacherId = req.body.teacherId;
     const teacher = await Teacher.findById(teacherId);
@@ -90,15 +92,14 @@ router.post("/update/teacher", async(req, res) => {
     });
 
     return res.status(201).json({
-      'success': true,
-      'teacher': newTeacher
+      success: true,
+      teacher: newTeacher,
     });
-
   } catch (err) {
     console.log(err);
     return res.json(err);
   }
-})
+});
 
 router.post("/add", async (req, res) => {
   let obj = req.body;
