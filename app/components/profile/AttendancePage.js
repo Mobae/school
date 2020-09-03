@@ -1,7 +1,8 @@
-import * as React from "react";
-import { FAB, Portal, Provider } from "react-native-paper";
+import * as React from 'react';
+import { FAB, Portal, Provider } from 'react-native-paper';
+import AddAttendence from './AddAttendence';
 
-const AttendancePage = () => {
+const AttendancePage = ({ navigation }) => {
   const [state, setState] = React.useState({ open: false });
 
   const onStateChange = ({ open }) => setState({ open });
@@ -13,17 +14,17 @@ const AttendancePage = () => {
       <Portal>
         <FAB.Group
           open={open}
-          icon={open ? "plus" : "plus"}
+          icon={open ? 'plus' : 'plus'}
           actions={[
             {
-              icon: "account-plus",
-              label: "Add",
-              onPress: () => console.log("Pressed add"),
+              icon: 'account-plus',
+              label: 'Add',
+              onPress: () => navigation.push('AddAttendance'),
             },
             {
-              icon: "account-edit",
-              label: "Edit",
-              onPress: () => console.log("Pressed edit"),
+              icon: 'account-edit',
+              label: 'Edit',
+              onPress: () => console.log('Pressed edit'),
             },
           ]}
           onStateChange={onStateChange}

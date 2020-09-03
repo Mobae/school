@@ -14,7 +14,7 @@ import { StyleSheet, View } from 'react-native';
 
 const AddAttendence = () => {
   const [checked, setChecked] = React.useState(0);
-  
+
   const [visible, setVisible] = React.useState(false);
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
@@ -36,11 +36,11 @@ const AddAttendence = () => {
         </View>
 
         <Chip
-          icon='content-save'
+          icon="content-save"
           onPress={() => showDialog()}
           style={styles.chip}
           // mode='outlined'
-          selectedColor='blue'
+          selectedColor="blue"
         >
           Save
         </Chip>
@@ -56,11 +56,11 @@ const AddAttendence = () => {
               <DataTable.Cell style={styles.present}>
                 <View style={styles.RadioButton}>
                   <RadioButton
-                    value='present'
+                    value="present"
                     status={checked === 'present' ? 'checked' : 'unchecked'}
                     onPress={() => setChecked('present')}
-                    color='green'
-                    uncheckedColor='grey'
+                    color="green"
+                    uncheckedColor="grey"
                   />
                 </View>
               </DataTable.Cell>
@@ -68,11 +68,11 @@ const AddAttendence = () => {
                 <View style={styles.RadioButtonAb}>
                   <RadioButton
                     style={{ paddingRight: 20 }}
-                    value='present'
+                    value="present"
                     status={checked === 'absent' ? 'checked' : 'unchecked'}
                     onPress={() => setChecked('absent')}
-                    color='red'
-                    uncheckedColor='grey'
+                    color="red"
+                    uncheckedColor="grey"
                   />
                 </View>
               </DataTable.Cell>
@@ -82,11 +82,11 @@ const AddAttendence = () => {
               <DataTable.Cell style={styles.present}>
                 <View style={styles.RadioButton}>
                   <RadioButton
-                    value='present'
+                    value="present"
                     status={checked === 'present' ? 'checked' : 'unchecked'}
                     onPress={() => setChecked('present')}
-                    color='green'
-                    uncheckedColor='grey'
+                    color="green"
+                    uncheckedColor="grey"
                   />
                 </View>
               </DataTable.Cell>
@@ -94,11 +94,11 @@ const AddAttendence = () => {
                 <View style={styles.RadioButtonAb}>
                   <RadioButton
                     style={{ paddingRight: 20 }}
-                    value='present'
+                    value="present"
                     status={checked === 'absent' ? 'checked' : 'unchecked'}
                     onPress={() => setChecked('absent')}
-                    color='red'
-                    uncheckedColor='grey'
+                    color="red"
+                    uncheckedColor="grey"
                   />
                 </View>
               </DataTable.Cell>
@@ -108,11 +108,11 @@ const AddAttendence = () => {
               <DataTable.Cell style={styles.present}>
                 <View style={styles.RadioButton}>
                   <RadioButton
-                    value='present'
+                    value="present"
                     status={checked === 'present' ? 'checked' : 'unchecked'}
                     onPress={() => setChecked('present')}
-                    color='green'
-                    uncheckedColor='grey'
+                    color="green"
+                    uncheckedColor="grey"
                   />
                 </View>
               </DataTable.Cell>
@@ -120,11 +120,11 @@ const AddAttendence = () => {
                 <View style={styles.RadioButtonAb}>
                   <RadioButton
                     style={{ paddingRight: 20 }}
-                    value='present'
+                    value="present"
                     status={checked === 'absent' ? 'checked' : 'unchecked'}
                     onPress={() => setChecked('absent')}
-                    color='red'
-                    uncheckedColor='grey'
+                    color="red"
+                    uncheckedColor="grey"
                   />
                 </View>
               </DataTable.Cell>
