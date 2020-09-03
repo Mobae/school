@@ -46,9 +46,9 @@ const AddAttendence = () => {
             </Dialog>
           </Portal>
         </View>
-        <View style={{ marginLeft: 120 }}>
+        <View style={{ marginLeft: 100 }}>
           <DatePicker
-            style={{ width: 180, marginTop: 40, alignItems: 'center' }}
+            style={{ width: 190, marginTop: 40, alignItems: 'center' }}
             date={date}
             androidMode='default'
             format='DD-MM-YYYY'
@@ -56,7 +56,7 @@ const AddAttendence = () => {
             maxDate='31-12-2050'
             confirmBtnText='Confirm'
             cancelBtnText='Cancel'
-            iconSource={(uri = require('../../calender.png'))}
+            // iconSource={(uri = require('../../calender.png'))}
             customStyles={{
               dateIcon: {
                 position: 'absolute',
@@ -66,7 +66,7 @@ const AddAttendence = () => {
               },
               dateInput: {
                 margin: 50,
-                borderRadius: 10,
+                borderRadius: 2,
               },
             }}
             onDateChange={(date) => {
@@ -74,25 +74,26 @@ const AddAttendence = () => {
             }}
           />
         </View>
-        <Chip
+        <FAB
+          style={styles.fab}
           icon='content-save'
-          onPress={() => showDialog()}
-          style={styles.chip}
-          mode='outlined'
-          selectedColor='blue'
-        >
-          Save
-        </Chip>
+          animated
+          onPress={() => {
+            showDialog();
+          }}
+        />
 
-        <View style={styles.header}>
+        <View>
           <DataTable>
             <DataTable.Header>
-              <DataTable.Title numeric>Names</DataTable.Title>
+              <DataTable.Title style={styles.name}>Names</DataTable.Title>
               <DataTable.Title style={styles.present}>Present</DataTable.Title>
-              <DataTable.Title numeric>Absent</DataTable.Title>
+              <DataTable.Title style={styles.absent}>Absent</DataTable.Title>
             </DataTable.Header>
             <DataTable.Row>
-              <DataTable.Cell style={styles.name}>Ajay Sharma</DataTable.Cell>
+              <DataTable.Cell style={styles.name}>
+                Ajay Kumar Sharma
+              </DataTable.Cell>
               <DataTable.Cell style={styles.present}>
                 <View style={styles.RadioButton}>
                   <RadioButton
@@ -104,7 +105,7 @@ const AddAttendence = () => {
                   />
                 </View>
               </DataTable.Cell>
-              <DataTable.Cell>
+              <DataTable.Cell style={styles.absent}>
                 <View style={styles.RadioButtonAb}>
                   <RadioButton
                     style={{ paddingRight: 20 }}
@@ -117,7 +118,7 @@ const AddAttendence = () => {
                 </View>
               </DataTable.Cell>
             </DataTable.Row>
-            <DataTable.Row>
+            {/* <DataTable.Row>
               <DataTable.Cell style={styles.name}>Aditya</DataTable.Cell>
               <DataTable.Cell style={styles.present}>
                 <View style={styles.RadioButton}>
@@ -168,7 +169,7 @@ const AddAttendence = () => {
                   />
                 </View>
               </DataTable.Cell>
-            </DataTable.Row>
+            </DataTable.Row> */}
           </DataTable>
         </View>
       </PaperProvider>
@@ -178,18 +179,25 @@ const AddAttendence = () => {
 
 const styles = StyleSheet.create({
   present: {
-    paddingLeft: 235,
+    // marginLeft: 10,
+    justifyContent: 'flex-end',
+    position: 'relative',
+    paddingHorizontal: 'auto',
   },
   presentChecked: {
     paddingLeft: 215,
     paddingTop: 5,
   },
   name: {
-    paddingLeft: 10,
+    marginLeft: 3.5,
   },
   RadioButton: {
-    width: 28,
+    width: 35,
     height: 32,
+  },
+  absent: {
+    justifyContent: 'flex-end',
+    position: 'relative',
   },
   RadioButtonAb: {
     width: 35,
@@ -205,6 +213,14 @@ const styles = StyleSheet.create({
   },
   byline: {
     fontWeight: 'bold',
+  },
+  fab: {
+    position: 'absolute',
+    margin: 20,
+    right: 10,
+    bottom: 25,
+    height: 63,
+    width: 63,
   },
 });
 

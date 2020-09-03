@@ -9,8 +9,8 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* <Profile /> */}
-      {/* <AllStudentsAttendance /> */}
-      <AddAttendence />
+      <AllStudentsAttendance />
+      {/* <AddAttendence /> */}
       <StatusBar style='auto' />
     </View>
   );
