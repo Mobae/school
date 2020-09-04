@@ -3,7 +3,7 @@ const StudentSchema = mongoose.Schema({
   name: String,
   email: String,
   password: String,
-  studentClass: String,
+  studentClass: mongoose.Schema.Types.ObjectId,
   rank: { type: String, default: "0" },
 });
 

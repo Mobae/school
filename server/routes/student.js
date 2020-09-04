@@ -1,16 +1,105 @@
-const { Router } = require("express");
+const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-router = Router();
+
+const router = express.Router();
 
 const { trimObj, genRandPass } = require("../utils/common");
 const auth = require("../middleware/auth");
 
 const Student = require("../models/Student");
 const Teacher = require("../models/Teacher");
+const Class = require("../models/Class");
+const Admin = require("../models/Admin");
 
 router.get("/", auth, async (req, res) => {
   console.log(req.body.data);
+});
+
+router.get("/student/:studentId", async (req, res) => {
+  try {
+    const student = await Student.findById(req.params.studentId);
+
+    return res.status(200).json({
+      sucess: true,
+      data: student,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      sucess: false,
+      error: err,
+    });
+  }
+});
+
+router.get("/teacher/:teacherId", async (req, res) => {
+  try {
+    const teacher = await Teacher.findById(req.params.teacherId);
+    console.log(teacher);
+
+    return res.status(200).json({
+      success: true,
+      data: teacher,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      sucess: false,
+      error: err,
+    });
+  }
+});
+
+router.post("/update/student", async (req, res) => {
+  try {
+    const studentId = req.body.studentId;
+    const student = await Student.findById(studentId);
+
+    if (req.body.classId) {
+      const oldClass = await Class.findById(student.studentClass);
+      oldClass.students = oldClass.students.filter(
+        (student) => student == studentId
+      );
+      oldClass.save();
+
+      const class_ = await Class.findById(req.body.classId);
+      class_.students.push({ student: student.id });
+      class_.save();
+    }
+
+    const newStudent = await student.updateOne({
+      name: req.body.name || student.name,
+      email: req.body.email || student.email,
+      studentClass: req.body.classId || student.studentClass,
+    });
+    student.save();
+    return res.status(201).json({
+      sucess: true,
+      student: newStudent,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.json(err);
+  }
+});
+
+router.post("/update/teacher", async (req, res) => {
+  try {
+    const teacherId = req.body.teacherId;
+    const teacher = await Teacher.findById(teacherId);
+
+    const newTeacher = await Teacher.updateOne({
+      name: req.body.name || teacher.name,
+      email: req.body.email || teacher.email,
+    });
+
+    return res.status(201).json({
+      success: true,
+      teacher: newTeacher,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.json(err);
+  }
 });
 
 router.post("/add", async (req, res) => {
@@ -20,7 +109,7 @@ router.post("/add", async (req, res) => {
   const stu = await Student.findOne({ email });
   const tea = await Teacher.findOne({ email });
   if (stu || tea) {
-    res.status(400).send("User already exists");
+    res.status(400).json({ msg: "User already exists" });
   } else {
     const name = firstName + " " + lastName;
     let password = genRandPass();
@@ -29,6 +118,11 @@ router.post("/add", async (req, res) => {
     password = await bcrypt.hash(password, salt);
     if (rank === "0") {
       const student = new Student({ name, email, studentClass, password });
+
+      const class_ = await Class.findById(studentClass);
+      class_.students.push({ student: student.id });
+      class_.save();
+
       await student.save();
       const payload = {
         data: {
@@ -36,10 +130,9 @@ router.post("/add", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.send(token);
+      res.json({ token, name, email, rank });
     } else if (rank === "1") {
-      const teacher = new Teacher({ name, email, teacherClass, password });
-      console.log(teacher);
+      const teacher = new Teacher({ name, email, password });
       await teacher.save();
       const payload = {
         data: {
@@ -47,14 +140,29 @@ router.post("/add", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.send(token);
+      res.json({ token, name, email, rank });
+    } else if (rank === "2") {
+      const admin = new Admin({ name, email, password, rank });
+      await admin.save();
+      const payload = {
+        data: {
+          id: admin.id,
+        },
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      res.json({ token, name, email, rank });
     }
   }
 });
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
+  if (!email || !password) {
+    res.status(400).json({ msg: "Invalid credentials" });
+    return;
+  }
   const user = await Student.findOne({ email });
+  const { name, rank } = user;
   const passMatches = await bcrypt.compare(password, user.password);
   if (passMatches) {
     const payload = {
@@ -63,9 +171,9 @@ router.post("/login", async (req, res) => {
       },
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
-    res.send(token);
+    res.json({ token, name, email, rank });
   } else {
-    res.status(400).send("Wrong credentials");
+    res.status(400).json({ msg: "Invalid credentials" });
   }
 });
 

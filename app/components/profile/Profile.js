@@ -1,23 +1,12 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Appbar, Avatar } from 'react-native-paper';
+import React, { Fragment } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Avatar, Button } from 'react-native-paper';
+import Attendance from './Attendance';
+import AllStudentAttendance from './AllStudentsAttendance';
 
-const Profile = () => {
-  const _goBack = () => console.log('Went back');
-
-  const _handleMore = () => console.log('Shown more');
-
+const Profile = ({ navigation }) => {
   return (
-    <View>
-      <Appbar.Header style={{ backgroundColor: '#3B547E' }}>
-        <Appbar.BackAction icon="chevron-left" onPress={_goBack} />
-        <Appbar.Content
-          title="Profile"
-          subtitle="Teacher"
-          style={styles.appbar_content}
-        />
-        <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
-      </Appbar.Header>
+    <Fragment>
       <View style={styles.profile_info}>
         <View>
           <Avatar.Icon size={150} icon="account" style={styles.avatar_icon} />
@@ -27,7 +16,12 @@ const Profile = () => {
           <Text>Class Assigned: 2nd</Text>
         </View>
       </View>
-    </View>
+      <View>
+        <TouchableOpacity onPress={() => navigation.push('Attendance')}>
+          <Attendance />
+        </TouchableOpacity>
+      </View>
+    </Fragment>
   );
 };
 

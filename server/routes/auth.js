@@ -2,7 +2,8 @@ const { Router } = require("express");
 router = Router();
 
 router.get("/login", (req, res) => {
-  res.send("hi from auth");
+  console.log("hi");
+  res.json({ msg: "hi" });
 });
 
 module.exports = router;
