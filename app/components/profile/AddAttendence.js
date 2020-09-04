@@ -14,11 +14,7 @@ import DatePicker from 'react-native-datepicker';
 
 const AddAttendence = () => {
   const [checked, setChecked] = React.useState(0);
-<<<<<<< HEAD
   const [date, setDate] = React.useState(CurrentDate);
-=======
-
->>>>>>> f39b92031d1c26d12321bc5a5e5d4f3fdaee9252
   const [visible, setVisible] = React.useState(false);
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
@@ -49,7 +45,6 @@ const AddAttendence = () => {
             </Dialog>
           </Portal>
         </View>
-<<<<<<< HEAD
         <View style={{ marginLeft: 100 }}>
           <DatePicker
             style={{ width: 190, marginTop: 40, alignItems: 'center' }}
@@ -88,19 +83,6 @@ const AddAttendence = () => {
           }}
         />
         <View>
-=======
-
-        <Chip
-          icon="content-save"
-          onPress={() => showDialog()}
-          style={styles.chip}
-          // mode='outlined'
-          selectedColor="blue"
-        >
-          Save
-        </Chip>
-        <View style={styles.header}>
->>>>>>> f39b92031d1c26d12321bc5a5e5d4f3fdaee9252
           <DataTable>
             <DataTable.Header>
               <DataTable.Title style={styles.name}>Names</DataTable.Title>
@@ -108,12 +90,9 @@ const AddAttendence = () => {
               <DataTable.Title style={styles.absent}>Absent</DataTable.Title>
             </DataTable.Header>
             <DataTable.Row>
-<<<<<<< HEAD
               <DataTable.Cell style={styles.name}>
                 Ajay Kumar Sharma
               </DataTable.Cell>
-=======
-              <DataTable.Cell style={styles.name}>Ajay Sharma</DataTable.Cell>
               <DataTable.Cell style={styles.present}>
                 <View style={styles.RadioButton}>
                   <RadioButton
@@ -125,64 +104,7 @@ const AddAttendence = () => {
                   />
                 </View>
               </DataTable.Cell>
-              <DataTable.Cell>
-                <View style={styles.RadioButtonAb}>
-                  <RadioButton
-                    style={{ paddingRight: 20 }}
-                    value="present"
-                    status={checked === 'absent' ? 'checked' : 'unchecked'}
-                    onPress={() => setChecked('absent')}
-                    color="red"
-                    uncheckedColor="grey"
-                  />
-                </View>
-              </DataTable.Cell>
-            </DataTable.Row>
-            <DataTable.Row>
-              <DataTable.Cell style={styles.name}>Aditya</DataTable.Cell>
->>>>>>> f39b92031d1c26d12321bc5a5e5d4f3fdaee9252
-              <DataTable.Cell style={styles.present}>
-                <View style={styles.RadioButton}>
-                  <RadioButton
-                    value="present"
-                    status={checked === 'present' ? 'checked' : 'unchecked'}
-                    onPress={() => setChecked('present')}
-                    color="green"
-                    uncheckedColor="grey"
-                  />
-                </View>
-              </DataTable.Cell>
-<<<<<<< HEAD
               <DataTable.Cell style={styles.absent}>
-=======
-              <DataTable.Cell>
-                <View style={styles.RadioButtonAb}>
-                  <RadioButton
-                    style={{ paddingRight: 20 }}
-                    value="present"
-                    status={checked === 'absent' ? 'checked' : 'unchecked'}
-                    onPress={() => setChecked('absent')}
-                    color="red"
-                    uncheckedColor="grey"
-                  />
-                </View>
-              </DataTable.Cell>
-            </DataTable.Row>
-            <DataTable.Row>
-              <DataTable.Cell style={styles.name}>Aryan</DataTable.Cell>
-              <DataTable.Cell style={styles.present}>
-                <View style={styles.RadioButton}>
-                  <RadioButton
-                    value="present"
-                    status={checked === 'present' ? 'checked' : 'unchecked'}
-                    onPress={() => setChecked('present')}
-                    color="green"
-                    uncheckedColor="grey"
-                  />
-                </View>
-              </DataTable.Cell>
-              <DataTable.Cell>
->>>>>>> f39b92031d1c26d12321bc5a5e5d4f3fdaee9252
                 <View style={styles.RadioButtonAb}>
                   <RadioButton
                     style={{ paddingRight: 20 }}
