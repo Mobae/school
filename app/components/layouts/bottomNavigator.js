@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { BottomNavigation, Text } from "react-native-paper";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import StudentProfile from "./student/StudentProfile";
-import TeacherProfile from "./teacher/TeacherProfile";
+import StudentProfile from "../student/StudentProfile";
+import TeacherProfile from "../teacher/TeacherProfile";
 
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const ChatRoute = () => <Text>Music</Text>;
 
