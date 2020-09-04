@@ -3,9 +3,8 @@ import {
   DataTable,
   RadioButton,
   Button,
-  FAB,
-  Chip,
   Paragraph,
+  IconButton,
   Dialog,
   Portal,
   Provider as PaperProvider,
@@ -56,7 +55,7 @@ const AddAttendence = () => {
             maxDate='31-12-2050'
             confirmBtnText='Confirm'
             cancelBtnText='Cancel'
-            iconSource={(uri = require('../../calender.png'))}
+            // iconSource={(uri = require('../../calender.png'))}
             customStyles={{
               dateIcon: {
                 position: 'absolute',
@@ -74,15 +73,15 @@ const AddAttendence = () => {
             }}
           />
         </View>
-        <FAB
-          style={styles.fab}
+        <IconButton
           icon='content-save'
-          animated
+          style={styles.fab}
+          color='white'
+          size={40}
           onPress={() => {
             showDialog();
           }}
         />
-
         <View>
           <DataTable>
             <DataTable.Header>
@@ -165,12 +164,13 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: 'absolute',
-    margin: 20,
-    right: 10,
-    bottom: 25,
+    margin: 16,
+    right: 18,
+    bottom: 0,
     height: 63,
+    borderRadius: 50,
+    backgroundColor: '#00bfff',
     width: 63,
   },
 });
-
 export default AddAttendence;

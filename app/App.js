@@ -12,9 +12,9 @@ export default function App() {
     <View style={styles.container}>
       {/* <Profile /> */}
       {/* <StudentAttendance /> */}
-      <IndividualMonth />
+      {/* <IndividualMonth /> */}
       {/* <AllStudentsAttendance /> */}
-      {/* <AddAttendence /> */}
+      <AddAttendence />
       <StatusBar style='auto' />
     </View>
   );
