@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
-  const url = "http://8ade73aa9ab6.ngrok.io";
+  const url = "http://127.0.0.1:5000";
   const initialState = { isLoggedIn: false, jwt: "", user: {} };
   const [authState, setAuthState] = useState(initialState);
 

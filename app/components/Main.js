@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { AuthContext } from "../context/AuthContext";
 import Login from "./auth/Login";
 import Home from "./routes/Home";
+import BottomNavigator from './bottomNavigator';
 
 const Stack = createStackNavigator();
 
@@ -14,10 +15,10 @@ const Main = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {!isLoggedIn ? (
+        {isLoggedIn ? (
           <Stack.Screen name="Login" component={Login} />
         ) : (
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Home" component={BottomNavigator} />
         )}
       </Stack.Navigator>
     </NavigationContainer>
