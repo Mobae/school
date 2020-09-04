@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
 
@@ -9,23 +9,23 @@ const AuthContextProvider = (props) => {
   const initialState = { isLoggedIn: false, jwt: "", user: {} };
   const [authState, setAuthState] = useState(initialState);
 
+  useEffect(() => {
+    console.log(authState);
+  }, [authState]);
+
   const LogIn = async (values) => {
     try {
       let data = await axios.post(url + "/student/login", values);
-      console.log(data.data);
-      setAuthState({ ...authState, isLoggedIn: true, jwt: data.data.token });
+      const { token, email, name, rank } = data.data;
+      setAuthState({
+        ...authState,
+        isLoggedIn: true,
+        jwt: token,
+        user: { email, name, rank },
+      });
       await AsyncStorage.setItem("@jwt", authState.jwt);
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const getUser = async () => {
-    const token = await AsyncStorage.getItem("@jwt");
-    if (token) {
-      // get user data and store in state
-    } else {
-      // take to login page
     }
   };
 
