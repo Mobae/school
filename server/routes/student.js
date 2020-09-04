@@ -130,7 +130,7 @@ router.post("/add", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.send(token);
+      res.json({ token, name, email, rank });
     } else if (rank === "1") {
       const teacher = new Teacher({ name, email, password });
       await teacher.save();
@@ -140,7 +140,7 @@ router.post("/add", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.json({ token });
+      res.json({ token, name, email, rank });
     } else if (rank === "2") {
       const admin = new Admin({ name, email, password, rank });
       await admin.save();
@@ -150,7 +150,7 @@ router.post("/add", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.json({ token });
+      res.json({ token, name, email, rank });
     }
   }
 });
@@ -162,6 +162,7 @@ router.post("/login", async (req, res) => {
     return;
   }
   const user = await Student.findOne({ email });
+  const { name, rank } = user;
   const passMatches = await bcrypt.compare(password, user.password);
   if (passMatches) {
     const payload = {
@@ -170,7 +171,7 @@ router.post("/login", async (req, res) => {
       },
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
-    res.json({ token });
+    res.json({ token, name, email, rank });
   } else {
     res.status(400).json({ msg: "Invalid credentials" });
   }
