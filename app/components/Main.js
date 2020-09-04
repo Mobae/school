@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import { AuthContext } from "../context/AuthContext";
 import Login from "./auth/Login";
-import BottomNavigator from "./bottomNavigator";
+import BottomNavigator from "./layouts/bottomNavigator";
 import { ActivityIndicator } from "react-native-paper";
 
 const Stack = createStackNavigator();
