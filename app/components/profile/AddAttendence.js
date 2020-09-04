@@ -45,7 +45,7 @@ const AddAttendence = () => {
             </Dialog>
           </Portal>
         </View>
-        <View >
+        <View>
           <DatePicker
             style={{
               width: 190,
@@ -61,7 +61,7 @@ const AddAttendence = () => {
             maxDate='31-12-2050'
             confirmBtnText='Confirm'
             cancelBtnText='Cancel'
-            // iconSource={(uri = require('../../calender.png'))}
+            iconSource={(uri = require('../../calender.png'))}
             customStyles={{
               dateIcon: {
                 position: 'absolute',
