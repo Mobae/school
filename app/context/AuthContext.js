@@ -12,9 +12,9 @@ const AuthContextProvider = (props) => {
 
   const LogIn = async (values) => {
     try {
-      setLoading(true);
+      // setLoading(true);
       let data = await axios.post(url + "/student/login", values);
-      setLoading(false);
+      // setLoading(false);
       const { token, email, name, rank } = data.data;
       setAuthState({
         ...authState,
