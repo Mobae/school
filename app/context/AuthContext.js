@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
-  const url = "http://127.0.0.1:5000";
+  const url = "https://f68b61d0e56b.ngrok.io";
   const initialState = { isLoggedIn: false, jwt: "", user: {} };
   const [authState, setAuthState] = useState(initialState);
 
@@ -17,6 +17,15 @@ const AuthContextProvider = (props) => {
       await AsyncStorage.setItem("@jwt", authState.jwt);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const getUser = async () => {
+    const token = await AsyncStorage.getItem("@jwt");
+    if (token) {
+      // get user data and store in state
+    } else {
+      // take to login page
     }
   };
 
