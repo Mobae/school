@@ -1,10 +1,10 @@
-import React, { createContext, useState } from 'react';
-import axios from 'axios';
+import React, { createContext, useState } from "react";
+import axios from "axios";
 
 export const AttendanceContext = createContext();
 
 const AttendanceContextProvider = (props) => {
-  const url = 'expected url';
+  const url = "expected url";
   const initialState = {
     attendance: [],
     loading: false,
