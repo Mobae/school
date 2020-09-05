@@ -96,8 +96,10 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: 'absolute',
+    // display: 'flex',
     margin: 25,
-    right: 60,
+    // right: 90,
+    alignSelf: 'center',
     bottom: 10,
   },
 });

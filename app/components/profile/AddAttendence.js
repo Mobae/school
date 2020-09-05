@@ -45,17 +45,23 @@ const AddAttendence = () => {
             </Dialog>
           </Portal>
         </View>
-        <View style={{ marginLeft: 100 }}>
+        <View>
           <DatePicker
-            style={{ width: 190, marginTop: 40, alignItems: 'center' }}
+            style={{
+              width: 190,
+              marginTop: 40,
+              alignItems: 'center',
+              justifyContent: 'center',
+              alignSelf: 'center',
+            }}
             date={date}
-            androidMode="default"
-            format="DD-MM-YYYY"
-            minDate="01-01-2000"
-            maxDate="31-12-2050"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            // iconSource={(uri = require('../../calender.png'))}
+            androidMode='default'
+            format='DD-MM-YYYY'
+            minDate='01-01-2000'
+            maxDate='31-12-2050'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
+            iconSource={(uri = require('../../calender.png'))}
             customStyles={{
               dateIcon: {
                 position: 'absolute',
@@ -96,11 +102,11 @@ const AddAttendence = () => {
               <DataTable.Cell style={styles.present}>
                 <View style={styles.RadioButton}>
                   <RadioButton
-                    value="present"
+                    value='present'
                     status={checked === 'present' ? 'checked' : 'unchecked'}
                     onPress={() => setChecked('present')}
-                    color="green"
-                    uncheckedColor="grey"
+                    color='green'
+                    uncheckedColor='grey'
                   />
                 </View>
               </DataTable.Cell>
@@ -108,11 +114,11 @@ const AddAttendence = () => {
                 <View style={styles.RadioButtonAb}>
                   <RadioButton
                     style={{ paddingRight: 20 }}
-                    value="present"
+                    value='present'
                     status={checked === 'absent' ? 'checked' : 'unchecked'}
                     onPress={() => setChecked('absent')}
-                    color="red"
-                    uncheckedColor="grey"
+                    color='red'
+                    uncheckedColor='grey'
                   />
                 </View>
               </DataTable.Cell>
