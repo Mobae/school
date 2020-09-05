@@ -10,15 +10,6 @@ const ChatRoute = () => <Text>Music</Text>;
 const NoticeRoute = () => <Text>Albums</Text>;
 
 const ProfileRoute = () => <AdminProfile />;
-// const ProfileRoute = () => {
-//   return (
-//     <View>
-//     <AdminContextProvider>
-//       <AdminProfile />
-//     </AdminContextProvider>
-//     </View>
-//   )
-// };
 
 const MyComponent = () => {
   const [index, setIndex] = React.useState(0);
