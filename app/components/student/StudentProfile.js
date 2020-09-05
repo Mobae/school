@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 import { Avatar, Paragraph, Button, Card, Title } from "react-native-paper";
 
 import { AuthContext } from "../../context/AuthContext";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ProfileIcon = (props) => (
   <Avatar.Icon {...props} icon="account" size={45} />

@@ -7,9 +7,7 @@ import Main from "./components/Main";
 export default function App() {
   return (
     <AuthContextProvider>
-      <StudentContextProvider>
-        <Main />
-      </StudentContextProvider>
+      <Main />
     </AuthContextProvider>
   );
 }

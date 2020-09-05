@@ -1,12 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { Fragment } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React, { Fragment } from "react";
+import { View, Text, StyleSheet } from "react-native";
 import {
   Title,
   DataTable,
   FAB,
   Provider as PaperProvider,
-} from 'react-native-paper';
+} from "react-native-paper";
 
 const AllStudentsAttendance = ({ navigation }) => {
   return (
@@ -80,7 +80,7 @@ const AllStudentsAttendance = ({ navigation }) => {
         small
         icon="account-multiple-plus"
         label="Add Attendance"
-        onPress={() => navigation.push('Add Attendance')}
+        onPress={() => navigation.push("Add Attendance")}
       />
       <StatusBar style="auto" />
     </React.Fragment>
@@ -89,21 +89,12 @@ const AllStudentsAttendance = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   title: {
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   fab: {
-<<<<<<< HEAD
-    position: 'absolute',
-    // display: 'flex',
-    margin: 25,
-    // right: 90,
-    alignSelf: 'center',
-    bottom: 10,
-=======
     width: 200,
-    alignSelf: 'center',
+    alignSelf: "center",
     bottom: 50,
->>>>>>> 2a822e03db8aa91f24b7d25bcb2191ca5e3a2fdb
   },
 });
 
