@@ -45,9 +45,15 @@ const AddAttendence = () => {
             </Dialog>
           </Portal>
         </View>
-        <View style={{ marginLeft: 100 }}>
+        <View>
           <DatePicker
-            style={{ width: 190, marginTop: 40, alignItems: 'center' }}
+            style={{
+              width: 190,
+              marginTop: 40,
+              alignItems: 'center',
+              justifyContent: 'center',
+              alignSelf: 'center',
+            }}
             date={date}
             androidMode='default'
             format='DD-MM-YYYY'
@@ -55,7 +61,7 @@ const AddAttendence = () => {
             maxDate='31-12-2050'
             confirmBtnText='Confirm'
             cancelBtnText='Cancel'
-            // iconSource={(uri = require('../../calender.png'))}
+            iconSource={(uri = require('../../calender.png'))}
             customStyles={{
               dateIcon: {
                 position: 'absolute',
@@ -74,9 +80,9 @@ const AddAttendence = () => {
           />
         </View>
         <IconButton
-          icon='content-save'
+          icon="content-save"
           style={styles.fab}
-          color='white'
+          color="white"
           size={40}
           onPress={() => {
             showDialog();
@@ -96,11 +102,11 @@ const AddAttendence = () => {
               <DataTable.Cell style={styles.present}>
                 <View style={styles.RadioButton}>
                   <RadioButton
-                    value="present"
+                    value='present'
                     status={checked === 'present' ? 'checked' : 'unchecked'}
                     onPress={() => setChecked('present')}
-                    color="green"
-                    uncheckedColor="grey"
+                    color='green'
+                    uncheckedColor='grey'
                   />
                 </View>
               </DataTable.Cell>
@@ -108,11 +114,11 @@ const AddAttendence = () => {
                 <View style={styles.RadioButtonAb}>
                   <RadioButton
                     style={{ paddingRight: 20 }}
-                    value="present"
+                    value='present'
                     status={checked === 'absent' ? 'checked' : 'unchecked'}
                     onPress={() => setChecked('absent')}
-                    color="red"
-                    uncheckedColor="grey"
+                    color='red'
+                    uncheckedColor='grey'
                   />
                 </View>
               </DataTable.Cell>
@@ -145,7 +151,7 @@ const styles = StyleSheet.create({
   absent: {
     justifyContent: 'flex-end',
     position: 'relative',
-    width: '20px',
+    width: 20,
   },
   RadioButtonAb: {
     width: 35,
