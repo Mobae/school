@@ -3,9 +3,12 @@ const router = Router();
 
 const Attendance = require("../models/Attendance");
 
-router.get("/:studentId", async (req, res) => {
+const auth = require("../middleware/auth");
+
+router.get("/student", auth, async (req, res) => {
+  console.log("hi from att");
   try {
-    const studentId = req.params.studentId;
+    const studentId = req.body.id;
     const att = await Attendance.find({ studentId });
     console.log(att);
     return res.status(200).json({
@@ -22,10 +25,17 @@ router.get("/:studentId", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   try {
-    const attendance = await Attendance.create(req.body);
-
+    const studentId = req.body.id;
+    const { status, date } = req.body;
+    let attendance;
+    if (date) {
+      attendance = await Attendance.create({ studentId, date, status });
+    } else {
+      attendance = await Attendance.create({ studentId, status });
+    }
+    console.log(attendance);
     return res.status(201).json({
       sucess: true,
       data: attendance,

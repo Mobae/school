@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useContext } from "react";
+import { StyleSheet } from "react-native";
 
-import AuthContextProvider from './context/AuthContext';
-import Main from './components/Main';
+import AuthContextProvider from "./context/AuthContext";
+import Main from "./components/Main";
 
 export default function App() {
   return (
@@ -15,6 +15,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
 });

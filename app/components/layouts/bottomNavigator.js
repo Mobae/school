@@ -54,7 +54,7 @@ const ProfileRoute = () => {
   //   case "0":
   //     return <StudentProfile />;
   // }
-  return <TeacherStackScreen />;
+  return <StudentStackScreen />;
 };
 
 const MyComponent = () => {

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   DataTable,
   RadioButton,
@@ -8,9 +8,9 @@ import {
   Dialog,
   Portal,
   Provider as PaperProvider,
-} from 'react-native-paper';
-import { StyleSheet, View } from 'react-native';
-import DatePicker from 'react-native-datepicker';
+} from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import DatePicker from "react-native-datepicker";
 
 const AddAttendence = () => {
   const [checked, setChecked] = React.useState(0);
@@ -22,9 +22,9 @@ const AddAttendence = () => {
   var today = new Date(),
     CurrentDate =
       today.getDate() +
-      '-' +
+      "-" +
       (today.getMonth() + 1) +
-      '-' +
+      "-" +
       today.getFullYear();
 
   return (
@@ -102,11 +102,11 @@ const AddAttendence = () => {
               <DataTable.Cell style={styles.present}>
                 <View style={styles.RadioButton}>
                   <RadioButton
-                    value='present'
-                    status={checked === 'present' ? 'checked' : 'unchecked'}
-                    onPress={() => setChecked('present')}
-                    color='green'
-                    uncheckedColor='grey'
+                    value="present"
+                    status={checked === "present" ? "checked" : "unchecked"}
+                    onPress={() => setChecked("present")}
+                    color="green"
+                    uncheckedColor="grey"
                   />
                 </View>
               </DataTable.Cell>
@@ -114,11 +114,11 @@ const AddAttendence = () => {
                 <View style={styles.RadioButtonAb}>
                   <RadioButton
                     style={{ paddingRight: 20 }}
-                    value='present'
-                    status={checked === 'absent' ? 'checked' : 'unchecked'}
-                    onPress={() => setChecked('absent')}
-                    color='red'
-                    uncheckedColor='grey'
+                    value="present"
+                    status={checked === "absent" ? "checked" : "unchecked"}
+                    onPress={() => setChecked("absent")}
+                    color="red"
+                    uncheckedColor="grey"
                   />
                 </View>
               </DataTable.Cell>
@@ -131,11 +131,15 @@ const AddAttendence = () => {
 };
 
 const styles = StyleSheet.create({
+  datepicker: {
+    width: 200,
+    alignSelf: "center",
+  },
   present: {
     // marginLeft: 10,
-    justifyContent: 'flex-end',
-    position: 'relative',
-    paddingHorizontal: 'auto',
+    justifyContent: "flex-end",
+    position: "relative",
+    paddingHorizontal: "auto",
   },
   presentChecked: {
     paddingLeft: 215,
@@ -149,8 +153,8 @@ const styles = StyleSheet.create({
     height: 32,
   },
   absent: {
-    justifyContent: 'flex-end',
-    position: 'relative',
+    justifyContent: "flex-end",
+    position: "relative",
     width: 20,
   },
   RadioButtonAb: {
@@ -158,7 +162,7 @@ const styles = StyleSheet.create({
     height: 32,
   },
   chip: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     marginTop: 10,
   },
   yes: {
@@ -166,16 +170,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   byline: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   fab: {
-    position: 'absolute',
+    position: "absolute",
     margin: 16,
     right: 18,
     bottom: 0,
     height: 63,
     borderRadius: 50,
-    backgroundColor: '#00bfff',
+    backgroundColor: "#00bfff",
     width: 63,
   },
 });

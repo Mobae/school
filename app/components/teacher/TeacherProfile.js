@@ -1,9 +1,8 @@
-import React, { Fragment, useContext } from 'react';
-import { TouchableOpacity, TouchableHighlight } from 'react-native';
-import { Avatar, Button } from 'react-native-paper';
-import CardC from '../layouts/CardC';
+import React, { Fragment, useContext } from "react";
+import { TouchableOpacity, TouchableHighlight } from "react-native";
+import { Avatar, Button } from "react-native-paper";
 
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from "../../context/AuthContext";
 
 const ProfileIcon = (props) => (
   <Avatar.Icon {...props} icon="account" size={45} />
@@ -24,19 +23,19 @@ const TeacherProfile = ({ navigation }) => {
 
   return (
     <Fragment>
-      <TouchableOpacity>
+      {/* <TouchableOpacity>
         <CardC
           title="Profile"
           subtitle={name}
           leftContent={ProfileIcon}
         ></CardC>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.push('Attendance')}>
+      <TouchableOpacity onPress={() => navigation.push("Attendance")}>
         <CardC title="Attendance" leftContent={AttendanceIcon}></CardC>
       </TouchableOpacity>
       <TouchableOpacity>
         <CardC title="Tests" leftContent={TestIcon}></CardC>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </Fragment>
   );
 };
