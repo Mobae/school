@@ -45,34 +45,32 @@ const AddAttendence = () => {
             </Dialog>
           </Portal>
         </View>
-        <View style={{ marginLeft: 100 }}>
-          <DatePicker
-            style={{ width: 190, marginTop: 40, alignItems: 'center' }}
-            date={date}
-            androidMode="default"
-            format="DD-MM-YYYY"
-            minDate="01-01-2000"
-            maxDate="31-12-2050"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            // iconSource={(uri = require('../../calender.png'))}
-            customStyles={{
-              dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: 3,
-                marginLeft: 18,
-              },
-              dateInput: {
-                margin: 50,
-                borderRadius: 2,
-              },
-            }}
-            onDateChange={(date) => {
-              setDate(date);
-            }}
-          />
-        </View>
+        <DatePicker
+          style={styles.datepicker}
+          date={date}
+          androidMode="default"
+          format="DD-MM-YYYY"
+          minDate="01-01-2000"
+          maxDate="31-12-2050"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          // iconSource={(uri = require('../../calender.png'))}
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 3,
+              marginLeft: 18,
+            },
+            dateInput: {
+              margin: 50,
+              borderRadius: 2,
+            },
+          }}
+          onDateChange={(date) => {
+            setDate(date);
+          }}
+        />
         <IconButton
           icon="content-save"
           style={styles.fab}
@@ -125,6 +123,10 @@ const AddAttendence = () => {
 };
 
 const styles = StyleSheet.create({
+  datepicker: {
+    width: 200,
+    alignSelf: 'center',
+  },
   present: {
     // marginLeft: 10,
     justifyContent: 'flex-end',
