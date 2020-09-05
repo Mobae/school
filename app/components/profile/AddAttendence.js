@@ -49,12 +49,12 @@ const AddAttendence = () => {
           <DatePicker
             style={{ width: 190, marginTop: 40, alignItems: 'center' }}
             date={date}
-            androidMode='default'
-            format='DD-MM-YYYY'
-            minDate='01-01-2000'
-            maxDate='31-12-2050'
-            confirmBtnText='Confirm'
-            cancelBtnText='Cancel'
+            androidMode="default"
+            format="DD-MM-YYYY"
+            minDate="01-01-2000"
+            maxDate="31-12-2050"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
             // iconSource={(uri = require('../../calender.png'))}
             customStyles={{
               dateIcon: {
@@ -74,9 +74,9 @@ const AddAttendence = () => {
           />
         </View>
         <IconButton
-          icon='content-save'
+          icon="content-save"
           style={styles.fab}
-          color='white'
+          color="white"
           size={40}
           onPress={() => {
             showDialog();
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   absent: {
     justifyContent: 'flex-end',
     position: 'relative',
-    width: '20px',
+    width: 20,
   },
   RadioButtonAb: {
     width: 35,

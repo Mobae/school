@@ -8,7 +8,7 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 
-const AllStudentsAttendance = () => {
+const AllStudentsAttendance = ({ navigation }) => {
   return (
     <React.Fragment>
       <PaperProvider>
@@ -70,7 +70,7 @@ const AllStudentsAttendance = () => {
               onPageChange={(page) => {
                 console.log(page);
               }}
-              label='1-2 of 6'
+              label="1-2 of 6"
             />
           </DataTable>
         </View>
@@ -78,11 +78,11 @@ const AllStudentsAttendance = () => {
       <FAB
         style={styles.fab}
         small
-        icon='account-multiple-plus'
-        label='Add Attendance'
-        onPress={() => console.log('Pressed')}
+        icon="account-multiple-plus"
+        label="Add Attendance"
+        onPress={() => navigation.push('Add Attendance')}
       />
-      <StatusBar style='auto' />
+      <StatusBar style="auto" />
     </React.Fragment>
   );
 };
