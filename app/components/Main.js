@@ -23,7 +23,7 @@ const Main = () => {
         {!isLoggedIn ? (
           <Stack.Screen name="Login" component={Login} />
         ) : (
-          <Stack.Screen name="Home" component={BottomNavigator} />
+          <Stack.Screen name="JMRD" component={BottomNavigator} />
         )}
         {/* <Stack.Screen name="Home" component={BottomNavigator} /> */}
       </Stack.Navigator>

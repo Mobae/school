@@ -1,16 +1,16 @@
-import React, { useContext, Fragment } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { BottomNavigation, Text } from 'react-native-paper';
-import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
-import StudentProfile from '../student/StudentProfile';
-import TeacherProfile from '../teacher/TeacherProfile';
-import StudentAttendance from '../profile/StudentView/StudentAttendance';
-import IndividualMonth from '../profile/StudentView/IndividualMonth';
-import AllStudentAttendance from '../profile/AllStudentsAttendance';
-import AddAttendance from '../profile/AddAttendence';
+import React, { useContext, Fragment } from "react";
+import { StatusBar } from "expo-status-bar";
+import { BottomNavigation, Text } from "react-native-paper";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import StudentProfile from "../student/StudentProfile";
+import TeacherProfile from "../teacher/TeacherProfile";
+import StudentAttendance from "../profile/StudentView/StudentAttendance";
+import IndividualMonth from "../profile/StudentView/IndividualMonth";
+import AllStudentAttendance from "../profile/AllStudentsAttendance";
+import AddAttendance from "../profile/AddAttendence";
 
-import { AuthContext } from '../../context/AuthContext';
-import { createStackNavigator } from '@react-navigation/stack';
+import { AuthContext } from "../../context/AuthContext";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const StudentStack = createStackNavigator();
 const TeacherStack = createStackNavigator();
@@ -54,15 +54,15 @@ const ProfileRoute = () => {
   //   case "0":
   //     return <StudentProfile />;
   // }
-  return <StudentStackScreen />;
+  return <TeacherStackScreen />;
 };
 
 const MyComponent = () => {
   const [index, setIndex] = React.useState(1);
   const [routes] = React.useState([
-    { key: 'chat', title: 'Chat', icon: 'forum-outline' },
-    { key: 'profile', title: 'Profile', icon: 'face-profile' },
-    { key: 'notice', title: 'Notice', icon: 'format-list-checkbox' },
+    { key: "chat", title: "Chat", icon: "forum-outline" },
+    { key: "profile", title: "Profile", icon: "face-profile" },
+    { key: "notice", title: "Notice", icon: "format-list-checkbox" },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
