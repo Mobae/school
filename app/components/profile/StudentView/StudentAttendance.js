@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Avatar, Card, DataTable } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
 
-const StudentAttendance = () => {
+const StudentAttendance = ({ navigation }) => {
   return (
     <View>
       <TouchableOpacity onPress={() => console.log('profile')}>
@@ -12,7 +13,7 @@ const StudentAttendance = () => {
               <View>
                 <Avatar.Icon
                   size={100}
-                  icon='account'
+                  icon="account"
                   style={styles.avatar_icon}
                 />
               </View>
@@ -28,11 +29,9 @@ const StudentAttendance = () => {
       </TouchableOpacity>
       <View style={{ paddingHorizontal: 20, paddingTop: 40 }}>
         <Card
-          style={
-            {
-              backgroundColor: '#c6b3ff',
-            }
-          }
+          style={{
+            backgroundColor: '#c6b3ff',
+          }}
         >
           <Card.Content>
             <View
@@ -49,7 +48,7 @@ const StudentAttendance = () => {
                   <DataTable.Title>P/T</DataTable.Title>
                   <DataTable.Title>Percent(%)</DataTable.Title>
                 </DataTable.Header>
-                <TouchableOpacity onPress={() => console.log('pressed')}>
+                <TouchableOpacity onPress={() => navigation.push('Month')}>
                   <DataTable.Row style={{ backgroundColor: '#b3ffc6' }}>
                     <DataTable.Cell>January</DataTable.Cell>
                     <DataTable.Cell>13/30</DataTable.Cell>

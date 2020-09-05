@@ -1,8 +1,9 @@
-import React, { Fragment, useContext } from "react";
-import { Avatar } from "react-native-paper";
-import CardC from "../layouts/CardC";
+import React, { Fragment, useContext } from 'react';
+import { TouchableOpacity, TouchableHighlight } from 'react-native';
+import { Avatar, Button } from 'react-native-paper';
+import CardC from '../layouts/CardC';
 
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from '../../context/AuthContext';
 
 const ProfileIcon = (props) => (
   <Avatar.Icon {...props} icon="account" size={45} />
@@ -14,7 +15,7 @@ const AttendanceIcon = (props) => (
 
 const TestIcon = (props) => <Avatar.Icon {...props} icon="file" size={45} />;
 
-const StudentProfile = () => {
+const StudentProfile = ({ navigation }) => {
   const {
     authState: {
       user: { name },
@@ -23,9 +24,19 @@ const StudentProfile = () => {
 
   return (
     <Fragment>
-      <CardC title="Profile" subtitle={name} leftContent={ProfileIcon}></CardC>
-      <CardC title="Attendance" leftContent={AttendanceIcon}></CardC>
-      <CardC title="Tests" leftContent={TestIcon}></CardC>
+      <TouchableOpacity>
+        <CardC
+          title="Profile"
+          subtitle={name}
+          leftContent={ProfileIcon}
+        ></CardC>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.push('Attendance')}>
+        <CardC title="Attendance" leftContent={AttendanceIcon}></CardC>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <CardC title="Tests" leftContent={TestIcon}></CardC>
+      </TouchableOpacity>
     </Fragment>
   );
 };

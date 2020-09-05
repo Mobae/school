@@ -1,6 +1,6 @@
-import React from "react";
-import { StyleSheet } from "react-native";
-import { Card, Title } from "react-native-paper";
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import { Card, Title } from 'react-native-paper';
 
 const CardC = (props) => {
   return (
