@@ -6,7 +6,7 @@ const Admin = require("../models/Admin");
 const auth = require("../middleware/auth");
 const { admin } = require("../middleware/rank");
 
-router.get("/", auth, admin, async (req, res) => {
+router.get("/", auth, async (req, res) => {
   const { data } = req.body;
   const admin = await Admin.findById(data.id);
   res.json({ admin });

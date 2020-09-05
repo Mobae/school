@@ -1,6 +1,6 @@
 const teacher = async (req, res, next) => {
   const { rank } = req.body.data;
-  if (rank === "1") {
+  if (rank === "1" || rank == "2") {
     next();
   } else {
     res.status(401).json({
@@ -9,10 +9,10 @@ const teacher = async (req, res, next) => {
   }
 };
 
-const admin = async (req, res, next) => {
+const student = async (req, res, next) => {
   const { rank } = req.body.data;
   console.log(rank);
-  if (rank == "2") {
+  if (rank == "0" || rank == "2") {
     next();
   } else {
     res.status(401).json({
@@ -21,4 +21,4 @@ const admin = async (req, res, next) => {
   }
 };
 
-module.exports = { teacher, admin };
+module.exports = { teacher, student };

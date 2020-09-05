@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from "react";
-import { Avatar } from "react-native-paper";
-import CardC from "../layouts/CardC";
+import { StyleSheet } from "react-native";
+import { Avatar, Paragraph, Button, Card, Title } from "react-native-paper";
 
 import { AuthContext } from "../../context/AuthContext";
 
@@ -16,18 +16,33 @@ const TestIcon = (props) => <Avatar.Icon {...props} icon="file" size={45} />;
 
 const StudentProfile = () => {
   const {
-    authState: {
-      user: { name },
-    },
+    authState: { user },
   } = useContext(AuthContext);
 
   return (
     <Fragment>
-      <CardC title="Profile" subtitle={name} leftContent={ProfileIcon}></CardC>
-      <CardC title="Attendance" leftContent={AttendanceIcon}></CardC>
-      <CardC title="Tests" leftContent={TestIcon}></CardC>
+      <Card style={styles}>
+        <Card.Title title="Profile" subtitle={user.name} left={ProfileIcon} />
+        <Card.Content>
+          <Paragraph>Email: {user.email}</Paragraph>
+          <Paragraph>Class: {user.studentClass}</Paragraph>
+        </Card.Content>
+      </Card>
+      <Card style={styles}>
+        <Card.Title title="Attendance" left={AttendanceIcon} />
+        <Card.Actions>
+          <Button title="View" mode="outlined">
+            View
+          </Button>
+        </Card.Actions>
+      </Card>
     </Fragment>
   );
 };
+
+const styles = StyleSheet.create({
+  margin: 10,
+  marginBottom: 0,
+});
 
 export default StudentProfile;

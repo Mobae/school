@@ -6,6 +6,7 @@ const Admin = require("../models/Admin");
 
 module.exports = async function (req, res, next) {
   const token = req.get("auth-token");
+  console.log(token);
   const { data } = jwt.verify(token, process.env.JWT_SECRET);
   const id = data.id;
   let user = await Student.findById(id);
@@ -23,8 +24,5 @@ module.exports = async function (req, res, next) {
     req.body.data = user;
     console.log(user);
     next();
-  }
-  if (!user) {
-    res.status(401).json({ msg: "Unauthorized" });
   }
 };
