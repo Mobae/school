@@ -189,13 +189,15 @@ router.post("/add", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  let obj = req.body;
+  obj = trimObj(obj);
+  const { email, password } = obj;
   if (!email || !password) {
     res.status(400).json({ msg: "Invalid credentials" });
     return;
   }
   const user = await Student.findOne({ email });
-  const { name, rank } = user;
+  const { name, rank, studentClass } = user;
   const passMatches = await bcrypt.compare(password, user.password);
   if (passMatches) {
     const payload = {
@@ -204,7 +206,7 @@ router.post("/login", async (req, res) => {
       },
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET);
-    res.json({ token, name, email, rank });
+    res.json({ token, name, email, rank, studentClass });
   } else {
     res.status(400).json({ msg: "Invalid credentials" });
   }

@@ -16,11 +16,13 @@ const IndividualMonth = () => {
   ]);
   return (
     <React.Fragment>
-      <View style={{ marginLeft: 155, marginTop: 50 }}>
+      <View style={{ marginTop: 50 }}>
         <Text
           style={{
             fontWeight: 'bold',
             textDecorationLine: 'underline',
+            alignSelf: 'center',
+            justifyContent: 'center',
           }}
         >
           January

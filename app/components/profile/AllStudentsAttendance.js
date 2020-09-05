@@ -1,18 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { Fragment } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React, { Fragment } from "react";
+import { View, Text, StyleSheet } from "react-native";
 import {
   Title,
   DataTable,
   FAB,
   Provider as PaperProvider,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-const AllStudentsAttendance = () => {
+const AllStudentsAttendance = ({ navigation }) => {
   return (
     <React.Fragment>
       <PaperProvider>
-        <View style={styles.container}>
+        <View>
           <Title style={styles.title}>Attendance</Title>
           <DataTable>
             <DataTable.Header>
@@ -70,7 +70,7 @@ const AllStudentsAttendance = () => {
               onPageChange={(page) => {
                 console.log(page);
               }}
-              label='1-2 of 6'
+              label="1-2 of 6"
             />
           </DataTable>
         </View>
@@ -78,27 +78,23 @@ const AllStudentsAttendance = () => {
       <FAB
         style={styles.fab}
         small
-        icon='account-multiple-plus'
-        label='Add Attendance'
-        onPress={() => console.log('Pressed')}
+        icon="account-multiple-plus"
+        label="Add Attendance"
+        onPress={() => navigation.push("Add Attendance")}
       />
-      <StatusBar style='auto' />
+      <StatusBar style="auto" />
     </React.Fragment>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    // marginTop: 35,
-  },
   title: {
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   fab: {
-    position: 'absolute',
-    margin: 25,
-    right: 60,
-    bottom: 10,
+    width: 200,
+    alignSelf: "center",
+    bottom: 50,
   },
 });
 
