@@ -80,9 +80,9 @@ const AddAttendence = () => {
           />
         </View>
         <IconButton
-          icon='content-save'
+          icon="content-save"
           style={styles.fab}
-          color='white'
+          color="white"
           size={40}
           onPress={() => {
             showDialog();
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   absent: {
     justifyContent: 'flex-end',
     position: 'relative',
-    width: '20px',
+    width: 20,
   },
   RadioButtonAb: {
     width: 35,
