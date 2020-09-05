@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from 'react';
 import { TouchableOpacity, TouchableHighlight } from 'react-native';
 import { Avatar, Button } from 'react-native-paper';
-import CardC from '../layouts/CardC';
+// import CardC from '../layouts/CardC';
 
 import { AuthContext } from '../../context/AuthContext';
 
@@ -24,7 +24,7 @@ const StudentProfile = ({ navigation }) => {
 
   return (
     <Fragment>
-      <TouchableOpacity>
+      {/* <TouchableOpacity>
         <CardC
           title="Profile"
           subtitle={name}
@@ -36,7 +36,7 @@ const StudentProfile = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity>
         <CardC title="Tests" leftContent={TestIcon}></CardC>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </Fragment>
   );
 };
