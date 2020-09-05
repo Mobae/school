@@ -23,7 +23,7 @@ const Main = () => {
     return (
       <NavigationContainer>
         <Stack.Navigator>
-          {!isLoggedIn ? (
+          {isLoggedIn ? (
             <Stack.Screen name="Login" component={Login} />
           ) : (
             <Stack.Screen name="Home" component={BottomNavigator} />

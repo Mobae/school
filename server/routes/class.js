@@ -9,6 +9,24 @@ router.get("/view", async (req, res) => {
   res.send("Classes Get Triggered !!");
 });
 
+router.get("/all", async (req, res) => {
+  try {
+    const classes = await Class.find();
+
+    return res.status(200).json({
+      sucess: true,
+      data: classes
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      sucess: false,
+      data: "Server error",
+      err: err,
+    });
+  }
+});
+
 router.post("/add", async (req, res) => {
   try {
     const name = req.body.name;

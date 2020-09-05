@@ -4,10 +4,6 @@ require("dotenv").config();
 const connectDB = require("./db");
 
 const app = express();
-<<<<<<< HEAD
-app.use(express.json());
-=======
->>>>>>> 26c5b01b5d6f5e445a9afcc9da44f4c140c214cc
 connectDB();
 
 app.use(express.json());
