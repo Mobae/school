@@ -1,16 +1,18 @@
-import React, { useContext, Fragment } from "react";
-import { StatusBar } from "expo-status-bar";
-import { BottomNavigation, Text } from "react-native-paper";
-import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import StudentProfile from "../student/StudentProfile";
-import TeacherProfile from "../teacher/TeacherProfile";
-import StudentAttendance from "../profile/StudentView/StudentAttendance";
-import IndividualMonth from "../profile/StudentView/IndividualMonth";
-import AllStudentAttendance from "../profile/AllStudentsAttendance";
-import AddAttendance from "../profile/AddAttendence";
+import React, { useContext, Fragment } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { BottomNavigation, Text } from 'react-native-paper';
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { AuthContext } from "../../context/AuthContext";
-import { createStackNavigator } from "@react-navigation/stack";
+import StudentProfile from '../student/StudentProfile';
+import TeacherProfile from '../teacher/TeacherProfile';
+import StudentAttendance from '../profile/StudentView/StudentAttendance';
+import IndividualMonth from '../profile/StudentView/IndividualMonth';
+import AllStudentAttendance from '../profile/AllStudentsAttendance';
+import AddAttendance from '../profile/AddAttendence';
+import Notice from '../NoticeBoard/Notice';
+
+import { AuthContext } from '../../context/AuthContext';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const StudentStack = createStackNavigator();
 const TeacherStack = createStackNavigator();
@@ -37,7 +39,9 @@ const TeacherStackScreen = () => {
 
 const ChatRoute = () => <Text>Music</Text>;
 
-const NoticeRoute = () => <Text>Albums</Text>;
+const NoticeRoute = () => {
+  return <Notice />;
+};
 
 const ProfileRoute = () => {
   const {
@@ -60,9 +64,9 @@ const ProfileRoute = () => {
 const MyComponent = () => {
   const [index, setIndex] = React.useState(1);
   const [routes] = React.useState([
-    { key: "chat", title: "Chat", icon: "forum-outline" },
-    { key: "profile", title: "Profile", icon: "face-profile" },
-    { key: "notice", title: "Notice", icon: "format-list-checkbox" },
+    { key: 'chat', title: 'Chat', icon: 'forum-outline' },
+    { key: 'profile', title: 'Profile', icon: 'face-profile' },
+    { key: 'notice', title: 'Notice', icon: 'format-list-checkbox' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
