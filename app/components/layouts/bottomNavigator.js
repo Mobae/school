@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, Fragment } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import { BottomNavigation, Text } from 'react-native-paper';
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import StudentProfile from '../student/StudentProfile';
@@ -71,12 +72,15 @@ const MyComponent = () => {
   });
 
   return (
-    <BottomNavigation
-      navigationState={{ index, routes }}
-      onIndexChange={setIndex}
-      renderScene={renderScene}
-      shifting={true}
-    />
+    <Fragment>
+      <BottomNavigation
+        navigationState={{ index, routes }}
+        onIndexChange={setIndex}
+        renderScene={renderScene}
+        shifting={true}
+      />
+      <StatusBar style="auto" />
+    </Fragment>
   );
 };
 
