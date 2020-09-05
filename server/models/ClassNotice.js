@@ -6,7 +6,7 @@ const ClassNoticeSchema = new mongoose.Schema({
   description: String,
   date: Date,
   author: String,
-  status: String,
+  status: { type: String, default: "active" },
 });
 
 module.exports = mongoose.model("classnotice", ClassNoticeSchema);
