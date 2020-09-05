@@ -12,7 +12,7 @@ const AllStudentsAttendance = ({ navigation }) => {
   return (
     <React.Fragment>
       <PaperProvider>
-        <View style={styles.container}>
+        <View>
           <Title style={styles.title}>Attendance</Title>
           <DataTable>
             <DataTable.Header>
@@ -88,19 +88,22 @@ const AllStudentsAttendance = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    // marginTop: 35,
-  },
   title: {
     alignSelf: 'center',
   },
   fab: {
+<<<<<<< HEAD
     position: 'absolute',
     // display: 'flex',
     margin: 25,
     // right: 90,
     alignSelf: 'center',
     bottom: 10,
+=======
+    width: 200,
+    alignSelf: 'center',
+    bottom: 50,
+>>>>>>> 2a822e03db8aa91f24b7d25bcb2191ca5e3a2fdb
   },
 });
 
