@@ -1,8 +1,8 @@
-import React, { Fragment, useContext } from "react";
-import { StyleSheet } from "react-native";
-import { Avatar, Paragraph, Button, Card, Title } from "react-native-paper";
+import React, { Fragment, useContext } from 'react';
+import { StyleSheet } from 'react-native';
+import { Avatar, Paragraph, Button, Card, Title } from 'react-native-paper';
 
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from '../../context/AuthContext';
 
 const ProfileIcon = (props) => (
   <Avatar.Icon {...props} icon="account" size={45} />
@@ -31,7 +31,11 @@ const StudentProfile = ({ navigation }) => {
       <Card style={styles}>
         <Card.Title title="Attendance" left={AttendanceIcon} />
         <Card.Actions>
-          <Button title="View" mode="outlined">
+          <Button
+            title="View"
+            mode="outlined"
+            onPress={() => navigation.push('Attendance')}
+          >
             View
           </Button>
         </Card.Actions>
