@@ -16,7 +16,7 @@ router.get("/", auth, teacher, async (req, res) => {
   }
 });
 
-router.post("/", auth, teacher, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { title, description, author, date, teacherClass } = req.body;
     const classNotice = new ClassNotice({
