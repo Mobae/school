@@ -30,12 +30,8 @@ const Notice = () => {
               left={NoticeIcon}
             />
             <Card.Content style={{ marginBottom: 8 }}>
-              <Paragraph>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
-                earum labore repudiandae. Non quod dolor commodi error, culpa
-                molestiae inventore itaque exercitationem necessitatibus id
-                expedita nam eveniet aperiam repellat. Corrupti.
-              </Paragraph>
+              <Subheading>Subject Of the Notice</Subheading>
+              <Paragraph>Issued By: Teacher Name</Paragraph>
             </Card.Content>
           </Fragment>
         </TouchableRipple>
