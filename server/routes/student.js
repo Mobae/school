@@ -49,18 +49,15 @@ router.get("/teachers/all", async (req, res) => {
   }
 });
 
-router.get("/student/:studentId", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const student = await Student.findById(req.params.studentId);
-
+    const student = await Student.findById(req.body.id);
     return res.status(200).json({
-      sucess: true,
-      data: student,
+      student,
     });
   } catch (err) {
     return res.status(404).json({
-      sucess: false,
-      error: err,
+      err,
     });
   }
 });
