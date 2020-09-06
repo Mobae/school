@@ -13,12 +13,19 @@ const AuthContextProvider = (props) => {
   const LogIn = async (values) => {
     try {
       let data = await axios.post(URL + "/student/login", values);
-      const { token, email, name, rank, studentClass } = data.data;
+      const { token, email, name, rank } = data.data;
+      let class_;
+      if (rank === "1") {
+        class_ = data.data.teacherClass;
+      }
+      if (rank == "0") {
+        class_ = data.data.studentClass;
+      }
       setAuthState({
         ...authState,
         isLoggedIn: true,
         jwt: token,
-        user: { email, name, rank, studentClass },
+        user: { email, name, rank, class_ },
       });
       await AsyncStorage.setItem("@jwt", authState.jwt);
       axios.defaults.headers.common["auth-token"] = token;

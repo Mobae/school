@@ -1,7 +1,9 @@
 const { Router } = require("express");
 router = Router();
 
-router.get("/login", (req, res) => {
+const auth = require("../middleware/auth");
+
+router.get("/login", auth, (req, res) => {
   console.log("hi");
   res.json({ msg: "hi" });
 });

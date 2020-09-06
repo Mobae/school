@@ -1,8 +1,10 @@
-import React, { Fragment, useContext } from 'react';
-import { StyleSheet } from 'react-native';
-import { Avatar, Card, Paragraph, TouchableRipple } from 'react-native-paper';
+import React, { Fragment, useContext, useState, useEffect } from "react";
+import { StyleSheet } from "react-native";
+import { Avatar, Card, Paragraph, TouchableRipple } from "react-native-paper";
+import axios from "axios";
 
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from "../../context/AuthContext";
+import { URL } from "../../config";
 
 const ProfileIcon = (props) => (
   <Avatar.Icon {...props} icon="account" size={45} />
@@ -15,10 +17,16 @@ const AttendanceIcon = (props) => (
 const TestIcon = (props) => <Avatar.Icon {...props} icon="file" size={45} />;
 
 const TeacherProfile = ({ navigation }) => {
-  const {
-    authState: { user },
-  } = useContext(AuthContext);
-
+  const { authState } = useContext(AuthContext);
+  const { user } = authState;
+  const getHi = async () => {
+    axios.defaults.headers["auth-token"] = authState.jwt;
+    const res = await axios.get(URL + "/class");
+    console.log(res.data);
+  };
+  useEffect(() => {
+    getHi();
+  }, [authState]);
   return (
     <Fragment>
       <Card style={styles}>
@@ -26,12 +34,12 @@ const TeacherProfile = ({ navigation }) => {
         <Card.Title title="Profile" subtitle={user.name} left={ProfileIcon} />
         <Card.Content>
           <Paragraph>Email: {user.email}</Paragraph>
-          <Paragraph>Class: {user.studentClass}</Paragraph>
+          <Paragraph>Class teacher of {user.class_}</Paragraph>
         </Card.Content>
         {/* </TouchableRipple> */}
       </Card>
       <Card style={styles}>
-        <TouchableRipple onPress={() => navigation.push('Attendance')}>
+        <TouchableRipple onPress={() => navigation.push("Attendance")}>
           <Card.Title
             title="Attendance"
             subtitle="View Attendance"

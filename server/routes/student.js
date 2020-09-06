@@ -131,7 +131,7 @@ router.post("/update/teacher", async (req, res) => {
 router.post("/add", async (req, res) => {
   let obj = req.body;
   obj = trimObj(obj);
-  const { firstName, lastName, email, studentClass, rank, teacherClass } = obj;
+  const { firstName, lastName, email, rank, studentClass, teacherClass } = obj;
   const stu = await Student.findOne({ email });
   const tea = await Teacher.findOne({ email });
   if (stu || tea) {
@@ -157,9 +157,9 @@ router.post("/add", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.json({ token, name, email, rank });
+      res.json({ token, name, email, rank, _id: student.id });
     } else if (rank === "1") {
-      const teacher = new Teacher({ name, email, password });
+      const teacher = new Teacher({ name, email, password, teacherClass });
       await teacher.save();
       const payload = {
         data: {
@@ -201,13 +201,12 @@ router.post("/login", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.json({ token, name, email, rank, studentClass });
+      return res.json({ token, name, email, rank, studentClass });
     }
-  } else {
-    res.status(400).json({ msg: "Invalid credentials" });
   }
   user = await Teacher.findOne({ email });
   if (user) {
+    console.log("hi");
     const { name, rank, teacherClass } = user;
     const passMatches = await bcrypt.compare(password, user.password);
     if (passMatches) {
@@ -217,10 +216,10 @@ router.post("/login", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.json({ token, name, email, rank, teacherClass });
+      return res.json({ token, name, email, rank, teacherClass });
     }
   } else {
-    res.status(400).json({ msg: "Invalid credentials" });
+    return res.status(400).json({ msg: "Invalid credentials" });
   }
 });
 

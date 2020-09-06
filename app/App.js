@@ -1,17 +1,16 @@
 import React, { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 
-import AuthContextProvider from "./context/AuthContext";
+import AuthContextProvider from './context/AuthContext';
 import AdminContextProvider from './context/AdminContext';
-import Main from "./components/Main";
-
+import Main from './components/Main';
 
 export default function App() {
   return (
     <AuthContextProvider>
-    <AdminContextProvider>
-      <Main />
-    </AdminContextProvider> 
+      <AdminContextProvider>
+        <Main />
+      </AdminContextProvider>
     </AuthContextProvider>
   );
 }
