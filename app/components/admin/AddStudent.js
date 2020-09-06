@@ -3,14 +3,14 @@ import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Keyboard } fro
 import { Headline, TextInput, Button } from "react-native-paper";
 import { Formik } from "formik";
 import { MaterialIcons } from '@expo/vector-icons';
-import { Dropdown } from 'react-native-material-dropdown';
+// import { Dropdown } from 'react-native-material-dropdown';
 
 import globalStyles from "../styles/global";
 
 const AddStudent = ({ addStudent, studentModalOpen, setStudentModalOpen, navigation }) => {
 
     const options = [
-        
+
     ]
 
 
