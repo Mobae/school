@@ -16,6 +16,39 @@ router.get("/", auth, async (req, res) => {
   console.log(req.body.data);
 });
 
+router.get("/students/all", async (req, res) => {
+  try {
+    const students = await Student.find();
+
+    return res.status(200).json({
+      sucess: true,
+      data: students,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      sucess: false,
+      error: err,
+    });
+  }
+});
+
+router.get("/teachers/all", async(req, res) => {
+  try {
+    const teachers = await Teacher.find();
+    console.log(teachers);
+
+    return res.status(200).json({
+      success: true,
+      data: teachers,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      sucess: false,
+      error: err,
+    });
+  }
+})
+
 router.get("/student/:studentId", async (req, res) => {
   try {
     const student = await Student.findById(req.params.studentId);
