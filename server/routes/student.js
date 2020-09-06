@@ -49,7 +49,7 @@ router.get("/teachers/all", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
     const student = await Student.findById(req.body.id);
     return res.status(200).json({
