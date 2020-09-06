@@ -19,13 +19,23 @@ router.get("/", auth, teacher, async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { title, description, author, date, teacherClass } = req.body;
-    const classNotice = new ClassNotice({
-      title,
-      description,
-      author,
-      date,
-      class: teacherClass,
-    });
+    let classNotice;
+    if (date) {
+      classNotice = new ClassNotice({
+        title,
+        description,
+        author,
+        date,
+        class: teacherClass,
+      });
+    } else {
+      classNotice = new ClassNotice({
+        title,
+        description,
+        author,
+        class: teacherClass,
+      });
+    }
     await classNotice.save();
     res.json({ classNotice });
   } catch (err) {
