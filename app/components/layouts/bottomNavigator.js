@@ -10,6 +10,7 @@ import IndividualMonth from '../profile/StudentView/IndividualMonth';
 import AllStudentAttendance from '../profile/AllStudentsAttendance';
 import AddAttendance from '../profile/AddAttendence';
 import Notice from '../NoticeBoard/Notice';
+import NoticeForm from '../NoticeBoard/NoticeForm';
 
 import { AuthContext } from '../../context/AuthContext';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -50,7 +51,8 @@ const NoticeStackScreen = () => {
   return (
     <NavigationContainer>
       <NoticeStack.Navigator>
-        <NoticeStack.Screen name="Notice" component={Notice} />
+        <NoticeStack.Screen name="Notice Board" component={Notice} />
+        <NoticeStack.Screen name="New Notice" component={NoticeForm} />
       </NoticeStack.Navigator>
     </NavigationContainer>
   );
@@ -77,7 +79,7 @@ const ProfileRoute = () => {
   //   case "0":
   //     return <StudentProfile />;
   // }
-  return <StudentStackScreen />;
+  return <TeacherStackScreen />;
 };
 
 const MyComponent = () => {

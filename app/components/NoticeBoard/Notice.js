@@ -19,7 +19,7 @@ const NoticeIcon = () => {
   return <Avatar.Icon icon="bulletin-board" size={45} />;
 };
 
-const Notice = () => {
+const Notice = ({ navigation }) => {
   const {
     authState: {
       user: { rank },
@@ -30,7 +30,6 @@ const Notice = () => {
   return (
     <Fragment>
       <ScrollView>
-        <Title style={styles.title}>Notice Board</Title>
         <Card style={styles.notice}>
           <TouchableRipple onPress={() => refRBSheet.current.open()}>
             <Fragment>
@@ -57,7 +56,8 @@ const Notice = () => {
             </Paragraph>
           </View>
         </RBSheet>
-        {/* {rank === 1 ? (
+      </ScrollView>
+      {/* {rank === 1 ? (
         <IconButton
           icon="content-save"
           style={styles.fab}
@@ -68,13 +68,12 @@ const Notice = () => {
           }}
         />
       ) : null} */}
-      </ScrollView>
       <IconButton
         icon="plus"
         style={styles.fab}
         color="white"
         size={40}
-        onPress={() => {}}
+        onPress={() => navigation.push('New Notice')}
       />
     </Fragment>
   );

@@ -8,3 +8,5 @@ const NoticeForm = () => {
     </Fragment>
   );
 };
+
+export default NoticeForm;
