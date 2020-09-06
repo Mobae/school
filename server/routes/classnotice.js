@@ -31,3 +31,16 @@ router.post("/", auth, teacher, async (req, res) => {
     res.status(500).json({ err: "Server error" });
   }
 });
+
+router.delete("/", auth, admin, async (req, res) => {
+  try {
+    const { class_, id } = req.body;
+    const classNotice = ClassNotice.findOne({ class_, id });
+    classNotice.status = "archived";
+    await classNotice.save();
+  } catch (err) {
+    res.status(500).json({ err: "Server error" });
+  }
+});
+
+module.exports = router;

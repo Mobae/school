@@ -12,6 +12,8 @@ app.use("/student", require("./routes/student"));
 app.use("/attendance", require("./routes/attendance"));
 app.use("/class", require("./routes/class"));
 app.use("/admin", require("./routes/admin"));
+app.use("/classnotice", require("./routes/classnotice"));
+app.use("/schoolnotice", require("./routes/schoolnotice"));
 
 app.listen(process.env.PORT, () =>
   console.log(`Server runnning on ${process.env.PORT}`)
