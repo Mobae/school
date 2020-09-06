@@ -11,7 +11,7 @@ router.get("/view", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const class_ = await Class.find(req.body.id);
+    const class_ = await Class.findById(req.body.id);
     res.json({ class_ });
   } catch (err) {
     res.status(500).json({ err });
