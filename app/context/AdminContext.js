@@ -65,11 +65,9 @@ const AdminContextProvider = (props) => {
     const addTeacher = async (teacher) => {
         try {
             setLoading(true);
-            console.log(`incoming: ${teacher}`)
             const res = await axios.post(url + '/student/add', teacher);
             setLoading(false);
-            const newTeacher = res.data.data;
-            console.log(newTeacher);
+            const newTeacher = res.data;
 
             setAdminState({
                 students: adminState.students,
@@ -100,21 +98,19 @@ const AdminContextProvider = (props) => {
     }
     const addStudent = async (student) => {
         try {
-            // setLoading(true);
-            // const res = await axios.post(url + '/student/add', class_, {
-            //     headers: {
-            //         Authorization: `token`
-            //     }
-            // });
-            // setLoading(false);
-            // const { student } = res.data;
+            setLoading(true);
+            const res = await axios.post(url + '/student/add', class_, {
+                headers: {
+                    Authorization: `token`
+                }
+            });
+            setLoading(false);
+            const { student } = res.data;
 
-            // setAdminState({
-            //     ...adminState,
-            //     classes: [ ...adminState.students, student ]
-            // });
-            console.log(student);
-            console.log("***************************");
+            setAdminState({
+                ...adminState,
+                classes: [ ...adminState.students, student ]
+            });
         } catch (err) {
             console.log(err);
         }

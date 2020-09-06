@@ -12,9 +12,9 @@ const TeacherList = () => {
   const { adminState, getTeachers } = React.useContext(AdminContext);
   
 
-//   React.useEffect(() => {
-//     getTeachers();
-//   }, [])
+  React.useEffect(() => {
+    getTeachers();
+  }, [])
 
   return (
     <View>

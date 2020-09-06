@@ -18,7 +18,10 @@ const AdminProfile = ({ navigation }) => {
   const [ studentModalOpen, setStudentModalOpen ] = React.useState(false);
 
   React.useEffect(() => {
-    getClasses();
+    getClasses()
+      .then(getTeachers())
+      .then(getStudents())
+      .then(getClasses());
   }, []);
 
 
