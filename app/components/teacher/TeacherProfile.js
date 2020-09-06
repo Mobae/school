@@ -1,8 +1,8 @@
-import React, { Fragment, useContext } from "react";
-import { TouchableOpacity, TouchableHighlight } from "react-native";
-import { Avatar, Button } from "react-native-paper";
+import React, { Fragment, useContext } from 'react';
+import { StyleSheet } from 'react-native';
+import { Avatar, Card, Paragraph, TouchableRipple } from 'react-native-paper';
 
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from '../../context/AuthContext';
 
 const ProfileIcon = (props) => (
   <Avatar.Icon {...props} icon="account" size={45} />
@@ -16,28 +16,36 @@ const TestIcon = (props) => <Avatar.Icon {...props} icon="file" size={45} />;
 
 const TeacherProfile = ({ navigation }) => {
   const {
-    authState: {
-      user: { name },
-    },
+    authState: { user },
   } = useContext(AuthContext);
 
   return (
     <Fragment>
-      {/* <TouchableOpacity>
-        <CardC
-          title="Profile"
-          subtitle={name}
-          leftContent={ProfileIcon}
-        ></CardC>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.push("Attendance")}>
-        <CardC title="Attendance" leftContent={AttendanceIcon}></CardC>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <CardC title="Tests" leftContent={TestIcon}></CardC>
-      </TouchableOpacity> */}
+      <Card style={styles}>
+        {/* <TouchableRipple> */}
+        <Card.Title title="Profile" subtitle={user.name} left={ProfileIcon} />
+        <Card.Content>
+          <Paragraph>Email: {user.email}</Paragraph>
+          <Paragraph>Class: {user.studentClass}</Paragraph>
+        </Card.Content>
+        {/* </TouchableRipple> */}
+      </Card>
+      <Card style={styles}>
+        <TouchableRipple onPress={() => navigation.push('Attendance')}>
+          <Card.Title
+            title="Attendance"
+            subtitle="View Attendance"
+            left={AttendanceIcon}
+          />
+        </TouchableRipple>
+      </Card>
     </Fragment>
   );
 };
+
+const styles = StyleSheet.create({
+  margin: 10,
+  marginBottom: 0,
+});
 
 export default TeacherProfile;

@@ -1,6 +1,13 @@
 import React, { Fragment, useContext } from 'react';
-import { StyleSheet } from 'react-native';
-import { Avatar, Paragraph, Button, Card, Title } from 'react-native-paper';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  Avatar,
+  Paragraph,
+  Button,
+  Card,
+  Title,
+  TouchableRipple,
+} from 'react-native-paper';
 
 import { AuthContext } from '../../context/AuthContext';
 
@@ -29,16 +36,13 @@ const StudentProfile = ({ navigation }) => {
         </Card.Content>
       </Card>
       <Card style={styles}>
-        <Card.Title title="Attendance" left={AttendanceIcon} />
-        <Card.Actions>
-          <Button
-            title="View"
-            mode="outlined"
-            onPress={() => navigation.push('Attendance')}
-          >
-            View
-          </Button>
-        </Card.Actions>
+        <TouchableRipple onPress={() => navigation.push('Attendance')}>
+          <Card.Title
+            title="Attendance"
+            subtitle="View Attendance"
+            left={AttendanceIcon}
+          />
+        </TouchableRipple>
       </Card>
     </Fragment>
   );
