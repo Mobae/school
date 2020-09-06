@@ -49,7 +49,7 @@ router.get("/", auth, async (req, res) => {
   try {
     const student = await Student.findById(req.body.data.id);
     return res.json({
-      msg: "HI",
+      student,
     });
   } catch (err) {
     return res.status(404).json({
