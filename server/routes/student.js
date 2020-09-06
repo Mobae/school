@@ -12,10 +12,6 @@ const Teacher = require("../models/Teacher");
 const Class = require("../models/Class");
 const Admin = require("../models/Admin");
 
-router.get("/", auth, async (req, res) => {
-  console.log(req.body.data);
-});
-
 router.get("/students/all", async (req, res) => {
   try {
     const students = await Student.find();
@@ -49,18 +45,15 @@ router.get("/teachers/all", async (req, res) => {
   }
 });
 
-router.get("/student/:studentId", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
-    const student = await Student.findById(req.params.studentId);
-
-    return res.status(200).json({
-      sucess: true,
-      data: student,
+    const student = await Student.findById(req.body.data.id);
+    return res.json({
+      student,
     });
   } catch (err) {
     return res.status(404).json({
-      sucess: false,
-      error: err,
+      err,
     });
   }
 });

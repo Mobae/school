@@ -9,13 +9,22 @@ router.get("/view", async (req, res) => {
   res.send("Classes Get Triggered !!");
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const class_ = await Class.findById(req.body.id);
+    res.json({ class_ });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
 router.get("/all", async (req, res) => {
   try {
     const classes = await Class.find();
 
     return res.status(200).json({
       sucess: true,
-      data: classes
+      data: classes,
     });
   } catch (err) {
     console.log(err);
