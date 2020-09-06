@@ -208,6 +208,7 @@ router.post("/login", async (req, res) => {
   }
   user = await Teacher.findOne({ email });
   if (user) {
+    console.log("hi");
     const { name, rank, teacherClass } = user;
     const passMatches = await bcrypt.compare(password, user.password);
     if (passMatches) {
