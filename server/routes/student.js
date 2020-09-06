@@ -203,8 +203,6 @@ router.post("/login", async (req, res) => {
       const token = jwt.sign(payload, process.env.JWT_SECRET);
       return res.json({ token, name, email, rank, studentClass });
     }
-  } else {
-    return res.status(400).json({ msg: "Invalid credentials" });
   }
   user = await Teacher.findOne({ email });
   if (user) {
