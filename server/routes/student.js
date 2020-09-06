@@ -50,7 +50,7 @@ router.get("/teachers/all", async (req, res) => {
 });
 
 router.get("/", auth, async (req, res) => {
-  res.json({ msg: "hi" });
+  console.log("you're hitting the get route");
   // try {
   //   const student = await Student.findById(req.body.data.id);
   //   return res.json({
