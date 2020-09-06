@@ -10,6 +10,7 @@ router.get("/", async (req, res) => {
   try {
     const { class_ } = req.body;
     const notices = await ClassNotice.find({ class: class_ });
+    console.log(notices);
     res.status(200).json({ notices });
   } catch (err) {
     console.log(err);
