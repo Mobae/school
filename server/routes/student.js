@@ -204,7 +204,7 @@ router.post("/login", async (req, res) => {
       return res.json({ token, name, email, rank, studentClass });
     }
   } else {
-    res.status(400).json({ msg: "Invalid credentials" });
+    return res.status(400).json({ msg: "Invalid credentials" });
   }
   user = await Teacher.findOne({ email });
   if (user) {
@@ -220,7 +220,7 @@ router.post("/login", async (req, res) => {
       return res.json({ token, name, email, rank, teacherClass });
     }
   } else {
-    res.status(400).json({ msg: "Invalid credentials" });
+    return res.status(400).json({ msg: "Invalid credentials" });
   }
 });
 
