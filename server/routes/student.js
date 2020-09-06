@@ -12,10 +12,6 @@ const Teacher = require("../models/Teacher");
 const Class = require("../models/Class");
 const Admin = require("../models/Admin");
 
-router.get("/", auth, async (req, res) => {
-  console.log(req.body.data);
-});
-
 router.get("/students/all", async (req, res) => {
   try {
     const students = await Student.find();
