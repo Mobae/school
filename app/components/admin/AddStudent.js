@@ -1,18 +1,23 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { Headline, TextInput, Button } from "react-native-paper";
-import { Formik } from "formik";
+import { Formik, Field } from "formik";
 import { MaterialIcons } from '@expo/vector-icons';
-// import { Dropdown } from 'react-native-material-dropdown';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 import globalStyles from "../styles/global";
 
 const AddStudent = ({ addStudent, studentModalOpen, setStudentModalOpen, navigation }) => {
-
-    const options = [
-
-    ]
-
+    let data = [{
+        value: 'Banana',
+        label: 'Banana'
+        }, {
+        value: 'Mango',
+        label: 'Mango'
+        }, {
+        value: 'Pear',
+        label: 'Pear'
+    }];
 
     return (
         <Modal visible={studentModalOpen} animationType="slide">
@@ -63,8 +68,22 @@ const AddStudent = ({ addStudent, studentModalOpen, setStudentModalOpen, navigat
                                     onBlur={handleBlur("firstName")}
                                     value={values.email}
                                 />
+                                <DropDownPicker
+                                    items={data}
+                                    zIndex={0}
+                                    defaultValue={data[0].value}
+                                    containerStyle={{height: 40}}
+                                    style={{backgroundColor: '#fafafa'}}
+                                    itemStyle={{
+                                        justifyContent: 'flex-start'
+                                    }}
+                                    dropDownStyle={{backgroundColor: '#fafafa'}}
+                                    onChangeItem={item => {
+                                        handleChange("firstName")
+                                    }}
+                                />
                                 <Button
-                                    style={{ marginTop: 15 }}
+                                    style={{ marginTop: 50 }}
                                     onPress={handleSubmit}
                                     title="Submit"
                                     mode="contained"

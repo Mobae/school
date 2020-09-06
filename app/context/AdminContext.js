@@ -9,6 +9,7 @@ const AdminContextProvider = (props) => {
     const initialState = { teachers: [], students: [], classes: [] };
     const [adminState, setAdminState] = useState(initialState);
     const [loading, setLoading] = useState(false);
+    const [ currClass, setCurrClass ] = useState('');
 
     const getClasses = async () => {
         try {
@@ -81,21 +82,19 @@ const AdminContextProvider = (props) => {
     const getStudents = async() => {
         try {
             setLoading(true);
-            let res = await axios.get(url + "/student/students/all");
+            let res = await axios.get(url + "/class/students/" + currClass);
             setLoading(false);
             const  students  = res.data.data;
-            console.log(students);
 
             setAdminState({
                 teachers: adminState.teachers,
                 students: students,
-                classes: adminState.classes
+                classes: adminState.classes,
             });
-            console.log(adminState);
         } catch (err) {
             console.log(error);
         }
-    }
+    };
     const addStudent = async (student) => {
         try {
             setLoading(true);
@@ -133,7 +132,9 @@ const AdminContextProvider = (props) => {
                 getTeachers,
                 getStudents,
                 getAttendance,
-                adminState: adminState
+                adminState: adminState,
+                currClass,
+                setCurrClass
             }}
         >
             { props.children }

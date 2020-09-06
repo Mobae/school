@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, TouchableOpacity, Keyboard } from "react-native";
 import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -8,26 +8,31 @@ import { ScrollView } from "react-native-gesture-handler";
 
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
-const ClassList = () => {
-  const { adminState, getClasses } = React.useContext(AdminContext);
+const ClassList = ({ navigation }) => {
+  const { adminState, getClasses, setCurrClass } = React.useContext(AdminContext);
   
-
-//   React.useEffect(() => {
-//     getClasses();
-//   }, [])
+  React.useEffect(() => {
+    setCurrClass('');
+  }, [])
 
   return (
     <View>
         <ScrollView>
         { adminState.classes.map(class_ => (
             <View key={class_._id}>
-                <Card style={styles.card}>
-                    <Card.Title
-                    title={class_.name}
-                    left={LeftContent}
-                    />
-                    <Card.Content></Card.Content>
-                </Card>
+                <TouchableOpacity onPress={() => {
+                        setCurrClass(class_._id);
+                        navigation.navigate('StudentList');
+                    }}
+                >
+                    <Card style={styles.card}>
+                        <Card.Title
+                        title={class_.name}
+                        left={LeftContent}
+                        />
+                        <Card.Content></Card.Content>
+                    </Card>
+                </TouchableOpacity>
             </View>
         )) }
         </ScrollView>

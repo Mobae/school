@@ -20,7 +20,6 @@ const AdminProfile = ({ navigation }) => {
   React.useEffect(() => {
     getClasses()
       .then(getTeachers())
-      .then(getStudents())
       .then(getClasses());
   }, []);
 
@@ -75,7 +74,7 @@ const AdminProfile = ({ navigation }) => {
         <Card style={styles.card}>
           <Card.Title title="Students" left={LeftContent} />
           <Card.Actions>
-            <Button onPress={() => navigation.navigate('StudentList')}>VIEW</Button>
+            <Button onPress={() => navigation.navigate('ClassList')}>VIEW</Button>
             <Button  onPress={() => setStudentModalOpen(true)}>ADD</Button>
           </Card.Actions>
         </Card>

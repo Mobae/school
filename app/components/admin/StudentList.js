@@ -10,7 +10,6 @@ const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const StudentList = () => {
   const { adminState, getStudents } = React.useContext(AdminContext);
-  
 
   React.useEffect(() => {
     getStudents();
