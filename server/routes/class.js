@@ -3,15 +3,18 @@ const Class = require("../models/Class");
 const Teacher = require("../models/Teacher");
 const Student = require("../models/Student");
 
+const auth = require("../middleware/auth");
+
 router = Router();
 
 router.get("/view", async (req, res) => {
   res.send("Classes Get Triggered !!");
 });
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
-    const class_ = await Class.findById(req.body.id);
+    console.log(req.body.data.teacherClass);
+    const class_ = await Class.findById(req.body.data.teacherClass);
     res.json({ class_ });
   } catch (err) {
     res.status(500).json({ err });
