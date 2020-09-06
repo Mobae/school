@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = Router();
 
 const auth = require("../middleware/auth");
-const { teacher } = require("../middleware/rank");
+const { teacher, admin } = require("../middleware/rank");
 
 const ClassNotice = require("../models/ClassNotice");
 
