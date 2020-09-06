@@ -13,8 +13,8 @@ router.get("/view", async (req, res) => {
 
 router.get("/", auth, async (req, res) => {
   try {
-    console.log(req.body.teacherClass);
-    const class_ = await Class.findById(req.body.teacherClass);
+    console.log(req.body.data.teacherClass);
+    const class_ = await Class.findById(req.body.data.teacherClass);
     res.json({ class_ });
   } catch (err) {
     res.status(500).json({ err });
