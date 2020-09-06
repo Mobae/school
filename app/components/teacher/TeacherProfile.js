@@ -20,21 +20,6 @@ const TeacherProfile = ({ navigation }) => {
   const {
     authState: { user },
   } = useContext(AuthContext);
-  const { class_ } = user;
-  const [className, setClassName] = useState({});
-  const getClassName = async () => {
-    const data = await axios.get(URL + "/class", {
-      params: {
-        id: class_,
-      },
-    });
-    console.log(data.data);
-  };
-
-  useEffect(() => {
-    getClassName();
-  }, []);
-
   return (
     <Fragment>
       <Card style={styles}>
