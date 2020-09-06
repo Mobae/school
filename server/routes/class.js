@@ -9,6 +9,33 @@ router.get("/view", async (req, res) => {
   res.send("Classes Get Triggered !!");
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const class_ = await Class.findById(req.body.id);
+    res.json({ class_ });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
+router.get("/all", async (req, res) => {
+  try {
+    const classes = await Class.find();
+
+    return res.status(200).json({
+      sucess: true,
+      data: classes,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      sucess: false,
+      data: "Server error",
+      err: err,
+    });
+  }
+});
+
 router.post("/add", async (req, res) => {
   try {
     const name = req.body.name;
@@ -21,6 +48,27 @@ router.post("/add", async (req, res) => {
     res.status(200).json({
       sucess: true,
       data: newClass,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      sucess: false,
+      data: "Server error",
+      err: err,
+    });
+  }
+});
+
+router.get("/students/:classId", async (req, res) => {
+  try {
+    console.log(req.params.classId);
+
+    const class_ = await Class.findById(req.params.classId);
+    const students = await Student.find({ studentClass: class_._id });
+
+    res.status(200).json({
+      sucess: true,
+      data: students,
     });
   } catch (err) {
     console.log(err);

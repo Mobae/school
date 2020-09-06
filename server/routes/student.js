@@ -12,22 +12,48 @@ const Teacher = require("../models/Teacher");
 const Class = require("../models/Class");
 const Admin = require("../models/Admin");
 
-router.get("/", auth, async (req, res) => {
-  console.log(req.body.data);
-});
-
-router.get("/student/:studentId", async (req, res) => {
+router.get("/students/all", async (req, res) => {
   try {
-    const student = await Student.findById(req.params.studentId);
+    const students = await Student.find();
 
     return res.status(200).json({
       sucess: true,
-      data: student,
+      data: students,
     });
   } catch (err) {
     return res.status(404).json({
       sucess: false,
       error: err,
+    });
+  }
+});
+
+router.get("/teachers/all", async (req, res) => {
+  try {
+    const teachers = await Teacher.find();
+    console.log(teachers);
+
+    return res.status(200).json({
+      success: true,
+      data: teachers,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      sucess: false,
+      error: err,
+    });
+  }
+});
+
+router.get("/", auth, async (req, res) => {
+  try {
+    const student = await Student.findById(req.body.data.id);
+    return res.json({
+      student,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      err,
     });
   }
 });
@@ -114,8 +140,9 @@ router.post("/add", async (req, res) => {
     const name = firstName + " " + lastName;
     let password = genRandPass();
     console.log(`password: ${password}`);
+    const tempPass = "abcd";
     const salt = await bcrypt.genSalt();
-    password = await bcrypt.hash(password, salt);
+    password = await bcrypt.hash(tempPass, salt);
     if (rank === "0") {
       const student = new Student({ name, email, studentClass, password });
 

@@ -17,6 +17,7 @@ module.exports = async function (req, res, next) {
   user = await Teacher.findById(id);
   if (user) {
     req.body.data = user;
+    console.log(user, "hi");
     next();
   }
   user = await Admin.findById(id);
