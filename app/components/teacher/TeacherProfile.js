@@ -20,6 +20,13 @@ const TeacherProfile = ({ navigation }) => {
   const {
     authState: { user },
   } = useContext(AuthContext);
+  const getHi = async () => {
+    const res = await axios.get(URL + "/class");
+    console.log(res.data);
+  };
+  useEffect(() => {
+    getHi();
+  }, [user]);
   return (
     <Fragment>
       <Card style={styles}>
