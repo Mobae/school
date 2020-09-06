@@ -3,6 +3,8 @@ const Class = require("../models/Class");
 const Teacher = require("../models/Teacher");
 const Student = require("../models/Student");
 
+const auth = require("../middleware/auth");
+
 router = Router();
 
 router.get("/view", async (req, res) => {
