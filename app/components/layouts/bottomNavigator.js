@@ -13,34 +13,53 @@ import Notice from '../NoticeBoard/Notice';
 
 import { AuthContext } from '../../context/AuthContext';
 import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
 const StudentStack = createStackNavigator();
 const TeacherStack = createStackNavigator();
+const NoticeStack = createStackNavigator();
 
 const StudentStackScreen = () => {
   return (
-    <StudentStack.Navigator>
-      <StudentStack.Screen name="Profile" component={StudentProfile} />
-      <StudentStack.Screen name="Attendance" component={StudentAttendance} />
-      <StudentStack.Screen name="Month" component={IndividualMonth} />
-    </StudentStack.Navigator>
+    <NavigationContainer>
+      <StudentStack.Navigator>
+        <StudentStack.Screen name="Profile" component={StudentProfile} />
+        <StudentStack.Screen name="Attendance" component={StudentAttendance} />
+        <StudentStack.Screen name="Month" component={IndividualMonth} />
+      </StudentStack.Navigator>
+    </NavigationContainer>
   );
 };
 
 const TeacherStackScreen = () => {
   return (
-    <TeacherStack.Navigator>
-      <TeacherStack.Screen name="Profile" component={TeacherProfile} />
-      <TeacherStack.Screen name="Attendance" component={AllStudentAttendance} />
-      <TeacherStack.Screen name="Add Attendance" component={AddAttendance} />
-    </TeacherStack.Navigator>
+    <NavigationContainer>
+      <TeacherStack.Navigator>
+        <TeacherStack.Screen name="Profile" component={TeacherProfile} />
+        <TeacherStack.Screen
+          name="Attendance"
+          component={AllStudentAttendance}
+        />
+        <TeacherStack.Screen name="Add Attendance" component={AddAttendance} />
+      </TeacherStack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+const NoticeStackScreen = () => {
+  return (
+    <NavigationContainer>
+      <NoticeStack.Navigator>
+        <NoticeStack.Screen name="Notice" component={Notice} />
+      </NoticeStack.Navigator>
+    </NavigationContainer>
   );
 };
 
 const ChatRoute = () => <Text>Music</Text>;
 
 const NoticeRoute = () => {
-  return <Notice />;
+  return <NoticeStackScreen />;
 };
 
 const ProfileRoute = () => {
@@ -58,7 +77,7 @@ const ProfileRoute = () => {
   //   case "0":
   //     return <StudentProfile />;
   // }
-  return <TeacherStackScreen />;
+  return <StudentStackScreen />;
 };
 
 const MyComponent = () => {
