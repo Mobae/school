@@ -55,9 +55,7 @@ router.get("/students/:classId", async (req, res) => {
     console.log(req.params.classId);
 
     const class_ = await Class.findById(req.params.classId);
-    console.log(class_._id);
     const students = await Student.find({ studentClass: class_._id });
-    console.log(students);
 
     res.status(200).json({
       sucess: true,
