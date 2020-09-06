@@ -17,16 +17,16 @@ const AttendanceIcon = (props) => (
 const TestIcon = (props) => <Avatar.Icon {...props} icon="file" size={45} />;
 
 const TeacherProfile = ({ navigation }) => {
-  const {
-    authState: { user },
-  } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
+  const { user } = authState;
   const getHi = async () => {
+    axios.defaults.headers["auth-token"] = authState.jwt;
     const res = await axios.get(URL + "/class");
     console.log(res.data);
   };
   useEffect(() => {
     getHi();
-  }, [user]);
+  }, [authState]);
   return (
     <Fragment>
       <Card style={styles}>
