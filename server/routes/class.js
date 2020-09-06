@@ -11,7 +11,7 @@ router.get("/view", async (req, res) => {
   res.send("Classes Get Triggered !!");
 });
 
-router.get("/", auth, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     console.log(req.body);
     const class_ = await Class.findById(req.body.teacherClass);
