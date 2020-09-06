@@ -50,6 +50,25 @@ router.post("/add", async (req, res) => {
   }
 });
 
+router.post("/students/:classId", async (req, res) => {
+  try {
+    const class_ = await Class.findById(req.params.classId);
+    const students = await Class.find({ studentClass: class_._id });
+
+    res.status(200).json({
+      sucess: true,
+      data: students,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      sucess: false,
+      data: "Server error",
+      err: err,
+    });
+  }
+});
+
 router.post("/classTeacher", async (req, res) => {
   try {
     const class_ = await Class.findById(req.body.class);
