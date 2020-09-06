@@ -53,7 +53,7 @@ router.post("/add", async (req, res) => {
 router.get("/students/:classId", async (req, res) => {
   try {
     const class_ = await Class.findById(req.params.classId);
-    const students = await Class.find({ studentClass: class_._id });
+    const students = await Student.find({ studentClass: class_._id });
 
     res.status(200).json({
       sucess: true,
