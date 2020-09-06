@@ -157,7 +157,7 @@ router.post("/add", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.json({ token, name, email, rank });
+      res.json({ token, name, email, rank, _id: student.id });
     } else if (rank === "1") {
       const teacher = new Teacher({ name, email, password, teacherClass });
       await teacher.save();
