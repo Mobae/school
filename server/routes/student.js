@@ -50,16 +50,17 @@ router.get("/teachers/all", async (req, res) => {
 });
 
 router.get("/", auth, async (req, res) => {
-  try {
-    const student = await Student.findById(req.body.data.id);
-    return res.json({
-      msg: "HI",
-    });
-  } catch (err) {
-    return res.status(404).json({
-      err,
-    });
-  }
+  res.json({ msg: "hi" });
+  // try {
+  //   const student = await Student.findById(req.body.data.id);
+  //   return res.json({
+  //     msg: "HI",
+  //   });
+  // } catch (err) {
+  //   return res.status(404).json({
+  //     err,
+  //   });
+  // }
 });
 
 router.get("/teacher/:teacherId", async (req, res) => {
