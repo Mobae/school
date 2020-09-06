@@ -6,36 +6,56 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import globalStyles from "../styles/global";
 
-const AddClass = ({ addClass, classModalOpen, setClassModalOpen, navigation }) => {
+const AddTeacher = ({ addTeacher, teacherModalOpen, setTeacherModalOpen, navigation }) => {
+
 
     return (
-        <Modal visible={classModalOpen} animationType="slide">
+        <Modal visible={teacherModalOpen} animationType="slide">
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.modalContent}>
+                <View style={styles.modalContent} >
                 <MaterialIcons
                     style={{ ...styles.modalToggle, ...styles.modalClose }}
                     name="close"
                     size={28}
-                    onPress={() => setClassModalOpen(false)}
+                    onPress={() => setTeacherModalOpen(false)}
                 />
                 <Fragment>
-                    <Headline style={globalStyles.headline}>Add Class</Headline>
-                    <Formik 
-                        initialValues={{ name: "" }}
+                    <Headline style={globalStyles.headline}>Add Teacher</Headline>
+                    <Formik
+                        initialValues={{ 
+                            firstName: "",
+                            lastName: "",
+                            email: "",
+                            rank: "1"
+                        }}
                         onSubmit={(values, actions) => {
                             actions.resetForm();
-                            addClass(values);                  // SUMITTING CLASS VALUE
-                            setClassModalOpen(false);
-                            navigation.navigate('ClassList');
+                            addTeacher(values);          // SUBMITTING TEACHER VALUE
+                            setTeacherModalOpen(false);
+                            navigation.navigate('TeacherList');
                         }}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (
                             <View style={globalStyles.view}>
-                                <TextInput 
+                                <TextInput
                                     mode="outlined"
-                                    label="Class Name"
-                                    onChangeText={handleChange("name")}
-                                    onBlur={handleBlur("name")}
+                                    label="First Name"
+                                    onChangeText={handleChange("firstName")}
+                                    onBlur={handleBlur("firstName")}
+                                    value={values.firstName}
+                                />
+                                <TextInput
+                                    mode="outlined"
+                                    label="Last Name"
+                                    onChangeText={handleChange("lastName")}
+                                    onBlur={handleBlur("lastName")}
+                                    value={values.lastName}
+                                />
+                                <TextInput
+                                    mode="outlined"
+                                    label="Email"
+                                    onChangeText={handleChange("email")}
+                                    onBlur={handleBlur("email")}
                                     value={values.email}
                                 />
                                 <Button
@@ -50,10 +70,10 @@ const AddClass = ({ addClass, classModalOpen, setClassModalOpen, navigation }) =
                         )}
                     </Formik>
                 </Fragment>
-            </View>
+                </View>
             </TouchableWithoutFeedback>
         </Modal>
-    );
+    )
 };
 
 const styles = StyleSheet.create({
@@ -80,4 +100,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default AddClass;
+export default AddTeacher;

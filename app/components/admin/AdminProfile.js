@@ -4,32 +4,31 @@ import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import { MaterialIcons } from '@expo/vector-icons';
 
 import AddClass from './AddClass';
+import ClassList from './ClassList';
+import AddTeacher from './AddTeacher';
+import AddStudent from './AddStudent';
 import {AdminContext} from '../../context/AdminContext';
 
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
-const AdminProfile = () => {
+const AdminProfile = ({ navigation }) => {
+  const { addClass, addTeacher, addStudent, getClasses, getTeachers, getStudents } = React.useContext(AdminContext);
   const [ classModalOpen, setClassModalOpen ] = React.useState(false);
+  const [ teacherModalOpen, setTeacherModalOpen ] = React.useState(false);
+  const [ studentModalOpen, setStudentModalOpen ] = React.useState(false);
 
-  const { addClass } = React.useContext(AdminContext);
+  React.useEffect(() => {
+    getClasses();
+  }, []);
 
 
   return (
     <View>
-      {/* // CLASS ADD MODAL */}
-      <Modal visible={classModalOpen} animationType="slide">
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.modalContent}>
-            <MaterialIcons
-              style={{ ...styles.modalToggle, ...styles.modalClose }}
-              name="close"
-              size={28}
-              onPress={() => setClassModalOpen(false)}
-            />
-            <AddClass addClass={addClass} />
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
+      <AddClass navigation={navigation} addClass={addClass} classModalOpen={classModalOpen} setClassModalOpen={setClassModalOpen} />
+
+      <AddTeacher navigation={navigation} addTeacher={addTeacher} teacherModalOpen={teacherModalOpen} setTeacherModalOpen={setTeacherModalOpen} />
+
+      <AddStudent navigation={navigation} addStudent={addStudent} studentModalOpen={studentModalOpen} setStudentModalOpen={setStudentModalOpen} />
 
       {/* // ATTENDANCE CARD */}
       <View>
@@ -49,7 +48,7 @@ const AdminProfile = () => {
         <Card style={styles.card}>
           <Card.Title title="Classes" left={LeftContent} />
           <Card.Actions>
-            <Button>VIEW</Button>
+            <Button onPress={() => navigation.navigate('ClassList')}>VIEW</Button>
             <Button onPress={() => setClassModalOpen(true)} >ADD</Button>
           </Card.Actions>
         </Card>
@@ -61,8 +60,8 @@ const AdminProfile = () => {
         <Card style={styles.card}>
           <Card.Title title="Teachers" left={LeftContent} />
           <Card.Actions>
-            <Button>VIEW</Button>
-            <Button>ADD</Button>
+            <Button onPress={() => navigation.navigate('TeacherList')} >VIEW</Button>
+            <Button onPress={() => setTeacherModalOpen(true)} >ADD</Button>
           </Card.Actions>
         </Card>
       </View>
@@ -73,8 +72,8 @@ const AdminProfile = () => {
         <Card style={styles.card}>
           <Card.Title title="Students" left={LeftContent} />
           <Card.Actions>
-            <Button>VIEW</Button>
-            <Button>ADD</Button>
+            <Button onPress={() => navigation.navigate('StudentList')}>VIEW</Button>
+            <Button  onPress={() => setStudentModalOpen(true)}>ADD</Button>
           </Card.Actions>
         </Card>
       </View>

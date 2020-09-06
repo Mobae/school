@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 export const AdminContext = createContext();
 
 const AdminContextProvider = (props) => {
-    const url = "http://326c26ad01fb.ngrok.io";
+    const url = "https://school-server-testing.herokuapp.com";
     const initialState = { teachers: [], students: [], classes: [] };
     const [adminState, setAdminState] = useState(initialState);
     const [loading, setLoading] = useState(false);
@@ -13,12 +13,13 @@ const AdminContextProvider = (props) => {
     const getClasses = async () => {
         try {
             setLoading(true);
-            let data = await axios.get(url + "/class/all");
+            let res = await axios.get(url + "/class/all");
             setLoading(false);
-            const { classes } = data.data;
+            const  classes  = res.data.data;
 
             setAdminState({
-                ...adminState,
+                teachers: adminState.teachers,
+                students: adminState.students,
                 classes: classes
             });
         } catch (err) {
@@ -27,22 +28,20 @@ const AdminContextProvider = (props) => {
     };
     const addClass = async (class_) => {
         try {
-            // setLoading(true);
-            // const { newClass } = class_;
-            // const res = await axios.post(url + '/class/add', class_, {
-            //     headers: {
-            //         Authorization: `token`
-            //     }
-            // });
-            // setLoading(false);
-            // const { class_ } = res.data;
-
-            // setAdminState({
-            //     ...adminState,
-            //     classes: [ ...adminState.class, class_ ]
-            // });
             console.log(class_);
-            console.log("***************************");
+            setLoading(true);
+            const res = await axios.post(url + '/class/add', class_);
+            setLoading(false);
+            console.log(res.data);
+            const  newClass  = res.data.data;
+            console.log(newClass);
+
+            setAdminState({
+                teachers: adminState.teachers,
+                students: adminState.students,
+                classes: [ ...adminState.classes, newClass ]
+            });
+            console.log(adminState.classes);
         } catch (err) {
             console.log(err);
         }
@@ -50,31 +49,76 @@ const AdminContextProvider = (props) => {
     const getTeachers = async() => {
         try {
             setLoading(true);
-            let data = await axios.get(url + "/teachers/all");
+            let res = await axios.get(url + "/student/teachers/all");
             setLoading(false);
-            const { teachers } = data.data;
+            const  teachers  = res.data.data;
+
             setAdminState({
-                ...adminState,
-                teachers: teachers
-            }); 
+                teachers: teachers,
+                students: adminState.students,
+                classes: adminState.classes,
+            });
         } catch (err) {
             console.log(error);
         }
     }
+    const addTeacher = async (teacher) => {
+        try {
+            setLoading(true);
+            console.log(`incoming: ${teacher}`)
+            const res = await axios.post(url + '/student/add', teacher);
+            setLoading(false);
+            const newTeacher = res.data.data;
+            console.log(newTeacher);
+
+            setAdminState({
+                students: adminState.students,
+                classes: adminState.classes,
+                teachers: [ ...adminState.teachers, newTeacher ]
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    };
     const getStudents = async() => {
         try {
             setLoading(true);
-            let data = await axios.get(url + "/students/all");
+            let res = await axios.get(url + "/student/students/all");
             setLoading(false);
-            const { students } = data.data;
+            const  students  = res.data.data;
+            console.log(students);
+
             setAdminState({
-                ...adminState,
-                students: students
-            }); 
+                teachers: adminState.teachers,
+                students: students,
+                classes: adminState.classes
+            });
+            console.log(adminState);
         } catch (err) {
             console.log(error);
         }
     }
+    const addStudent = async (student) => {
+        try {
+            // setLoading(true);
+            // const res = await axios.post(url + '/student/add', class_, {
+            //     headers: {
+            //         Authorization: `token`
+            //     }
+            // });
+            // setLoading(false);
+            // const { student } = res.data;
+
+            // setAdminState({
+            //     ...adminState,
+            //     classes: [ ...adminState.students, student ]
+            // });
+            console.log(student);
+            console.log("***************************");
+        } catch (err) {
+            console.log(err);
+        }
+    };
     const getAttendance = () => {
         try {
             
@@ -87,10 +131,13 @@ const AdminContextProvider = (props) => {
         <AdminContext.Provider
             value={{
                 addClass,
+                addTeacher,
+                addStudent,
                 getClasses,
                 getTeachers,
                 getStudents,
-                getAttendance
+                getAttendance,
+                adminState: adminState
             }}
         >
             { props.children }

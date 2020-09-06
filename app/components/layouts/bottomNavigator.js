@@ -2,38 +2,43 @@ import React, { useContext, Fragment } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { BottomNavigation, Text } from 'react-native-paper';
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
-import StudentProfile from '../student/StudentProfile';
-import TeacherProfile from '../teacher/TeacherProfile';
-import StudentAttendance from '../profile/StudentView/StudentAttendance';
-import IndividualMonth from '../profile/StudentView/IndividualMonth';
-import AllStudentAttendance from '../profile/AllStudentsAttendance';
-import AddAttendance from '../profile/AddAttendence';
+// import StudentProfile from '../student/StudentProfile';
+// import TeacherProfile from '../teacher/TeacherProfile';
+// import StudentAttendance from '../profile/StudentView/StudentAttendance';
+// // import IndividualMonth from '../profile/StudentView/IndividualMonth';
+// import AllStudentAttendance from '../profile/AllStudentsAttendance';
+// import AddAttendance from '../profile/AddAttendence';
 
 import { AuthContext } from '../../context/AuthContext';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const StudentStack = createStackNavigator();
-const TeacherStack = createStackNavigator();
+// import AdminProfile from '../admin/AdminProfile';
+// import ClassList from '../admin/ClassList';
+import StudentList from '../admin/StudentList';
+import AdminStack from '../admin/AdminStack';
 
-const StudentStackScreen = () => {
-  return (
-    <StudentStack.Navigator>
-      <StudentStack.Screen name="Profile" component={StudentProfile} />
-      <StudentStack.Screen name="Attendance" component={StudentAttendance} />
-      <StudentStack.Screen name="Month" component={IndividualMonth} />
-    </StudentStack.Navigator>
-  );
-};
+// const StudentStack = createStackNavigator();
+// const TeacherStack = createStackNavigator();
 
-const TeacherStackScreen = () => {
-  return (
-    <TeacherStack.Navigator>
-      <TeacherStack.Screen name="Profile" component={TeacherProfile} />
-      <TeacherStack.Screen name="Attendance" component={AllStudentAttendance} />
-      <TeacherStack.Screen name="Add Attendance" component={AddAttendance} />
-    </TeacherStack.Navigator>
-  );
-};
+// const StudentStackScreen = () => {
+//   return (
+//     <StudentStack.Navigator>
+//       <StudentStack.Screen name="Profile" component={StudentProfile} />
+//       <StudentStack.Screen name="Attendance" component={StudentAttendance} />
+//       <StudentStack.Screen name="Month" component={IndividualMonth} />
+//     </StudentStack.Navigator>
+//   );
+// };
+
+// const TeacherStackScreen = () => {
+//   return (
+//     <TeacherStack.Navigator>
+//       <TeacherStack.Screen name="Profile" component={TeacherProfile} />
+//       <TeacherStack.Screen name="Attendance" component={AllStudentAttendance} />
+//       <TeacherStack.Screen name="Add Attendance" component={AddAttendance} />
+//     </TeacherStack.Navigator>
+//   );
+// };
 
 const ChatRoute = () => <Text>Music</Text>;
 
@@ -54,7 +59,8 @@ const ProfileRoute = () => {
   //   case "0":
   //     return <StudentProfile />;
   // }
-  return <StudentStackScreen />;
+  // return <StudentStackScreen />;
+  return <AdminStack />;
 };
 
 const MyComponent = () => {
