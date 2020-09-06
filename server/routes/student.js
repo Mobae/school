@@ -190,17 +190,35 @@ router.post("/login", async (req, res) => {
     res.status(400).json({ msg: "Invalid credentials" });
     return;
   }
-  const user = await Student.findOne({ email });
-  const { name, rank, studentClass } = user;
-  const passMatches = await bcrypt.compare(password, user.password);
-  if (passMatches) {
-    const payload = {
-      data: {
-        id: user.id,
-      },
-    };
-    const token = jwt.sign(payload, process.env.JWT_SECRET);
-    res.json({ token, name, email, rank, studentClass });
+  let user = await Student.findOne({ email });
+  if (user) {
+    const { name, rank, studentClass } = user;
+    const passMatches = await bcrypt.compare(password, user.password);
+    if (passMatches) {
+      const payload = {
+        data: {
+          id: user.id,
+        },
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      res.json({ token, name, email, rank, studentClass });
+    }
+  } else {
+    res.status(400).json({ msg: "Invalid credentials" });
+  }
+  user = await Teacher.findOne({ email });
+  if (user) {
+    const { name, rank, teacherClass } = user;
+    const passMatches = await bcrypt.compare(password, user.password);
+    if (passMatches) {
+      const payload = {
+        data: {
+          id: user.id,
+        },
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      res.json({ token, name, email, rank, teacherClass });
+    }
   } else {
     res.status(400).json({ msg: "Invalid credentials" });
   }
