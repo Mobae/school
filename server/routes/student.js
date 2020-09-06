@@ -52,8 +52,8 @@ router.get("/teachers/all", async (req, res) => {
 router.get("/", auth, async (req, res) => {
   try {
     const student = await Student.findById(req.body.id);
-    return res.status(200).json({
-      student,
+    return res.json({
+      msg: "HI",
     });
   } catch (err) {
     return res.status(404).json({
