@@ -15,9 +15,12 @@ import { AuthContext } from '../../context/AuthContext';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
+import AdminStack from '../admin/AdminStack';
+
 const StudentStack = createStackNavigator();
 const TeacherStack = createStackNavigator();
 const NoticeStack = createStackNavigator();
+
 
 const StudentStackScreen = () => {
   return (

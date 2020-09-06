@@ -149,8 +149,9 @@ router.post("/add", async (req, res) => {
     console.log(`password: ${password}`);
     const salt = await bcrypt.genSalt();
     password = await bcrypt.hash(password, salt);
+    const tempPass = 'abcd'
     if (rank === "0") {
-      const student = new Student({ name, email, studentClass, password });
+      const student = new Student({ name, email, studentClass, tempPass });
 
       const class_ = await Class.findById(studentClass);
       class_.students.push({ student: student.id });
