@@ -5,6 +5,8 @@ import { Formik, Field } from "formik";
 import { MaterialIcons } from '@expo/vector-icons';
 import DropDownPicker from 'react-native-dropdown-picker';
 
+import { Dropdown } from 'react-native-material-dropdown';
+
 import globalStyles from "../styles/global";
 
 const AddStudent = ({ addStudent, studentModalOpen, setStudentModalOpen, navigation }) => {
@@ -68,19 +70,9 @@ const AddStudent = ({ addStudent, studentModalOpen, setStudentModalOpen, navigat
                                     onBlur={handleBlur("firstName")}
                                     value={values.email}
                                 />
-                                <DropDownPicker
-                                    items={data}
-                                    zIndex={0}
-                                    defaultValue={data[0].value}
-                                    containerStyle={{height: 40}}
-                                    style={{backgroundColor: '#fafafa'}}
-                                    itemStyle={{
-                                        justifyContent: 'flex-start'
-                                    }}
-                                    dropDownStyle={{backgroundColor: '#fafafa'}}
-                                    onChangeItem={item => {
-                                        handleChange("firstName")
-                                    }}
+                                <Dropdown
+                                    label='Favorite Fruit'
+                                    data={data}
                                 />
                                 <Button
                                     style={{ marginTop: 50 }}

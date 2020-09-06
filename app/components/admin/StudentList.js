@@ -6,6 +6,7 @@ import { ScrollView } from "react-native-gesture-handler";
 
 import {AdminContext} from '../../context/AdminContext';
 
+
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const StudentList = () => {
