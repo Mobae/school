@@ -27,6 +27,7 @@ router.post("/", async (req, res) => {
       class: teacherClass,
     });
     await classNotice.save();
+    res.json({ classNotice });
   } catch (err) {
     res.status(500).json({ err: "Server error" });
   }
