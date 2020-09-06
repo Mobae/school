@@ -50,10 +50,14 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.post("/students/:classId", async (req, res) => {
+router.get("/students/:classId", async (req, res) => {
   try {
+    console.log(req.params.classId);
+
     const class_ = await Class.findById(req.params.classId);
-    const students = await Class.find({ studentClass: class_._id });
+    console.log(class_._id);
+    const students = await Student.find({ studentClass: class_._id });
+    console.log(students);
 
     res.status(200).json({
       sucess: true,
