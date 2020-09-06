@@ -32,7 +32,7 @@ router.get("/students/all", async (req, res) => {
   }
 });
 
-router.get("/teachers/all", async(req, res) => {
+router.get("/teachers/all", async (req, res) => {
   try {
     const teachers = await Teacher.find();
     console.log(teachers);
@@ -47,7 +47,7 @@ router.get("/teachers/all", async(req, res) => {
       error: err,
     });
   }
-})
+});
 
 router.get("/student/:studentId", async (req, res) => {
   try {
@@ -147,11 +147,11 @@ router.post("/add", async (req, res) => {
     const name = firstName + " " + lastName;
     let password = genRandPass();
     console.log(`password: ${password}`);
+    const tempPass = "abcd";
     const salt = await bcrypt.genSalt();
-    password = await bcrypt.hash(password, salt);
-    const tempPass = 'abcd'
+    password = await bcrypt.hash(tempPass, salt);
     if (rank === "0") {
-      const student = new Student({ name, email, studentClass, tempPass });
+      const student = new Student({ name, email, studentClass, password });
 
       const class_ = await Class.findById(studentClass);
       class_.students.push({ student: student.id });
