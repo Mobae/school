@@ -12,7 +12,8 @@ router.get("/", async (req, res) => {
     const notices = ClassNotice.find({ class: class_ });
     res.status(200).json({ notices });
   } catch (err) {
-    res.status(500).json({ err });
+    console.log(err);
+    res.status(500).json({ err: "Server error" });
   }
 });
 
