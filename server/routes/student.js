@@ -201,7 +201,7 @@ router.post("/login", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.json({ token, name, email, rank, studentClass });
+      return res.json({ token, name, email, rank, studentClass });
     }
   } else {
     res.status(400).json({ msg: "Invalid credentials" });
@@ -217,7 +217,7 @@ router.post("/login", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.json({ token, name, email, rank, teacherClass });
+      return res.json({ token, name, email, rank, teacherClass });
     }
   } else {
     res.status(400).json({ msg: "Invalid credentials" });
