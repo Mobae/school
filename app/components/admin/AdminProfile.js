@@ -12,15 +12,16 @@ import {AdminContext} from '../../context/AdminContext';
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const AdminProfile = ({ navigation }) => {
-  const { addClass, addTeacher, addStudent, getClasses, getTeachers, getStudents } = React.useContext(AdminContext);
+  const { addClass, addTeacher, addStudent, getClasses, getTeachers, getStudents, adminState } = React.useContext(AdminContext);
   const [ classModalOpen, setClassModalOpen ] = React.useState(false);
   const [ teacherModalOpen, setTeacherModalOpen ] = React.useState(false);
   const [ studentModalOpen, setStudentModalOpen ] = React.useState(false);
 
   React.useEffect(() => {
     getClasses()
-      .then(getTeachers())
-      .then(getClasses());
+      // .then(getTeachers())
+      // .then(getClasses());
+    // console.log(`Admin State: ${adminState.classes}`)
   }, []);
 
 

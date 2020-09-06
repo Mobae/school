@@ -98,18 +98,16 @@ const AdminContextProvider = (props) => {
     const addStudent = async (student) => {
         try {
             setLoading(true);
-            const res = await axios.post(url + '/student/add', class_, {
-                headers: {
-                    Authorization: `token`
-                }
-            });
+            const res = await axios.post(url + '/student/add', student);
             setLoading(false);
-            const { student } = res.data;
+            const newStudent = res.data;
 
             setAdminState({
-                ...adminState,
-                classes: [ ...adminState.students, student ]
+                teachers: adminState.teachers,
+                students: [ ],
+                classes: adminState.classes
             });
+            console.log(adminState.students);
         } catch (err) {
             console.log(err);
         }

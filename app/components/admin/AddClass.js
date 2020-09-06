@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useEffect } from "react";
 import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Keyboard } from "react-native";
-import { Headline, TextInput, Button } from "react-native-paper";
+import { Headline, TextInput, Button, FAB } from "react-native-paper";
 import { Formik } from "formik";
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -12,14 +12,16 @@ const AddClass = ({ addClass, classModalOpen, setClassModalOpen, navigation }) =
         <Modal visible={classModalOpen} animationType="slide">
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.modalContent}>
-                <MaterialIcons
-                    style={{ ...styles.modalToggle, ...styles.modalClose }}
-                    name="close"
-                    size={28}
+                <FAB
+                    style={styles.fab}
+                    icon="backburger"
                     onPress={() => setClassModalOpen(false)}
                 />
                 <Fragment>
+                <Text></Text>
                     <Headline style={globalStyles.headline}>Add Class</Headline>
+                    <Text></Text>
+                    <Text></Text>
                     <Formik 
                         initialValues={{ name: "" }}
                         onSubmit={(values, actions) => {
@@ -77,7 +79,13 @@ const styles = StyleSheet.create({
     },
     modalContent: {
         flex: 1
-    }
+    },
+    fab: {
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 0,
+    },
 });
 
 export default AddClass;

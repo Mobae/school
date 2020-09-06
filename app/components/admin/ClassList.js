@@ -12,6 +12,7 @@ const ClassList = ({ navigation }) => {
   const { adminState, getClasses, setCurrClass } = React.useContext(AdminContext);
   
   React.useEffect(() => {
+    // getClasses();
     setCurrClass('');
   }, [])
 
