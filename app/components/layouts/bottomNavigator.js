@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext, useState, Fragment } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { BottomNavigation, Text } from 'react-native-paper';
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -63,7 +63,7 @@ const ProfileRoute = () => {
 
 const MyComponent = () => {
   const [index, setIndex] = React.useState(1);
-  const [routes] = React.useState([
+  const [routes] = useState([
     { key: 'chat', title: 'Chat', icon: 'forum-outline' },
     { key: 'profile', title: 'Profile', icon: 'face-profile' },
     { key: 'notice', title: 'Notice', icon: 'format-list-checkbox' },
