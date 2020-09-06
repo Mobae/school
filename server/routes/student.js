@@ -131,7 +131,7 @@ router.post("/update/teacher", async (req, res) => {
 router.post("/add", async (req, res) => {
   let obj = req.body;
   obj = trimObj(obj);
-  const { firstName, lastName, email, studentClass, rank, teacherClass } = obj;
+  const { firstName, lastName, email, rank, studentClass, teacherClass } = obj;
   const stu = await Student.findOne({ email });
   const tea = await Teacher.findOne({ email });
   if (stu || tea) {
@@ -159,7 +159,7 @@ router.post("/add", async (req, res) => {
       const token = jwt.sign(payload, process.env.JWT_SECRET);
       res.json({ token, name, email, rank });
     } else if (rank === "1") {
-      const teacher = new Teacher({ name, email, password });
+      const teacher = new Teacher({ name, email, password, teacherClass });
       await teacher.save();
       const payload = {
         data: {
