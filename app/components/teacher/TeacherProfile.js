@@ -1,8 +1,10 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { Avatar, Card, Paragraph, TouchableRipple } from "react-native-paper";
+import axios from "axios";
 
 import { AuthContext } from "../../context/AuthContext";
+import { URL } from "../../config";
 
 const ProfileIcon = (props) => (
   <Avatar.Icon {...props} icon="account" size={45} />
@@ -18,6 +20,20 @@ const TeacherProfile = ({ navigation }) => {
   const {
     authState: { user },
   } = useContext(AuthContext);
+  const { class_ } = user;
+  const [className, setClassName] = useState({});
+  const getClassName = async () => {
+    const data = await axios.get(URL + "/class", {
+      params: {
+        id: class_,
+      },
+    });
+    console.log(data.data);
+  };
+
+  useEffect(() => {
+    getClassName();
+  }, []);
 
   return (
     <Fragment>
