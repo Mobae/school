@@ -21,6 +21,8 @@ const NoticeForm = () => {
 
   const hideDialog = () => setVisible(false);
 
+  let rank = '0';
+
   return (
     <PaperProvider>
       <Fragment>
@@ -40,21 +42,23 @@ const NoticeForm = () => {
           multiline={true}
           numberOfLines={15}
         />
-        <View style={styles.radioGrp}>
-          <RadioButton.Group
-            onValueChange={(value) => setValue(value)}
-            value={value}
-          >
-            <View style={styles.radio}>
-              <RadioButton value="SchoolNotice" color="#6200EE" />
-              <Paragraph>School Notice</Paragraph>
-            </View>
-            <View style={styles.radio}>
-              <RadioButton value="ClassNotice" color="#6200EE" />
-              <Paragraph>Class Notice</Paragraph>
-            </View>
-          </RadioButton.Group>
-        </View>
+        {rank === '0' ? (
+          <View style={styles.radioGrp}>
+            <RadioButton.Group
+              onValueChange={(value) => setValue(value)}
+              value={value}
+            >
+              <View style={styles.radio}>
+                <RadioButton value="SchoolNotice" color="#6200EE" />
+                <Paragraph>School Notice</Paragraph>
+              </View>
+              <View style={styles.radio}>
+                <RadioButton value="ClassNotice" color="#6200EE" />
+                <Paragraph>Class Notice</Paragraph>
+              </View>
+            </RadioButton.Group>
+          </View>
+        ) : null}
         <Button
           icon="content-save"
           mode="contained"
@@ -97,9 +101,6 @@ const styles = StyleSheet.create({
   },
   radioGrp: {
     marginLeft: 10,
-    // display: 'flex',
-    // flexDirection: 'row',
-    // alignItems: 'center',
   },
 });
 
