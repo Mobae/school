@@ -8,34 +8,51 @@ import { ScrollView } from "react-native-gesture-handler";
 
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
-const ClassList = ({ navigation }) => {
-  const { adminState, getClasses, setCurrClass } = React.useContext(AdminContext);
-  
+const ClassView = ({ navigation }) => {
+  const { adminState, getClasses, setCurrClass, getClass } = React.useContext(AdminContext);
+
   React.useEffect(() => {
-    // getClasses();
-    setCurrClass('');
+    getClass();
   }, [])
 
   return (
     <View>
         <ScrollView>
-        { adminState.classes.map(class_ => (
-            <View key={class_._id}>
                 <TouchableOpacity onPress={() => {
-                        setCurrClass(class_._id);
-                        navigation.navigate('ClassView');
+                        navigation.navigate('StudentList');
                     }}
                 >
                     <Card style={styles.card}>
                         <Card.Title
-                        title={class_.name}
+                        title="Students"
                         left={LeftContent}
                         />
                         <Card.Content></Card.Content>
                     </Card>
                 </TouchableOpacity>
-            </View>
-        )) }
+
+                <TouchableOpacity onPress={() => {
+                        navigation.navigate('StudentList');
+                    }}
+                >
+                    <Card style={styles.card}>
+                        <Card.Title title="Class teacher" left={LeftContent} />
+                        <Card.Actions>
+                            <Button onPress={() => navigation.navigate('TeacherList')} >EDIT</Button>
+                        </Card.Actions>
+                    </Card>
+                </TouchableOpacity>
+
+                <Card style={styles.card}>
+                    <Card.Title title="Subject teachers" left={LeftContent} />
+                    <Card.Actions>
+                        <Button onPress={() => setTeacherModalOpen(true)} >ADD</Button>
+                    </Card.Actions>
+                </Card>
+                
+                
+                
+
         </ScrollView>
     </View>
   );
@@ -65,4 +82,4 @@ const styles = StyleSheet.create({
         flex: 1
     }
 });
-export default ClassList;
+export default ClassView;
