@@ -29,9 +29,7 @@ router.get("/student/:id/:month", auth, async (req, res) => {
   try {
     let res;
     const studentId = req.params.id;
-    console.log(studentId);
     const reqMonth = req.params.month;
-    console.log(month);
     const att = await Attendance.find({ studentId });
     console.log(att);
     for (let i = 0; i < att.length; i++) {
