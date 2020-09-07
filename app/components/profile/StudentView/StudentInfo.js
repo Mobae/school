@@ -7,9 +7,10 @@ import {
   Button,
   ImageBackground,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import { List, Provider as PaperProvider } from 'react-native-paper';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 const StudentInfo = () => {
   return (
     <React.Fragment>
@@ -50,9 +51,9 @@ const StudentInfo = () => {
               <Text style={styles.details}>Date of Addmission:</Text>
             </View>
             <List.Accordion
-              title="Parent Details"
+              title='Parent Details'
               titleStyle={{ alignSelf: 'flex-start' }}
-              left={(props) => <List.Icon {...props} icon="account-child" />}
+              left={(props) => <List.Icon {...props} icon='account-child' />}
             >
               <ScrollView>
                 <View style={styles.info}>
@@ -124,9 +125,9 @@ const StudentInfo = () => {
                 <Text>Change Password: </Text>
                 <View style={{ flexDirection: 'row' }}>
                   <MaterialCommunityIcons
-                    name="lock-outline"
+                    name='lock-outline'
                     size={24}
-                    color="black"
+                    color='black'
                     style={{ margin: 10 }}
                   />
 
@@ -136,17 +137,24 @@ const StudentInfo = () => {
                       alignSelf: 'flex-start',
                       marginBottom: 0,
                     }}
-                    autoCapitalize="none"
+                    autoCapitalize='none'
                     secureTextEntry={true}
-                    keyboardType="visible-password"
-                    placeholder="Enter old password"
+                    placeholder='Enter old password'
                   />
+                  <TouchableOpacity>
+                    <FontAwesome
+                      name='eye'
+                      size={30}
+                      color='black'
+                      style={{ margin: 10, marginTop: 8 }}
+                    />
+                  </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
                   <MaterialCommunityIcons
-                    name="lock-outline"
+                    name='lock-outline'
                     size={24}
-                    color="black"
+                    color='black'
                     style={{ margin: 10 }}
                   />
 
@@ -156,17 +164,24 @@ const StudentInfo = () => {
                       alignSelf: 'flex-start',
                       marginBottom: 0,
                     }}
-                    autoCapitalize="none"
+                    autoCapitalize='none'
                     secureTextEntry={true}
-                    keyboardType="visible-password"
-                    placeholder="Enter new password"
+                    placeholder='Enter new password'
                   />
+                  <TouchableOpacity>
+                    <FontAwesome
+                      name='eye'
+                      size={30}
+                      color='black'
+                      style={{ margin: 10, marginTop: 8 }}
+                    />
+                  </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row' }}>
                   <MaterialCommunityIcons
-                    name="lock-outline"
+                    name='lock-outline'
                     size={24}
-                    color="black"
+                    color='black'
                     style={{ margin: 10 }}
                   />
                   <TextInput
@@ -176,18 +191,25 @@ const StudentInfo = () => {
                       marginBottom: 0,
                     }}
                     secureTextEntry={true}
-                    autoCapitalize="none"
-                    keyboardType="visible-password"
-                    placeholder="Confirm password"
+                    autoCapitalize='none'
+                    placeholder='Confirm password'
                   />
+                  <TouchableOpacity>
+                    <FontAwesome
+                      name='eye'
+                      size={30}
+                      color='black'
+                      style={{ margin: 10, marginTop: 8 }}
+                    />
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>
             <View style={{ margin: 20, marginHorizontal: 40 }}>
               <Button
-                mode="contained"
-                title="save"
-                color="#6200EE"
+                mode='contained'
+                title='save'
+                color='#6200EE'
                 onPress={() => console.log('Pressed')}
               ></Button>
             </View>
