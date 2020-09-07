@@ -54,7 +54,7 @@ const NoticeCard = (props) => {
   );
 };
 
-const Notice = ({ navigation }) => {
+const ClassNotice = ({ navigation }) => {
   const [notices, setNotices] = useState([]);
   const {
     authState: {
@@ -85,7 +85,7 @@ const Notice = ({ navigation }) => {
           />
         ))}
       </ScrollView>
-      {/* {rank === '0' ? (
+      {/* {rank !== '2' ? (
         <IconButton
           icon="plus"
           style={styles.fab}
@@ -128,4 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Notice;
+export default ClassNotice;
