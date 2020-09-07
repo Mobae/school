@@ -19,14 +19,18 @@ const TestIcon = (props) => <Avatar.Icon {...props} icon="file" size={45} />;
 const TeacherProfile = ({ navigation }) => {
   const { authState } = useContext(AuthContext);
   const { user } = authState;
-  const getHi = async () => {
+  const [className, setClassName] = useState("");
+  const getClassName = async () => {
     axios.defaults.headers["auth-token"] = authState.jwt;
     const res = await axios.get(URL + "/class");
-    console.log(res.data);
+    setClassName(res.data.class_.name);
   };
   useEffect(() => {
-    getHi();
+    getClassName();
   }, [authState]);
+  useEffect(() => {
+    console.log(className);
+  }, [className]);
   return (
     <Fragment>
       <Card style={styles}>
@@ -34,7 +38,7 @@ const TeacherProfile = ({ navigation }) => {
         <Card.Title title="Profile" subtitle={user.name} left={ProfileIcon} />
         <Card.Content>
           <Paragraph>Email: {user.email}</Paragraph>
-          <Paragraph>Class teacher of {user.class_}</Paragraph>
+          <Paragraph>Class teacher of {className}</Paragraph>
         </Card.Content>
         {/* </TouchableRipple> */}
       </Card>

@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, Fragment } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, { useContext, useEffect, Fragment } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-import { AuthContext } from '../context/AuthContext';
-import Login from './auth/Login';
-import BottomNavigator from './layouts/bottomNavigator';
-import { ActivityIndicator } from 'react-native-paper';
+import { AuthContext } from "../context/AuthContext";
+import Login from "./auth/Login";
+import BottomNavigator from "./layouts/bottomNavigator";
+import { ActivityIndicator } from "react-native-paper";
 
 const Stack = createStackNavigator();
 

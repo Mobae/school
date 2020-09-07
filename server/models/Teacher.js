@@ -3,13 +3,16 @@ const TeacherSchema = mongoose.Schema({
   name: String,
   email: String,
   password: String,
+  info: {
+    phoneNo: String,
+  },
   teacherClass: mongoose.Schema.Types.ObjectId,
   teacherSubClasses: [
     {
       class: {
-        type: mongoose.Schema.ObjectId
-      }
-    }
+        type: mongoose.Schema.ObjectId,
+      },
+    },
   ],
   rank: { type: String, default: "1" },
 });
