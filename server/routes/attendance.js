@@ -55,6 +55,14 @@ router.get("/student/:id/:month", auth, async (req, res) => {
   }
 });
 
+router.get("/months", async (req, res) => {
+  const agg = await Attendance.aggregate([
+    { $project: { month: { $month: "$date" } } },
+    { $group: { _id: { month: "$month" } } },
+  ]);
+  console.log(agg);
+});
+
 router.post("/", auth, async (req, res) => {
   try {
     const studentId = req.body.studentId;
