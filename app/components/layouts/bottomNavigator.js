@@ -82,7 +82,7 @@ const ProfileRoute = () => {
   //   case '0':
   //     return <StudentStackScreen />;
   // }
-  return <StudentStackScreen />;
+  return <TeacherStackScreen />;
 };
 
 const MyComponent = () => {
