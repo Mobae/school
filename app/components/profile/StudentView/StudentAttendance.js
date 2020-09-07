@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Card, DataTable } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
@@ -7,47 +7,64 @@ import axios from "axios";
 import { AuthContext } from "../../../context/AuthContext";
 import { URL } from "../../../config";
 
-const MonthData = () => {
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const MonthData = (props) => {
   return (
-    <DataTable>
-      <DataTable.Header>
-        <DataTable.Title>Month</DataTable.Title>
-        <DataTable.Title>P/T</DataTable.Title>
-        <DataTable.Title>Percent(%)</DataTable.Title>
-      </DataTable.Header>
-      <TouchableOpacity onPress={() => navigation.push("Month")}>
-        <DataTable.Row style={{ backgroundColor: "#b3ffc6" }}>
-          <DataTable.Cell>January</DataTable.Cell>
-          <DataTable.Cell>13/30</DataTable.Cell>
-          <DataTable.Cell>85</DataTable.Cell>
-        </DataTable.Row>
-      </TouchableOpacity>
-    </DataTable>
+    <TouchableOpacity onPress={() => navigation.push("Month")}>
+      <DataTable.Row style={{ backgroundColor: "#b3ffc6" }}>
+        <DataTable.Cell>{props.name}</DataTable.Cell>
+        <DataTable.Cell>13/30</DataTable.Cell>
+        <DataTable.Cell>85</DataTable.Cell>
+      </DataTable.Row>
+    </TouchableOpacity>
   );
 };
 
 const StudentAttendance = ({ navigation }) => {
+  const [monthData, setMonthData] = useState([]);
   const {
     authState: { user },
   } = useContext(AuthContext);
 
   const getMonthData = async () => {
+    let MData = [];
     let monthStart = 1;
     let monthEnd = new Date().getMonth();
     monthEnd = monthEnd + 1;
     console.log(monthEnd, user);
     for (let i = monthStart; i <= monthEnd; i++) {
       const data = await axios.get(
-        URL + "/attendance/student/" + user._id + "/" + i.toString()
+        URL + "/attendance/student/" + user.id + "/" + i.toString()
       );
-      console.log(URL + "/attendance/student/" + user._id + "/" + i.toString());
-      console.log(data.data);
+      console.log(URL + "/attendance/student/" + user.id + "/" + i.toString());
+      data.data.monthName = monthNames[i - 1];
+      MData.push(data.data);
     }
+    console.log(MData);
+    setMonthData(MData);
   };
 
   useEffect(() => {
     getMonthData();
   }, []);
+
+  useEffect(() => {
+    console.log(monthData);
+  }, [monthData]);
 
   return (
     <View>
@@ -87,7 +104,16 @@ const StudentAttendance = ({ navigation }) => {
                 backgroundColor: "white",
               }}
             >
-              <MonthData />
+              <DataTable>
+                <DataTable.Header>
+                  <DataTable.Title>Month</DataTable.Title>
+                  <DataTable.Title>P/T</DataTable.Title>
+                  <DataTable.Title>Percent(%)</DataTable.Title>
+                </DataTable.Header>
+                {monthData.map((month) => (
+                  <MonthData name={month.monthName} key={month._id} />
+                ))}
+              </DataTable>
             </View>
           </Card.Content>
         </Card>
