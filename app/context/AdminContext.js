@@ -6,10 +6,11 @@ export const AdminContext = createContext();
 
 const AdminContextProvider = (props) => {
   const url = "https://school-server-testing.herokuapp.com";
-  const initialState = { teachers: [], students: [], classes: [], class_: {} };
+  const initialState = { teachers: [], students: [], classes: []};
   const [adminState, setAdminState] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [currClass, setCurrClass] = useState("");
+  const [classObj, setClassObj] = useState({});
 
     // 1 Getting All Classes
     const getClasses = async () => {
@@ -29,20 +30,18 @@ const AdminContextProvider = (props) => {
         }
     };
     // 2 Getting currently selected class data
-    const getClass = async() => {
+    const getCurrClassTeachers = async(classId) => {
         try {
             setLoading(true);
-            let res = await axios.get(url + "/class/view/" + currClass);
-            setLoading(false);
-            const  newClass  = res.data.data;
-            console.log(res.data.data);
-
-            setAdminState({
-                teachers: adminState.teachers,
-                students: students,
-                classes: adminState.classes,
-                class_: newClass,
-            });
+            await axios
+                .get(url + "/class/view/" + classId)
+                .then((response) => {
+                    setLoading(false);
+                    const newClass = response.data.data;
+                    setClassObj(newClass);
+                    console.log(newClass);
+                    console.log(classObj);
+                });
         } catch (err) {
             console.log(error);
         }
@@ -156,13 +155,14 @@ const AdminContextProvider = (props) => {
         addTeacher,
         addStudent,
         getClasses,
-        getClass,
+        getCurrClassTeachers,
         getTeachers,
         getStudents,
         getAttendance,
         adminState: adminState,
         currClass,
         setCurrClass,
+        classObj
       }}
     >
       {props.children}
