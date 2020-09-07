@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import React, { Fragment, useEffect, useContext, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useEffect, useContext, useState } from "react";
+import { View, StyleSheet } from "react-native";
 import {
   Title,
   DataTable,
@@ -53,7 +53,7 @@ const AllStudentsAttendance = ({ navigation }) => {
               <DataTable.Title numeric>Attendance</DataTable.Title>
             </DataTable.Header>
             {studentList.map((student) => (
-              <DataRow name={student.name} key={student.id} />
+              <DataRow name={student.name} key={student._id} />
             ))}
             <DataTable.Pagination
               page={1}
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     width: 200,
     alignSelf: "center",
     bottom: 50,
+    backgroundColor: "#6200EE",
   },
 });
 
