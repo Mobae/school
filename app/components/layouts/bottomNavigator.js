@@ -9,8 +9,11 @@ import IndividualMonth from "../profile/StudentView/IndividualMonth";
 import AllStudentAttendance from "../profile/AllStudentsAttendance";
 import AddAttendance from "../profile/AddAttendence";
 import Notice from "../NoticeBoard/Notice";
+<<<<<<< HEAD
+=======
 import NoticeForm from "../NoticeBoard/NoticeForm";
 import StudentInfo from "../profile/StudentView/StudentInfo";
+>>>>>>> 82fdf1b7bb730cfec0a66b2071724de56b00a76a
 
 import { AuthContext } from "../../context/AuthContext";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -26,9 +29,8 @@ const StudentStackScreen = () => {
   return (
     <NavigationContainer>
       <StudentStack.Navigator>
-        <StudentStack.Screen name="JMRD" component={StudentProfile} />
+        <StudentStack.Screen name="Profile" component={StudentProfile} />
         <StudentStack.Screen name="Attendance" component={StudentAttendance} />
-        <StudentStack.Screen name="Profile" component={StudentInfo} />
         <StudentStack.Screen name="Month" component={IndividualMonth} />
       </StudentStack.Navigator>
     </NavigationContainer>
@@ -39,7 +41,7 @@ const TeacherStackScreen = () => {
   return (
     <NavigationContainer>
       <TeacherStack.Navigator>
-        <TeacherStack.Screen name="JMRD" component={TeacherProfile} />
+        <TeacherStack.Screen name="Profile" component={TeacherProfile} />
         <TeacherStack.Screen
           name="Attendance"
           component={AllStudentAttendance}
@@ -54,8 +56,7 @@ const NoticeStackScreen = () => {
   return (
     <NavigationContainer>
       <NoticeStack.Navigator>
-        <NoticeStack.Screen name="Notice Board" component={Notice} />
-        <NoticeStack.Screen name="New Notice" component={NoticeForm} />
+        <NoticeStack.Screen name="Notice" component={Notice} />
       </NoticeStack.Navigator>
     </NavigationContainer>
   );
@@ -82,6 +83,7 @@ const ProfileRoute = () => {
     case "0":
       return <StudentStackScreen />;
   }
+  // return <StudentStackScreen />;
 };
 
 const MyComponent = () => {

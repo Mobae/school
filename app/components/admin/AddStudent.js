@@ -12,6 +12,7 @@ import globalStyles from "../styles/global";
 
 const AddStudent = ({ addStudent, studentModalOpen, setStudentModalOpen, navigation }) => {
     const { adminState } = React.useContext(AdminContext);
+    
     var classes = adminState.classes.map((class_) => {
         return ({
             classId: class_._id,
