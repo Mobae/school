@@ -27,19 +27,23 @@ router.get("/student/:id", auth, async (req, res) => {
 
 router.get("/student/:id/:month", auth, async (req, res) => {
   try {
+    let res;
     const studentId = req.params.id;
     console.log(studentId);
-    const month = req.params.month;
+    const reqMonth = req.params.month;
     console.log(month);
     const att = await Attendance.find({ studentId });
     console.log(att);
     for (let i = 0; i < att.length; i++) {
       const date = new Date(att[i].date).toDateString();
-      console.log(date);
+      const month = date.getMonth();
+      if (month === reqMonth) {
+        res.append(att[i]);
+      }
     }
     return res.status(200).json({
       sucess: true,
-      data: att,
+      data: res,
     });
   } catch (err) {
     console.log(err);
