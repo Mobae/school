@@ -5,7 +5,7 @@ const Attendance = require("../models/Attendance");
 
 const auth = require("../middleware/auth");
 
-router.get("/student", auth, async (req, res) => {
+router.get("/student:id", auth, async (req, res) => {
   console.log("hi from att");
   try {
     const studentId = req.params.id;
