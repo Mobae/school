@@ -40,7 +40,7 @@ router.get("/student/:id/:month", auth, async (req, res) => {
       month = (month + 1).toString();
       console.log(reqMonth === month);
       if (reqMonth === month) {
-        result.append(att[i]);
+        result.push(att[i]);
       }
     }
     return res.status(200).json({
