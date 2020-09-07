@@ -39,6 +39,25 @@ router.get("/all", async (req, res) => {
   }
 });
 
+
+router.get("/view/:classId", async (req, res) => {
+  try {
+    const class_ = await Class.findById(req.params.classId);
+
+    return res.status(200).json({
+      sucess: true,
+      data: class_,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      sucess: false,
+      data: "Server error",
+      err: err,
+    });
+  }
+});
+
 router.post("/add", async (req, res) => {
   try {
     const name = req.body.name;
@@ -101,7 +120,10 @@ router.post("/classTeacher", async (req, res) => {
     class_.classTeacher = req.body.classTeacher;
     class_.save();
 
-    return res.status(200).json({ class: class_ });
+    return res.status(200).json({
+      success: true,
+      data: class_ 
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({
