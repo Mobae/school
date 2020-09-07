@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { Table, Row, Rows } from 'react-native-table-component';
+// import { Table, Row, Rows } from 'react-native-table-component';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const IndividualMonth = () => {

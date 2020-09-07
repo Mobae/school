@@ -45,32 +45,40 @@ const AddAttendence = () => {
             </Dialog>
           </Portal>
         </View>
-        <DatePicker
-          style={styles.datepicker}
-          date={date}
-          androidMode="default"
-          format="DD-MM-YYYY"
-          minDate="01-01-2000"
-          maxDate="31-12-2050"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          // iconSource={(uri = require('../../calender.png'))}
-          customStyles={{
-            dateIcon: {
-              position: "absolute",
-              left: 0,
-              top: 3,
-              marginLeft: 18,
-            },
-            dateInput: {
-              margin: 50,
-              borderRadius: 2,
-            },
-          }}
-          onDateChange={(date) => {
-            setDate(date);
-          }}
-        />
+        <View>
+          <DatePicker
+            style={{
+              width: 190,
+              marginTop: 40,
+              alignItems: 'center',
+              justifyContent: 'center',
+              alignSelf: 'center',
+            }}
+            date={date}
+            androidMode='default'
+            format='DD-MM-YYYY'
+            minDate='01-01-2000'
+            maxDate='31-12-2050'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
+            // iconSource={(uri = require('../../calender.png'))}
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 3,
+                marginLeft: 18,
+              },
+              dateInput: {
+                margin: 50,
+                borderRadius: 2,
+              },
+            }}
+            onDateChange={(date) => {
+              setDate(date);
+            }}
+          />
+        </View>
         <IconButton
           icon="content-save"
           style={styles.fab}

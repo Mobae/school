@@ -6,21 +6,46 @@ const { admin } = require("../middleware/rank");
 
 const SchoolNotice = require("../models/SchoolNotice");
 
-router.get("/", auth, admin, async (req, res) => {
+router.get("/", auth, async (req, res) => {
+  console.log("hi");
   try {
-    const notices = SchoolNotice.find();
+    const notices = await SchoolNotice.find({ status: "active" });
     res.status(200).json({ notices });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ err: "Server error" });
   }
 });
 
-router.post("/", auth, admin, async (req, res) => {
+router.post("/", async (req, res) => {
+  console.log("hi");
   try {
     const { title, description, author, date } = req.body;
-    const schoolNotice = new SchoolNotice({ title, description, author, date });
+    let schoolNotice;
+    if (date) {
+      schoolNotice = new SchoolNotice({ title, description, author, date });
+    } else {
+      schoolNotice = new SchoolNotice({ title, description, author });
+    }
+    await schoolNotice.save();
+    res.json({
+      schoolNotice,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ err: "Server error" });
+  }
+});
+
+router.delete("/", auth, admin, async (req, res) => {
+  try {
+    const { id } = req.body;
+    const schoolNotice = SchoolNotice.findOne({ id });
+    schoolNotice.status = "archived";
     await schoolNotice.save();
   } catch (err) {
     res.status(500).json({ err: "Server error" });
   }
 });
+
+module.exports = router;

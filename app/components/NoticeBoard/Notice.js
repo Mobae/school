@@ -1,7 +1,12 @@
-import React, { Fragment, useRef, useContext } from 'react';
+import React, {
+  Fragment,
+  useRef,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
 import {
-  Text,
   Title,
   Card,
   Avatar,
@@ -14,50 +19,73 @@ import {
 import RBSheet from 'react-native-raw-bottom-sheet';
 
 import { AuthContext } from '../../context/AuthContext';
+import { URL } from '../../config';
+
+import axios from 'axios';
 
 const NoticeIcon = () => {
   return <Avatar.Icon icon="bulletin-board" size={45} />;
 };
 
-const Notice = ({ navigation }) => {
+const NoticeCard = (props) => {
+  const refRBSheet = useRef();
+  let { date } = props;
+  date = new Date(date).toDateString();
+  return (
+    <Fragment>
+      <Card style={styles.notice}>
+        <TouchableRipple onPress={() => refRBSheet.current.open()}>
+          <Fragment>
+            <Card.Title title={props.title} subtitle={date} left={NoticeIcon} />
+            <Card.Content style={{ marginBottom: 8 }}>
+              <Subheading>{props.description}</Subheading>
+              <Paragraph>Issued By: {props.author}</Paragraph>
+            </Card.Content>
+          </Fragment>
+        </TouchableRipple>
+      </Card>
+      <RBSheet ref={refRBSheet} closeOnDragDown={true} height={500}>
+        <View style={styles.notice}>
+          <Headline style={styles.headline}>{props.title}</Headline>
+          <Paragraph>{props.description}</Paragraph>
+        </View>
+      </RBSheet>
+    </Fragment>
+  );
+};
+
+const Notice = () => {
+  const [notices, setNotices] = useState([]);
   const {
     authState: {
       user: { rank },
     },
   } = useContext(AuthContext);
-  const refRBSheet = useRef();
+
+  const getNotices = async () => {
+    const notices = await axios.get(URL + '/schoolnotice');
+    console.log(notices.data);
+    setNotices(notices.data.notices);
+  };
+
+  useEffect(() => {
+    getNotices();
+  }, []);
 
   return (
     <Fragment>
       <ScrollView>
-        <Card style={styles.notice}>
-          <TouchableRipple onPress={() => refRBSheet.current.open()}>
-            <Fragment>
-              <Card.Title
-                title="Notice"
-                subtitle="Notice aaya hai bhai"
-                left={NoticeIcon}
-              />
-              <Card.Content style={{ marginBottom: 8 }}>
-                <Subheading>Subject Of the Notice</Subheading>
-                <Paragraph>Issued By: Teacher Name</Paragraph>
-              </Card.Content>
-            </Fragment>
-          </TouchableRipple>
-        </Card>
-        <RBSheet ref={refRBSheet} closeOnDragDown={true} height={500}>
-          <View style={styles.notice}>
-            <Headline style={styles.headline}>Subject of the Notice</Headline>
-            <Paragraph>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
-              obcaecati cumque facilis cum iusto facere nisi officia veritatis
-              in. Debitis nesciunt possimus ullam, nam inventore maxime! Dolore
-              voluptate maxime consequatur.
-            </Paragraph>
-          </View>
-        </RBSheet>
-      </ScrollView>
-      {/* {rank === 1 ? (
+        <Title style={styles.title}>Notice Board</Title>
+        {notices.map((notice) => (
+          <NoticeCard
+            title={notice.title}
+            author={notice.author}
+            date={notice.date}
+            description={notice.description}
+            key={notice._id}
+          />
+        ))}
+        {/* {rank === 1 ? (
         <IconButton
           icon="content-save"
           style={styles.fab}
@@ -68,13 +96,14 @@ const Notice = ({ navigation }) => {
           }}
         />
       ) : null} */}
-      <IconButton
-        icon="plus"
-        style={styles.fab}
-        color="white"
-        size={40}
-        onPress={() => navigation.push('New Notice')}
-      />
+        <IconButton
+          icon="plus"
+          style={styles.fab}
+          color="white"
+          size={40}
+          onPress={() => navigation.push('New Notice')}
+        />
+      </ScrollView>
     </Fragment>
   );
 };

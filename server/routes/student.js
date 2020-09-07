@@ -12,22 +12,48 @@ const Teacher = require("../models/Teacher");
 const Class = require("../models/Class");
 const Admin = require("../models/Admin");
 
-router.get("/", auth, async (req, res) => {
-  console.log(req.body.data);
-});
-
-router.get("/student/:studentId", async (req, res) => {
+router.get("/students/all", async (req, res) => {
   try {
-    const student = await Student.findById(req.params.studentId);
+    const students = await Student.find();
 
     return res.status(200).json({
       sucess: true,
-      data: student,
+      data: students,
     });
   } catch (err) {
     return res.status(404).json({
       sucess: false,
       error: err,
+    });
+  }
+});
+
+router.get("/teachers/all", async (req, res) => {
+  try {
+    const teachers = await Teacher.find();
+    console.log(teachers);
+
+    return res.status(200).json({
+      success: true,
+      data: teachers,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      sucess: false,
+      error: err,
+    });
+  }
+});
+
+router.get("/", auth, async (req, res) => {
+  try {
+    const student = await Student.findById(req.body.data.id);
+    return res.json({
+      student,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      err,
     });
   }
 });
@@ -105,7 +131,7 @@ router.post("/update/teacher", async (req, res) => {
 router.post("/add", async (req, res) => {
   let obj = req.body;
   obj = trimObj(obj);
-  const { firstName, lastName, email, studentClass, rank, teacherClass } = obj;
+  const { firstName, lastName, email, rank, studentClass, teacherClass } = obj;
   const stu = await Student.findOne({ email });
   const tea = await Teacher.findOne({ email });
   if (stu || tea) {
@@ -114,8 +140,9 @@ router.post("/add", async (req, res) => {
     const name = firstName + " " + lastName;
     let password = genRandPass();
     console.log(`password: ${password}`);
+    const tempPass = "abcd";
     const salt = await bcrypt.genSalt();
-    password = await bcrypt.hash(password, salt);
+    password = await bcrypt.hash(tempPass, salt);
     if (rank === "0") {
       const student = new Student({ name, email, studentClass, password });
 
@@ -130,9 +157,9 @@ router.post("/add", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      res.json({ token, name, email, rank });
+      res.json({ token, name, email, rank, _id: student.id });
     } else if (rank === "1") {
-      const teacher = new Teacher({ name, email, password });
+      const teacher = new Teacher({ name, email, password, teacherClass });
       await teacher.save();
       const payload = {
         data: {
@@ -163,19 +190,36 @@ router.post("/login", async (req, res) => {
     res.status(400).json({ msg: "Invalid credentials" });
     return;
   }
-  const user = await Student.findOne({ email });
-  const { name, rank, studentClass } = user;
-  const passMatches = await bcrypt.compare(password, user.password);
-  if (passMatches) {
-    const payload = {
-      data: {
-        id: user.id,
-      },
-    };
-    const token = jwt.sign(payload, process.env.JWT_SECRET);
-    res.json({ token, name, email, rank, studentClass });
+  let user = await Student.findOne({ email });
+  if (user) {
+    const { name, rank, studentClass } = user;
+    const passMatches = await bcrypt.compare(password, user.password);
+    if (passMatches) {
+      const payload = {
+        data: {
+          id: user.id,
+        },
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      return res.json({ token, name, email, rank, studentClass });
+    }
+  }
+  user = await Teacher.findOne({ email });
+  if (user) {
+    console.log("hi");
+    const { name, rank, teacherClass } = user;
+    const passMatches = await bcrypt.compare(password, user.password);
+    if (passMatches) {
+      const payload = {
+        data: {
+          id: user.id,
+        },
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      return res.json({ token, name, email, rank, teacherClass });
+    }
   } else {
-    res.status(400).json({ msg: "Invalid credentials" });
+    return res.status(400).json({ msg: "Invalid credentials" });
   }
 });
 

@@ -1,5 +1,5 @@
-import React, { Fragment, useContext } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import React, { Fragment, useContext } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import {
   Avatar,
   Paragraph,
@@ -7,9 +7,9 @@ import {
   Card,
   Title,
   TouchableRipple,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from "../../context/AuthContext";
 
 const ProfileIcon = (props) => (
   <Avatar.Icon {...props} icon="account" size={45} />
@@ -32,11 +32,11 @@ const StudentProfile = ({ navigation }) => {
         <Card.Title title="Profile" subtitle={user.name} left={ProfileIcon} />
         <Card.Content>
           <Paragraph>Email: {user.email}</Paragraph>
-          <Paragraph>Class: {user.studentClass}</Paragraph>
+          <Paragraph>Class: {user.class_}</Paragraph>
         </Card.Content>
       </Card>
       <Card style={styles}>
-        <TouchableRipple onPress={() => navigation.push('Attendance')}>
+        <TouchableRipple onPress={() => navigation.push("Attendance")}>
           <Card.Title
             title="Attendance"
             subtitle="View Attendance"

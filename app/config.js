@@ -1,1 +1,1 @@
-export const URL = "http://7ffbb4ca5ebc.ngrok.io";
+export const URL = "https://school-server-testing.herokuapp.com";
