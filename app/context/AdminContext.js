@@ -139,7 +139,7 @@ const AdminContextProvider = (props) => {
       console.log(err);
     }
   };
-  //
+  // 8 Getting class and subject teachers
   const addClassTeacher = async(values) => {
     try {
         setLoading(true);
