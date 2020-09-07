@@ -31,7 +31,7 @@ const AdminProfile = ({ navigation }) => {
 
       <AddTeacher navigation={navigation} addTeacher={addTeacher} teacherModalOpen={teacherModalOpen} setTeacherModalOpen={setTeacherModalOpen} />
 
-      <AddStudent navigation={navigation} addStudent={addStudent} studentModalOpen={studentModalOpen} setStudentModalOpen={setStudentModalOpen} />
+      {/* <AddStudent navigation={navigation} addStudent={addStudent} studentModalOpen={studentModalOpen} setStudentModalOpen={setStudentModalOpen} /> */}
 
       {/* // ATTENDANCE CARD */}
       <View>

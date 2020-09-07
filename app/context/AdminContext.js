@@ -11,30 +11,31 @@ const AdminContextProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [currClass, setCurrClass] = useState("");
 
-  // 1 Getting All Classes
-  const getClasses = async () => {
-    try {
-      setLoading(true);
-      let res = await axios.get(url + "/class/view/" + currClass);
-      setLoading(false);
-      const classes = res.data.data;
-      setAdminState({
-        teachers: adminState.teachers,
-        students: adminState.students,
-        classes: classes,
-        class_: adminState.class_,
-      });
-    } catch (err) {
-      console.log(error);
-    }
-  };
-  // 2 Getting currently selected class data
-  const getClass = async () => {
-    try {
-      setLoading(true);
-      let res = await axios.get(url + "/class/students/" + currClass);
-      setLoading(false);
-      const newClass = res.data.data;
+    // 1 Getting All Classes
+    const getClasses = async () => {
+        try {
+            setLoading(true);
+            let res = await axios.get(url + "/class/all");
+            setLoading(false);
+            const  classes  = res.data.data;
+            setAdminState({
+                teachers: adminState.teachers,
+                students: adminState.students,
+                classes: classes,
+                class_: adminState.class_
+            });
+        } catch (err) {
+            console.log(error);
+        }
+    };
+    // 2 Getting currently selected class data
+    const getClass = async() => {
+        try {
+            setLoading(true);
+            let res = await axios.get(url + "/class/view/" + currClass);
+            setLoading(false);
+            const  newClass  = res.data.data;
+            console.log(res.data.data);
 
       setAdminState({
         teachers: adminState.teachers,
@@ -76,14 +77,15 @@ const AdminContextProvider = (props) => {
       setLoading(false);
       const teachers = res.data.data;
 
-      setAdminState({
-        teachers: teachers,
-        students: adminState.students,
-        classes: adminState.classes,
-        class_: adminState.class_,
-      });
-    } catch (err) {
-      console.log(error);
+            setAdminState({
+                teachers: teachers,
+                students: adminState.students,
+                classes: adminState.classes,
+                class_: adminState.class_
+            });
+        } catch (err) {
+            console.log(error);
+        }
     }
   };
   // 5 Adding a teacher
@@ -112,23 +114,23 @@ const AdminContextProvider = (props) => {
       setLoading(false);
       const students = res.data.data;
 
-      setAdminState({
-        teachers: adminState.teachers,
-        students: students,
-        classes: adminState.classes,
-        class_: adminState.class_,
-      });
-    } catch (err) {
-      console.log(error);
-    }
-  };
-  // 7 Adding a student
-  const addStudent = async (student) => {
-    try {
-      setLoading(true);
-      const res = await axios.post(url + "/student/add", student);
-      setLoading(false);
-      const newStudent = res.data;
+            setAdminState({
+                teachers: adminState.teachers,
+                students: students,
+                classes: adminState.classes,
+                class_: adminState.class_
+            });
+        } catch (err) {
+            console.log(error);
+        }
+    };
+    // 7 Adding a student
+    const addStudent = async (student) => {
+        try {
+            setLoading(true);
+            const res = await axios.post(url + '/student/add', student);
+            setLoading(false);
+            const newStudent = res.data;
 
       setAdminState({
         teachers: adminState.teachers,
