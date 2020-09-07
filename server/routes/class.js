@@ -165,8 +165,13 @@ router.post("/subTeacher", async (req, res) => {
   try {
     const class_ = await Class.findById(req.body.class);
     const subTeacher = req.body.subTeacher;
-    class_.subTeachers.push(subTeacher);
+    class_.subTeachers.push({teacher: subTeacher});
     class_.save();
+
+    const teacher = await Teacher.findById(subTeacher);
+    teacher.teacherSubClasses.push({ class: class_.id });
+    teacher.save();
+
 
     return res.status(200).json({ class: class_ });
   } catch (err) {
