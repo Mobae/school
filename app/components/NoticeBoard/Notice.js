@@ -4,8 +4,8 @@ import React, {
   useContext,
   useEffect,
   useState,
-} from "react";
-import { StyleSheet, ScrollView, View } from "react-native";
+} from 'react';
+import { StyleSheet, ScrollView, View } from 'react-native';
 import {
   Title,
   Card,
@@ -15,13 +15,13 @@ import {
   Subheading,
   Headline,
   IconButton,
-} from "react-native-paper";
-import RBSheet from "react-native-raw-bottom-sheet";
+} from 'react-native-paper';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
-import { AuthContext } from "../../context/AuthContext";
-import { URL } from "../../config";
+import { AuthContext } from '../../context/AuthContext';
+import { URL } from '../../config';
 
-import axios from "axios";
+import axios from 'axios';
 
 const NoticeIcon = () => {
   return <Avatar.Icon icon="bulletin-board" size={45} />;
@@ -54,7 +54,7 @@ const NoticeCard = (props) => {
   );
 };
 
-const Notice = () => {
+const Notice = ({ navigation }) => {
   const [notices, setNotices] = useState([]);
   const {
     authState: {
@@ -63,7 +63,7 @@ const Notice = () => {
   } = useContext(AuthContext);
 
   const getNotices = async () => {
-    const notices = await axios.get(URL + "/schoolnotice");
+    const notices = await axios.get(URL + '/schoolnotice');
     console.log(notices.data);
     setNotices(notices.data.notices);
   };
@@ -75,7 +75,6 @@ const Notice = () => {
   return (
     <Fragment>
       <ScrollView>
-        <Title style={styles.title}>Notice Board</Title>
         {notices.map((notice) => (
           <NoticeCard
             title={notice.title}
@@ -85,7 +84,8 @@ const Notice = () => {
             key={notice._id}
           />
         ))}
-        {/* {rank === 1 ? (
+      </ScrollView>
+      {/* {rank === 1 ? (
         <IconButton
           icon="content-save"
           style={styles.fab}
@@ -96,13 +96,12 @@ const Notice = () => {
           }}
         />
       ) : null} */}
-      </ScrollView>
       <IconButton
         icon="plus"
         style={styles.fab}
         color="white"
         size={40}
-        onPress={() => {}}
+        onPress={() => navigation.push('New Notice')}
       />
     </Fragment>
   );
@@ -110,7 +109,7 @@ const Notice = () => {
 
 const styles = StyleSheet.create({
   title: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   headline: {
     marginBottom: 10,
@@ -120,13 +119,13 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   fab: {
-    position: "absolute",
+    position: 'absolute',
     margin: 16,
     right: 18,
     bottom: 20,
     height: 63,
     borderRadius: 50,
-    backgroundColor: "#6200EE",
+    backgroundColor: '#6200EE',
     width: 63,
   },
 });
