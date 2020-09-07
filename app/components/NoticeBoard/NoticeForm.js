@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import {
   Paragraph,
@@ -11,6 +11,11 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 
+import { AuthContext } from '../../context/AuthContext';
+import { URL } from '../../config';
+
+import axios from 'axios';
+
 const NoticeForm = () => {
   const [text, setText] = useState('');
   const [desc, setDesc] = useState('');
@@ -21,7 +26,11 @@ const NoticeForm = () => {
 
   const hideDialog = () => setVisible(false);
 
-  let rank = '0';
+  const {
+    authState: {
+      user: { rank },
+    },
+  } = useContext(AuthContext);
 
   return (
     <PaperProvider>
@@ -42,7 +51,7 @@ const NoticeForm = () => {
           multiline={true}
           numberOfLines={15}
         />
-        {rank === '0' ? (
+        {/* {rank === '0' ? (
           <View style={styles.radioGrp}>
             <RadioButton.Group
               onValueChange={(value) => setValue(value)}
@@ -58,7 +67,23 @@ const NoticeForm = () => {
               </View>
             </RadioButton.Group>
           </View>
-        ) : null}
+        ) : null} */}
+
+        <View style={styles.radioGrp}>
+          <RadioButton.Group
+            onValueChange={(value) => setValue(value)}
+            value={value}
+          >
+            <View style={styles.radio}>
+              <RadioButton value="SchoolNotice" color="#6200EE" />
+              <Paragraph>School Notice</Paragraph>
+            </View>
+            <View style={styles.radio}>
+              <RadioButton value="ClassNotice" color="#6200EE" />
+              <Paragraph>Class Notice</Paragraph>
+            </View>
+          </RadioButton.Group>
+        </View>
         <Button
           icon="content-save"
           mode="contained"
