@@ -50,9 +50,9 @@ const StudentInfo = () => {
               <Text style={styles.details}>Date of Addmission:</Text>
             </View>
             <List.Accordion
-              title='Parent Details'
+              title="Parent Details"
               titleStyle={{ alignSelf: 'flex-start' }}
-              left={(props) => <List.Icon {...props} icon='account-child' />}
+              left={(props) => <List.Icon {...props} icon="account-child" />}
             >
               <ScrollView>
                 <View style={styles.info}>
@@ -124,9 +124,9 @@ const StudentInfo = () => {
                 <Text>Change Password: </Text>
                 <View style={{ flexDirection: 'row' }}>
                   <MaterialCommunityIcons
-                    name='lock-outline'
+                    name="lock-outline"
                     size={24}
-                    color='black'
+                    color="black"
                     style={{ margin: 10 }}
                   />
 
@@ -136,17 +136,37 @@ const StudentInfo = () => {
                       alignSelf: 'flex-start',
                       marginBottom: 0,
                     }}
-                    autoCapitalize='none'
+                    autoCapitalize="none"
                     secureTextEntry={true}
-                    keyboardType='visible-password'
-                    placeholder='Enter new password'
+                    keyboardType="visible-password"
+                    placeholder="Enter old password"
                   />
                 </View>
                 <View style={{ flexDirection: 'row' }}>
                   <MaterialCommunityIcons
-                    name='lock-outline'
+                    name="lock-outline"
                     size={24}
-                    color='black'
+                    color="black"
+                    style={{ margin: 10 }}
+                  />
+
+                  <TextInput
+                    style={{
+                      margin: 10,
+                      alignSelf: 'flex-start',
+                      marginBottom: 0,
+                    }}
+                    autoCapitalize="none"
+                    secureTextEntry={true}
+                    keyboardType="visible-password"
+                    placeholder="Enter new password"
+                  />
+                </View>
+                <View style={{ flexDirection: 'row' }}>
+                  <MaterialCommunityIcons
+                    name="lock-outline"
+                    size={24}
+                    color="black"
                     style={{ margin: 10 }}
                   />
                   <TextInput
@@ -156,17 +176,18 @@ const StudentInfo = () => {
                       marginBottom: 0,
                     }}
                     secureTextEntry={true}
-                    autoCapitalize='none'
-                    keyboardType='visible-password'
-                    placeholder='Confirm password'
+                    autoCapitalize="none"
+                    keyboardType="visible-password"
+                    placeholder="Confirm password"
                   />
                 </View>
               </View>
             </View>
             <View style={{ margin: 20, marginHorizontal: 40 }}>
               <Button
-                mode='contained'
-                title='save'
+                mode="contained"
+                title="save"
+                color="#6200EE"
                 onPress={() => console.log('Pressed')}
               ></Button>
             </View>

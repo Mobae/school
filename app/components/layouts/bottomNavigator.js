@@ -9,6 +9,8 @@ import IndividualMonth from '../profile/StudentView/IndividualMonth';
 import AllStudentAttendance from '../profile/AllStudentsAttendance';
 import AddAttendance from '../profile/AddAttendence';
 import Notice from '../NoticeBoard/Notice';
+import NoticeForm from '../NoticeBoard/NoticeForm';
+import StudentInfo from '../profile/StudentView/StudentInfo';
 
 import { AuthContext } from '../../context/AuthContext';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -24,8 +26,9 @@ const StudentStackScreen = () => {
   return (
     <NavigationContainer>
       <StudentStack.Navigator>
-        <StudentStack.Screen name="Profile" component={StudentProfile} />
+        <StudentStack.Screen name="JMRD" component={StudentProfile} />
         <StudentStack.Screen name="Attendance" component={StudentAttendance} />
+        <StudentStack.Screen name="Profile" component={StudentInfo} />
         <StudentStack.Screen name="Month" component={IndividualMonth} />
       </StudentStack.Navigator>
     </NavigationContainer>
@@ -36,7 +39,7 @@ const TeacherStackScreen = () => {
   return (
     <NavigationContainer>
       <TeacherStack.Navigator>
-        <TeacherStack.Screen name="Profile" component={TeacherProfile} />
+        <TeacherStack.Screen name="JMRD" component={TeacherProfile} />
         <TeacherStack.Screen
           name="Attendance"
           component={AllStudentAttendance}
@@ -71,15 +74,15 @@ const ProfileRoute = () => {
     },
   } = useContext(AuthContext);
   console.log(rank);
-  switch (rank) {
-    case '2':
-      return null;
-    case '1':
-      return <TeacherStackScreen />;
-    case '0':
-      return <StudentStackScreen />;
-  }
-  // return <StudentStackScreen />;
+  // switch (rank) {
+  //   case '2':
+  //     return null;
+  //   case '1':
+  //     return <TeacherStackScreen />;
+  //   case '0':
+  //     return <StudentStackScreen />;
+  // }
+  return <StudentStackScreen />;
 };
 
 const MyComponent = () => {

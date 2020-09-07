@@ -54,7 +54,7 @@ const NoticeCard = (props) => {
   );
 };
 
-const Notice = () => {
+const Notice = ({ navigation }) => {
   const [notices, setNotices] = useState([]);
   const {
     authState: {
@@ -75,7 +75,6 @@ const Notice = () => {
   return (
     <Fragment>
       <ScrollView>
-        <Title style={styles.title}>Notice Board</Title>
         {notices.map((notice) => (
           <NoticeCard
             title={notice.title}
@@ -85,7 +84,8 @@ const Notice = () => {
             key={notice._id}
           />
         ))}
-        {/* {rank === 1 ? (
+      </ScrollView>
+      {/* {rank === 1 ? (
         <IconButton
           icon="content-save"
           style={styles.fab}
@@ -96,14 +96,13 @@ const Notice = () => {
           }}
         />
       ) : null} */}
-        <IconButton
-          icon="plus"
-          style={styles.fab}
-          color="white"
-          size={40}
-          onPress={() => navigation.push('New Notice')}
-        />
-      </ScrollView>
+      <IconButton
+        icon="plus"
+        style={styles.fab}
+        color="white"
+        size={40}
+        onPress={() => navigation.push('New Notice')}
+      />
     </Fragment>
   );
 };
