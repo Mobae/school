@@ -37,16 +37,16 @@ const AdminContextProvider = (props) => {
             const  newClass  = res.data.data;
             console.log(res.data.data);
 
-      setAdminState({
-        teachers: adminState.teachers,
-        students: students,
-        classes: adminState.classes,
-        class_: newClass,
-      });
-    } catch (err) {
-      console.log(error);
-    }
-  };
+            setAdminState({
+                teachers: adminState.teachers,
+                students: students,
+                classes: adminState.classes,
+                class_: newClass,
+            });
+        } catch (err) {
+            console.log(error);
+        }
+    };
   // 3 Adding class
   const addClass = async (class_) => {
     try {
@@ -86,8 +86,7 @@ const AdminContextProvider = (props) => {
         } catch (err) {
             console.log(error);
         }
-    }
-  };
+    };
   // 5 Adding a teacher
   const addTeacher = async (teacher) => {
     try {
