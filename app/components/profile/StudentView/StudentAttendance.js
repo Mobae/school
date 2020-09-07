@@ -1,12 +1,16 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Avatar, Card, DataTable } from 'react-native-paper';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useContext } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Avatar, Card, DataTable } from "react-native-paper";
+import { NavigationContainer } from "@react-navigation/native";
+import { AuthContext } from "../../../context/AuthContext";
 
 const StudentAttendance = ({ navigation }) => {
+  const {
+    authState: { user },
+  } = useContext(AuthContext);
   return (
     <View>
-      <TouchableOpacity onPress={() => console.log('profile')}>
+      <TouchableOpacity onPress={() => console.log("profile")}>
         <Card>
           <Card.Content>
             <View style={styles.profile_info}>
@@ -18,10 +22,10 @@ const StudentAttendance = ({ navigation }) => {
                 />
               </View>
               <View style={{ marginLeft: 30, marginTop: 30 }}>
-                <Text style={{ fontWeight: 'bold', fontSize: 20 }}>
-                  Aditya Yadav
+                <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                  {user.name}
                 </Text>
-                <Text>Class: X B</Text>
+                <Text>Class: {user.class_}</Text>
               </View>
             </View>
           </Card.Content>
@@ -30,16 +34,16 @@ const StudentAttendance = ({ navigation }) => {
       <View style={{ paddingHorizontal: 20, paddingTop: 40 }}>
         <Card
           style={{
-            backgroundColor: '#c6b3ff',
+            backgroundColor: "#c6b3ff",
           }}
         >
           <Card.Content>
             <View
               style={{
-                borderColor: 'black',
+                borderColor: "black",
                 borderWidth: 1.2,
                 borderRadius: 3,
-                backgroundColor: 'white',
+                backgroundColor: "white",
               }}
             >
               <DataTable>
@@ -48,8 +52,8 @@ const StudentAttendance = ({ navigation }) => {
                   <DataTable.Title>P/T</DataTable.Title>
                   <DataTable.Title>Percent(%)</DataTable.Title>
                 </DataTable.Header>
-                <TouchableOpacity onPress={() => navigation.push('Month')}>
-                  <DataTable.Row style={{ backgroundColor: '#b3ffc6' }}>
+                <TouchableOpacity onPress={() => navigation.push("Month")}>
+                  <DataTable.Row style={{ backgroundColor: "#b3ffc6" }}>
                     <DataTable.Cell>January</DataTable.Cell>
                     <DataTable.Cell>13/30</DataTable.Cell>
                     <DataTable.Cell>85</DataTable.Cell>
@@ -67,8 +71,8 @@ const StudentAttendance = ({ navigation }) => {
 const styles = StyleSheet.create({
   profile_info: {
     padding: 20,
-    display: 'flex',
-    flexDirection: 'row',
+    display: "flex",
+    flexDirection: "row",
     marginTop: 50,
   },
 });

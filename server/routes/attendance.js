@@ -25,6 +25,36 @@ router.get("/student/:id", auth, async (req, res) => {
   }
 });
 
+router.get("/student/:id/:month", auth, async (req, res) => {
+  try {
+    let result = [];
+    const studentId = req.params.id;
+    const reqMonth = req.params.month;
+    const att = await Attendance.find({ studentId });
+    console.log(att);
+    for (let i = 0; i < att.length; i++) {
+      const date = new Date(att[i].date);
+      let month = date.getMonth();
+      month = (month + 1).toString();
+      console.log(reqMonth === month);
+      if (reqMonth === month) {
+        result.push(att[i]);
+      }
+    }
+    return res.status(200).json({
+      sucess: true,
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      sucess: false,
+      data: "Server error",
+      err: err,
+    });
+  }
+});
+
 router.post("/", auth, async (req, res) => {
   try {
     const studentId = req.body.studentId;
