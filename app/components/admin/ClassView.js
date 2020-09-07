@@ -9,63 +9,73 @@ import adminStyles from "./AdminStyles";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const ClassView = ({ navigation }) => {
-  const { getCurrClassTeachers, classObj, addClassTeacher } = React.useContext(AdminContext);
+  const { getCurrClassTeachers, classObj, addClassTeacher, currClass, flag } = React.useContext(AdminContext);
   const [ classTeacherModalOpen, setClassTeacherModalOpen ] = React.useState(false);
 
   React.useEffect(() => {
-    getCurrClassTeachers();
+    getCurrClassTeachers(); 
   }, [])
 
-  return (
-    <View>
-        <AddClassTeacher navigation={navigation} addClassTeacher={addClassTeacher} classTeacherModalOpen={classTeacherModalOpen} setClassTeacherModalOpen={setClassTeacherModalOpen} />
-        <ScrollView>
-                <TouchableOpacity onPress={() => {
-                        navigation.navigate('StudentList');
-                    }}
-                >
-                    <Card style={adminStyles.card}>
-                        <Card.Title
-                        title="Students"
-                        left={LeftContent}
-                        />
-                        <Card.Content></Card.Content>
-                    </Card>
-                </TouchableOpacity>
+  if(flag){
+    return (
+        <View>
+            <AddClassTeacher navigation={navigation} addClassTeacher={addClassTeacher} classTeacherModalOpen={classTeacherModalOpen} setClassTeacherModalOpen={setClassTeacherModalOpen} />
+            <ScrollView>
+                    <TouchableOpacity onPress={() => {
+                            navigation.navigate('StudentList');
+                        }}
+                    >
+                        <Card style={adminStyles.card}>
+                            <Card.Title
+                            title="Students"
+                            left={LeftContent}
+                            />
+                            <Card.Content></Card.Content>
+                        </Card>
+                    </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => {
-                        navigation.navigate('StudentList');
-                    }}
-                >
+                    <TouchableOpacity onPress={() => {
+                            navigation.navigate('StudentList');
+                        }}
+                    >
+                        <Card style={adminStyles.card}>
+                            <Card.Title title="Class Teacher"  />
+                            <Card.Actions>
+                                <Button onPress={() => setClassTeacherModalOpen(true)} >EDIT</Button>
+                            </Card.Actions>
+                        </Card>
+                        <Card style={adminStyles.card}>
+                            <Card.Title 
+                                title={classObj.classTeacher[0].name} 
+                                left={LeftContent} 
+                            />
+                        </Card>
+                    </TouchableOpacity>
+
                     <Card style={adminStyles.card}>
-                        <Card.Title title="Class Teacher"  />
+                        <Card.Title title="Subject teachers"  />
                         <Card.Actions>
-                            <Button onPress={() => setClassTeacherModalOpen(true)} >EDIT</Button>
+                            <Button onPress={() => setTeacherModalOpen(true)} >ADD</Button>
                         </Card.Actions>
                     </Card>
-                    <Card style={adminStyles.card}>
-                        <Card.Title 
-                            title={classObj.classTeacher[0].name} 
-                            left={LeftContent} 
-                        />
-                    </Card>
-                </TouchableOpacity>
 
-                <Card style={adminStyles.card}>
-                    <Card.Title title="Subject teachers"  />
-                    <Card.Actions>
-                        <Button onPress={() => setTeacherModalOpen(true)} >ADD</Button>
-                    </Card.Actions>
-                </Card>
-
-                {classObj.subTeachers.map((teacher) => (
-                    <Card style={adminStyles.card} key={teacher._id}>
-                        <Card.Title title={teacher.name} left={LeftContent} />
-                    </Card>
-                ))}
-        </ScrollView>
-    </View>
-  );
+                    {classObj.subTeachers.map((teacher) => (
+                        <Card style={adminStyles.card} key={teacher._id}>
+                            <Card.Title title={teacher.name} left={LeftContent} />
+                        </Card>
+                    ))}
+            </ScrollView>
+        </View>
+    );
+  } else{
+      return (
+        <View>
+            <Card style={adminStyles.card}>
+                <Card.Title title="Loading..." left={LeftContent} />
+            </Card>
+        </View>
+      );
+  }
 };
 
 export default ClassView;

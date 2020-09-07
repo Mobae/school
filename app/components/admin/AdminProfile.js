@@ -12,15 +12,13 @@ import adminStyles from "./AdminStyles";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const AdminProfile = ({ navigation }) => {
-  const { addClass, addTeacher, getClasses, getTeachers, getCurrClassTeachers } = React.useContext(AdminContext);
+  const { addClass, addTeacher, getClasses, getTeachers, getCurrClassTeachers, addStudent, adminState } = React.useContext(AdminContext);
   const [ classModalOpen, setClassModalOpen ] = React.useState(false);
   const [ teacherModalOpen, setTeacherModalOpen ] = React.useState(false);
   const [ studentModalOpen, setStudentModalOpen ] = React.useState(false);
 
   React.useEffect(() => {
-    getClasses();
-    getCurrClassTeachers();
-    getTeachers();
+    getClasses(); 
   }, []);
 
 
@@ -28,7 +26,7 @@ const AdminProfile = ({ navigation }) => {
     <View>
       <AddClass navigation={navigation} addClass={addClass} classModalOpen={classModalOpen} setClassModalOpen={setClassModalOpen} />
       <AddTeacher navigation={navigation} addTeacher={addTeacher} teacherModalOpen={teacherModalOpen} setTeacherModalOpen={setTeacherModalOpen} />
-      {/* <AddStudent navigation={navigation} addStudent={addStudent} studentModalOpen={studentModalOpen} setStudentModalOpen={setStudentModalOpen} /> */}
+      <AddStudent navigation={navigation} addStudent={addStudent} studentModalOpen={studentModalOpen} setStudentModalOpen={setStudentModalOpen} />
 
       {/* // ATTENDANCE CARD */}
       <View>
