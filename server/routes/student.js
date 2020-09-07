@@ -221,6 +221,7 @@ router.post("/login", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
+      console.log(`********ID********: ${user.id}`);
       return res.json({ token, name, email, rank, studentClass });
     }
   }
