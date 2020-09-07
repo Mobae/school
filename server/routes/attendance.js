@@ -8,7 +8,7 @@ const auth = require("../middleware/auth");
 router.get("/student", auth, async (req, res) => {
   console.log("hi from att");
   try {
-    const studentId = req.body.id;
+    const studentId = req.params.id;
     const att = await Attendance.find({ studentId });
     console.log(att);
     return res.status(200).json({
