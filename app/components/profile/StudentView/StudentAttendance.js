@@ -1,13 +1,54 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Card, DataTable } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
+import axios from "axios";
+
 import { AuthContext } from "../../../context/AuthContext";
+import { URL } from "../../../config";
+
+const MonthData = () => {
+  return (
+    <DataTable>
+      <DataTable.Header>
+        <DataTable.Title>Month</DataTable.Title>
+        <DataTable.Title>P/T</DataTable.Title>
+        <DataTable.Title>Percent(%)</DataTable.Title>
+      </DataTable.Header>
+      <TouchableOpacity onPress={() => navigation.push("Month")}>
+        <DataTable.Row style={{ backgroundColor: "#b3ffc6" }}>
+          <DataTable.Cell>January</DataTable.Cell>
+          <DataTable.Cell>13/30</DataTable.Cell>
+          <DataTable.Cell>85</DataTable.Cell>
+        </DataTable.Row>
+      </TouchableOpacity>
+    </DataTable>
+  );
+};
 
 const StudentAttendance = ({ navigation }) => {
   const {
     authState: { user },
   } = useContext(AuthContext);
+
+  const getMonthData = async () => {
+    let monthStart = 1;
+    let monthEnd = new Date().getMonth();
+    monthEnd = monthEnd + 1;
+    console.log(monthEnd, user);
+    for (let i = monthStart; i <= monthEnd; i++) {
+      const data = await axios.get(
+        URL + "/attendance/student/" + user._id + "/" + i.toString()
+      );
+      console.log(URL + "/attendance/student/" + user._id + "/" + i.toString());
+      console.log(data.data);
+    }
+  };
+
+  useEffect(() => {
+    getMonthData();
+  }, []);
+
   return (
     <View>
       <TouchableOpacity onPress={() => console.log("profile")}>
@@ -46,20 +87,7 @@ const StudentAttendance = ({ navigation }) => {
                 backgroundColor: "white",
               }}
             >
-              <DataTable>
-                <DataTable.Header>
-                  <DataTable.Title>Month</DataTable.Title>
-                  <DataTable.Title>P/T</DataTable.Title>
-                  <DataTable.Title>Percent(%)</DataTable.Title>
-                </DataTable.Header>
-                <TouchableOpacity onPress={() => navigation.push("Month")}>
-                  <DataTable.Row style={{ backgroundColor: "#b3ffc6" }}>
-                    <DataTable.Cell>January</DataTable.Cell>
-                    <DataTable.Cell>13/30</DataTable.Cell>
-                    <DataTable.Cell>85</DataTable.Cell>
-                  </DataTable.Row>
-                </TouchableOpacity>
-              </DataTable>
+              <MonthData />
             </View>
           </Card.Content>
         </Card>
