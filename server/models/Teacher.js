@@ -3,6 +3,9 @@ const TeacherSchema = mongoose.Schema({
   name: String,
   email: String,
   password: String,
+  info: {
+    phoneNo: String
+  }
   teacherClass: mongoose.Schema.Types.ObjectId,
   teacherSubClasses: [
     {

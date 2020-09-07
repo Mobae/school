@@ -27,7 +27,7 @@ router.get("/student", auth, async (req, res) => {
 
 router.post("/", auth, async (req, res) => {
   try {
-    const studentId = req.body.id;
+    const studentId = req.body.studentId;
     const { status, date } = req.body;
     let attendance;
     if (date) {
