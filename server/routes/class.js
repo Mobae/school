@@ -102,6 +102,33 @@ router.get("/students/:classId", async (req, res) => {
   }
 });
 
+router.get("/teachers/:classId", async (req, res) => {
+  try {
+    console.log(req.params.classId);
+
+    const class_ = await Class.findById(req.params.classId);
+    const classTeacher = await Teacher.find({ teacherClass: class_._id });
+    const subTeachers = await Teacher.find({ teacherSubClasses: { $elemMatch: { class: class_.id } } });
+
+    const teachers = {
+      classTeacher,
+      subTeachers
+    }
+
+    res.status(200).json({
+      sucess: true,
+      data: teachers
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      sucess: false,
+      data: "Server error",
+      err: err,
+    });
+  }
+});
+
 router.post("/classTeacher", async (req, res) => {
   try {
     const class_ = await Class.findById(req.body.class);
