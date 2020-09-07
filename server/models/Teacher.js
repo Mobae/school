@@ -4,15 +4,15 @@ const TeacherSchema = mongoose.Schema({
   email: String,
   password: String,
   info: {
-    phoneNo: String
-  }
+    phoneNo: String,
+  },
   teacherClass: mongoose.Schema.Types.ObjectId,
   teacherSubClasses: [
     {
       class: {
-        type: mongoose.Schema.ObjectId
-      }
-    }
+        type: mongoose.Schema.ObjectId,
+      },
+    },
   ],
   rank: { type: String, default: "1" },
 });
