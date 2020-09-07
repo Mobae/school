@@ -36,7 +36,7 @@ router.get("/student/:id/:month", auth, async (req, res) => {
       const date = new Date(att[i].date);
       const month = date.getMonth();
       console.log(month);
-      if (month === reqMonth) {
+      if ((month + 1).toString() === reqMonth) {
         result.append(att[i]);
       }
     }
