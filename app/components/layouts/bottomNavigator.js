@@ -9,6 +9,8 @@ import IndividualMonth from "../profile/StudentView/IndividualMonth";
 import AllStudentAttendance from "../profile/AllStudentsAttendance";
 import AddAttendance from "../profile/AddAttendence";
 import Notice from "../NoticeBoard/Notice";
+import NoticeForm from "../NoticeBoard/NoticeForm";
+import StudentInfo from "../profile/StudentView/StudentInfo";
 
 import { AuthContext } from "../../context/AuthContext";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -64,21 +66,21 @@ const NoticeRoute = () => {
 };
 
 const ProfileRoute = () => {
-  const {
-    authState: {
-      user: { rank },
-    },
-  } = useContext(AuthContext);
-  console.log(rank);
-  switch (rank) {
-    case "2":
-      return null;
-    case "1":
-      return <TeacherStackScreen />;
-    case "0":
-      return <StudentStackScreen />;
-  }
-  // return <StudentStackScreen />;
+  // const {
+  //   authState: {
+  //     user: { rank },
+  //   },
+  // } = useContext(AuthContext);
+  // console.log(rank);
+  // switch (rank) {
+  //   case "2":
+  //     return null;
+  //   case "1":
+  //     return <TeacherStackScreen />;
+  //   case "0":
+  //     return <StudentStackScreen />;
+  // }
+  return <AdminStack />;
 };
 
 const MyComponent = () => {
