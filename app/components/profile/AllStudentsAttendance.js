@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useContext, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import {
   Title,
@@ -7,8 +7,40 @@ import {
   FAB,
   Provider as PaperProvider,
 } from "react-native-paper";
+import axios from "axios";
+
+import { URL } from "../../config";
+import { AuthContext } from "../../context/AuthContext";
+
+const DataRow = (props) => {
+  return (
+    <DataTable.Row>
+      <DataTable.Cell style={styles.name_cell} style={{ flex: 2 }}>
+        {props.name}
+      </DataTable.Cell>
+      <DataTable.Cell numeric></DataTable.Cell>
+      <DataTable.Cell numeric></DataTable.Cell>
+      <DataTable.Cell numeric></DataTable.Cell>
+    </DataTable.Row>
+  );
+};
 
 const AllStudentsAttendance = ({ navigation }) => {
+  const [studentList, setStudentList] = useState([]);
+  const {
+    authState: { user },
+  } = useContext(AuthContext);
+
+  const getStudents = async () => {
+    const res = await axios.get(URL + "/class/students/" + user.class_);
+    console.log(res.data.data);
+    setStudentList(res.data.data);
+  };
+
+  useEffect(() => {
+    getStudents();
+  }, []);
+
   return (
     <React.Fragment>
       <PaperProvider>
@@ -18,52 +50,11 @@ const AllStudentsAttendance = ({ navigation }) => {
             <DataTable.Header>
               <DataTable.Title>Student Name</DataTable.Title>
               <DataTable.Title numeric>Roll No.</DataTable.Title>
-              <DataTable.Title numeric>Present</DataTable.Title>
-              <DataTable.Title numeric>Absent</DataTable.Title>
+              <DataTable.Title numeric>Attendance</DataTable.Title>
             </DataTable.Header>
-
-            <DataTable.Row>
-              <DataTable.Cell style={styles.name_cell}>Aryan</DataTable.Cell>
-              <DataTable.Cell numeric>01</DataTable.Cell>
-              <DataTable.Cell numeric>20</DataTable.Cell>
-              <DataTable.Cell numeric>0</DataTable.Cell>
-            </DataTable.Row>
-
-            <DataTable.Row>
-              <DataTable.Cell style={styles.name_cell}>
-                Bada Aryan
-              </DataTable.Cell>
-              <DataTable.Cell numeric>02</DataTable.Cell>
-              <DataTable.Cell numeric>20</DataTable.Cell>
-              <DataTable.Cell numeric>0</DataTable.Cell>
-            </DataTable.Row>
-
-            <DataTable.Row>
-              <DataTable.Cell style={styles.name_cell}>
-                Medium Aryan
-              </DataTable.Cell>
-              <DataTable.Cell numeric>03</DataTable.Cell>
-              <DataTable.Cell numeric>20</DataTable.Cell>
-              <DataTable.Cell numeric>0</DataTable.Cell>
-            </DataTable.Row>
-
-            <DataTable.Row>
-              <DataTable.Cell style={styles.name_cell}>
-                Chota Aryan
-              </DataTable.Cell>
-              <DataTable.Cell numeric>04</DataTable.Cell>
-              <DataTable.Cell numeric>20</DataTable.Cell>
-              <DataTable.Cell numeric>0</DataTable.Cell>
-            </DataTable.Row>
-
-            <DataTable.Row>
-              <DataTable.Cell style={styles.name_cell}>
-                Non Existing Aryan
-              </DataTable.Cell>
-              <DataTable.Cell numeric>05</DataTable.Cell>
-              <DataTable.Cell numeric>20</DataTable.Cell>
-              <DataTable.Cell numeric>0</DataTable.Cell>
-            </DataTable.Row>
+            {studentList.map((student) => (
+              <DataRow name={student.name} key={student.id} />
+            ))}
             <DataTable.Pagination
               page={1}
               numberOfPages={3}
