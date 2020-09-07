@@ -27,7 +27,7 @@ router.get("/student/:id", auth, async (req, res) => {
 
 router.get("/student/:id/:month", auth, async (req, res) => {
   try {
-    let result;
+    let result = [];
     const studentId = req.params.id;
     const reqMonth = req.params.month;
     const att = await Attendance.find({ studentId });
@@ -35,13 +35,13 @@ router.get("/student/:id/:month", auth, async (req, res) => {
     for (let i = 0; i < att.length; i++) {
       const date = new Date(att[i].date);
       let month = date.getMonth();
-      console.log(typeof reqMonth, typeof month.toString());
-      console.log(reqMonth, (month + 1).toString());
+      // console.log(typeof reqMonth, typeof month.toString());
+      // console.log(reqMonth, (month + 1).toString());
       month = (month + 1).toString();
       console.log(reqMonth === month);
-      // if ((month + 1).toString() === reqMonth) {
-      //   result.append(att[i]);
-      // }
+      if ((month + 1).toString() === reqMonth) {
+        result.append(att[i]);
+      }
     }
     return res.status(200).json({
       sucess: true,
