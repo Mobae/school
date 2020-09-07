@@ -1,19 +1,19 @@
-import React, { Fragment, useContext, useEffect } from "react";
-import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Keyboard } from "react-native";
+import React, { Fragment } from "react";
+import { View, Text, Modal, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { Headline, TextInput, Button, FAB } from "react-native-paper";
 import { Formik } from "formik";
-import { MaterialIcons } from '@expo/vector-icons';
 
 import globalStyles from "../styles/global";
+import adminStyles from "./AdminStyles";
 
 const AddClass = ({ addClass, classModalOpen, setClassModalOpen, navigation }) => {
 
     return (
         <Modal visible={classModalOpen} animationType="slide">
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.modalContent}>
+            <View style={adminStyles.modalContent}>
                 <FAB
-                    style={styles.fab}
+                    style={adminStyles.fab}
                     icon="backburger"
                     onPress={() => setClassModalOpen(false)}
                 />
@@ -57,35 +57,5 @@ const AddClass = ({ addClass, classModalOpen, setClassModalOpen, navigation }) =
         </Modal>
     );
 };
-
-const styles = StyleSheet.create({
-    card: {
-        margin: 10,
-        marginBottom: 0,
-    },
-    modalToggle: {
-        marginBottom: 10,
-        padding: 10,
-        alignSelf: 'center',
-        position: 'relative'
-    },
-    modalClose: {
-
-    },  
-    addBtn: {
-        backgroundColor: 'gray',
-        marginLeft: 240,
-        borderRadius: 50
-    },
-    modalContent: {
-        flex: 1
-    },
-    fab: {
-        position: 'absolute',
-        margin: 16,
-        right: 0,
-        bottom: 0,
-    },
-});
 
 export default AddClass;

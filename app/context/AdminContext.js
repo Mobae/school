@@ -29,18 +29,16 @@ const AdminContextProvider = (props) => {
             console.log(error);
         }
     };
-    // 2 Getting currently selected class data
-    const getCurrClassTeachers = async(classId) => {
+    // 2 Getting currently selected class's teacher data
+    const getCurrClassTeachers = async() => {
         try {
             setLoading(true);
             await axios
-                .get(url + "/class/view/" + classId)
+                .get(url + "/class/teachers/" + currClass)
                 .then((response) => {
                     setLoading(false);
-                    const newClass = response.data.data;
-                    setClassObj(newClass);
-                    console.log(newClass);
-                    console.log(classObj);
+                    const data = response.data.data;
+                    setClassObj(data);
                 });
         } catch (err) {
             console.log(error);
@@ -141,6 +139,19 @@ const AdminContextProvider = (props) => {
       console.log(err);
     }
   };
+  //
+  const addClassTeacher = async(values) => {
+    try {
+        setLoading(true);
+        let res = await axios.get(url + "/class/classTeacher/", values);
+        setLoading(false);
+        console.log(res.data.data);
+    } catch (err) {
+        console.log(error);
+    }
+  }
+
+
   const getAttendance = () => {
     try {
     } catch (err) {

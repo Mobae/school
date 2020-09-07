@@ -17,7 +17,7 @@ const Main = () => {
     console.log(authState);
   }, [authState]);
 
-  return <Fragment>{!isLoggedIn ? <Login /> : <BottomNavigator />}</Fragment>;
+  return <Fragment>{isLoggedIn ? <Login /> : <BottomNavigator />}</Fragment>;
   // return <BottomNavigator />;
 };
 
