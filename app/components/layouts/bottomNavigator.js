@@ -9,11 +9,8 @@ import IndividualMonth from "../profile/StudentView/IndividualMonth";
 import AllStudentAttendance from "../profile/AllStudentsAttendance";
 import AddAttendance from "../profile/AddAttendence";
 import Notice from "../NoticeBoard/Notice";
-<<<<<<< HEAD
-=======
 import NoticeForm from "../NoticeBoard/NoticeForm";
 import StudentInfo from "../profile/StudentView/StudentInfo";
->>>>>>> 82fdf1b7bb730cfec0a66b2071724de56b00a76a
 
 import { AuthContext } from "../../context/AuthContext";
 import { createStackNavigator } from "@react-navigation/stack";
