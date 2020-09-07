@@ -25,6 +25,28 @@ router.get("/student/:id", auth, async (req, res) => {
   }
 });
 
+router.get("/student/:id/:month", auth, async (req, res) => {
+  try {
+    const { id, month } = req.params;
+    const att = await Attendance.find({ id });
+    console.log(att);
+    att.forEach((at) => {
+      console.log(at);
+    });
+    return res.status(200).json({
+      sucess: true,
+      data: att,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      sucess: false,
+      data: "Server error",
+      err: err,
+    });
+  }
+});
+
 router.post("/", auth, async (req, res) => {
   try {
     const studentId = req.body.studentId;
