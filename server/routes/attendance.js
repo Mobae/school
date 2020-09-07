@@ -27,7 +27,7 @@ router.get("/student/:id", auth, async (req, res) => {
 
 router.get("/student/:id/:month", auth, async (req, res) => {
   try {
-    let res;
+    let result;
     const studentId = req.params.id;
     const reqMonth = req.params.month;
     const att = await Attendance.find({ studentId });
@@ -36,12 +36,12 @@ router.get("/student/:id/:month", auth, async (req, res) => {
       const date = new Date(att[i].date);
       const month = date.getMonth();
       if (month === reqMonth) {
-        res.append(att[i]);
+        result.append(att[i]);
       }
     }
     return res.status(200).json({
       sucess: true,
-      data: res,
+      data: result,
     });
   } catch (err) {
     console.log(err);
