@@ -9,7 +9,7 @@ import { ScrollView } from "react-native-gesture-handler";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const ClassList = ({ navigation }) => {
-  const { adminState, getClasses, setCurrClass } = React.useContext(AdminContext);
+  const { adminState, getClasses, setCurrClass, currClass, getClass } = React.useContext(AdminContext);
   
   React.useEffect(() => {
     // getClasses();
