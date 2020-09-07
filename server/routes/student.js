@@ -131,7 +131,15 @@ router.post("/update/teacher", async (req, res) => {
 router.post("/add", async (req, res) => {
   let obj = req.body;
   obj = trimObj(obj);
-  const { firstName, lastName, email, rank, studentClass, teacherClass } = obj;
+  const {
+    firstName,
+    lastName,
+    email,
+    rank,
+    studentClass,
+    teacherClass,
+    info,
+  } = obj;
   const stu = await Student.findOne({ email });
   const tea = await Teacher.findOne({ email });
   if (stu || tea) {
@@ -144,7 +152,13 @@ router.post("/add", async (req, res) => {
     const salt = await bcrypt.genSalt();
     password = await bcrypt.hash(tempPass, salt);
     if (rank === "0") {
-      const student = new Student({ name, email, studentClass, password });
+      const student = new Student({
+        name,
+        email,
+        studentClass,
+        password,
+        info,
+      });
 
       const class_ = await Class.findById(studentClass);
       class_.students.push({ student: student.id });
@@ -159,7 +173,13 @@ router.post("/add", async (req, res) => {
       const token = jwt.sign(payload, process.env.JWT_SECRET);
       res.json({ token, name, email, rank, _id: student.id });
     } else if (rank === "1") {
-      const teacher = new Teacher({ name, email, password, teacherClass });
+      const teacher = new Teacher({
+        name,
+        email,
+        password,
+        teacherClass,
+        info,
+      });
       await teacher.save();
       const payload = {
         data: {
