@@ -6,6 +6,7 @@ import AdminProfile from "./AdminProfile";
 import ClassList from "./ClassList";
 import TeacherList from "./TeacherList";
 import StudentList from "./StudentList";
+import ClassView from './ClassView';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ function AdminStack() {
         <Stack.Screen name="ClassList" component={ClassList} />
         <Stack.Screen name="TeacherList" component={TeacherList} />
         <Stack.Screen name="StudentList" component={StudentList} />
+        <Stack.Screen name="ClassView" component={ClassView} />
       </Stack.Navigator>
     </NavigationContainer>
   );

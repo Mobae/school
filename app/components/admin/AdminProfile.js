@@ -12,16 +12,16 @@ import {AdminContext} from '../../context/AdminContext';
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const AdminProfile = ({ navigation }) => {
-  const { addClass, addTeacher, addStudent, getClasses, getTeachers, getStudents } = React.useContext(AdminContext);
+  const { addClass, addTeacher, addStudent, getClasses, getTeachers, getStudents, adminState } = React.useContext(AdminContext);
   const [ classModalOpen, setClassModalOpen ] = React.useState(false);
   const [ teacherModalOpen, setTeacherModalOpen ] = React.useState(false);
   const [ studentModalOpen, setStudentModalOpen ] = React.useState(false);
 
   React.useEffect(() => {
     getClasses()
-      .then(getTeachers())
-      .then(getStudents())
-      .then(getClasses());
+      // .then(getTeachers())
+      // .then(getClasses());
+    // console.log(`Admin State: ${adminState.classes}`)
   }, []);
 
 
@@ -75,7 +75,7 @@ const AdminProfile = ({ navigation }) => {
         <Card style={styles.card}>
           <Card.Title title="Students" left={LeftContent} />
           <Card.Actions>
-            <Button onPress={() => navigation.navigate('StudentList')}>VIEW</Button>
+            <Button onPress={() => navigation.navigate('ClassList')}>VIEW</Button>
             <Button  onPress={() => setStudentModalOpen(true)}>ADD</Button>
           </Card.Actions>
         </Card>
