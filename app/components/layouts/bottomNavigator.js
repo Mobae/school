@@ -1,7 +1,8 @@
-import React, { useContext, useState, Fragment } from "react";
-import { StatusBar } from "expo-status-bar";
-import { BottomNavigation, Text } from "react-native-paper";
+import React, { useContext, useState, Fragment } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { BottomNavigation, Text } from 'react-native-paper';
 
+<<<<<<< HEAD
 import StudentProfile from "../student/StudentProfile";
 import TeacherProfile from "../teacher/TeacherProfile";
 import StudentAttendance from "../profile/StudentView/StudentAttendance";
@@ -11,12 +12,24 @@ import AddAttendance from "../profile/AddAttendence";
 import Notice from "../NoticeBoard/Notice";
 import NoticeForm from "../NoticeBoard/NoticeForm";
 import StudentInfo from "../profile/StudentView/StudentInfo";
+=======
+import StudentProfile from '../student/StudentProfile';
+import TeacherProfile from '../teacher/TeacherProfile';
+import StudentAttendance from '../profile/StudentView/StudentAttendance';
+import IndividualMonth from '../profile/StudentView/IndividualMonth';
+import AllStudentAttendance from '../profile/AllStudentsAttendance';
+import AddAttendance from '../profile/AddAttendence';
+import Notice from '../NoticeBoard/Notice';
+import ClassNotice from '../NoticeBoard/ClassNotice';
+import NoticeForm from '../NoticeBoard/NoticeForm';
+import BrowseNotice from '../NoticeBoard/BrowseNotice';
+>>>>>>> ed7759de831bb006b348f6f8d555286eb5e3cac4
 
-import { AuthContext } from "../../context/AuthContext";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import { AuthContext } from '../../context/AuthContext';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-import AdminStack from "../admin/AdminStack";
+import AdminStack from '../admin/AdminStack';
 
 const StudentStack = createStackNavigator();
 const TeacherStack = createStackNavigator();
@@ -53,7 +66,10 @@ const NoticeStackScreen = () => {
   return (
     <NavigationContainer>
       <NoticeStack.Navigator>
-        <NoticeStack.Screen name="Notice" component={Notice} />
+        <NoticeStack.Screen name="Notice Board" component={BrowseNotice} />
+        <NoticeStack.Screen name="School Notice Board" component={Notice} />
+        <NoticeStack.Screen name="Class Notice Board" component={ClassNotice} />
+        <NoticeStack.Screen name="New Notice" component={NoticeForm} />
       </NoticeStack.Navigator>
     </NavigationContainer>
   );
@@ -66,12 +82,12 @@ const NoticeRoute = () => {
 };
 
 const ProfileRoute = () => {
-  // const {
-  //   authState: {
-  //     user: { rank },
-  //   },
-  // } = useContext(AuthContext);
-  // console.log(rank);
+  const {
+    authState: {
+      user: { rank },
+    },
+  } = useContext(AuthContext);
+  console.log(rank);
   // switch (rank) {
   //   case "2":
   //     return null;
@@ -86,9 +102,9 @@ const ProfileRoute = () => {
 const MyComponent = () => {
   const [index, setIndex] = React.useState(1);
   const [routes] = useState([
-    { key: "chat", title: "Chat", icon: "forum-outline" },
-    { key: "profile", title: "Profile", icon: "face-profile" },
-    { key: "notice", title: "Notice", icon: "format-list-checkbox" },
+    { key: 'chat', title: 'Chat', icon: 'forum-outline' },
+    { key: 'profile', title: 'Profile', icon: 'face-profile' },
+    { key: 'notice', title: 'Notice', icon: 'format-list-checkbox' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
