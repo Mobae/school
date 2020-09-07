@@ -221,8 +221,8 @@ router.post("/login", async (req, res) => {
         },
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      console.log(`********ID********: ${user.id}`);
-      return res.json({ token, name, email, rank, studentClass });
+      const { id } = user;
+      return res.json({ token, name, email, rank, studentClass, id });
     }
   }
   user = await Teacher.findOne({ email });
