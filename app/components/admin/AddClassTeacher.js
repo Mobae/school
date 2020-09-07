@@ -1,77 +1,57 @@
-import React, { Fragment } from "react";
-import { View, Text, Modal, TouchableWithoutFeedback, Keyboard } from "react-native";
+import React, { Fragment, useContext, useEffect } from "react";
+import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { Headline, TextInput, Button, FAB } from "react-native-paper";
 import { Formik } from "formik";
 import SearchableDropdown from 'react-native-searchable-dropdown';
 
-import {AdminContext} from '../../context/AdminContext';
 import globalStyles from "../styles/global";
-import adminStyles from "./AdminStyles";
+import AddClass from "./AddClass";
 
-const AddStudent = ({ addStudent, studentModalOpen, setStudentModalOpen, navigation }) => {
-    const { adminState } = React.useContext(AdminContext);
+import {AdminContext} from '../../context/AdminContext';
+
+const AddClassTeacher = ({ addClassTeacher, classTeacherModalOpen, setClassTeacherModalOpen, navigation }) => {
+
+    const { adminState, currClass, getTeachers } = React.useContext(AdminContext);
     
-    var classes = adminState.classes.map((class_) => {
-        return ({
-            classId: class_._id,
-            name: class_.name
-        });
+    useEffect(() => {
+        getTeachers();
+        console.log(adminState);
+    }, [])
+
+    var teachers = adminState.teachers.map((teacher) => {
+        return({
+            teacherId: teacher._id,
+            name: teacher.name
+        })
     });
 
     return (
-        <Modal visible={studentModalOpen} animationType="slide">
+        <Modal visible={classTeacherModalOpen} animationType="slide">
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <View style={adminStyles.modalContent} >
+            <View style={styles.modalContent}>
                 <FAB
-                    style={adminStyles.fab}
+                    style={styles.fab}
                     icon="backburger"
-                    onPress={() => setStudentModalOpen(false)}
+                    onPress={() => setClassTeacherModalOpen(false)}
                 />
                 <Fragment>
+                <Text></Text>
+                    <Headline style={globalStyles.headline}>Add Class Teacher</Headline>
                     <Text></Text>
-                    <Headline style={globalStyles.headline}>Add Student</Headline>
                     <Text></Text>
-                    <Text></Text>
-                    <Formik
-                        initialValues={{ 
-                            firstName: "",
-                            lastName: "",
-                            email: "",
-                            studentClass: "",
-                            rank: "0"
-                        }}
+                    <Formik 
+                        initialValues={{ classTeacher: "", class: currClass }}
                         onSubmit={(values, actions) => {
                             actions.resetForm();
-                            navigation.navigate('ClassList');
-                            addStudent(values);          // SUBMITTING STUDENT VALUE
+                            addClassTeacher(values);                  // SUMITTING CLASS VALUE
+                            setClassTeacherModalOpen(false);
+                            navigation.navigate('ClassView');
                         }}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (
                             <View style={globalStyles.view}>
-                                <TextInput
-                                    mode="outlined"
-                                    label="First Name"
-                                    onChangeText={handleChange("firstName")}
-                                    onBlur={handleBlur("firstName")}
-                                    value={values.firstName}
-                                />
-                                <TextInput
-                                    mode="outlined"
-                                    label="Last Name"
-                                    onChangeText={handleChange("lastName")}
-                                    onBlur={handleBlur("lastName")}
-                                    value={values.lastName}
-                                />
-                                <TextInput
-                                    mode="outlined"
-                                    label="Email"
-                                    onChangeText={handleChange("email")}
-                                    onBlur={handleBlur("email")}
-                                    value={values.email}
-                                />
-
                                 <SearchableDropdown 
-                                    items={classes}
+                                    items={teachers}
                                     textInputProps={
                                     {
                                         placeholder: "Choose Class",
@@ -87,7 +67,7 @@ const AddStudent = ({ addStudent, studentModalOpen, setStudentModalOpen, navigat
                                     }
                                     }
                                     onItemSelect={(item) => {
-                                        values.studentClass = item.classId;
+                                        values.classTeacher = item.teacherId;
                                     }}
                                     containerStyle={{ padding: 1 }}
                                     itemStyle={{
@@ -101,9 +81,8 @@ const AddStudent = ({ addStudent, studentModalOpen, setStudentModalOpen, navigat
                                     itemTextStyle={{ color: '#222' }}
                                     itemsContainerStyle={{ maxHeight: 200 }}
                                 />
-
                                 <Button
-                                    style={{ marginTop: 50 }}
+                                    style={{ marginTop: 15 }}
                                     onPress={handleSubmit}
                                     title="Submit"
                                     mode="contained"
@@ -114,10 +93,40 @@ const AddStudent = ({ addStudent, studentModalOpen, setStudentModalOpen, navigat
                         )}
                     </Formik>
                 </Fragment>
-                </View>
+            </View>
             </TouchableWithoutFeedback>
         </Modal>
-    )
+    );
 };
 
-export default AddStudent;
+const styles = StyleSheet.create({
+    card: {
+        margin: 10,
+        marginBottom: 0,
+    },
+    modalToggle: {
+        marginBottom: 10,
+        padding: 10,
+        alignSelf: 'center',
+        position: 'relative'
+    },
+    modalClose: {
+
+    },  
+    addBtn: {
+        backgroundColor: 'gray',
+        marginLeft: 240,
+        borderRadius: 50
+    },
+    modalContent: {
+        flex: 1
+    },
+    fab: {
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 0,
+    },
+});
+
+export default AddClassTeacher;
