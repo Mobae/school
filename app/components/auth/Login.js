@@ -1,24 +1,25 @@
-import React, { Fragment, useContext, useEffect } from 'react';
-import { View } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { Headline, TextInput, Button } from 'react-native-paper';
-import { Formik } from 'formik';
+import React, { Fragment, useContext, useEffect } from "react";
+import { View } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { Headline, TextInput, Button } from "react-native-paper";
+import { Formik } from "formik";
 
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from "../../context/AuthContext";
 
-import globalStyles from '../styles/global';
+import globalStyles from "../styles/global";
 
 const Login = () => {
-  const { LogIn, authState } = useContext(AuthContext);
+  const { LogIn, authState, getUser } = useContext(AuthContext);
   const handleSubmit = async (values) => {
     const { email, password } = values;
     LogIn({ email, password });
   };
+
   return (
     <View style={{ top: 40 }}>
       <Headline style={globalStyles.headline}>Login</Headline>
       <Formik
-        initialValues={{ email: '', password: '' }}
+        initialValues={{ email: "", password: "" }}
         onSubmit={(values) => handleSubmit(values)}
       >
         {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -26,15 +27,15 @@ const Login = () => {
             <TextInput
               mode="outlined"
               label="Email"
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
+              onChangeText={handleChange("email")}
+              onBlur={handleBlur("email")}
               value={values.email}
             />
             <TextInput
               mode="outlined"
               label="Password"
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
+              onChangeText={handleChange("password")}
+              onBlur={handleBlur("password")}
               value={values.password}
             />
             <Button

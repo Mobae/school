@@ -1,4 +1,4 @@
-import React, { useContext, useState, Fragment } from "react";
+import React, { useContext, useState, useEffect, Fragment } from "react";
 import { StatusBar } from "expo-status-bar";
 import { BottomNavigation, Text } from "react-native-paper";
 
@@ -72,20 +72,27 @@ const NoticeRoute = () => {
 };
 
 const ProfileRoute = () => {
+  const { authState, getUser } = useContext(AuthContext);
   const {
-    authState: {
-      user: { rank },
-    },
-  } = useContext(AuthContext);
+    user: { rank },
+  } = authState;
+  useEffect(() => {
+    getUser();
+  }, []);
   // console.log(rank);
-  switch (rank) {
-    case "2":
-      return null;
-    case "1":
-      return <TeacherStackScreen />;
-    case "0":
-      return <StudentStackScreen />;
-  }
+  // switch (rank) {
+  //   case "2":
+  //     return null;
+  //   case "1":
+  //     return <TeacherStackScreen />;
+  //   case "0":
+  //     return <StudentStackScreen />;
+  // }
+  return rank === "1" ? (
+    <TeacherStackScreen />
+  ) : rank === "0" ? (
+    <StudentStackScreen />
+  ) : null;
   // return <AdminStack />;
 };
 
