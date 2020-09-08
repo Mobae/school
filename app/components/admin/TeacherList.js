@@ -21,13 +21,11 @@ const TeacherList = () => {
   }, [])
 
   React.useEffect(() => {
-    // console.log(searchQuery);
-    // console.log(filtered);
     if(searchQuery === ''){
         setFiltered(adminState.teachers);
     } else {
         setFiltered(adminState.teachers.filter((teacher) => {
-            if(teacher.name.includes(searchQuery)){
+            if(teacher.name.toLowerCase().includes(searchQuery.toLowerCase())){
                 return(teacher);
             }
         }));
