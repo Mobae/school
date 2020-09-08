@@ -6,7 +6,7 @@ export const AdminContext = createContext();
 
 const AdminContextProvider = (props) => {
   const url = "https://school-server-testing.herokuapp.com";
-  const initialState = { teachers: [], students: [], classes: [] };
+  const initialState = { teachers: [], students: [], classes: [], allStudents: [] };
   const [adminState, setAdminState] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [currClass, setCurrClass] = useState("");
@@ -28,6 +28,7 @@ const AdminContextProvider = (props) => {
         students: adminState.students,
         classes: classes,
         class_: adminState.class_,
+        allStudents: adminState.allStudents
       });
     } catch (err) {
       console.log(error);
@@ -61,6 +62,7 @@ const AdminContextProvider = (props) => {
         students: adminState.students,
         classes: [...adminState.classes, newClass],
         class_: adminState.class_,
+        allStudents: adminState.allStudents
       });
       // console.log(adminState.classes);
     } catch (err) {
@@ -80,6 +82,7 @@ const AdminContextProvider = (props) => {
         students: adminState.students,
         classes: adminState.classes,
         class_: adminState.class_,
+        allStudents: adminState.allStudents
       });
     } catch (err) {
       console.log(error);
@@ -98,6 +101,7 @@ const AdminContextProvider = (props) => {
         classes: adminState.classes,
         teachers: [...adminState.teachers, newTeacher],
         class_: adminState.class_,
+        allStudents: adminState.allStudents
       });
     } catch (err) {
       console.log(err);
@@ -116,12 +120,35 @@ const AdminContextProvider = (props) => {
         students: students,
         classes: adminState.classes,
         class_: adminState.class_,
+        allStudents: adminState.allStudents
       });
     } catch (err) {
       console.log(error);
     }
   };
-  // 7 Adding a student
+  // 7 GET ALL STUDENTS
+  const getAllStudents = async () => {
+    try {
+      // setLoading(true);
+      let res = await axios.get(url + "/student/students/all");
+      setLoading(false);
+      const allStudents = res.data.data;
+      // console.log(res.data);
+
+      setAdminState({
+        teachers: adminState.teachers,
+        students: adminState.students,
+        classes: adminState.classes,
+        class_: adminState.class_,
+        allStudents: allStudents
+      });
+      // console.log(adminState.allStudents);
+    } catch (err) {
+      console.log(error);
+    }
+  };
+
+  // 8 Adding a student
   const addStudent = async (student) => {
     try {
       setLoading(true);
@@ -134,17 +161,29 @@ const AdminContextProvider = (props) => {
         students: [],
         classes: adminState.classes,
         class_: adminState.class_,
+        allStudents: adminState.allStudents
       });
-      // console.log(adminState.students);
     } catch (err) {
       console.log(err);
     }
   };
-  // 8 Getting class and subject teachers
+  // 9 Getting class and subject teachers
   const addClassTeacher = async (values) => {
     try {
       setLoading(true);
-      let res = await axios.get(url + "/class/classTeacher/", values);
+      let res = await axios.post(url + "/class/classTeacher/", values);
+      setLoading(false);
+      console.log(res.data.data);
+    } catch (err) {
+      console.log(error);
+    }
+  };
+
+  // 10 Getting class and subject teachers
+  const addSubTeacher = async (values) => {
+    try {
+      setLoading(true);
+      let res = await axios.post(url + "/class/subTeacher/", values);
       setLoading(false);
       console.log(res.data.data);
     } catch (err) {
@@ -164,11 +203,14 @@ const AdminContextProvider = (props) => {
       value={{
         addClass,
         addTeacher,
+        addClassTeacher,
+        addSubTeacher,
         addStudent,
         getClasses,
         getCurrClassTeachers,
         getTeachers,
         getStudents,
+        getAllStudents,
         getAttendance,
         adminState: adminState,
         currClass,

@@ -5,17 +5,15 @@ import { Formik } from "formik";
 import SearchableDropdown from 'react-native-searchable-dropdown';
 
 import globalStyles from "../styles/global";
-import AddClass from "./AddClass";
 import adminStyles from './AdminStyles';
 import {AdminContext} from '../../context/AdminContext';
 
-const AddClassTeacher = ({ addClassTeacher, classTeacherModalOpen, setClassTeacherModalOpen, navigation }) => {
+const AddClassTeacher = ({ subTeacherModalOpen, setSubTeacherModalOpen, navigation }) => {
 
-    const { adminState, currClass, getTeachers } = React.useContext(AdminContext);
+    const { adminState, currClass, getTeachers, addSubTeacher, classObj } = React.useContext(AdminContext);
     
     useEffect(() => {
         getTeachers();
-        console.log(adminState);
     }, [])
 
     var teachers = adminState.teachers.map((teacher) => {
@@ -25,33 +23,59 @@ const AddClassTeacher = ({ addClassTeacher, classTeacherModalOpen, setClassTeach
         })
     });
 
+    // FILTERED TEACHER LIST LOGIC
+    if (classObj.subTeachers !== undefined){
+        function isPresent(value) {
+            var present = false;
+            classObj.subTeachers.map((teacher) => {
+                if(teacher._id === value.teacherId){
+                    present = true;
+                }
+            });
+            if(classObj.classTeacher[0] !== undefined){
+                if(value.teacherId === classObj.classTeacher[0]._id){
+                    present = true;
+                }
+            }
+            return(present);
+        }
+        var filteredTeachers = teachers.filter((teacher) => {
+            if(!isPresent(teacher)){
+                return(teacher);
+            }
+        });
+
+    } else{
+        var filteredTeachers = teachers;
+    }
+
     return (
-        <Modal visible={classTeacherModalOpen} animationType="slide">
+        <Modal visible={subTeacherModalOpen} animationType="slide">
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={adminStyles.modalContent}>
                 <FAB
                     style={adminStyles.fab}
                     icon="backburger"
-                    onPress={() => setClassTeacherModalOpen(false)}
+                    onPress={() => setSubTeacherModalOpen(false)}
                 />
                 <Fragment>
                 <Text></Text>
-                    <Headline style={globalStyles.headline}>Add Class Teacher</Headline>
+                    <Headline style={globalStyles.headline}>Add Subject Teacher</Headline>
                     <Text></Text>
                     <Text></Text>
                     <Formik 
-                        initialValues={{ classTeacher: "", class: currClass }}
+                        initialValues={{ teacher: "", class: currClass }}
                         onSubmit={(values, actions) => {
                             actions.resetForm();
-                            addClassTeacher(values);                  // SUMITTING CLASS VALUE
-                            setClassTeacherModalOpen(false);
+                            addSubTeacher(values);                  // SUMITTING SUB TEACHER VALUE
+                            setSubTeacherModalOpen(false);
                             navigation.navigate('ClassView');
                         }}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (
                             <View style={globalStyles.view}>
                                 <SearchableDropdown 
-                                    items={teachers}
+                                    items={filteredTeachers}
                                     textInputProps={
                                     {
                                         placeholder: "Choose Class",
@@ -67,7 +91,7 @@ const AddClassTeacher = ({ addClassTeacher, classTeacherModalOpen, setClassTeach
                                     }
                                     }
                                     onItemSelect={(item) => {
-                                        values.classTeacher = item.teacherId;
+                                        values.teacher = item.teacherId;
                                     }}
                                     containerStyle={{ padding: 1 }}
                                     itemStyle={{

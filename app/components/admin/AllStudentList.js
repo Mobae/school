@@ -8,16 +8,16 @@ import adminStyles from "./AdminStyles";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const StudentList = () => {
-  const { adminState, getStudents } = React.useContext(AdminContext);
+  const { adminState, getAllStudents } = React.useContext(AdminContext);
 
   React.useEffect(() => {
-    getStudents();
+    getAllStudents();
   }, [])
 
   return (
     <View>
         <ScrollView>
-        { adminState.students.map(student => (
+        { adminState.allStudents.map(student => (
             <View key={student._id}>
                 <Card style={adminStyles.card}>
                     <Card.Title

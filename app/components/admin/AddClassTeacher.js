@@ -9,21 +9,30 @@ import AddClass from "./AddClass";
 import adminStyles from './AdminStyles';
 import {AdminContext} from '../../context/AdminContext';
 
-const AddClassTeacher = ({ addClassTeacher, classTeacherModalOpen, setClassTeacherModalOpen, navigation }) => {
+const AddClassTeacher = ({ classTeacherModalOpen, setClassTeacherModalOpen, navigation }) => {
 
-    const { adminState, currClass, getTeachers } = React.useContext(AdminContext);
+    const { adminState, currClass, getTeachers, classObj, addClassTeacher } = React.useContext(AdminContext);
     
     useEffect(() => {
         getTeachers();
-        // console.log(adminState);
     }, [])
-
+    
     var teachers = adminState.teachers.map((teacher) => {
         return({
             teacherId: teacher._id,
             name: teacher.name
         })
     });
+    if(classObj.classTeacher[0] !== undefined){
+        const currClassTeacher = classObj.classTeacher[0];
+        var filteredTeachers = teachers.filter((teacher) => {
+            if(teacher.teacherId !== currClassTeacher._id){
+                return(teacher);
+            }
+        });
+    } else {
+        var filteredTeachers = teachers;
+    }
 
     return (
         <Modal visible={classTeacherModalOpen} animationType="slide">
@@ -40,7 +49,7 @@ const AddClassTeacher = ({ addClassTeacher, classTeacherModalOpen, setClassTeach
                     <Text></Text>
                     <Text></Text>
                     <Formik 
-                        initialValues={{ classTeacher: "", class: currClass }}
+                        initialValues={{ teacher: "", class: currClass }}
                         onSubmit={(values, actions) => {
                             actions.resetForm();
                             addClassTeacher(values);                  // SUMITTING CLASS VALUE
@@ -51,7 +60,7 @@ const AddClassTeacher = ({ addClassTeacher, classTeacherModalOpen, setClassTeach
                         {({ handleChange, handleBlur, handleSubmit, values }) => (
                             <View style={globalStyles.view}>
                                 <SearchableDropdown 
-                                    items={teachers}
+                                    items={filteredTeachers}
                                     textInputProps={
                                     {
                                         placeholder: "Choose Class",
@@ -67,7 +76,7 @@ const AddClassTeacher = ({ addClassTeacher, classTeacherModalOpen, setClassTeach
                                     }
                                     }
                                     onItemSelect={(item) => {
-                                        values.classTeacher = item.teacherId;
+                                        values.teacher = item.teacherId;
                                     }}
                                     containerStyle={{ padding: 1 }}
                                     itemStyle={{

@@ -70,7 +70,7 @@ const AdminProfile = ({ navigation }) => {
         <Card style={adminStyles.card}>
           <Card.Title title="Students" left={LeftContent} />
           <Card.Actions>
-            <Button onPress={() => navigation.navigate('ClassList')}>VIEW</Button>
+            <Button onPress={() => navigation.navigate('AllStudentList')}>VIEW</Button>
             <Button  onPress={() => setStudentModalOpen(true)}>ADD</Button>
           </Card.Actions>
         </Card>
