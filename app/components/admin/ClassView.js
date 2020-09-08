@@ -38,18 +38,39 @@ const ClassView = ({ navigation }) => {
                             navigation.navigate('StudentList');
                         }}
                     >
-                        <Card style={adminStyles.card}>
-                            <Card.Title title="Class Teacher"  />
-                            <Card.Actions>
-                                <Button onPress={() => setClassTeacherModalOpen(true)} >EDIT</Button>
-                            </Card.Actions>
-                        </Card>
-                        <Card style={adminStyles.card}>
-                            <Card.Title 
-                                title={classObj.classTeacher[0].name} 
-                                left={LeftContent} 
-                            />
-                        </Card>
+                        { 
+                            classObj.classTeacher[0] !== undefined ? (
+                                <View>
+                                    <Card style={adminStyles.card}>
+                                        <Card.Title title="Class Teacher"  />
+                                        <Card.Actions>
+                                            <Button onPress={() => setClassTeacherModalOpen(true)} >EDIT</Button>
+                                        </Card.Actions>
+                                    </Card>
+                                    <Card style={adminStyles.card}>
+                                        <Card.Title 
+                                            title={classObj.classTeacher[0].name} 
+                                            left={LeftContent} 
+                                        />
+                                    </Card>
+                                </View>
+                            ) : (
+                                <View>
+                                    <Card style={adminStyles.card}>
+                                        <Card.Title title="Class Teacher"  />
+                                        <Card.Actions>
+                                            <Button onPress={() => setClassTeacherModalOpen(true)} >ADD</Button>
+                                        </Card.Actions>
+                                    </Card>
+                                    <Card style={adminStyles.card}>
+                                        <Card.Title 
+                                            title="None"
+                                            left={LeftContent} 
+                                        />
+                                    </Card>
+                                </View>
+                            )
+                        }
                     </TouchableOpacity>
 
                     <Card style={adminStyles.card}>

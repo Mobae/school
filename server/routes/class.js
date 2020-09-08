@@ -133,21 +133,16 @@ router.get("/teachers/:classId", async (req, res) => {
 router.post("/classTeacher", async (req, res) => {
   try {
     const class_ = await Class.findById(req.body.class);
-    const teacher = await Teacher.findById(req.body.classTeacher);
-
-    // Removing class from old class teacher's model
+    const teacher = await Teacher.findById(req.body.teacher);
     if (class_.classTeacher) {
-      const oldClassTeacher = await Class.findById(class_.classTeacher);
+      const oldClassTeacher = await Teacher.findById(class_.classTeacher);
       oldClassTeacher.teacherClass = null;
       oldClassTeacher.save();
     }
-    // Adding this class to new class teacher's model
     teacher.teacherClass = class_.id;
     teacher.save();
-    // Adding new teacher to this class
-    class_.classTeacher = req.body.classTeacher;
+    class_.classTeacher = req.body.teacher;
     class_.save();
-
     return res.status(200).json({
       success: true,
       data: class_,
@@ -165,7 +160,7 @@ router.post("/classTeacher", async (req, res) => {
 router.post("/subTeacher", async (req, res) => {
   try {
     const class_ = await Class.findById(req.body.class);
-    const subTeacher = req.body.subTeacher;
+    const subTeacher = req.body.teacher;
     class_.subTeachers.push({ teacher: subTeacher });
     class_.save();
 
