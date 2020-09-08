@@ -1,36 +1,54 @@
-import React, { Fragment } from 'react';
-import { Card, Paragraph, Avatar, TouchableRipple } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
+import React, { Fragment } from "react";
+import {
+  Card,
+  Paragraph,
+  Avatar,
+  TouchableRipple,
+  Button,
+} from "react-native-paper";
+import { StyleSheet } from "react-native";
+
+import globalStyles from "../styles/global";
+
+const SchoolIcon = (props) => <Avatar.Icon {...props} icon="school" />;
+
+const ClassIcon = (props) => (
+  <Avatar.Icon {...props} icon="account-multiple-outline" />
+);
 
 const BrowseNotice = ({ navigation }) => {
   return (
     <Fragment>
-      <Card style={styles.card}>
-        <TouchableRipple onPress={() => navigation.push('School Notice Board')}>
+      <Card style={globalStyles.card}>
+        <TouchableRipple onPress={() => navigation.push("School Notice Board")}>
           <Fragment>
-            <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
             <Card.Title
-              title="School Notice Board"
-              titleStyle={styles.titleStyle}
-              subtitleStyle={styles.titleStyle}
+              title="School Notices"
+              subtitle="Important notices for all school students"
+              left={SchoolIcon}
             />
-            <Card.Content style={styles.content}>
-              <Paragraph>Notice for all students of the school</Paragraph>
+            <Card.Content style={globalStyles.cardContent}>
+              {/* <Paragraph style={globalStyles.cardP}>
+                Important notices for all school students
+              </Paragraph> */}
+              {/* <Button style={globalStyles.cardButton}>More</Button> */}
             </Card.Content>
           </Fragment>
         </TouchableRipple>
       </Card>
-      <Card style={styles.card}>
-        <TouchableRipple onPress={() => navigation.push('Class Notice Board')}>
+      <Card style={globalStyles.card}>
+        <TouchableRipple onPress={() => navigation.push("Class Notice Board")}>
           <Fragment>
-            <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
             <Card.Title
-              title="Class Notice Board"
-              titleStyle={styles.titleStyle}
-              subtitleStyle={styles.titleStyle}
+              title="Class Notices"
+              subtitle="A notice board for the class"
+              left={ClassIcon}
             />
-            <Card.Content style={styles.content}>
-              <Paragraph>Notice for Students of your class</Paragraph>
+            <Card.Content style={globalStyles.cardContent}>
+              {/* <Paragraph style={globalStyles.cardP}>
+                A notice board for the class
+              </Paragraph> */}
+              {/* <Button style={globalStyles.cardButton}>More</Button> */}
             </Card.Content>
           </Fragment>
         </TouchableRipple>
@@ -40,15 +58,19 @@ const BrowseNotice = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  p: {
+    color: "#606060",
+  },
+  button: {
+    marginLeft: "auto",
+  },
   card: {
     margin: 10,
-  },
-  titleStyle: {
-    alignSelf: 'center',
+    marginTop: 15,
+    marginBottom: 0,
   },
   content: {
-    marginBottom: 8,
-    alignItems: 'center',
+    marginLeft: 5,
   },
 });
 

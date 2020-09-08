@@ -1,6 +1,6 @@
-import React, { useContext, useState, Fragment } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { BottomNavigation, Text } from 'react-native-paper';
+import React, { useContext, useState, Fragment } from "react";
+import { StatusBar } from "expo-status-bar";
+import { BottomNavigation, Text } from "react-native-paper";
 
 import StudentProfile from '../student/StudentProfile';
 import TeacherProfile from '../teacher/TeacherProfile';
@@ -14,11 +14,11 @@ import ClassNotice from '../NoticeBoard/ClassNotice';
 import NoticeForm from '../NoticeBoard/NoticeForm';
 import BrowseNotice from '../NoticeBoard/BrowseNotice';
 
-import { AuthContext } from '../../context/AuthContext';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { AuthContext } from "../../context/AuthContext";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
-import AdminStack from '../admin/AdminStack';
+import AdminStack from "../admin/AdminStack";
 
 const StudentStack = createStackNavigator();
 const TeacherStack = createStackNavigator();
@@ -79,11 +79,11 @@ const ProfileRoute = () => {
   } = useContext(AuthContext);
   console.log(rank);
   switch (rank) {
-    case '2':
+    case "2":
       return null;
-    case '1':
+    case "1":
       return <TeacherStackScreen />;
-    case '0':
+    case "0":
       return <StudentStackScreen />;
   }
   // return <AdminStack />;
@@ -92,9 +92,9 @@ const ProfileRoute = () => {
 const MyComponent = () => {
   const [index, setIndex] = React.useState(1);
   const [routes] = useState([
-    { key: 'chat', title: 'Chat', icon: 'forum-outline' },
-    { key: 'profile', title: 'Profile', icon: 'face-profile' },
-    { key: 'notice', title: 'Notice', icon: 'format-list-checkbox' },
+    { key: "chat", title: "Chat", icon: "forum-outline" },
+    { key: "profile", title: "Profile", icon: "face-profile" },
+    { key: "notice", title: "Notice", icon: "format-list-checkbox" },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({

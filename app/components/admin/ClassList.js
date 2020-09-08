@@ -1,19 +1,17 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, TouchableOpacity, Keyboard } from "react-native";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
-import { MaterialIcons } from '@expo/vector-icons';
-
-import {AdminContext} from '../../context/AdminContext';
+import { View, TouchableOpacity } from "react-native";
+import { Avatar, Button, Card } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 
+import {AdminContext} from '../../context/AdminContext';
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+import adminStyles from "./AdminStyles";
 
 const ClassList = ({ navigation }) => {
-  const { adminState, getClasses, setCurrClass, currClass, getClass } = React.useContext(AdminContext);
+  const { adminState, setCurrClass, currClass, getCurrClassTeachers, classObj, getClasses } = React.useContext(AdminContext);
+
   
   React.useEffect(() => {
-    // getClasses();
-    setCurrClass('');
   }, [])
 
   return (
@@ -23,10 +21,11 @@ const ClassList = ({ navigation }) => {
             <View key={class_._id}>
                 <TouchableOpacity onPress={() => {
                         setCurrClass(class_._id);
+                        // getCurrClassTeachers();
                         navigation.navigate('ClassView');
                     }}
                 >
-                    <Card style={styles.card}>
+                    <Card style={adminStyles.card}>
                         <Card.Title
                         title={class_.name}
                         left={LeftContent}
@@ -41,28 +40,4 @@ const ClassList = ({ navigation }) => {
   );
 };
 
-
-const styles = StyleSheet.create({
-    card: {
-        margin: 10,
-        marginBottom: 0,
-    },
-    modalToggle: {
-        marginBottom: 10,
-        padding: 10,
-        alignSelf: 'center',
-        position: 'relative'
-    },
-    modalClose: {
-
-    },  
-    addBtn: {
-        backgroundColor: 'gray',
-        marginLeft: 240,
-        borderRadius: 50
-    },
-    modalContent: {
-        flex: 1
-    }
-});
 export default ClassList;

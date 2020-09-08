@@ -1,16 +1,14 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Keyboard } from "react-native";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
-import { MaterialIcons } from '@expo/vector-icons';
+import { View, Text } from "react-native";
+import { Avatar, Button, Card } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 
 import {AdminContext} from '../../context/AdminContext';
-
+import adminStyles from "./AdminStyles";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const TeacherList = () => {
   const { adminState, getTeachers } = React.useContext(AdminContext);
-  
 
   React.useEffect(() => {
     getTeachers();
@@ -21,7 +19,7 @@ const TeacherList = () => {
         <ScrollView>
         { adminState.teachers.map(teacher => (
             <View key={teacher._id}>
-                <Card style={styles.card}>
+                <Card style={adminStyles.card}>
                     <Card.Title
                         title={teacher.name}
                         subtitle={teacher.email}
@@ -36,28 +34,4 @@ const TeacherList = () => {
   );
 };
 
-
-const styles = StyleSheet.create({
-    card: {
-        margin: 10,
-        marginBottom: 0,
-    },
-    modalToggle: {
-        marginBottom: 10,
-        padding: 10,
-        alignSelf: 'center',
-        position: 'relative'
-    },
-    modalClose: {
-
-    },  
-    addBtn: {
-        backgroundColor: 'gray',
-        marginLeft: 240,
-        borderRadius: 50
-    },
-    modalContent: {
-        flex: 1
-    }
-});
 export default TeacherList;
