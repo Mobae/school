@@ -15,16 +15,18 @@ import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
 import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
 
+import { URL } from "../../../config";
+
 const StudentInfo = () => {
-  const {
-    authState: { user },
-  } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
+  const { user } = authState;
 
   const [info, setInfo] = useState({});
 
   const getInfo = async () => {
+    axios.defaults.headers["auth-token"] = authState.jwt;
     const res = await axios.get(URL + "/student/" + user.id);
-    console.log(res.data);
+    setInfo(res.data.student.info);
   };
 
   useEffect(() => {
@@ -55,19 +57,28 @@ const StudentInfo = () => {
               <Text style={styles.details}>Class: {user.className}</Text>
             </View>
             <View style={styles.info}>
-              <Text style={styles.details}>Admission No.: </Text>
+              <Text style={styles.details}>
+                Admission No.: {info.admissionNo}
+              </Text>
             </View>
             <View style={styles.info}>
-              <Text style={styles.details}>DOB:</Text>
+              <Text style={styles.details}>DOB: {info.admissionNo}</Text>
             </View>
             <View style={styles.info}>
-              <Text style={styles.details}>Buss Route:</Text>
+              <Text style={styles.details}>Buss Route: {info.busNo}</Text>
             </View>
             <View style={styles.info}>
-              <Text style={styles.details}>Aadhar No.:</Text>
+              <Text style={styles.details}>Aadhar No.: {info.admissionNo}</Text>
             </View>
             <View style={styles.info}>
-              <Text style={styles.details}>Date of Addmission:</Text>
+              <Text style={styles.details}>
+                Phone Number: {"+91 " + info.phone}
+              </Text>
+            </View>
+            <View style={styles.info}>
+              <Text style={styles.details}>
+                Date of Addmission: {info.admissionNo}
+              </Text>
             </View>
             <List.Accordion
               title="Parent Details"
@@ -91,9 +102,11 @@ const StudentInfo = () => {
                         marginLeft: 20,
                       }}
                     >
-                      Name
+                      Name: {info.fatherName}
                     </Text>
-                    <Text style={{ marginLeft: 20 }}>Number</Text>
+                    <Text style={{ marginLeft: 20 }}>
+                      Number: {info.fatherName}
+                    </Text>
                   </View>
                 </View>
                 <View style={styles.info}>
@@ -112,9 +125,11 @@ const StudentInfo = () => {
                         marginLeft: 20,
                       }}
                     >
-                      Name
+                      Name: {info.fatherName}
                     </Text>
-                    <Text style={{ marginLeft: 20 }}>Number</Text>
+                    <Text style={{ marginLeft: 20 }}>
+                      Number: {info.fatherName}
+                    </Text>
                   </View>
                 </View>
                 <View style={styles.info}>
@@ -133,7 +148,7 @@ const StudentInfo = () => {
                         marginLeft: 20,
                       }}
                     >
-                      GWALIOR
+                      {info.address}
                     </Text>
                   </View>
                 </View>

@@ -29,7 +29,7 @@ const StudentProfile = ({ navigation }) => {
 
   useEffect(() => {
     getClassName();
-  });
+  }, []);
 
   return (
     <Fragment>
