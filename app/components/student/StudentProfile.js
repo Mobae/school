@@ -19,10 +19,10 @@ const StudentProfile = ({ navigation }) => {
   const { user } = authState;
 
   useEffect(() => {
-    if (user) {
-      getClassName();
-    }
+    getClassName();
   }, []);
+
+  useEffect(() => {}, [authState]);
 
   return (
     <Fragment>
@@ -36,7 +36,7 @@ const StudentProfile = ({ navigation }) => {
             />
             <Card.Content style={{ marginBottom: 8 }}>
               <Paragraph>Email: {user.email}</Paragraph>
-              <Paragraph className={user.className}>{user.className}</Paragraph>
+              <Paragraph>Class: {user.className}</Paragraph>
             </Card.Content>
           </Fragment>
         </TouchableRipple>

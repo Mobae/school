@@ -17,8 +17,8 @@ const Main = () => {
     console.log(authState);
   }, [authState]);
 
-  // return <Fragment>{!isLoggedIn ? <Login /> : <BottomNavigator />}</Fragment>;
-  return <BottomNavigator />;
+  return <Fragment>{!isLoggedIn ? <Login /> : <BottomNavigator />}</Fragment>;
+  // return <BottomNavigator />;
 };
 
 export default Main;
