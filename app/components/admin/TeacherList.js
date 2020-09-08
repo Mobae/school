@@ -21,8 +21,8 @@ const TeacherList = () => {
   }, [])
 
   React.useEffect(() => {
-    console.log(searchQuery);
-    console.log(filtered);
+    // console.log(searchQuery);
+    // console.log(filtered);
     if(searchQuery === ''){
         setFiltered(adminState.teachers);
     } else {

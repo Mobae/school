@@ -18,8 +18,8 @@ const ClassList = ({ navigation }) => {
 
   
   React.useEffect(() => {
-    console.log(searchQuery);
-    console.log(filtered);
+    // console.log(searchQuery);
+    // console.log(filtered);
     if(searchQuery === ''){
         setFiltered(adminState.classes);
     } else {

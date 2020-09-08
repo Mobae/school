@@ -88,12 +88,12 @@ const ProfileRoute = () => {
   //   case "0":
   //     return <StudentStackScreen />;
   // }
-  return rank === "1" ? (
-    <TeacherStackScreen />
-  ) : rank === "0" ? (
-    <StudentStackScreen />
-  ) : null;
-  // return <AdminStack />;
+  // return rank === "1" ? (
+  //   <TeacherStackScreen />
+  // ) : rank === "0" ? (
+  //   <StudentStackScreen />
+  // ) : null;
+  return <AdminStack />;
 };
 
 const MyComponent = () => {
