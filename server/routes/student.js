@@ -47,6 +47,7 @@ router.get("/teachers/all", async (req, res) => {
 
 router.get("/:id", auth, async (req, res) => {
   try {
+    console.log(`STUDENT ID: ${req.params.id}`);
     const student = await Student.findById(req.params.id);
     return res.json({
       student,
