@@ -10,14 +10,37 @@ const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 const StudentList = () => {
   const { adminState, getAllStudents } = React.useContext(AdminContext);
 
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const [filtered, setFiltered] = React.useState(adminState.allStudents);
+  const onChangeSearch = query => {
+      setSearchQuery(query);
+    };
+
   React.useEffect(() => {
     getAllStudents();
   }, [])
 
+  React.useEffect(() => {
+    if(searchQuery === ''){
+        setFiltered(adminState.allStudents);
+    } else {
+        setFiltered(adminState.allStudents.filter((student) => {
+            if(student.name.toLowerCase().includes(searchQuery.toLowerCase())){
+                return(student);
+            }
+        }));
+    }
+  }, [searchQuery]);
+
   return (
     <View>
+        <Searchbar
+            placeholder="Search class.."
+            onChangeText={onChangeSearch}
+            value={searchQuery}
+        />
         <ScrollView>
-        { adminState.allStudents.map(student => (
+        { filtered.map(student => (
             <View key={student._id}>
                 <Card style={adminStyles.card}>
                     <Card.Title
