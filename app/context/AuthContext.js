@@ -36,7 +36,7 @@ const AuthContextProvider = (props) => {
 
   const getClassName = async () => {
     axios.defaults.headers["auth-token"] = authState.jwt;
-    const res = await axios.get(URL + "/class");
+    const res = await axios.get(URL + "/class/" + authState.user.class_);
     console.log(res);
     const st = authState;
     st.user.className = res.data.class_.name;
