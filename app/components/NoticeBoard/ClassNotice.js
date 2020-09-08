@@ -85,7 +85,7 @@ const ClassNotice = ({ navigation }) => {
           />
         ))}
       </ScrollView>
-      {/* {rank !== '2' ? (
+      {rank !== '0' ? (
         <IconButton
           icon="plus"
           style={styles.fab}
@@ -93,14 +93,7 @@ const ClassNotice = ({ navigation }) => {
           size={40}
           onPress={() => navigation.push('New Notice')}
         />
-      ) : null} */}
-      <IconButton
-        icon="plus"
-        style={styles.fab}
-        color="white"
-        size={40}
-        onPress={() => navigation.push('New Notice')}
-      />
+      ) : null}
     </Fragment>
   );
 };

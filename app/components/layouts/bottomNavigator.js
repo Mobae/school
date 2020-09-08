@@ -6,6 +6,7 @@ import StudentProfile from '../student/StudentProfile';
 import TeacherProfile from '../teacher/TeacherProfile';
 import StudentAttendance from '../profile/StudentView/StudentAttendance';
 import IndividualMonth from '../profile/StudentView/IndividualMonth';
+import StudentInfo from '../profile/StudentView/StudentInfo';
 import AllStudentAttendance from '../profile/AllStudentsAttendance';
 import AddAttendance from '../profile/AddAttendence';
 import Notice from '../NoticeBoard/Notice';
@@ -27,7 +28,8 @@ const StudentStackScreen = () => {
   return (
     <NavigationContainer>
       <StudentStack.Navigator>
-        <StudentStack.Screen name="Profile" component={StudentProfile} />
+        <StudentStack.Screen name="JMRD" component={StudentProfile} />
+        <StudentStack.Screen name="Profile" component={StudentInfo} />
         <StudentStack.Screen name="Attendance" component={StudentAttendance} />
         <StudentStack.Screen name="Month" component={IndividualMonth} />
       </StudentStack.Navigator>
@@ -76,15 +78,15 @@ const ProfileRoute = () => {
     },
   } = useContext(AuthContext);
   console.log(rank);
-  // switch (rank) {
-  //   case "2":
-  //     return null;
-  //   case "1":
-  //     return <TeacherStackScreen />;
-  //   case "0":
-  //     return <StudentStackScreen />;
-  // }
-  return <AdminStack />;
+  switch (rank) {
+    case '2':
+      return null;
+    case '1':
+      return <TeacherStackScreen />;
+    case '0':
+      return <StudentStackScreen />;
+  }
+  // return <AdminStack />;
 };
 
 const MyComponent = () => {

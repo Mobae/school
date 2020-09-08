@@ -15,8 +15,9 @@ import { AuthContext } from '../../context/AuthContext';
 import { URL } from '../../config';
 
 import axios from 'axios';
+import { add } from 'react-native-reanimated';
 
-const NoticeForm = () => {
+const NoticeForm = (props) => {
   const [text, setText] = useState('');
   const [desc, setDesc] = useState('');
   const [value, setValue] = useState('');
@@ -31,6 +32,29 @@ const NoticeForm = () => {
       user: { rank },
     },
   } = useContext(AuthContext);
+
+  let { date } = props;
+  date = new Date(date).toDateString();
+
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  const notice = JSON.stringify({
+    title: text,
+    description: desc,
+    author: 'author',
+    date: date,
+  });
+
+  const addNotice = async () => {
+    try {
+      const res = await axios.post(URL + `/${value}`, notice, headers);
+      console.log(res.config.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <PaperProvider>
@@ -75,11 +99,11 @@ const NoticeForm = () => {
             value={value}
           >
             <View style={styles.radio}>
-              <RadioButton value="SchoolNotice" color="#6200EE" />
+              <RadioButton value="schoolNotice" color="#6200EE" />
               <Paragraph>School Notice</Paragraph>
             </View>
             <View style={styles.radio}>
-              <RadioButton value="ClassNotice" color="#6200EE" />
+              <RadioButton value="classNotice" color="#6200EE" />
               <Paragraph>Class Notice</Paragraph>
             </View>
           </RadioButton.Group>
@@ -99,7 +123,14 @@ const NoticeForm = () => {
               <Paragraph>Are You Sure?</Paragraph>
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={hideDialog}>Yes</Button>
+              <Button
+                onPress={() => {
+                  hideDialog();
+                  addNotice();
+                }}
+              >
+                Yes
+              </Button>
               <Button onPress={hideDialog}>No</Button>
             </Dialog.Actions>
           </Dialog>
