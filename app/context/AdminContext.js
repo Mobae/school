@@ -48,13 +48,13 @@ const AdminContextProvider = (props) => {
   // 3 Adding class
   const addClass = async (class_) => {
     try {
-      console.log(class_);
+      // console.log(class_);
       setLoading(true);
       const res = await axios.post(url + "/class/add", class_);
       setLoading(false);
-      console.log(res.data);
+      // console.log(res.data);
       const newClass = res.data.data;
-      console.log(newClass);
+      // console.log(newClass);
 
       setAdminState({
         teachers: adminState.teachers,
@@ -62,7 +62,7 @@ const AdminContextProvider = (props) => {
         classes: [...adminState.classes, newClass],
         class_: adminState.class_,
       });
-      console.log(adminState.classes);
+      // console.log(adminState.classes);
     } catch (err) {
       console.log(err);
     }
@@ -135,7 +135,7 @@ const AdminContextProvider = (props) => {
         classes: adminState.classes,
         class_: adminState.class_,
       });
-      console.log(adminState.students);
+      // console.log(adminState.students);
     } catch (err) {
       console.log(err);
     }

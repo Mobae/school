@@ -43,6 +43,7 @@ const AddStudent = ({ addStudent, studentModalOpen, setStudentModalOpen, navigat
                         onSubmit={(values, actions) => {
                             actions.resetForm();
                             navigation.navigate('ClassList');
+                            setStudentModalOpen(false);
                             addStudent(values);          // SUBMITTING STUDENT VALUE
                         }}
                     >

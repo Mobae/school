@@ -17,24 +17,34 @@ const ClassList = ({ navigation }) => {
   return (
     <View>
         <ScrollView>
-        { adminState.classes.map(class_ => (
-            <View key={class_._id}>
-                <TouchableOpacity onPress={() => {
-                        setCurrClass(class_._id);
-                        // getCurrClassTeachers();
-                        navigation.navigate('ClassView');
-                    }}
-                >
-                    <Card style={adminStyles.card}>
-                        <Card.Title
-                        title={class_.name}
-                        left={LeftContent}
-                        />
-                        <Card.Content></Card.Content>
-                    </Card>
-                </TouchableOpacity>
-            </View>
-        )) }
+        { 
+            adminState.classes ? (
+                adminState.classes.map(class_ => (
+                    <View key={class_._id}>
+                        <TouchableOpacity onPress={() => {
+                                setCurrClass(class_._id);
+                                navigation.navigate('ClassView');
+                            }}
+                        >
+                            <Card style={adminStyles.card}>
+                                <Card.Title
+                                title={class_.name}
+                                left={LeftContent}
+                                />
+                                <Card.Content></Card.Content>
+                            </Card>
+                        </TouchableOpacity>
+                    </View>
+                )) 
+            ) : (
+                <Card style={adminStyles.card}>
+                    <Card.Title 
+                        title="None"
+                        left={LeftContent} 
+                    />
+                </Card>
+            )
+        }
         </ScrollView>
     </View>
   );
