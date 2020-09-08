@@ -11,7 +11,7 @@ router.get("/view", async (req, res) => {
   res.send("Classes Get Triggered !!");
 });
 
-router.get("/:id", auth, async (req, res) => {
+router.get("/views/:id", auth, async (req, res) => {
   try {
     console.log(req.params.id);
     const class_ = await Class.findById(req.params.id);
@@ -33,7 +33,7 @@ router.get("/all", async (req, res) => {
     console.log(err);
     res.status(500).json({
       sucess: false,
-      data: "Server error",  
+      data: "Server error",
       err: err,
     });
   }
