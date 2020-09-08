@@ -1,14 +1,9 @@
-import React, { Fragment } from "react";
-import {
-  Card,
-  Paragraph,
-  Avatar,
-  TouchableRipple,
-  Button,
-} from "react-native-paper";
+import React, { Fragment, useContext } from "react";
+import { Card, Avatar, TouchableRipple } from "react-native-paper";
 import { StyleSheet } from "react-native";
 
 import globalStyles from "../styles/global";
+import { AuthContext } from "../../context/AuthContext";
 
 const SchoolIcon = (props) => <Avatar.Icon {...props} icon="school" />;
 
@@ -17,6 +12,9 @@ const ClassIcon = (props) => (
 );
 
 const BrowseNotice = ({ navigation }) => {
+  const {
+    authState: { user },
+  } = useContext(AuthContext);
   return (
     <Fragment>
       <Card style={globalStyles.card}>
@@ -24,7 +22,7 @@ const BrowseNotice = ({ navigation }) => {
           <Fragment>
             <Card.Title
               title="School Notices"
-              subtitle="Important notices for all school students"
+              subtitle="Important Notices for School Students"
               left={SchoolIcon}
             />
             <Card.Content style={globalStyles.cardContent}></Card.Content>
@@ -36,7 +34,7 @@ const BrowseNotice = ({ navigation }) => {
           <Fragment>
             <Card.Title
               title="Class Notices"
-              subtitle="A notice board for the class"
+              subtitle={"Notice board for Class " + user.className}
               left={ClassIcon}
             />
             <Card.Content style={globalStyles.cardContent}></Card.Content>

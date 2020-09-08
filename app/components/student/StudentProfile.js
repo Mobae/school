@@ -43,7 +43,7 @@ const StudentProfile = ({ navigation }) => {
             />
             <Card.Content style={{ marginBottom: 8 }}>
               <Paragraph>Email: {user.email}</Paragraph>
-              <Paragraph>Class: {user.class_}</Paragraph>
+              <Paragraph>Class: {user.className}</Paragraph>
             </Card.Content>
           </Fragment>
         </TouchableRipple>
