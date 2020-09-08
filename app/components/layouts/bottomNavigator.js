@@ -77,16 +77,16 @@ const ProfileRoute = () => {
       user: { rank },
     },
   } = useContext(AuthContext);
-  console.log(rank);
-  switch (rank) {
-    case "2":
-      return null;
-    case "1":
-      return <TeacherStackScreen />;
-    case "0":
-      return <StudentStackScreen />;
-  }
-  // return <AdminStack />;
+  // console.log(rank);
+  // switch (rank) {
+  //   case "2":
+  //     return null;
+  //   case "1":
+  //     return <TeacherStackScreen />;
+  //   case "0":
+  //     return <StudentStackScreen />;
+  // }
+  return <AdminStack />;
 };
 
 const MyComponent = () => {

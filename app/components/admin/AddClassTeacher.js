@@ -6,7 +6,7 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 
 import globalStyles from "../styles/global";
 import AddClass from "./AddClass";
-
+import adminStyles from './AdminStyles';
 import {AdminContext} from '../../context/AdminContext';
 
 const AddClassTeacher = ({ addClassTeacher, classTeacherModalOpen, setClassTeacherModalOpen, navigation }) => {
@@ -15,7 +15,7 @@ const AddClassTeacher = ({ addClassTeacher, classTeacherModalOpen, setClassTeach
     
     useEffect(() => {
         getTeachers();
-        console.log(adminState);
+        // console.log(adminState);
     }, [])
 
     var teachers = adminState.teachers.map((teacher) => {
@@ -28,9 +28,9 @@ const AddClassTeacher = ({ addClassTeacher, classTeacherModalOpen, setClassTeach
     return (
         <Modal visible={classTeacherModalOpen} animationType="slide">
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.modalContent}>
+            <View style={adminStyles.modalContent}>
                 <FAB
-                    style={styles.fab}
+                    style={adminStyles.fab}
                     icon="backburger"
                     onPress={() => setClassTeacherModalOpen(false)}
                 />
@@ -98,35 +98,5 @@ const AddClassTeacher = ({ addClassTeacher, classTeacherModalOpen, setClassTeach
         </Modal>
     );
 };
-
-const styles = StyleSheet.create({
-    card: {
-        margin: 10,
-        marginBottom: 0,
-    },
-    modalToggle: {
-        marginBottom: 10,
-        padding: 10,
-        alignSelf: 'center',
-        position: 'relative'
-    },
-    modalClose: {
-
-    },  
-    addBtn: {
-        backgroundColor: 'gray',
-        marginLeft: 240,
-        borderRadius: 50
-    },
-    modalContent: {
-        flex: 1
-    },
-    fab: {
-        position: 'absolute',
-        margin: 16,
-        right: 0,
-        bottom: 0,
-    },
-});
 
 export default AddClassTeacher;
