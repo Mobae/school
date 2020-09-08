@@ -18,13 +18,11 @@ const ClassList = ({ navigation }) => {
 
   
   React.useEffect(() => {
-    // console.log(searchQuery);
-    // console.log(filtered);
     if(searchQuery === ''){
         setFiltered(adminState.classes);
     } else {
         setFiltered(adminState.classes.filter((class_) => {
-            if(class_.name.includes(searchQuery)){
+            if(class_.name.toLowerCase().includes(searchQuery.toLowerCase())){
                 return(class_);
             }
         }));
