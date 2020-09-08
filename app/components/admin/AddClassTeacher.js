@@ -9,9 +9,9 @@ import AddClass from "./AddClass";
 import adminStyles from './AdminStyles';
 import {AdminContext} from '../../context/AdminContext';
 
-const AddClassTeacher = ({ classTeacherModalOpen, setClassTeacherModalOpen, navigation }) => {
+const AddClassTeacher = ({ classTeacherModalOpen, setClassTeacherModalOpen, navigation, setPin1 }) => {
 
-    const { adminState, currClass, getTeachers, classObj, addClassTeacher } = React.useContext(AdminContext);
+    const { adminState, currClass, getTeachers, classObj, addClassTeacher, setCurrClass } = React.useContext(AdminContext);
     
     useEffect(() => {
         getTeachers();
@@ -54,6 +54,7 @@ const AddClassTeacher = ({ classTeacherModalOpen, setClassTeacherModalOpen, navi
                             actions.resetForm();
                             addClassTeacher(values);                  // SUMITTING CLASS VALUE
                             setClassTeacherModalOpen(false);
+                            setPin1(currClass);
                             navigation.navigate('ClassView');
                         }}
                     >

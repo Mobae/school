@@ -173,7 +173,7 @@ const AdminContextProvider = (props) => {
       setLoading(true);
       let res = await axios.post(url + "/class/classTeacher/", values);
       setLoading(false);
-      console.log(res.data.data);
+      // console.log(res.data.data);
     } catch (err) {
       console.log(error);
     }
@@ -185,7 +185,7 @@ const AdminContextProvider = (props) => {
       setLoading(true);
       let res = await axios.post(url + "/class/subTeacher/", values);
       setLoading(false);
-      console.log(res.data.data);
+      // console.log(res.data.data);
     } catch (err) {
       console.log(error);
     }
