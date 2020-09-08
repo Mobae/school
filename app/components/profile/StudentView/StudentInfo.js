@@ -123,7 +123,9 @@ const StudentInfo = () => {
             <View style={styles.info}>
               <View style={{ flexDirection: 'column' }}>
                 <Text>Change Password: </Text>
-                <View style={{ flexDirection: 'row' }}>
+                <View
+                  style={{
+                    flexDirection: 'row'}}>
                   <MaterialCommunityIcons
                     name='lock-outline'
                     size={24}
@@ -173,7 +175,10 @@ const StudentInfo = () => {
                       name='eye'
                       size={30}
                       color='black'
-                      style={{ margin: 10, marginTop: 8 }}
+                      style={{
+                        margin: 10,
+                        marginTop: 8,
+                      }}
                     />
                   </TouchableOpacity>
                 </View>
