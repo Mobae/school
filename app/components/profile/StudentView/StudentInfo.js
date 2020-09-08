@@ -158,7 +158,6 @@ const StudentInfo = () => {
               <View style={{ flexDirection: "column" }}>
                 <Text>Change Password: </Text>
                 <View style={{ flexDirection: "row" }}>
-
                   <MaterialCommunityIcons
                     name="lock-outline"
                     size={24}

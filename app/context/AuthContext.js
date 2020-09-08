@@ -21,12 +21,15 @@ const AuthContextProvider = (props) => {
       if (rank == "0") {
         class_ = data.data.studentClass;
       }
-      setAuthState({
-        ...authState,
-        isLoggedIn: true,
-        jwt: token,
-        user: { email, name, rank, class_, id },
-      });
+      setAuthState(
+        {
+          ...authState,
+          isLoggedIn: true,
+          jwt: token,
+          user: { email, name, rank, class_, id },
+        },
+        getClassName()
+      );
       await AsyncStorage.setItem("@jwt", authState.jwt);
       axios.defaults.headers.common["auth-token"] = token;
     } catch (error) {

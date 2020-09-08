@@ -1,13 +1,6 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import {
-  Avatar,
-  Paragraph,
-  Button,
-  Card,
-  Title,
-  TouchableRipple,
-} from "react-native-paper";
+import { StyleSheet } from "react-native";
+import { Avatar, Paragraph, Card, TouchableRipple } from "react-native-paper";
 
 import { AuthContext } from "../../context/AuthContext";
 
@@ -22,13 +15,13 @@ const AttendanceIcon = (props) => (
 const TestIcon = (props) => <Avatar.Icon {...props} icon="file" size={45} />;
 
 const StudentProfile = ({ navigation }) => {
-  const {
-    authState: { user },
-    getClassName,
-  } = useContext(AuthContext);
+  const { authState, getClassName } = useContext(AuthContext);
+  const { user } = authState;
 
   useEffect(() => {
-    getClassName();
+    if (user) {
+      getClassName();
+    }
   }, []);
 
   return (
@@ -43,7 +36,7 @@ const StudentProfile = ({ navigation }) => {
             />
             <Card.Content style={{ marginBottom: 8 }}>
               <Paragraph>Email: {user.email}</Paragraph>
-              <Paragraph>Class: {user.className}</Paragraph>
+              <Paragraph className={user.className}>{user.className}</Paragraph>
             </Card.Content>
           </Fragment>
         </TouchableRipple>
