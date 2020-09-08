@@ -37,6 +37,12 @@ const AuthContextProvider = (props) => {
     }
   };
 
+  const getUser = async () => {
+    axios.defaults.headers["auth-token"] = authState.jwt;
+    const res = await axios.get(URL + "/student/");
+    console.log(res.data);
+  };
+
   const getClassName = async () => {
     axios.defaults.headers["auth-token"] = authState.jwt;
     const res = await axios.get(URL + "/class/views/" + authState.user.class_);

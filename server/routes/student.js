@@ -48,12 +48,7 @@ router.get("/teachers/all", async (req, res) => {
 router.get("/:id", auth, async (req, res) => {
   try {
     console.log(`STUDENT ID: ${req.params.id}`);
-    let studentId;
-    if (!req.params.id) {
-      studentId = req.body.data.id;
-    }
-    studentId = req.params.id;
-    const student = await Student.findById(studentId);
+    const student = await Student.findById(req.params.id);
     delete student.password;
     return res.json({
       student,
