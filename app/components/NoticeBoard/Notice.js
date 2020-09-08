@@ -15,6 +15,7 @@ import {
   Subheading,
   Headline,
   IconButton,
+  Menu,
 } from 'react-native-paper';
 import RBSheet from 'react-native-raw-bottom-sheet';
 
@@ -56,6 +57,11 @@ const NoticeCard = (props) => {
 
 const Notice = ({ navigation }) => {
   const [notices, setNotices] = useState([]);
+  const [visible, setVisible] = useState(false);
+
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
+
   const {
     authState: {
       user: { rank },
@@ -85,13 +91,16 @@ const Notice = ({ navigation }) => {
           />
         ))}
       </ScrollView>
-      {/* {rank === '0' ? (
+      {/* {rank === '2' ? (
         <IconButton
           icon="plus"
           style={styles.fab}
           color="white"
           size={40}
-          onPress={() => navigation.push('New Notice')}
+          onPress={() => {
+            navigation.push('New Notice');
+            console.log(rank);
+          }}
         />
       ) : null} */}
       <IconButton
@@ -99,7 +108,10 @@ const Notice = ({ navigation }) => {
         style={styles.fab}
         color="white"
         size={40}
-        onPress={() => navigation.push('New Notice')}
+        onPress={() => {
+          navigation.push('New Notice');
+          console.log(rank);
+        }}
       />
     </Fragment>
   );

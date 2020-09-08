@@ -45,9 +45,10 @@ router.get("/teachers/all", async (req, res) => {
   }
 });
 
-router.get("/", auth, async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
   try {
-    const student = await Student.findById(req.body.data.id);
+    console.log(`STUDENT ID: ${req.params.id}`);
+    const student = await Student.findById(req.params.id);
     return res.json({
       student,
     });
