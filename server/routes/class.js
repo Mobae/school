@@ -11,9 +11,9 @@ router.get("/view", async (req, res) => {
   res.send("Classes Get Triggered !!");
 });
 
-router.get("/", auth, async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
   try {
-    console.log(req.body.data.teacherClass);
+    console.log(req.params.id);
     const class_ = await Class.findById(req.body.data.teacherClass);
     res.json({ class_ });
   } catch (err) {
@@ -38,7 +38,6 @@ router.get("/all", async (req, res) => {
     });
   }
 });
-
 
 router.get("/view/:classId", async (req, res) => {
   try {
@@ -108,16 +107,18 @@ router.get("/teachers/:classId", async (req, res) => {
 
     const class_ = await Class.findById(req.params.classId);
     const classTeacher = await Teacher.find({ teacherClass: class_._id });
-    const subTeachers = await Teacher.find({ teacherSubClasses: { $elemMatch: { class: class_.id } } });
+    const subTeachers = await Teacher.find({
+      teacherSubClasses: { $elemMatch: { class: class_.id } },
+    });
 
     const teachers = {
       classTeacher,
-      subTeachers
-    }
+      subTeachers,
+    };
 
     res.status(200).json({
       sucess: true,
-      data: teachers
+      data: teachers,
     });
   } catch (err) {
     console.log(err);
@@ -149,7 +150,7 @@ router.post("/classTeacher", async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      data: class_ 
+      data: class_,
     });
   } catch (err) {
     console.log(err);
@@ -165,13 +166,12 @@ router.post("/subTeacher", async (req, res) => {
   try {
     const class_ = await Class.findById(req.body.class);
     const subTeacher = req.body.subTeacher;
-    class_.subTeachers.push({teacher: subTeacher});
+    class_.subTeachers.push({ teacher: subTeacher });
     class_.save();
 
     const teacher = await Teacher.findById(subTeacher);
     teacher.teacherSubClasses.push({ class: class_.id });
     teacher.save();
-
 
     return res.status(200).json({ class: class_ });
   } catch (err) {

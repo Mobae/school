@@ -34,8 +34,20 @@ const AuthContextProvider = (props) => {
     }
   };
 
+  const getClassName = async () => {
+    axios.defaults.headers["auth-token"] = authState.jwt;
+    const res = await axios.get(URL + "/class");
+    console.log(res);
+    const st = authState;
+    st.user.className = res.data.class_.name;
+    setAuthState(st);
+    // setAuthState(res.data.class_.name);
+  };
+
   return (
-    <AuthContext.Provider value={{ LogIn, authState, setAuthState }}>
+    <AuthContext.Provider
+      value={{ LogIn, authState, setAuthState, getClassName }}
+    >
       {props.children}
     </AuthContext.Provider>
   );

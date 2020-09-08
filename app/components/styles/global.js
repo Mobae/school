@@ -14,12 +14,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     paddingBottom: 10,
   },
-  cardP: {
-    color: "#606060",
-  },
-  cardButton: {
-    marginLeft: "auto",
-  },
 });
 
 export default styles;

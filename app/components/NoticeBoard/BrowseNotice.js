@@ -27,12 +27,7 @@ const BrowseNotice = ({ navigation }) => {
               subtitle="Important notices for all school students"
               left={SchoolIcon}
             />
-            <Card.Content style={globalStyles.cardContent}>
-              {/* <Paragraph style={globalStyles.cardP}>
-                Important notices for all school students
-              </Paragraph> */}
-              {/* <Button style={globalStyles.cardButton}>More</Button> */}
-            </Card.Content>
+            <Card.Content style={globalStyles.cardContent}></Card.Content>
           </Fragment>
         </TouchableRipple>
       </Card>
@@ -44,12 +39,7 @@ const BrowseNotice = ({ navigation }) => {
               subtitle="A notice board for the class"
               left={ClassIcon}
             />
-            <Card.Content style={globalStyles.cardContent}>
-              {/* <Paragraph style={globalStyles.cardP}>
-                A notice board for the class
-              </Paragraph> */}
-              {/* <Button style={globalStyles.cardButton}>More</Button> */}
-            </Card.Content>
+            <Card.Content style={globalStyles.cardContent}></Card.Content>
           </Fragment>
         </TouchableRipple>
       </Card>
