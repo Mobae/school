@@ -33,7 +33,7 @@ router.get("/all", async (req, res) => {
     console.log(err);
     res.status(500).json({
       sucess: false,
-      data: "Server error",
+      data: "Server error",  
       err: err,
     });
   }
