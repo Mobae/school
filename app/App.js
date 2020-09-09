@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ImageComponent } from 'react-native';
 
 import AuthContextProvider from './context/AuthContext';
 import AdminContextProvider from './context/AdminContext';
