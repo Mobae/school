@@ -19,6 +19,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
 import AdminStack from "../admin/AdminStack";
+import ChatStack from "../Chats/ChatStack";
 
 const StudentStack = createStackNavigator();
 const TeacherStack = createStackNavigator();
@@ -65,7 +66,9 @@ const NoticeStackScreen = () => {
   );
 };
 
-const ChatRoute = () => <Text>Music</Text>;
+const ChatRoute = () => {
+  return <ChatStack />;
+};
 
 const NoticeRoute = () => {
   return <NoticeStackScreen />;
@@ -88,12 +91,12 @@ const ProfileRoute = () => {
   //   case "0":
   //     return <StudentStackScreen />;
   // }
-  // return rank === "1" ? (
-  //   <TeacherStackScreen />
-  // ) : rank === "0" ? (
-  //   <StudentStackScreen />
-  // ) : null;
-  return <AdminStack />;
+  return rank === "1" ? (
+    <TeacherStackScreen />
+  ) : rank === "0" ? (
+    <StudentStackScreen />
+  ) : null;
+  // return <AdminStack />;
 };
 
 const MyComponent = () => {

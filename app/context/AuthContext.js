@@ -47,7 +47,7 @@ const AuthContextProvider = (props) => {
     axios.defaults.headers["auth-token"] = authState.jwt;
     const res = await axios.get(URL + "/student/initial");
     console.log(res.data);
-    const { _id, email, info, name, rank } = res.data.student;
+    const { _id, email, info, name, rank, className } = res.data.student;
     let class_;
     if (rank === "1") {
       class_ = res.data.student.teacherClass;
@@ -57,7 +57,7 @@ const AuthContextProvider = (props) => {
     }
     setAuthState({
       ...authState,
-      user: { _id, name, email, rank, class_, info },
+      user: { _id, name, email, rank, class_, info, className },
     });
   };
 
