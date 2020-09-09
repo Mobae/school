@@ -16,9 +16,9 @@ const StudentList = () => {
       setSearchQuery(query);
     };
 
-  React.useEffect(() => {
-    getAllStudents();
-  }, [])
+//   React.useEffect(() => {
+//     getAllStudents();
+//   }, [])
 
   React.useEffect(() => {
     if(searchQuery === ''){
