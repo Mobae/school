@@ -1,25 +1,25 @@
-import React, { useContext, useState, useEffect, Fragment } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { BottomNavigation, Text } from 'react-native-paper';
+import React, { useContext, useState, useEffect, Fragment } from "react";
+import { StatusBar } from "expo-status-bar";
+import { BottomNavigation, Text } from "react-native-paper";
 
-import StudentProfile from '../student/StudentProfile';
-import TeacherProfile from '../teacher/TeacherProfile';
-import StudentAttendance from '../profile/StudentView/StudentAttendance';
-import IndividualMonth from '../profile/StudentView/IndividualMonth';
-import StudentInfo from '../profile/StudentView/StudentInfo';
-import AllStudentAttendance from '../profile/AllStudentsAttendance';
-import AddAttendance from '../profile/AddAttendence';
-import Notice from '../NoticeBoard/Notice';
-import ClassNotice from '../NoticeBoard/ClassNotice';
-import NoticeForm from '../NoticeBoard/NoticeForm';
-import BrowseNotice from '../NoticeBoard/BrowseNotice';
+import StudentProfile from "../student/StudentProfile";
+import TeacherProfile from "../teacher/TeacherProfile";
+import StudentAttendance from "../profile/StudentView/StudentAttendance";
+import IndividualMonth from "../profile/StudentView/IndividualMonth";
+import StudentInfo from "../profile/StudentView/StudentInfo";
+import AllStudentAttendance from "../profile/AllStudentsAttendance";
+import AddAttendance from "../profile/AddAttendence";
+import Notice from "../NoticeBoard/Notice";
+import ClassNotice from "../NoticeBoard/ClassNotice";
+import NoticeForm from "../NoticeBoard/NoticeForm";
+import BrowseNotice from "../NoticeBoard/BrowseNotice";
 
-import { AuthContext } from '../../context/AuthContext';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { AuthContext } from "../../context/AuthContext";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
-import AdminStack from '../admin/AdminStack';
-import ChatStack from '../Chats/ChatStack';
+import AdminStack from "../admin/AdminStack";
+import ChatStack from "../Chats/ChatStack";
 
 const StudentStack = createStackNavigator();
 const TeacherStack = createStackNavigator();
@@ -29,10 +29,10 @@ const StudentStackScreen = () => {
   return (
     <NavigationContainer>
       <StudentStack.Navigator>
-        <StudentStack.Screen name='JMRD' component={StudentProfile} />
-        <StudentStack.Screen name='Profile' component={StudentInfo} />
-        <StudentStack.Screen name='Attendance' component={StudentAttendance} />
-        <StudentStack.Screen name='Month' component={IndividualMonth} />
+        <StudentStack.Screen name="JMRD" component={StudentProfile} />
+        <StudentStack.Screen name="Profile" component={StudentInfo} />
+        <StudentStack.Screen name="Attendance" component={StudentAttendance} />
+        <StudentStack.Screen name="Month" component={IndividualMonth} />
       </StudentStack.Navigator>
     </NavigationContainer>
   );
@@ -42,12 +42,12 @@ const TeacherStackScreen = () => {
   return (
     <NavigationContainer>
       <TeacherStack.Navigator>
-        <TeacherStack.Screen name='Profile' component={TeacherProfile} />
+        <TeacherStack.Screen name="Profile" component={TeacherProfile} />
         <TeacherStack.Screen
-          name='Attendance'
+          name="Attendance"
           component={AllStudentAttendance}
         />
-        <TeacherStack.Screen name='Add Attendance' component={AddAttendance} />
+        <TeacherStack.Screen name="Add Attendance" component={AddAttendance} />
       </TeacherStack.Navigator>
     </NavigationContainer>
   );
@@ -57,10 +57,10 @@ const NoticeStackScreen = () => {
   return (
     <NavigationContainer>
       <NoticeStack.Navigator>
-        <NoticeStack.Screen name='Notice Board' component={BrowseNotice} />
-        <NoticeStack.Screen name='School Notice Board' component={Notice} />
-        <NoticeStack.Screen name='Class Notice Board' component={ClassNotice} />
-        <NoticeStack.Screen name='New Notice' component={NoticeForm} />
+        <NoticeStack.Screen name="Notice Board" component={BrowseNotice} />
+        <NoticeStack.Screen name="School Notice Board" component={Notice} />
+        <NoticeStack.Screen name="Class Notice Board" component={ClassNotice} />
+        <NoticeStack.Screen name="New Notice" component={NoticeForm} />
       </NoticeStack.Navigator>
     </NavigationContainer>
   );
@@ -91,20 +91,20 @@ const ProfileRoute = () => {
   //   case "0":
   //     return <StudentStackScreen />;
   // }
-  // return rank === "1" ? (
-  //   <TeacherStackScreen />
-  // ) : rank === "0" ? (
-  //   <StudentStackScreen />
-  // ) : null;
-  return <AdminStack />;
+  return rank === "1" ? (
+    <TeacherStackScreen />
+  ) : rank === "0" ? (
+    <StudentStackScreen />
+  ) : null;
+  // return <AdminStack />;
 };
 
 const MyComponent = () => {
   const [index, setIndex] = React.useState(1);
   const [routes] = useState([
-    { key: 'chat', title: 'Chat', icon: 'forum-outline' },
-    { key: 'profile', title: 'Profile', icon: 'face-profile' },
-    { key: 'notice', title: 'Notice', icon: 'format-list-checkbox' },
+    { key: "chat", title: "Chat", icon: "forum-outline" },
+    { key: "profile", title: "Profile", icon: "face-profile" },
+    { key: "notice", title: "Notice", icon: "format-list-checkbox" },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
@@ -121,7 +121,7 @@ const MyComponent = () => {
         renderScene={renderScene}
         shifting={true}
       />
-      <StatusBar style='auto' />
+      <StatusBar style="auto" />
     </Fragment>
   );
 };

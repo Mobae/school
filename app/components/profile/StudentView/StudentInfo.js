@@ -21,17 +21,19 @@ const StudentInfo = () => {
   const { authState } = useContext(AuthContext);
   const { user } = authState;
 
-  const [info, setInfo] = useState({});
+  // const [info, setInfo] = useState({});
 
-  const getInfo = async () => {
-    axios.defaults.headers["auth-token"] = authState.jwt;
-    const res = await axios.get(URL + "/student/" + user.id);
-    setInfo(res.data.student.info);
-  };
+  // const getInfo = async () => {
+  //   axios.defaults.headers["auth-token"] = authState.jwt;
+  //   const res = await axios.get(URL + "/student/" + user.id);
+  //   setInfo(res.data.student.info);
+  // };
 
-  useEffect(() => {
-    getInfo();
-  }, []);
+  // useEffect(() => {
+  //   getInfo();
+  // }, []);
+
+  const { info } = user;
 
   return (
     <React.Fragment>
@@ -87,69 +89,31 @@ const StudentInfo = () => {
             >
               <ScrollView>
                 <View style={styles.info}>
-                  <View style={{ flexDirection: "column" }}>
-                    <Text
-                      style={{
-                        fontSize: 15,
-                        fontWeight: "500",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Father Details:
-                    </Text>
-                    <Text
-                      style={{
-                        marginLeft: 20,
-                      }}
-                    >
+                  <View style={styles.parentInfo}>
+                    <Text style={styles.parentInfoText1}>Father Details:</Text>
+                    <Text style={styles.parentInfoText2}>
                       Name: {info.fatherName}
                     </Text>
-                    <Text style={{ marginLeft: 20 }}>
+                    <Text style={styles.parentInfoText2}>
                       Number: {info.fatherName}
                     </Text>
                   </View>
                 </View>
                 <View style={styles.info}>
-                  <View style={{ flexDirection: "column" }}>
-                    <Text
-                      style={{
-                        fontSize: 15,
-                        fontWeight: "500",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Mother Details:
-                    </Text>
-                    <Text
-                      style={{
-                        marginLeft: 20,
-                      }}
-                    >
+                  <View style={styles.parentInfo}>
+                    <Text style={styles.parentInfoText1}>Mother Details:</Text>
+                    <Text style={styles.parentInfoText2}>
                       Name: {info.fatherName}
                     </Text>
-                    <Text style={{ marginLeft: 20 }}>
+                    <Text style={styles.parentInfoText2}>
                       Number: {info.fatherName}
                     </Text>
                   </View>
                 </View>
                 <View style={styles.info}>
-                  <View style={{ flexDirection: "column" }}>
-                    <Text
-                      style={{
-                        fontSize: 15,
-                        fontWeight: "500",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Address:
-                    </Text>
-                    <Text
-                      style={{
-                        marginLeft: 20,
-                      }}
-                    >
-                      {info.address}
-                    </Text>
+                  <View style={styles.parentInfo}>
+                    <Text style={styles.parentInfoText1}>Address:</Text>
+                    <Text style={styles.parentInfoText2}>{info.address}</Text>
                   </View>
                 </View>
               </ScrollView>
@@ -275,5 +239,16 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
+  },
+  parentInfo: {
+    flexDirection: "column",
+  },
+  parentInfoText1: {
+    fontSize: 15,
+    fontWeight: "500",
+    fontWeight: "bold",
+  },
+  parentInfoText2: {
+    marginLeft: 20,
   },
 });
