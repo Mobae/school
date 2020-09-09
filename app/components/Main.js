@@ -23,7 +23,7 @@ const Main = () => {
     AsyncStorage.getItem("@jwt").then((jwt) => {
       console.log(jwt);
       if (jwt) {
-        setAuthState({ ...authState, isLoggedIn: true });
+        setAuthState({ ...authState, isLoggedIn: true, token: jwt });
       }
     });
   }, []);

@@ -31,7 +31,7 @@ const AuthContextProvider = (props) => {
       //   },
       //   getClassName()
       // );
-      await AsyncStorage.setItem("@jwt", authState.jwt);
+      await AsyncStorage.setItem("@jwt", token);
       axios.defaults.headers.common["auth-token"] = token;
       setAuthState({
         ...authState,
@@ -44,9 +44,13 @@ const AuthContextProvider = (props) => {
   };
 
   const getUser = async () => {
-    axios.defaults.headers["auth-token"] = authState.jwt;
+    axios.defaults.headers["auth-token"] = await AsyncStorage.getItem("@jwt");
     const res = await axios.get(URL + "/student/initial");
     console.log(res.data);
+    // TODO
+    // if(!res.data.student) {
+    //   setAuthState({isLoggedIn: false})
+    // }
     const { _id, email, info, name, rank, className } = res.data.student;
     let class_;
     if (rank === "1") {
