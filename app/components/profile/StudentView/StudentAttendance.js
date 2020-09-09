@@ -92,7 +92,11 @@ const StudentAttendance = ({ navigation }) => {
     const data = res.data.data;
     console.log(data);
     const p = data.filter((d) => d.status === "P");
-    setAttState({ tDays: data.length, pDays: p.length });
+    setAttState({
+      tDays: data.length,
+      pDays: p.length,
+      percentage: ((p.length / data.length) * 100).toFixed(2),
+    });
   };
 
   useEffect(() => {
@@ -121,6 +125,7 @@ const StudentAttendance = ({ navigation }) => {
               <Card.Content style={{ marginBottom: 12 }}>
                 <Paragraph>Present Days: {attState.pDays}</Paragraph>
                 <Paragraph>Total Days: {attState.tDays}</Paragraph>
+                <Paragraph>Percent: {attState.percentage + "%"}</Paragraph>
               </Card.Content>
             </Fragment>
           </TouchableRipple>
