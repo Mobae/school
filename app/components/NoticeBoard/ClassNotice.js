@@ -4,8 +4,8 @@ import React, {
   useContext,
   useEffect,
   useState,
-} from 'react';
-import { StyleSheet, ScrollView, View } from 'react-native';
+} from "react";
+import { StyleSheet, ScrollView, View } from "react-native";
 import {
   Title,
   Card,
@@ -15,13 +15,13 @@ import {
   Subheading,
   Headline,
   IconButton,
-} from 'react-native-paper';
-import RBSheet from 'react-native-raw-bottom-sheet';
+} from "react-native-paper";
+import RBSheet from "react-native-raw-bottom-sheet";
 
-import { AuthContext } from '../../context/AuthContext';
-import { URL } from '../../config';
+import { AuthContext } from "../../context/AuthContext";
+import { URL } from "../../config";
 
-import axios from 'axios';
+import axios from "axios";
 
 const NoticeIcon = () => {
   return <Avatar.Icon icon="bulletin-board" size={45} />;
@@ -57,13 +57,12 @@ const NoticeCard = (props) => {
 const ClassNotice = ({ navigation }) => {
   const [notices, setNotices] = useState([]);
   const {
-    authState: {
-      user: { rank },
-    },
+    authState: { user },
   } = useContext(AuthContext);
+  const { rank } = user;
 
   const getNotices = async () => {
-    const notices = await axios.get(URL + '/schoolnotice');
+    const notices = await axios.get(URL + "/classnotice/" + user.class_);
     console.log(notices.data);
     setNotices(notices.data.notices);
   };
@@ -85,13 +84,13 @@ const ClassNotice = ({ navigation }) => {
           />
         ))}
       </ScrollView>
-      {rank !== '0' ? (
+      {rank !== "0" ? (
         <IconButton
           icon="plus"
           style={styles.fab}
           color="white"
           size={40}
-          onPress={() => navigation.push('New Notice')}
+          onPress={() => navigation.push("New Notice")}
         />
       ) : null}
     </Fragment>
@@ -100,7 +99,7 @@ const ClassNotice = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   title: {
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   headline: {
     marginBottom: 10,
@@ -110,13 +109,13 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   fab: {
-    position: 'absolute',
+    position: "absolute",
     margin: 16,
     right: 18,
     bottom: 20,
     height: 63,
     borderRadius: 50,
-    backgroundColor: '#6200EE',
+    backgroundColor: "#6200EE",
     width: 63,
   },
 });
