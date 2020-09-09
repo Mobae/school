@@ -21,6 +21,7 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 
 import { URL } from "../../config";
+import styles from "./styles";
 
 const NoticeIcon = () => {
   return <Avatar.Icon icon="bulletin-board" size={45} />;
@@ -55,7 +56,9 @@ const NoticeCard = (props) => {
 
 const Notice = ({ navigation }) => {
   const { authState } = useContext(AuthContext);
-
+  const {
+    user: { rank },
+  } = authState;
   const [notices, setNotices] = useState([]);
 
   const getSchoolNotices = async () => {
@@ -86,53 +89,17 @@ const Notice = ({ navigation }) => {
           ) : null
         )}
       </ScrollView>
-      {/* {rank === '2' ? (
+      {rank === "2" ? (
         <IconButton
           icon="plus"
           style={styles.fab}
           color="white"
           size={40}
-          onPress={() => {
-            navigation.push('New Notice');
-            console.log(rank);
-          }}
+          onPress={() => navigation.push("New Notice")}
         />
-      ) : null} */}
-      <IconButton
-        icon="plus"
-        style={styles.fab}
-        color="white"
-        size={40}
-        onPress={() => {
-          navigation.push("New Notice");
-          console.log(rank);
-        }}
-      />
+      ) : null}
     </Fragment>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    alignSelf: "center",
-  },
-  headline: {
-    marginBottom: 10,
-  },
-  notice: {
-    margin: 10,
-    marginBottom: 0,
-  },
-  fab: {
-    position: "absolute",
-    margin: 16,
-    right: 18,
-    bottom: 20,
-    height: 63,
-    borderRadius: 50,
-    backgroundColor: "#6200EE",
-    width: 63,
-  },
-});
 
 export default Notice;
