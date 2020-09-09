@@ -16,9 +16,9 @@ const TeacherList = () => {
       setSearchQuery(query);
     };
 
-  React.useEffect(() => {
-    getTeachers();
-  }, [])
+//   React.useEffect(() => {
+//     getTeachers();
+//   }, [])
 
   React.useEffect(() => {
     if(searchQuery === ''){

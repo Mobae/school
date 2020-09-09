@@ -8,7 +8,7 @@ const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 import adminStyles from "./AdminStyles";
 
 const ClassList = ({ navigation }) => {
-  const { adminState, setCurrClass, currClass, getCurrClassTeachers, classObj, getClasses } = React.useContext(AdminContext);
+  const { adminState, setCurrClass, currClass, getCurrClassTeachers, classObj, setFlag } = React.useContext(AdminContext);
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filtered, setFiltered] = React.useState(adminState.classes);
@@ -43,6 +43,7 @@ const ClassList = ({ navigation }) => {
                     <View key={class_._id}>
                         <TouchableOpacity onPress={() => {
                                 setCurrClass(class_._id);
+                                setFlag(false);
                                 navigation.navigate('ClassView');
                             }}
                         >
