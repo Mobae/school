@@ -67,7 +67,7 @@ const NoticeStackScreen = () => {
 };
 
 const ChatRoute = () => {
-  <ChatStack />;
+  return <ChatStack />;
 };
 
 const NoticeRoute = () => {

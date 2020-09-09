@@ -2,11 +2,11 @@ import React, { Fragment } from 'react';
 import { Avatar, Card, IconButton } from 'react-native-paper';
 import { View, TouchableOpacity } from 'react-native';
 
-const Chat = () => {
+const ChatHome = ({ navigation }) => {
   return (
     <Fragment>
       <TouchableOpacity>
-        <View style={{ margin: 20, marginTop: 50 }}>
+        <View style={{ margin: 20 }}>
           <Card style={{ height: 100 }}>
             <Card.Title
               title='Chats'
@@ -17,7 +17,7 @@ const Chat = () => {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Files')}>
         <View style={{ margin: 20, marginTop: 10 }}>
           <Card style={{ height: 100 }}>
             <Card.Title
@@ -34,4 +34,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default ChatHome;

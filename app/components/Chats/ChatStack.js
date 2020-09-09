@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 import Files from './Files';
-import Chat from './Chat';
+import ChatHome from './ChatHome';
 
 const Stack = createStackNavigator();
 
@@ -11,8 +11,8 @@ function ChatStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name='ChatHome' component={ChatHome} />
         <Stack.Screen name='Files' component={Files} />
-        <Stack.Screen name='Chat' component={Chat} />
       </Stack.Navigator>
     </NavigationContainer>
   );
