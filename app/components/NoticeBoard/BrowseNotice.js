@@ -22,7 +22,7 @@ const BrowseNotice = ({ navigation }) => {
           <Fragment>
             <Card.Title
               title="School Notices"
-              subtitle="Important Notices for School Students"
+              subtitle="Notice board for School"
               left={SchoolIcon}
             />
             <Card.Content style={globalStyles.cardContent}></Card.Content>

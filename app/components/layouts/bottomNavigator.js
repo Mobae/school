@@ -75,13 +75,13 @@ const NoticeRoute = () => {
 };
 
 const ProfileRoute = () => {
-  // const { authState, getUser } = useContext(AuthContext);
-  // const {
-  //   user: { rank },
-  // } = authState;
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
+  const { authState, getUser } = useContext(AuthContext);
+  const {
+    user: { rank },
+  } = authState;
+  useEffect(() => {
+    getUser();
+  }, []);
   // console.log(rank);
   // switch (rank) {
   //   case "2":
@@ -91,12 +91,12 @@ const ProfileRoute = () => {
   //   case "0":
   //     return <StudentStackScreen />;
   // }
-  // return rank === "1" ? (
-  //   <TeacherStackScreen />
-  // ) : rank === "0" ? (
-  //   <StudentStackScreen />
-  // ) : null;
-  return <AdminStack />;
+  return rank === "1" ? (
+    <TeacherStackScreen />
+  ) : rank === "0" ? (
+    <StudentStackScreen />
+  ) : null;
+  // return <AdminStack />;
 };
 
 const MyComponent = () => {

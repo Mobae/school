@@ -59,6 +59,7 @@ const AuthContextProvider = (props) => {
     if (rank == "0") {
       class_ = res.data.student.studentClass;
     }
+    console.log("HELLO", authState);
     setAuthState({
       ...authState,
       user: { _id, name, email, rank, class_, info, className },
