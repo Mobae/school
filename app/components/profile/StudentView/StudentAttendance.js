@@ -83,7 +83,7 @@ const StudentAttendance = ({ navigation }) => {
                 <Text style={{ fontWeight: "bold", fontSize: 20 }}>
                   {user.name}
                 </Text>
-                <Text>Class: {user.class_}</Text>
+                <Text>Class: {user.className}</Text>
               </View>
             </View>
           </Card.Content>

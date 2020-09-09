@@ -20,9 +20,7 @@ import {
 import RBSheet from 'react-native-raw-bottom-sheet';
 
 import { AuthContext } from '../../context/AuthContext';
-import { URL } from '../../config';
-
-import axios from 'axios';
+import { NoticeContext } from '../../context/NoticeContext';
 
 const NoticeIcon = () => {
   return <Avatar.Icon icon="bulletin-board" size={45} />;
@@ -56,32 +54,22 @@ const NoticeCard = (props) => {
 };
 
 const Notice = ({ navigation }) => {
-  const [notices, setNotices] = useState([]);
-  const [visible, setVisible] = useState(false);
-
-  const openMenu = () => setVisible(true);
-  const closeMenu = () => setVisible(false);
-
   const {
     authState: {
       user: { rank },
     },
   } = useContext(AuthContext);
 
-  const getNotices = async () => {
-    const notices = await axios.get(URL + '/schoolnotice');
-    console.log(notices.data);
-    setNotices(notices.data.notices);
-  };
+  const { getSchoolNotices, schoolNotices } = useContext(NoticeContext);
 
   useEffect(() => {
-    getNotices();
+    getSchoolNotices();
   }, []);
 
   return (
     <Fragment>
       <ScrollView>
-        {notices.map((notice) => (
+        {schoolNotices.map((notice) => (
           <NoticeCard
             title={notice.title}
             author={notice.author}
