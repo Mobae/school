@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { StyleSheet, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import {
   Card,
   Avatar,
