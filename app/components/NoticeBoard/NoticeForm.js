@@ -12,9 +12,7 @@ import {
 } from 'react-native-paper';
 
 import { AuthContext } from '../../context/AuthContext';
-import { URL } from '../../config';
-
-import axios from 'axios';
+import { NoticeContext } from '../../context/NoticeContext';
 import { add } from 'react-native-reanimated';
 
 const NoticeForm = (props) => {
@@ -33,12 +31,10 @@ const NoticeForm = (props) => {
     },
   } = useContext(AuthContext);
 
+  const { addSchoolNotice } = useContext(NoticeContext);
+
   let { date } = props;
   date = new Date(date).toDateString();
-
-  const headers = {
-    'Content-Type': 'application/json',
-  };
 
   const notice = JSON.stringify({
     title: text,
@@ -46,15 +42,6 @@ const NoticeForm = (props) => {
     author: 'author',
     date: date,
   });
-
-  const addNotice = async () => {
-    try {
-      const res = await axios.post(URL + `/${value}`, notice, headers);
-      console.log(res.config.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <PaperProvider>
@@ -99,11 +86,11 @@ const NoticeForm = (props) => {
             value={value}
           >
             <View style={styles.radio}>
-              <RadioButton value="schoolNotice" color="#6200EE" />
+              <RadioButton value="schoolnotice" color="#6200EE" />
               <Paragraph>School Notice</Paragraph>
             </View>
             <View style={styles.radio}>
-              <RadioButton value="classNotice" color="#6200EE" />
+              <RadioButton value="classnotice" color="#6200EE" />
               <Paragraph>Class Notice</Paragraph>
             </View>
           </RadioButton.Group>
@@ -126,7 +113,7 @@ const NoticeForm = (props) => {
               <Button
                 onPress={() => {
                   hideDialog();
-                  addNotice();
+                  addSchoolNotice(notice);
                 }}
               >
                 Yes
