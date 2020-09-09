@@ -13,16 +13,22 @@ const ClassView = ({ navigation }) => {
   const { getCurrClassTeachers, classObj, currClass, flag } = React.useContext(AdminContext);
   const [ classTeacherModalOpen, setClassTeacherModalOpen ] = React.useState(false);
   const [ subTeacherModalOpen, setSubTeacherModalOpen ] = React.useState(false);
+  const [ pin1, setPin1 ] = React.useState('');
+  const [ pin2, setPin2 ] = React.useState('');
+  
 
   React.useEffect(() => {
     getCurrClassTeachers(); 
-  }, [])
+  }, [pin1]);
+  React.useEffect(() => {
+    getCurrClassTeachers(); 
+  }, [pin2]);
 
   if(flag){
     return (
         <View>
-            <AddClassTeacher navigation={navigation}  classTeacherModalOpen={classTeacherModalOpen} setClassTeacherModalOpen={setClassTeacherModalOpen} />
-            <AddSubTeacher navigation={navigation}  subTeacherModalOpen={subTeacherModalOpen} setSubTeacherModalOpen={setSubTeacherModalOpen} />
+            <AddClassTeacher setPin1={setPin1} navigation={navigation}  classTeacherModalOpen={classTeacherModalOpen} setClassTeacherModalOpen={setClassTeacherModalOpen} />
+            <AddSubTeacher setPin2={setPin2} navigation={navigation}  subTeacherModalOpen={subTeacherModalOpen} setSubTeacherModalOpen={setSubTeacherModalOpen} />
             <ScrollView>
                     <TouchableOpacity onPress={() => {
                             navigation.navigate('StudentList');
