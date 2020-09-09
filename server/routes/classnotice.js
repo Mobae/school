@@ -6,9 +6,9 @@ const { teacher, admin } = require("../middleware/rank");
 
 const ClassNotice = require("../models/ClassNotice");
 
-router.get("/", async (req, res) => {
+router.get("/:class", async (req, res) => {
   try {
-    const { class_ } = req.body;
+    const class_ = req.params.class;
     const notices = await ClassNotice.find({ class: class_ });
     console.log(notices);
     res.status(200).json({ notices });

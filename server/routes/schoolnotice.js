@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
 router.delete("/", auth, admin, async (req, res) => {
   try {
     const { id } = req.body;
-    const schoolNotice = SchoolNotice.findOne({ id });
+    const schoolNotice = (await SchoolNotice.findOne({ id })).toJSON();
     schoolNotice.status = "archived";
     await schoolNotice.save();
   } catch (err) {

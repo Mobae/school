@@ -4,10 +4,9 @@ import React, {
   useContext,
   useEffect,
   useState,
-} from 'react';
-import { StyleSheet, ScrollView, View } from 'react-native';
+} from "react";
+import { StyleSheet, ScrollView, View } from "react-native";
 import {
-  Title,
   Card,
   Avatar,
   Paragraph,
@@ -15,12 +14,13 @@ import {
   Subheading,
   Headline,
   IconButton,
-  Menu,
-} from 'react-native-paper';
-import RBSheet from 'react-native-raw-bottom-sheet';
+} from "react-native-paper";
+import RBSheet from "react-native-raw-bottom-sheet";
 
-import { AuthContext } from '../../context/AuthContext';
-import { NoticeContext } from '../../context/NoticeContext';
+import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
+
+import { URL } from "../../config";
 
 const NoticeIcon = () => {
   return <Avatar.Icon icon="bulletin-board" size={45} />;
@@ -54,13 +54,18 @@ const NoticeCard = (props) => {
 };
 
 const Notice = ({ navigation }) => {
-  const {
-    authState: {
-      user: { rank },
-    },
-  } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
 
-  const { getSchoolNotices, schoolNotices } = useContext(NoticeContext);
+  const [notices, setNotices] = useState([]);
+
+  const getSchoolNotices = async () => {
+    const res = await axios.get(URL + "/schoolnotice", {
+      headers: {
+        "auth-token": authState.token,
+      },
+    });
+    setNotices(res.data.notices);
+  };
 
   useEffect(() => {
     getSchoolNotices();
@@ -69,15 +74,17 @@ const Notice = ({ navigation }) => {
   return (
     <Fragment>
       <ScrollView>
-        {schoolNotices.map((notice) => (
-          <NoticeCard
-            title={notice.title}
-            author={notice.author}
-            date={notice.date}
-            description={notice.description}
-            key={notice._id}
-          />
-        ))}
+        {notices.map((notice) =>
+          notice.title && notice.description ? (
+            <NoticeCard
+              title={notice.title}
+              author={notice.author}
+              date={notice.date}
+              description={notice.description}
+              key={notice._id}
+            />
+          ) : null
+        )}
       </ScrollView>
       {/* {rank === '2' ? (
         <IconButton
@@ -97,7 +104,7 @@ const Notice = ({ navigation }) => {
         color="white"
         size={40}
         onPress={() => {
-          navigation.push('New Notice');
+          navigation.push("New Notice");
           console.log(rank);
         }}
       />
@@ -107,7 +114,7 @@ const Notice = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   title: {
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   headline: {
     marginBottom: 10,
@@ -117,13 +124,13 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   fab: {
-    position: 'absolute',
+    position: "absolute",
     margin: 16,
     right: 18,
     bottom: 20,
     height: 63,
     borderRadius: 50,
-    backgroundColor: '#6200EE',
+    backgroundColor: "#6200EE",
     width: 63,
   },
 });
