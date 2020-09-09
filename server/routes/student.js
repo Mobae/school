@@ -47,6 +47,8 @@ router.get("/teachers/all", async (req, res) => {
 
 router.get("/initial", auth, async (req, res) => {
   const student = await Student.findById(req.body.data.id);
+  const cls = await Class.findById(student.studentClass);
+  student.className = cls.name;
   return res.json({
     student,
   });
