@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { DataTable, Card, Avatar } from 'react-native-paper';
+import { DataTable } from 'react-native-paper';
 import { View } from 'react-native';
 
 const Files = () => {
   return (
     <View style={{ justifyContent: 'center', marginHorizontal: 10 }}>
-      <DataTable style={{ marginTop: 50, alignSelf: 'center' }}>
+      <DataTable style={{ alignSelf: 'center' }}>
         <DataTable.Header>
           <DataTable.Title>Files</DataTable.Title>
           <DataTable.Title numeric>Date</DataTable.Title>
