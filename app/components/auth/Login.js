@@ -34,6 +34,7 @@ const Login = () => {
             <TextInput
               mode="outlined"
               label="Password"
+              secureTextEntry={true}
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
               value={values.password}
