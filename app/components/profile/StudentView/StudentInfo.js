@@ -21,17 +21,19 @@ const StudentInfo = () => {
   const { authState } = useContext(AuthContext);
   const { user } = authState;
 
-  const [info, setInfo] = useState({});
+  // const [info, setInfo] = useState({});
 
-  const getInfo = async () => {
-    axios.defaults.headers["auth-token"] = authState.jwt;
-    const res = await axios.get(URL + "/student/" + user.id);
-    setInfo(res.data.student.info);
-  };
+  // const getInfo = async () => {
+  //   axios.defaults.headers["auth-token"] = authState.jwt;
+  //   const res = await axios.get(URL + "/student/" + user.id);
+  //   setInfo(res.data.student.info);
+  // };
 
-  useEffect(() => {
-    getInfo();
-  }, []);
+  // useEffect(() => {
+  //   getInfo();
+  // }, []);
+
+  const { info } = user;
 
   return (
     <React.Fragment>
