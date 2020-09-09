@@ -42,35 +42,8 @@ const MonthData = (props) => {
 const StudentAttendance = ({ navigation }) => {
   const initialMonth = new Date().getMonth() + 1;
   const [month, setMonth] = useState(initialMonth);
-  //   const [monthData, setMonthData] = useState([]);
   const { authState } = useContext(AuthContext);
   const { user } = authState;
-
-  //   const getMonthData = async () => {
-  //     let MData = [];
-  //     let monthStart = 1;
-  //     let monthEnd = new Date().getMonth();
-  //     monthEnd = monthEnd + 1;
-  //     console.log(monthEnd, user);
-  //     for (let i = monthStart; i <= monthEnd; i++) {
-  //       const data = await axios.get(
-  //         URL + "/attendance/student/" + user.id + "/" + i.toString()
-  //       );
-  //       console.log(URL + "/attendance/student/" + user.id + "/" + i.toString());
-  //       data.data.monthName = monthNames[i - 1];
-  //       MData.push(data.data);
-  //     }
-  //     console.log(MData);
-  //     setMonthData(MData);
-  //   };
-
-  //   useEffect(() => {
-  //     getMonthData();
-  //   }, []);
-
-  //   useEffect(() => {
-  //     console.log(monthData);
-  //   }, [monthData]);
   const [attState, setAttState] = useState({
     tDays: 0,
     pDays: 0,
