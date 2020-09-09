@@ -201,23 +201,14 @@ const AdminContextProvider = (props) => {
   return (
     <AdminContext.Provider
       value={{
-        addClass,
-        addTeacher,
-        addClassTeacher,
-        addSubTeacher,
-        addStudent,
-        getClasses,
-        getCurrClassTeachers,
-        getTeachers,
-        getStudents,
-        getAllStudents,
+        addClass, addTeacher, addClassTeacher, addSubTeacher, addStudent,
+        getClasses, getTeachers,getAllStudents,
+        getCurrClassTeachers, getStudents,
         getAttendance,
-        adminState: adminState,
-        currClass,
-        setCurrClass,
+        adminState,
+        currClass, setCurrClass,
         classObj,
-        flag,
-        setFlag,
+        flag, setFlag,
       }}
     >
       {props.children}
