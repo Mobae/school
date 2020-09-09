@@ -26,7 +26,7 @@ const StudentProfile = ({ navigation }) => {
 
   return (
     <Fragment>
-      <Card style={styles}>
+      <Card style={styles.card}>
         <TouchableRipple onPress={() => navigation.push("Profile")}>
           <Fragment>
             <Card.Title
@@ -41,7 +41,7 @@ const StudentProfile = ({ navigation }) => {
           </Fragment>
         </TouchableRipple>
       </Card>
-      <Card style={styles}>
+      <Card style={styles.card}>
         <TouchableRipple onPress={() => navigation.push("Attendance")}>
           <Card.Title
             title="Attendance"
@@ -55,8 +55,7 @@ const StudentProfile = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  margin: 10,
-  marginBottom: 0,
+  card: { margin: 10, marginBottom: 0 },
 });
 
 export default StudentProfile;
