@@ -1,19 +1,10 @@
 import * as React from 'react';
-import { Card, Title, Paragraph, FAB, Button } from 'react-native-paper';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Card, Title, Paragraph } from 'react-native-paper';
+import { View, TouchableOpacity } from 'react-native';
 
 const Files = () => {
   return (
     <React.Fragment>
-      <Button
-        icon='attachment'
-        mode='contained'
-        onPress={() => console.log('Pressed')}
-        style={styles.attach}
-      >
-        Attach Files
-      </Button>
-
       <View
         style={{
           justifyContent: 'center',
@@ -66,13 +57,3 @@ const Files = () => {
 };
 
 export default Files;
-
-const styles = StyleSheet.create({
-  attach: {
-    position: 'absolute',
-    margin: 16,
-    right: 10,
-    bottom: 17,
-    borderRadius: 20,
-  },
-});
