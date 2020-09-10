@@ -36,11 +36,16 @@ const AuthContextProvider = (props) => {
       setAuthState({
         ...authState,
         isLoggedIn: true,
-        jwt: token,
+        token: token,
       });
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const Logout = async () => {
+    await AsyncStorage.removeItem("@jwt");
+    setAuthState(initialState);
   };
 
   const getUser = async () => {
@@ -70,6 +75,7 @@ const AuthContextProvider = (props) => {
     <AuthContext.Provider
       value={{
         LogIn,
+        Logout,
         authState,
         setAuthState,
         getUser,

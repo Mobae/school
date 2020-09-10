@@ -36,18 +36,25 @@ const logout = (
     style={{ marginRight: 15 }}
   />
 );
-const LogoutButton = (props) => (
-  <TouchableOpacity>
-    <View style={{ flexDirection: "row" }}>
-      <Text
-        style={{ marginTop: "auto", marginBottom: "auto", color: "#ef5350" }}
-      >
-        Logout
-      </Text>
-      <IconButton icon="logout" color="#ef5350" style={{ marginLeft: 0 }} />
-    </View>
-  </TouchableOpacity>
-);
+const LogoutButton = () => {
+  const { Logout } = useContext(AuthContext);
+  return (
+    <TouchableOpacity onPress={() => Logout()}>
+      <View style={{ flexDirection: "row" }}>
+        <Text
+          style={{
+            marginTop: "auto",
+            marginBottom: "auto",
+            color: "#ef5350",
+          }}
+        >
+          Logout
+        </Text>
+        <IconButton icon="logout" color="#ef5350" style={{ marginLeft: 0 }} />
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 const StudentStackScreen = () => {
   return (
@@ -56,7 +63,9 @@ const StudentStackScreen = () => {
         <StudentStack.Screen
           name="JMRD"
           component={StudentProfile}
-          options={{ headerRight: LogoutButton }}
+          options={{
+            headerRight: () => <LogoutButton />,
+          }}
         />
         <StudentStack.Screen name="Profile" component={StudentInfo} />
         <StudentStack.Screen name="Attendance" component={StudentAttendance} />
