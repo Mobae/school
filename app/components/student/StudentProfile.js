@@ -1,6 +1,12 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import { StyleSheet } from "react-native";
-import { Avatar, Paragraph, Card, TouchableRipple } from "react-native-paper";
+import { StyleSheet, Text } from "react-native";
+import {
+  Avatar,
+  Paragraph,
+  Card,
+  TouchableRipple,
+  Button,
+} from "react-native-paper";
 
 import { AuthContext } from "../../context/AuthContext";
 
