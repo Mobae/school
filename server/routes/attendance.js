@@ -71,6 +71,7 @@ router.get("/class/:classId", async (req, res) => {
         console.log(err);
       }
     });
+    console.log(data);
     res.json({ data });
   } catch (err) {
     console.log(err);
