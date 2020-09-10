@@ -57,8 +57,18 @@ router.get("/student/:id/:month", auth, async (req, res) => {
 });
 
 router.get("/class/:classId", async (req, res) => {
-  const cls = await Class.findById(req.params.classId);
-  console.log(cls);
+  try {
+    const cls = await Class.findById(req.params.classId);
+    const data = cls.students.forEach(async (stu) => {
+      const det = await Student.findById(stu._id);
+      const att = await Attendance.find({ studentId: stu._id });
+      return { name: det.name, rollNo: det.rollNo, attendance: att };
+    });
+    res.json({ data });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
 // router.get("/months", async (req, res) => {
