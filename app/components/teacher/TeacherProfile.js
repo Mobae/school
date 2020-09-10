@@ -13,16 +13,8 @@ const AttendanceIcon = (props) => (
 );
 
 const TeacherProfile = ({ navigation }) => {
-  const { authState, getClassName } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
   const { user } = authState;
-
-  useEffect(() => {
-    getClassName();
-  }, []);
-
-  useEffect(() => {
-    console.log(className);
-  }, [className]);
   return (
     <Fragment>
       <Card style={styles}>
@@ -30,7 +22,7 @@ const TeacherProfile = ({ navigation }) => {
         <Card.Title title="Profile" subtitle={user.name} left={ProfileIcon} />
         <Card.Content>
           <Paragraph>Email: {user.email}</Paragraph>
-          <Paragraph>Class teacher of {user.className}</Paragraph>
+          <Paragraph>Class teacher of {user.info.className}</Paragraph>
         </Card.Content>
         {/* </TouchableRipple> */}
       </Card>
