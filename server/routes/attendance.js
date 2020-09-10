@@ -60,7 +60,9 @@ router.get("/student/:id/:month", auth, async (req, res) => {
 router.get("/class/:classId", async (req, res) => {
   try {
     const cls = await (await Class.findById(req.params.classId)).toJSON();
-    for (let i = 0; i < cls.students.length; i++) {
+    const stu = cls.students;
+    let data = [];
+    for (let i = 0; i < stulength; i++) {
       try {
         const det = await Student.findById(stu.student);
         const att = await Attendance.find({ studentId: stu.student });
