@@ -16,9 +16,9 @@ const StudentList = () => {
       setSearchQuery(query);
     };
 
-//   React.useEffect(() => {
-//     getAllStudents();
-//   }, [])
+  React.useEffect(() => {
+    getAllStudents();
+  }, [])
 
   React.useEffect(() => {
     if(searchQuery === ''){
@@ -35,10 +35,11 @@ const StudentList = () => {
   return (
     <View>
         <Searchbar
-            placeholder="Search class.."
+            placeholder="Search students.."
             onChangeText={onChangeSearch}
             value={searchQuery}
         />
+        <View style={adminStyles.scroll}>
         <ScrollView>
         { filtered.map(student => (
             <View key={student._id}>
@@ -53,6 +54,7 @@ const StudentList = () => {
             </View>
         )) }
         </ScrollView>
+        </View>
     </View>
   );
 };
