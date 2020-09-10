@@ -134,6 +134,11 @@ router.post("/classTeacher", async (req, res) => {
   try {
     const class_ = await Class.findById(req.body.class);
     const teacher = await Teacher.findById(req.body.teacher);
+    if(teacher.teacherClass){
+      const oldClass = await Class.findById(teacher.teacherClass);
+      oldClass.classTeacher = null;
+      oldClass.save();
+    }
     if (class_.classTeacher) {
       const oldClassTeacher = await Teacher.findById(class_.classTeacher);
       oldClassTeacher.teacherClass = null;
