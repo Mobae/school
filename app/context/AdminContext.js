@@ -12,6 +12,23 @@ const AdminContextProvider = (props) => {
   const [currClass, setCurrClass] = useState("");
   const [classObj, setClassObj] = useState({});
   const [flag, setFlag] = useState(false);
+  const [redirect, setRedirect] = useState('hello');
+
+  const getAllData = async () => {
+    setLoading(true);
+    let res1 = await axios.get(url + "/class/all");
+    let res2 = await axios.get(url + "/student/teachers/all");
+    let res3 = await axios.get(url + "/student/students/all");
+    
+    setCurrClass(res1.data.data[0]._id);
+    setAdminState({
+      teachers: res2.data.data,
+      students: adminState.students,
+      classes: res1.data.data,
+      class_: adminState.class_,
+      allStudents: res3.data.data
+    });
+  }
 
   // 1 Getting All Classes
   const getClasses = async () => {
@@ -202,13 +219,15 @@ const AdminContextProvider = (props) => {
     <AdminContext.Provider
       value={{
         addClass, addTeacher, addClassTeacher, addSubTeacher, addStudent,
-        getClasses, getTeachers,getAllStudents,
+        getClasses, getTeachers,getAllStudents, getAllData,
         getCurrClassTeachers, getStudents,
         getAttendance,
         adminState,
         currClass, setCurrClass,
         classObj,
         flag, setFlag,
+        loading, setLoading,
+        redirect, setRedirect,
       }}
     >
       {props.children}
