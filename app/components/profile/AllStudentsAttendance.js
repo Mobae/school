@@ -32,15 +32,9 @@ const AllStudentsAttendance = ({ navigation }) => {
 
   const getStudents = async () => {
     try {
-      const res = await axios.get(URL + "/class/students/" + user.class_);
+      const res = await axios.get(URL + "/attendance/class/" + user.class_);
       console.log(res.data.data);
-      res.data.data.forEach(async (student) => {
-        const att = await axios.get(URL + "/attendance/student", {
-          params: { id: student._id },
-        });
-        console.log(att.data);
-      });
-      setStudentList(res.data.data);
+      // setStudentList(res.data.data);
     } catch (err) {
       console.log(err);
     }
