@@ -1,11 +1,6 @@
 import React, { useContext, useEffect, useState, Fragment } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import {
-  Card,
-  DataTable,
-  Paragraph,
-  TouchableRipple,
-} from "react-native-paper";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { Card, DataTable, Paragraph } from "react-native-paper";
 import axios from "axios";
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -120,12 +115,6 @@ const StudentAttendance = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  profile_info: {
-    padding: 20,
-    display: "flex",
-    flexDirection: "row",
-    marginTop: 50,
-  },
   card: { margin: 10, marginBottom: 0, marginTop: 15, paddingTop: 5 },
 });
 
