@@ -22,7 +22,7 @@ const TeacherProfile = ({ navigation }) => {
         <Card.Title title="Profile" subtitle={user.name} left={ProfileIcon} />
         <Card.Content>
           <Paragraph>Email: {user.email}</Paragraph>
-          <Paragraph>Class teacher of {user.info.className}</Paragraph>
+          <Paragraph>Class teacher of {user.className}</Paragraph>
         </Card.Content>
         {/* </TouchableRipple> */}
       </Card>

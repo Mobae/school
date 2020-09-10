@@ -4,6 +4,7 @@ const router = Router();
 const Attendance = require("../models/Attendance");
 
 const auth = require("../middleware/auth");
+const Class = require("../models/Class");
 
 router.get("/student/:id", auth, async (req, res) => {
   console.log("hi from att");
@@ -55,19 +56,24 @@ router.get("/student/:id/:month", auth, async (req, res) => {
   }
 });
 
-router.get("/months", async (req, res) => {
-  const agg = await Attendance.aggregate([
-    { $project: { month: { $month: "$date" }, studentId: 1, status: 1 } },
-    {
-      $group: {
-        _id: { month: "$month", stid: "$studentId" },
-        ssum: { $sum: 1 },
-        stats: "$status",
-      },
-    },
-  ]);
-  console.log(agg);
+router.get("/class/:classId", async (req, res) => {
+  const cls = await Class.findById(req.params.classId);
+  console.log(cls);
 });
+
+// router.get("/months", async (req, res) => {
+//   const agg = await Attendance.aggregate([
+//     { $project: { month: { $month: "$date" }, studentId: 1, status: 1 } },
+//     {
+//       $group: {
+//         _id: { month: "$month", stid: "$studentId" },
+//         ssum: { $sum: 1 },
+//         stats: "$status",
+//       },
+//     },
+//   ]);
+//   console.log(agg);
+// });
 
 router.post("/", auth, async (req, res) => {
   try {

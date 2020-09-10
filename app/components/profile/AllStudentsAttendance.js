@@ -18,9 +18,8 @@ const DataRow = (props) => {
       <DataTable.Cell style={styles.name_cell} style={{ flex: 2 }}>
         {props.name}
       </DataTable.Cell>
-      <DataTable.Cell numeric></DataTable.Cell>
-      <DataTable.Cell numeric></DataTable.Cell>
-      <DataTable.Cell numeric></DataTable.Cell>
+      <DataTable.Cell numeric>{props.rollNo}</DataTable.Cell>
+      <DataTable.Cell numeric>hi</DataTable.Cell>
     </DataTable.Row>
   );
 };
@@ -32,15 +31,19 @@ const AllStudentsAttendance = ({ navigation }) => {
   } = useContext(AuthContext);
 
   const getStudents = async () => {
-    const res = await axios.get(URL + "/class/students/" + user.class_);
-    console.log(res.data.data);
-    res.data.data.forEach(async (student) => {
-      const att = await axios.get(URL + "/attendance/student", {
-        params: { id: student._id },
+    try {
+      const res = await axios.get(URL + "/class/students/" + user.class_);
+      console.log(res.data.data);
+      res.data.data.forEach(async (student) => {
+        const att = await axios.get(URL + "/attendance/student", {
+          params: { id: student._id },
+        });
+        console.log(att.data);
       });
-      console.log(att.data);
-    });
-    setStudentList(res.data.data);
+      setStudentList(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -54,12 +57,18 @@ const AllStudentsAttendance = ({ navigation }) => {
           <Title style={styles.title}>Attendance</Title>
           <DataTable>
             <DataTable.Header>
-              <DataTable.Title>Student Name</DataTable.Title>
+              <DataTable.Title style={{ flex: 2 }}>
+                Student Name
+              </DataTable.Title>
               <DataTable.Title numeric>Roll No.</DataTable.Title>
               <DataTable.Title numeric>Attendance</DataTable.Title>
             </DataTable.Header>
             {studentList.map((student) => (
-              <DataRow name={student.name} key={student._id} />
+              <DataRow
+                name={student.name}
+                key={student._id}
+                rollNo={student.info.rollNo}
+              />
             ))}
             <DataTable.Pagination
               page={1}

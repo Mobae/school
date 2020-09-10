@@ -60,6 +60,7 @@ const AuthContextProvider = (props) => {
     let class_;
     if (rank === "1") {
       class_ = res.data.student.teacherClass;
+      console.log(class_);
     }
     if (rank == "0") {
       class_ = res.data.student.studentClass;

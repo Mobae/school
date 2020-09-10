@@ -79,7 +79,13 @@ const TeacherStackScreen = () => {
   return (
     <NavigationContainer>
       <TeacherStack.Navigator>
-        <TeacherStack.Screen name="Profile" component={TeacherProfile} />
+        <TeacherStack.Screen
+          name="JMRD"
+          component={TeacherProfile}
+          options={{
+            headerRight: () => <LogoutButton />,
+          }}
+        />
         <TeacherStack.Screen
           name="Attendance"
           component={AllStudentAttendance}
