@@ -12,15 +12,9 @@ const AttendanceIcon = (props) => (
   <Avatar.Icon {...props} icon="book" size={45} />
 );
 
-const TestIcon = (props) => <Avatar.Icon {...props} icon="file" size={45} />;
-
 const StudentProfile = ({ navigation }) => {
-  const { authState, getClassName } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
   const { user } = authState;
-
-  useEffect(() => {
-    getClassName();
-  }, []);
 
   useEffect(() => {}, [authState]);
 

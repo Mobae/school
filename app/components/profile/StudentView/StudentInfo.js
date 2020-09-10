@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -13,25 +13,10 @@ import { List, Provider as PaperProvider } from "react-native-paper";
 import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
 
 import { AuthContext } from "../../../context/AuthContext";
-import axios from "axios";
-
-import { URL } from "../../../config";
 
 const StudentInfo = () => {
   const { authState } = useContext(AuthContext);
   const { user } = authState;
-
-  // const [info, setInfo] = useState({});
-
-  // const getInfo = async () => {
-  //   axios.defaults.headers["auth-token"] = authState.jwt;
-  //   const res = await axios.get(URL + "/student/" + user.id);
-  //   setInfo(res.data.student.info);
-  // };
-
-  // useEffect(() => {
-  //   getInfo();
-  // }, []);
 
   const { info } = user;
 
