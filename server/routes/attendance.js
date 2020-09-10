@@ -64,10 +64,10 @@ router.get("/class/:classId", async (req, res) => {
     const data = cls.students.map(async (stu) => {
       try {
         const det = await Student.findById(stu.student);
-        console.log(det);
+        // console.log(det);
         const att = await Attendance.find({ studentId: stu.student });
-        console.log(att);
-        return { name: det.name, rollNo: det.rollNo, attendance: att };
+        // console.log(att);
+        console.log({ name: det.name, rollNo: det.rollNo, attendance: att });
       } catch (err) {
         console.log(err);
       }
