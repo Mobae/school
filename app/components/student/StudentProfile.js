@@ -1,6 +1,12 @@
 import React, { Fragment, useContext, useEffect } from "react";
-import { StyleSheet } from "react-native";
-import { Avatar, Paragraph, Card, TouchableRipple } from "react-native-paper";
+import { StyleSheet, Text } from "react-native";
+import {
+  Avatar,
+  Paragraph,
+  Card,
+  TouchableRipple,
+  Button,
+} from "react-native-paper";
 
 import { AuthContext } from "../../context/AuthContext";
 
@@ -12,21 +18,15 @@ const AttendanceIcon = (props) => (
   <Avatar.Icon {...props} icon="book" size={45} />
 );
 
-const TestIcon = (props) => <Avatar.Icon {...props} icon="file" size={45} />;
-
 const StudentProfile = ({ navigation }) => {
-  const { authState, getClassName } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
   const { user } = authState;
-
-  useEffect(() => {
-    getClassName();
-  }, []);
 
   useEffect(() => {}, [authState]);
 
   return (
     <Fragment>
-      <Card style={styles}>
+      <Card style={styles.card}>
         <TouchableRipple onPress={() => navigation.push("Profile")}>
           <Fragment>
             <Card.Title
@@ -41,7 +41,7 @@ const StudentProfile = ({ navigation }) => {
           </Fragment>
         </TouchableRipple>
       </Card>
-      <Card style={styles}>
+      <Card style={styles.card}>
         <TouchableRipple onPress={() => navigation.push("Attendance")}>
           <Card.Title
             title="Attendance"
@@ -55,8 +55,7 @@ const StudentProfile = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  margin: 10,
-  marginBottom: 0,
+  card: { margin: 10, marginBottom: 0 },
 });
 
 export default StudentProfile;

@@ -1,8 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Avatar, Card, DataTable } from "react-native-paper";
-import { NavigationContainer } from "@react-navigation/native";
+import React, { useContext, useEffect, useState, Fragment } from "react";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Card,
+  DataTable,
+  Paragraph,
+  TouchableRipple,
+} from "react-native-paper";
 import axios from "axios";
+import DropDownPicker from "react-native-dropdown-picker";
 
 import { AuthContext } from "../../../context/AuthContext";
 import { URL } from "../../../config";
@@ -23,112 +28,99 @@ const monthNames = [
 ];
 
 const MonthData = (props) => {
+  const date = new Date(props.date).toISOString().substr(0, 10);
   return (
-    <TouchableOpacity onPress={() => navigation.push("Month")}>
-      <DataTable.Row style={{ backgroundColor: "#b3ffc6" }}>
-        <DataTable.Cell>{props.name}</DataTable.Cell>
-        <DataTable.Cell>13/30</DataTable.Cell>
-        <DataTable.Cell>85</DataTable.Cell>
+    <TouchableOpacity>
+      <DataTable.Row
+        style={{
+          backgroundColor: props.status === "P" ? "#b3ffc6" : "#ffb3b3",
+        }}
+      >
+        <DataTable.Cell>{date}</DataTable.Cell>
+        <DataTable.Cell>{props.status}</DataTable.Cell>
       </DataTable.Row>
     </TouchableOpacity>
   );
 };
 
 const StudentAttendance = ({ navigation }) => {
+  const initialMonth = new Date().getMonth() + 1;
+  const [month, setMonth] = useState(initialMonth);
   const [monthData, setMonthData] = useState([]);
-  const {
-    authState: { user },
-  } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
+  const { user } = authState;
+  const [attState, setAttState] = useState({
+    tDays: 0,
+    pDays: 0,
+    percentage: 0,
+  });
 
-  const getMonthData = async () => {
-    let MData = [];
-    let monthStart = 1;
-    let monthEnd = new Date().getMonth();
-    monthEnd = monthEnd + 1;
-    console.log(monthEnd, user);
-    for (let i = monthStart; i <= monthEnd; i++) {
-      const data = await axios.get(
-        URL + "/attendance/student/" + user.id + "/" + i.toString()
-      );
-      console.log(URL + "/attendance/student/" + user.id + "/" + i.toString());
-      data.data.monthName = monthNames[i - 1];
-      MData.push(data.data);
-    }
-    console.log(MData);
-    setMonthData(MData);
+  const getMonthAtt = async () => {
+    console.log(
+      URL + "/attendance/student/" + user._id + "/" + month.toString()
+    );
+    const res = await axios.get(
+      URL + "/attendance/student/" + user._id + "/" + month.toString(),
+      {
+        headers: {
+          "auth-token": authState.token,
+        },
+      }
+    );
+    const data = res.data.data;
+    console.log(data);
+    setMonthData(data);
+    const p = data.filter((d) => d.status === "P");
+    setAttState({
+      tDays: data.length,
+      pDays: p.length,
+      percentage: ((p.length / data.length) * 100).toFixed(2),
+    });
   };
 
   useEffect(() => {
-    getMonthData();
-  }, []);
-
-  useEffect(() => {
-    console.log(monthData);
-  }, [monthData]);
+    console.log(month);
+    getMonthAtt();
+  }, [month]);
 
   return (
-    <View>
-      <TouchableOpacity onPress={() => console.log("profile")}>
-        <Card>
-          <Card.Content>
-            <View style={styles.profile_info}>
-              <View>
-                <Avatar.Icon
-                  size={100}
-                  icon="account"
-                  style={styles.avatar_icon}
-                />
-              </View>
-              <View style={{ marginLeft: 30, marginTop: 30 }}>
-                <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-                  {user.name}
-                </Text>
-                <Text>Class: {user.className}</Text>
-              </View>
-            </View>
+    <Fragment>
+      <DropDownPicker
+        items={monthNames.map((m, i) => ({ label: m, value: i + 1 }))}
+        defaultValue={month}
+        containerStyle={{ height: 60, margin: 10 }}
+        style={{ backgroundColor: "#fafafa" }}
+        itemStyle={{
+          justifyContent: "flex-start",
+        }}
+        dropDownStyle={{ backgroundColor: "#fafafa" }}
+        onChangeItem={(item) => setMonth(item.value)}
+      />
+      <View style={{ zIndex: 1 }}>
+        <Card style={styles.card}>
+          <Card.Title title="Attendance" subtitle={monthNames[month - 1]} />
+          <Card.Content style={{ marginBottom: 12 }}>
+            <Paragraph>Present Days: {attState.pDays}</Paragraph>
+            <Paragraph>Total Days: {attState.tDays}</Paragraph>
+            <Paragraph>Percent: {attState.percentage + "%"}</Paragraph>
           </Card.Content>
-        </Card>
-      </TouchableOpacity>
-      <View style={{ paddingHorizontal: 20, paddingTop: 40 }}>
-        <Card
-          style={{
-            backgroundColor: "#c6b3ff",
-          }}
-        >
-          <Card.Content>
-            <View
-              style={{
-                borderColor: "black",
-                borderWidth: 1.2,
-                borderRadius: 3,
-                backgroundColor: "white",
-              }}
-            >
-              <DataTable>
-                <DataTable.Header>
-                  <DataTable.Title>Month</DataTable.Title>
-                  <DataTable.Title>P/T</DataTable.Title>
-                  <DataTable.Title>Percent(%)</DataTable.Title>
-                </DataTable.Header>
-                {monthData.map((month) => (
-                  <MonthData name={month.monthName} key={month._id} />
-                ))}
-              </DataTable>
-            </View>
-          </Card.Content>
+          <DataTable>
+            <DataTable.Header>
+              <DataTable.Title>Date</DataTable.Title>
+              <DataTable.Title>Attendance</DataTable.Title>
+            </DataTable.Header>
+            {monthData.map((d) => (
+              <MonthData date={d.date} status={d.status} key={d._id} />
+            ))}
+          </DataTable>
         </Card>
       </View>
-    </View>
+    </Fragment>
   );
 };
 
 const styles = StyleSheet.create({
-  profile_info: {
-    padding: 20,
-    display: "flex",
-    flexDirection: "row",
-    marginTop: 50,
-  },
+  card: { margin: 10, marginBottom: 0, marginTop: 15, paddingTop: 5 },
 });
 
 export default StudentAttendance;

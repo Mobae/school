@@ -1,28 +1,58 @@
 import * as React from 'react';
-import { DataTable } from 'react-native-paper';
-import { View } from 'react-native';
+import { Card, Title, Paragraph } from 'react-native-paper';
+import { View, TouchableOpacity } from 'react-native';
 
 const Files = () => {
   return (
-    <View style={{ justifyContent: 'center', marginHorizontal: 10 }}>
-      <DataTable style={{ alignSelf: 'center' }}>
-        <DataTable.Header>
-          <DataTable.Title>Files</DataTable.Title>
-          <DataTable.Title numeric>Date</DataTable.Title>
-          <DataTable.Title numeric>Size (MB)</DataTable.Title>
-        </DataTable.Header>
-        <DataTable.Row>
-          <DataTable.Cell>File 1</DataTable.Cell>
-          <DataTable.Cell numeric>01-03-09</DataTable.Cell>
-          <DataTable.Cell numeric>3.6</DataTable.Cell>
-        </DataTable.Row>
-        <DataTable.Row>
-          <DataTable.Cell> File 2</DataTable.Cell>
-          <DataTable.Cell numeric>01-03-09</DataTable.Cell>
-          <DataTable.Cell numeric>2.6</DataTable.Cell>
-        </DataTable.Row>
-      </DataTable>
-    </View>
+    <React.Fragment>
+      <View
+        style={{
+          justifyContent: 'center',
+          marginHorizontal: 20,
+          marginVertical: 20,
+        }}
+      >
+        <TouchableOpacity>
+          <Card style={{ marginTop: 10, backgroundColor: '#eee' }}>
+            <Card.Content>
+              <Title>File 1</Title>
+              <Paragraph>Description</Paragraph>
+              <Paragraph>Subject:</Paragraph>
+              <View style={{ flexDirection: 'row' }}>
+                <Paragraph>Date:</Paragraph>
+                <Paragraph style={{ marginLeft: 160 }}>Size:</Paragraph>
+              </View>
+            </Card.Content>
+          </Card>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Card style={{ marginTop: 10, backgroundColor: '#eee' }}>
+            <Card.Content>
+              <Title>File 2</Title>
+              <Paragraph>Description</Paragraph>
+              <Paragraph>Subject:</Paragraph>
+              <View style={{ flexDirection: 'row' }}>
+                <Paragraph>Date:</Paragraph>
+                <Paragraph style={{ marginLeft: 160 }}>Size:</Paragraph>
+              </View>
+            </Card.Content>
+          </Card>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Card style={{ marginTop: 10, backgroundColor: '#eee' }}>
+            <Card.Content>
+              <Title>File 3</Title>
+              <Paragraph>Description</Paragraph>
+              <Paragraph>Subject:</Paragraph>
+              <View style={{ flexDirection: 'row' }}>
+                <Paragraph>Date:</Paragraph>
+                <Paragraph style={{ marginLeft: 160 }}>Size:</Paragraph>
+              </View>
+            </Card.Content>
+          </Card>
+        </TouchableOpacity>
+      </View>
+    </React.Fragment>
   );
 };
 

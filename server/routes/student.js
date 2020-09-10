@@ -48,16 +48,30 @@ router.get("/teachers/all", async (req, res) => {
 router.get("/initial", auth, async (req, res) => {
   try {
     let student = await Student.findById(req.body.data.id);
-    let cls = await Class.findById(student.studentClass);
-    student = student.toJSON();
-    delete student.password;
-    student.className = cls.name;
-    console.log(cls.name, student.className);
-    return res.json({
-      student,
-    });
+    if (student) {
+      let cls = await Class.findById(student.studentClass);
+      student = student.toJSON();
+      delete student.password;
+      student.className = cls.name;
+      console.log(cls.name, student.className);
+      return res.json({
+        student,
+      });
+    }
+    student = await Teacher.findById(req.body.data.id);
+    if (student) {
+      let cls = await Class.findById(student.teacherClass);
+      student = student.toJSON();
+      delete student.password;
+      student.className = cls.name;
+      console.log(cls.name, student.className);
+      return res.json({
+        student,
+      });
+    }
   } catch (err) {
     res.status(500).json({ err });
+    console.log(err);
   }
 });
 

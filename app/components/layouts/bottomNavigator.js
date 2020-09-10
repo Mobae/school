@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect, Fragment } from "react";
+import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { BottomNavigation, Text } from "react-native-paper";
+import { BottomNavigation, Text, IconButton } from "react-native-paper";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import StudentProfile from "../student/StudentProfile";
 import TeacherProfile from "../teacher/TeacherProfile";
@@ -20,16 +22,51 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import AdminStack from "../admin/AdminStack";
 import ChatStack from "../Chats/ChatStack";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const StudentStack = createStackNavigator();
 const TeacherStack = createStackNavigator();
 const NoticeStack = createStackNavigator();
 
+const logout = (
+  <MaterialCommunityIcons
+    name="logout"
+    size={100}
+    color="red"
+    style={{ marginRight: 15 }}
+  />
+);
+const LogoutButton = () => {
+  const { Logout } = useContext(AuthContext);
+  return (
+    <TouchableOpacity onPress={() => Logout()}>
+      <View style={{ flexDirection: "row" }}>
+        <Text
+          style={{
+            marginTop: "auto",
+            marginBottom: "auto",
+            color: "#ef5350",
+          }}
+        >
+          Logout
+        </Text>
+        <IconButton icon="logout" color="#ef5350" style={{ marginLeft: 0 }} />
+      </View>
+    </TouchableOpacity>
+  );
+};
+
 const StudentStackScreen = () => {
   return (
     <NavigationContainer>
       <StudentStack.Navigator>
-        <StudentStack.Screen name="JMRD" component={StudentProfile} />
+        <StudentStack.Screen
+          name="JMRD"
+          component={StudentProfile}
+          options={{
+            headerRight: () => <LogoutButton />,
+          }}
+        />
         <StudentStack.Screen name="Profile" component={StudentInfo} />
         <StudentStack.Screen name="Attendance" component={StudentAttendance} />
         <StudentStack.Screen name="Month" component={IndividualMonth} />
@@ -42,7 +79,13 @@ const TeacherStackScreen = () => {
   return (
     <NavigationContainer>
       <TeacherStack.Navigator>
-        <TeacherStack.Screen name="Profile" component={TeacherProfile} />
+        <TeacherStack.Screen
+          name="JMRD"
+          component={TeacherProfile}
+          options={{
+            headerRight: () => <LogoutButton />,
+          }}
+        />
         <TeacherStack.Screen
           name="Attendance"
           component={AllStudentAttendance}
@@ -75,13 +118,13 @@ const NoticeRoute = () => {
 };
 
 const ProfileRoute = () => {
-  // const { authState, getUser } = useContext(AuthContext);
-  // const {
-  //   user: { rank },
-  // } = authState;
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
+  const { authState, getUser } = useContext(AuthContext);
+  const {
+    user: { rank },
+  } = authState;
+  useEffect(() => {
+    getUser();
+  }, []);
   // console.log(rank);
   // switch (rank) {
   //   case "2":
@@ -91,12 +134,12 @@ const ProfileRoute = () => {
   //   case "0":
   //     return <StudentStackScreen />;
   // }
-  // return rank === "1" ? (
-  //   <TeacherStackScreen />
-  // ) : rank === "0" ? (
-  //   <StudentStackScreen />
-  // ) : null;
-  return <AdminStack />;
+  return rank === "1" ? (
+    <TeacherStackScreen />
+  ) : rank === "0" ? (
+    <StudentStackScreen />
+  ) : null;
+  // return <AdminStack />;
 };
 
 const MyComponent = () => {

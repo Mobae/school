@@ -2,6 +2,8 @@ const { Router } = require("express");
 const router = Router();
 
 const Attendance = require("../models/Attendance");
+const Class = require("../models/Class");
+const Student = require("../models/Student");
 
 const auth = require("../middleware/auth");
 
@@ -55,19 +57,53 @@ router.get("/student/:id/:month", auth, async (req, res) => {
   }
 });
 
-router.get("/months", async (req, res) => {
-  const agg = await Attendance.aggregate([
-    { $project: { month: { $month: "$date" }, studentId: 1, status: 1 } },
-    {
-      $group: {
-        _id: { month: "$month", stid: "$studentId" },
-        ssum: { $sum: 1 },
-        stats: "$status",
-      },
-    },
-  ]);
-  console.log(agg);
+router.get("/class/:classId", async (req, res) => {
+  try {
+    const cls = await (await Class.findById(req.params.classId)).toJSON();
+    const stu = cls.students;
+    let data = [];
+    for (let i = 0; i < stu.length; i++) {
+      console.log(stu);
+      try {
+        const det = await Student.findById(stu[i].student);
+        const att = await Attendance.find({ studentId: stu[i].student });
+        console.log({
+          name: det.name,
+          rollNo: det.info.rollNo,
+          _id: det._id,
+          attendance: att.map((at) => at.status),
+        });
+        data.push({
+          name: det.name,
+          rollNo: det.info.rollNo,
+          attendance: att.map((at) => at.status),
+          _id: det._id,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    console.log(data);
+    res.json({ data });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Server error" });
+  }
 });
+
+// router.get("/months", async (req, res) => {
+//   const agg = await Attendance.aggregate([
+//     { $project: { month: { $month: "$date" }, studentId: 1, status: 1 } },
+//     {
+//       $group: {
+//         _id: { month: "$month", stid: "$studentId" },
+//         ssum: { $sum: 1 },
+//         stats: "$status",
+//       },
+//     },
+//   ]);
+//   console.log(agg);
+// });
 
 router.post("/", auth, async (req, res) => {
   try {

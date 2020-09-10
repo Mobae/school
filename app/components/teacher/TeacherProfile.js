@@ -13,16 +13,8 @@ const AttendanceIcon = (props) => (
 );
 
 const TeacherProfile = ({ navigation }) => {
-  const { authState, getClassName } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
   const { user } = authState;
-
-  useEffect(() => {
-    getClassName();
-  }, []);
-
-  useEffect(() => {
-    console.log(className);
-  }, [className]);
   return (
     <Fragment>
       <Card style={styles}>

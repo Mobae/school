@@ -1,35 +1,35 @@
 import React, { Fragment } from 'react';
-import { Avatar, Card, IconButton } from 'react-native-paper';
+import { Avatar, Card, IconButton, TouchableRipple } from 'react-native-paper';
 import { View, TouchableOpacity } from 'react-native';
 
 const ChatHome = ({ navigation }) => {
   return (
     <Fragment>
-      <TouchableOpacity>
-        <View style={{ margin: 20 }}>
-          <Card style={{ height: 100 }}>
+      <View style={{ margin: 10, marginBottom: 0 }}>
+        <Card>
+          <TouchableRipple onPress={() => navigation.navigate('Chat')}>
             <Card.Title
-              title='Chats'
-              subtitle='Talk with teachers !!'
-              left={(props) => <Avatar.Icon {...props} icon='wechat' />}
+              title="Chats"
+              subtitle="Talk with teachers !!"
+              left={(props) => <Avatar.Icon {...props} icon="wechat" />}
             />
-          </Card>
-        </View>
-      </TouchableOpacity>
+          </TouchableRipple>
+        </Card>
+      </View>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Files')}>
-        <View style={{ margin: 20, marginTop: 10 }}>
-          <Card style={{ height: 100 }}>
+      <View style={{ margin: 10 }}>
+        <Card>
+          <TouchableRipple onPress={() => navigation.navigate('Files')}>
             <Card.Title
-              title='Files'
-              subtitle='Get your files'
+              title="Files"
+              subtitle="Get your files"
               left={(props) => (
-                <Avatar.Icon {...props} icon='file-document-box-multiple' />
+                <Avatar.Icon {...props} icon="file-document-box-multiple" />
               )}
             />
-          </Card>
-        </View>
-      </TouchableOpacity>
+          </TouchableRipple>
+        </Card>
+      </View>
     </Fragment>
   );
 };

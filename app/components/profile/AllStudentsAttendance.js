@@ -18,9 +18,8 @@ const DataRow = (props) => {
       <DataTable.Cell style={styles.name_cell} style={{ flex: 2 }}>
         {props.name}
       </DataTable.Cell>
-      <DataTable.Cell numeric></DataTable.Cell>
-      <DataTable.Cell numeric></DataTable.Cell>
-      <DataTable.Cell numeric></DataTable.Cell>
+      <DataTable.Cell numeric>{props.rollNo}</DataTable.Cell>
+      <DataTable.Cell numeric>{props.att}</DataTable.Cell>
     </DataTable.Row>
   );
 };
@@ -32,15 +31,21 @@ const AllStudentsAttendance = ({ navigation }) => {
   } = useContext(AuthContext);
 
   const getStudents = async () => {
-    const res = await axios.get(URL + "/class/students/" + user.class_);
-    console.log(res.data.data);
-    res.data.data.forEach(async (student) => {
-      const att = await axios.get(URL + "/attendance/student", {
-        params: { id: student._id },
+    try {
+      const res = await axios.get(URL + "/attendance/class/" + user.class_);
+      console.log(res.data.data);
+      const students = res.data.data;
+      const pt = students.map((stu) => {
+        const p = stu.attendance.filter((status) => status === "P").length;
+        const t = stu.attendance.length;
+        const pt = { p, t };
+        stu.pt = pt;
+        return stu;
       });
-      console.log(att.data);
-    });
-    setStudentList(res.data.data);
+      setStudentList(pt);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -54,12 +59,19 @@ const AllStudentsAttendance = ({ navigation }) => {
           <Title style={styles.title}>Attendance</Title>
           <DataTable>
             <DataTable.Header>
-              <DataTable.Title>Student Name</DataTable.Title>
+              <DataTable.Title style={{ flex: 2 }}>
+                Student Name
+              </DataTable.Title>
               <DataTable.Title numeric>Roll No.</DataTable.Title>
               <DataTable.Title numeric>Attendance</DataTable.Title>
             </DataTable.Header>
             {studentList.map((student) => (
-              <DataRow name={student.name} key={student._id} />
+              <DataRow
+                name={student.name}
+                key={student._id}
+                rollNo={student.rollNo}
+                att={((student.pt.p / student.pt.t) * 100).toFixed(2)}
+              />
             ))}
             <DataTable.Pagination
               page={1}

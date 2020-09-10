@@ -31,51 +31,54 @@ const AuthContextProvider = (props) => {
       //   },
       //   getClassName()
       // );
-      await AsyncStorage.setItem("@jwt", authState.jwt);
+      await AsyncStorage.setItem("@jwt", token);
       axios.defaults.headers.common["auth-token"] = token;
       setAuthState({
         ...authState,
         isLoggedIn: true,
-        jwt: token,
+        token: token,
       });
     } catch (error) {
       console.log(error);
     }
   };
 
+  const Logout = async () => {
+    await AsyncStorage.removeItem("@jwt");
+    setAuthState(initialState);
+  };
+
   const getUser = async () => {
-    axios.defaults.headers["auth-token"] = authState.jwt;
+    axios.defaults.headers["auth-token"] = await AsyncStorage.getItem("@jwt");
     const res = await axios.get(URL + "/student/initial");
     console.log(res.data);
+    // TODO
+    // if(!res.data.student) {
+    //   setAuthState({isLoggedIn: false})
+    // }
     const { _id, email, info, name, rank, className } = res.data.student;
     let class_;
     if (rank === "1") {
       class_ = res.data.student.teacherClass;
+      console.log(class_);
     }
     if (rank == "0") {
       class_ = res.data.student.studentClass;
     }
+    console.log("HELLO", authState);
     setAuthState({
       ...authState,
       user: { _id, name, email, rank, class_, info, className },
     });
   };
 
-  const getClassName = async () => {
-    axios.defaults.headers["auth-token"] = authState.jwt;
-    const res = await axios.get(URL + "/class/views/" + authState.user.class_);
-    const st = authState;
-    st.user.className = res.data.class_.name;
-    setAuthState(st);
-  };
-
   return (
     <AuthContext.Provider
       value={{
         LogIn,
+        Logout,
         authState,
         setAuthState,
-        getClassName,
         getUser,
         setAuthState,
       }}
