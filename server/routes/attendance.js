@@ -60,26 +60,24 @@ router.get("/student/:id/:month", auth, async (req, res) => {
 router.get("/class/:classId", async (req, res) => {
   try {
     const cls = await (await Class.findById(req.params.classId)).toJSON();
-    const data = cls.students.map(async (stu) => {
+    for (let i = 0; i < cls.students.length; i++) {
       try {
         const det = await Student.findById(stu.student);
-        // console.log(det);
         const att = await Attendance.find({ studentId: stu.student });
-        // console.log(att);
         console.log({
           name: det.name,
           rollNo: det.info.rollNo,
           attendance: att.map((at) => at.status),
         });
-        return {
+        data.push({
           name: det.name,
           rollNo: det.info.rollNo,
           attendance: att.map((at) => at.status),
-        };
+        });
       } catch (err) {
         console.log(err);
       }
-    });
+    }
     console.log(data);
     res.json({ data });
   } catch (err) {
