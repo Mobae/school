@@ -34,6 +34,7 @@ const NoticeContextProvider = (props) => {
       let res = await axios.post(URL + '/schoolnotice', notice);
       setLoading(false);
       const newSchoolNotice = res.config.data;
+      console.log(newSchoolNotice);
 
       setNoticeState({
         schoolNotices: [...noticeState.schoolNotices, newSchoolNotice],
