@@ -65,7 +65,7 @@ router.get("/class/:classId", async (req, res) => {
       try {
         const det = await Student.findById(stu.student);
         console.log(det);
-        const att = await Attendance.find({ studentId: stu._id });
+        const att = await Attendance.find({ studentId: stu.student });
         console.log(att);
         return { name: det.name, rollNo: det.rollNo, attendance: att };
       } catch (err) {
