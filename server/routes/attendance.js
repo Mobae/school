@@ -70,12 +70,14 @@ router.get("/class/:classId", async (req, res) => {
         console.log({
           name: det.name,
           rollNo: det.info.rollNo,
+          _id: det._id,
           attendance: att.map((at) => at.status),
         });
         data.push({
           name: det.name,
           rollNo: det.info.rollNo,
           attendance: att.map((at) => at.status),
+          _id: det._id,
         });
       } catch (err) {
         console.log(err);
