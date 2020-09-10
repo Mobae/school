@@ -71,6 +71,11 @@ router.get("/class/:classId", async (req, res) => {
           rollNo: det.info.rollNo,
           attendance: att.map((at) => at.status),
         });
+        return {
+          name: det.name,
+          rollNo: det.info.rollNo,
+          attendance: att.map((at) => at.status),
+        };
       } catch (err) {
         console.log(err);
       }
