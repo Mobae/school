@@ -61,9 +61,13 @@ router.get("/class/:classId", async (req, res) => {
   try {
     const cls = await Class.findById(req.params.classId);
     const data = cls.students.forEach(async (stu) => {
-      const det = await Student.findById(stu._id);
-      const att = await Attendance.find({ studentId: stu._id });
-      return { name: det.name, rollNo: det.rollNo, attendance: att };
+      try {
+        const det = await Student.findById(stu._id);
+        const att = await Attendance.find({ studentId: stu._id });
+        return { name: det.name, rollNo: det.rollNo, attendance: att };
+      } catch (err) {
+        console.log(err);
+      }
     });
     res.json({ data });
   } catch (err) {
