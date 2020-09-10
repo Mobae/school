@@ -19,7 +19,7 @@ const DataRow = (props) => {
         {props.name}
       </DataTable.Cell>
       <DataTable.Cell numeric>{props.rollNo}</DataTable.Cell>
-      <DataTable.Cell numeric>hi</DataTable.Cell>
+      <DataTable.Cell numeric>{props.att}</DataTable.Cell>
     </DataTable.Row>
   );
 };
@@ -34,7 +34,15 @@ const AllStudentsAttendance = ({ navigation }) => {
     try {
       const res = await axios.get(URL + "/attendance/class/" + user.class_);
       console.log(res.data.data);
-      // setStudentList(res.data.data);
+      const students = res.data.data;
+      const pt = students.map((stu) => {
+        const p = stu.attendance.filter((status) => status === "P").length;
+        const t = stu.attendance.length;
+        const pt = { p, t };
+        stu.pt = pt;
+        return stu;
+      });
+      setStudentList(pt);
     } catch (err) {
       console.log(err);
     }
@@ -61,7 +69,8 @@ const AllStudentsAttendance = ({ navigation }) => {
               <DataRow
                 name={student.name}
                 key={student._id}
-                rollNo={student.info.rollNo}
+                rollNo={student.rollNo}
+                att={student.pt.p + "/" + student.pt.t}
               />
             ))}
             <DataTable.Pagination
