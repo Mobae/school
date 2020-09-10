@@ -2,9 +2,10 @@ const { Router } = require("express");
 const router = Router();
 
 const Attendance = require("../models/Attendance");
+const Class = require("../models/Class");
+const Student = require("../models/Student");
 
 const auth = require("../middleware/auth");
-const Class = require("../models/Class");
 
 router.get("/student/:id", auth, async (req, res) => {
   console.log("hi from att");
