@@ -1,6 +1,11 @@
 import React, { useContext, useEffect, useState, Fragment } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { Card, DataTable, Paragraph } from "react-native-paper";
+import {
+  Card,
+  DataTable,
+  Paragraph,
+  TouchableRipple,
+} from "react-native-paper";
 import axios from "axios";
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -25,7 +30,7 @@ const monthNames = [
 const MonthData = (props) => {
   const date = new Date(props.date).toISOString().substr(0, 10);
   return (
-    <TouchableOpacity onPress={() => navigation.push("Month")}>
+    <TouchableOpacity>
       <DataTable.Row
         style={{
           backgroundColor: props.status === "P" ? "#b3ffc6" : "#ffb3b3",

@@ -103,10 +103,10 @@ const StudentInfo = () => {
                   <View style={styles.parentInfo}>
                     <Text style={styles.parentInfoText1}>Mother Details:</Text>
                     <Text style={styles.parentInfoText2}>
-                      Name: {info.fatherName}
+                      Name: {info.motherName}
                     </Text>
                     <Text style={styles.parentInfoText2}>
-                      Number: {info.fatherName}
+                      Number: {info.motherName}
                     </Text>
                   </View>
                 </View>
