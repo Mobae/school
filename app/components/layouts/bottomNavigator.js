@@ -15,6 +15,7 @@ import Notice from "../NoticeBoard/Notice";
 import ClassNotice from "../NoticeBoard/ClassNotice";
 import NoticeForm from "../NoticeBoard/NoticeForm";
 import BrowseNotice from "../NoticeBoard/BrowseNotice";
+import Students from "../teacher/Students";
 
 import { AuthContext } from "../../context/AuthContext";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -91,6 +92,7 @@ const TeacherStackScreen = () => {
           component={AllStudentAttendance}
         />
         <TeacherStack.Screen name="Add Attendance" component={AddAttendance} />
+        <TeacherStack.Screen name="Students" component={Students} />
       </TeacherStack.Navigator>
     </NavigationContainer>
   );
