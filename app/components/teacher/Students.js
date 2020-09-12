@@ -19,7 +19,7 @@ const StudentCard = (props) => {
       >
         <Fragment>
           <Card.Title title={props.name} />
-          <Card.Content>
+          <Card.Content style={{ marginBottom: 10 }}>
             <Paragraph>Roll No: {props.rollNo}</Paragraph>
             <Paragraph>Email: {props.email}</Paragraph>
           </Card.Content>
