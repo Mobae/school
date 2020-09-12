@@ -13,7 +13,7 @@ const AttendanceIcon = (props) => (
 );
 
 const StudentsIcon = (props) => (
-  <Avatar.Icon {...props} icon="accounts-multiple" size={45} />
+  <Avatar.Icon {...props} icon="contacts" size={45} />
 );
 
 const TeacherProfile = ({ navigation }) => {

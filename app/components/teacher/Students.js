@@ -1,24 +1,68 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, Fragment } from "react";
+import { StyleSheet } from "react-native";
+import { Card, Paragraph, TouchableRipple } from "react-native-paper";
 import axios from "axios";
 
 import { AuthContext } from "../../context/AuthContext";
 import { URL } from "../../config";
 
-const Students = (props) => {
+const StudentCard = (props) => {
+  return (
+    <Card style={styles}>
+      <TouchableRipple
+        onPress={() =>
+          props.navigation.push("Student Details", {
+            user: props.user,
+            class_: props.class,
+          })
+        }
+      >
+        <Fragment>
+          <Card.Title title={props.name} />
+          <Card.Content>
+            <Paragraph>Roll No: {props.rollNo}</Paragraph>
+            <Paragraph>Email: {props.email}</Paragraph>
+          </Card.Content>
+        </Fragment>
+      </TouchableRipple>
+    </Card>
+  );
+};
+
+const Students = ({ navigation }) => {
   const {
     authState: { user },
   } = useContext(AuthContext);
   const [students, setStudents] = useState([]);
   const getStudents = async () => {
     const res = await axios.get(URL + "/class/students/" + user.class_);
-    console.log(res.data);
+    setStudents(res.data.data);
   };
 
   useEffect(() => {
     getStudents();
-  });
+  }, []);
 
-  return;
+  return (
+    <Fragment>
+      {students.map((st) => (
+        <StudentCard
+          name={st.name}
+          rollNo={st.info.rollNo}
+          email={st.email}
+          key={st._id}
+          navigation={navigation}
+          user={st}
+          class={user.className}
+        />
+      ))}
+    </Fragment>
+  );
 };
+
+const styles = StyleSheet.create({
+  margin: 10,
+  marginBottom: 0,
+});
 
 export default Students;
