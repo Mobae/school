@@ -10,13 +10,12 @@ import adminStyles from "./AdminStyles";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const ClassView = ({ navigation }) => {
-  const { getCurrClassTeachers, classObj, currClass, flag } = React.useContext(AdminContext);
+  const { getCurrClassTeachers, classObj, currClass, flag, setFlag } = React.useContext(AdminContext);
   const [ classTeacherModalOpen, setClassTeacherModalOpen ] = React.useState(false);
   const [ subTeacherModalOpen, setSubTeacherModalOpen ] = React.useState(false);
   const [ pin1, setPin1 ] = React.useState('');
   const [ pin2, setPin2 ] = React.useState('');
   
-
   React.useEffect(() => {
     getCurrClassTeachers(); 
   }, [pin1]);
@@ -27,7 +26,7 @@ const ClassView = ({ navigation }) => {
   if(flag){
     return (
         <View>
-            <AddClassTeacher setPin1={setPin1} navigation={navigation}  classTeacherModalOpen={classTeacherModalOpen} setClassTeacherModalOpen={setClassTeacherModalOpen} />
+            <AddClassTeacher setPin1={setPin1} pin1={pin1} setFlag={setFlag} navigation={navigation}  classTeacherModalOpen={classTeacherModalOpen} setClassTeacherModalOpen={setClassTeacherModalOpen} />
             <AddSubTeacher setPin2={setPin2} navigation={navigation}  subTeacherModalOpen={subTeacherModalOpen} setSubTeacherModalOpen={setSubTeacherModalOpen} />
             <ScrollView>
                     <TouchableOpacity onPress={() => {

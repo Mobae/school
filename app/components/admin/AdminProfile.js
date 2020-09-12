@@ -12,16 +12,14 @@ import adminStyles from "./AdminStyles";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const AdminProfile = ({ navigation }) => {
-  const { addClass, addTeacher, getClasses, getTeachers, getAllStudents, addStudent, adminState } = React.useContext(AdminContext);
+  const { addClass, addTeacher, getClasses, getTeachers, getAllStudents, addStudent, adminState, getAllData } = React.useContext(AdminContext);
   const [ classModalOpen, setClassModalOpen ] = React.useState(false);
   const [ teacherModalOpen, setTeacherModalOpen ] = React.useState(false);
   const [ studentModalOpen, setStudentModalOpen ] = React.useState(false);
 
   React.useEffect(() => {
-    const p = getClasses();
-    p.then(getTeachers());
-    p.then(getClasses());
-    p.then(getAllStudents());
+    console.log("Entered all data !!!!!!!!!");
+    getAllData();
   }, []);
 
 
@@ -61,7 +59,9 @@ const AdminProfile = ({ navigation }) => {
         <Card style={adminStyles.card}>
           <Card.Title title="Teachers" left={LeftContent} />
           <Card.Actions>
-            <Button onPress={() => navigation.navigate('TeacherList')} >VIEW</Button>
+            <Button onPress={() => {
+              navigation.navigate('TeacherList');
+            }} >VIEW</Button>
             <Button onPress={() => setTeacherModalOpen(true)} >ADD</Button>
           </Card.Actions>
         </Card>
@@ -73,7 +73,11 @@ const AdminProfile = ({ navigation }) => {
         <Card style={adminStyles.card}>
           <Card.Title title="Students" left={LeftContent} />
           <Card.Actions>
-            <Button onPress={() => navigation.navigate('AllStudentList')}>VIEW</Button>
+            <Button onPress={() => {
+              navigation.navigate('AllStudentList');
+            }}>
+              VIEW
+            </Button>
             <Button  onPress={() => setStudentModalOpen(true)}>ADD</Button>
           </Card.Actions>
         </Card>

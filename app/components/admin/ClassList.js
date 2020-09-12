@@ -8,14 +8,13 @@ const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 import adminStyles from "./AdminStyles";
 
 const ClassList = ({ navigation }) => {
-  const { adminState, setCurrClass, currClass, getCurrClassTeachers, classObj, setFlag } = React.useContext(AdminContext);
+  const { adminState, setCurrClass, currClass, setFlag } = React.useContext(AdminContext);
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filtered, setFiltered] = React.useState(adminState.classes);
   const onChangeSearch = query => {
-      setSearchQuery(query);
-    };
-
+    setSearchQuery(query);
+  };
   
   React.useEffect(() => {
     if(searchQuery === ''){
@@ -36,6 +35,7 @@ const ClassList = ({ navigation }) => {
             onChangeText={onChangeSearch}
             value={searchQuery}
         />
+        <View style={adminStyles.scroll}>
         <ScrollView>
         { 
             filtered ? (
@@ -67,6 +67,7 @@ const ClassList = ({ navigation }) => {
             )
         }
         </ScrollView>
+        </View>
     </View>
   );
 };
