@@ -69,10 +69,10 @@ router.get("/initial", auth, async (req, res) => {
         student,
       });
     }
-    const admin = await Admin.findById(req.body.data.id);
-    if (admin) {
+    const student = await Admin.findById(req.body.data.id);
+    if (student) {
       return res.json({
-        admin,
+        student,
       });
     }
   } catch (err) {
