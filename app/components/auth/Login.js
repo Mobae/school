@@ -27,6 +27,7 @@ const Login = () => {
             <TextInput
               mode="outlined"
               label="Email"
+              autoCapitalize = 'none'
               onChangeText={handleChange("email")}
               onBlur={handleBlur("email")}
               value={values.email}
@@ -34,6 +35,7 @@ const Login = () => {
             <TextInput
               mode="outlined"
               label="Password"
+              autoCapitalize = 'none'
               secureTextEntry={true}
               onChangeText={handleChange("password")}
               onBlur={handleBlur("password")}
