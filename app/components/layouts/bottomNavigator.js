@@ -132,7 +132,7 @@ const ProfileRoute = () => {
   return rank === "1" ? (
     <TeacherStackScreen />
   ) : rank === "0" ? (
-    <StudentStackScreen />
+    <StudentStackScreen /> 
   ) : rank === "2" ? (
     <AdminStack />
   ) :  null ;
