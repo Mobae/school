@@ -54,10 +54,10 @@ module.exports = (upload) => {
         })
         .get((req, res, next) => {
             File.find({})
-                .then(images => {
+                .then(files_ => {
                     res.status(200).json({
                         success: true,
-                        images,
+                        files: files_,
                     });
                 })
                 .catch(err => res.status(500).json(err));
