@@ -1,3 +1,4 @@
+
 const express = require("express");
 const path = require("path");
 const crypto = require("crypto");
@@ -5,7 +6,8 @@ const multer = require("multer");
 const GridFsStorage = require("multer-gridfs-storage");
 require("dotenv").config();
 
-const connectDB = require("./db");
+
+const connectDB = require('./db');
 
 const app = express();
 connectDB();
@@ -18,6 +20,7 @@ app.use("/class", require("./routes/class"));
 app.use("/admin", require("./routes/admin"));
 app.use("/classnotice", require("./routes/classnotice"));
 app.use("/schoolnotice", require("./routes/schoolnotice"));
+app.use('/update', require('./routes/update'));
 const fileRouter = require("./routes/file");
 
 // creating a storage engine
