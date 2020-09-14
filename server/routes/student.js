@@ -69,7 +69,7 @@ router.get("/initial", auth, async (req, res) => {
         student,
       });
     }
-    const student = await Admin.findById(req.body.data.id);
+    student = await Admin.findById(req.body.data.id);
     if (student) {
       return res.json({
         student,
