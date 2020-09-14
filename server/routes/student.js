@@ -48,16 +48,36 @@ router.get("/teachers/all", async (req, res) => {
 router.get("/initial", auth, async (req, res) => {
   try {
     let student = await Student.findById(req.body.data.id);
-    let cls = await Class.findById(student.studentClass);
-    student = student.toJSON();
-    delete student.password;
-    student.className = cls.name;
-    console.log(cls.name, student.className);
-    return res.json({
-      student,
-    });
+    if (student) {
+      let cls = await Class.findById(student.studentClass);
+      student = student.toJSON();
+      delete student.password;
+      student.className = cls.name;
+      console.log(cls.name, student.className);
+      return res.json({
+        student,
+      });
+    }
+    student = await Teacher.findById(req.body.data.id);
+    if (student) {
+      let cls = await Class.findById(student.teacherClass);
+      student = student.toJSON();
+      delete student.password;
+      student.className = cls.name;
+      console.log(cls.name, student.className);
+      return res.json({
+        student,
+      });
+    }
+    student = await Admin.findById(req.body.data.id);
+    if (student) {
+      return res.json({
+        student,
+      });
+    }
   } catch (err) {
     res.status(500).json({ err });
+    console.log(err);
   }
 });
 
@@ -257,7 +277,23 @@ router.post("/login", async (req, res) => {
       const token = jwt.sign(payload, process.env.JWT_SECRET);
       return res.json({ token, name, email, rank, teacherClass });
     }
-  } else {
+  }
+  user = await Admin.findOne({ email });
+  if (user) {
+    console.log("hi");
+    const { name, rank } = user;
+    const passMatches = await bcrypt.compare(password, user.password);
+    if (passMatches) {
+      const payload = {
+        data: {
+          id: user.id,
+        },
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      return res.json({ token, name, email, rank });
+    }
+  }
+  else {
     return res.status(400).json({ msg: "Invalid credentials" });
   }
 });

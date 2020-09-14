@@ -36,11 +36,16 @@ const AuthContextProvider = (props) => {
       setAuthState({
         ...authState,
         isLoggedIn: true,
-        jwt: token,
+        token: token,
       });
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const Logout = async () => {
+    await AsyncStorage.removeItem("@jwt");
+    setAuthState(initialState);
   };
 
   const getUser = async () => {
@@ -55,6 +60,7 @@ const AuthContextProvider = (props) => {
     let class_;
     if (rank === "1") {
       class_ = res.data.student.teacherClass;
+      console.log(class_);
     }
     if (rank == "0") {
       class_ = res.data.student.studentClass;
@@ -66,21 +72,13 @@ const AuthContextProvider = (props) => {
     });
   };
 
-  const getClassName = async () => {
-    axios.defaults.headers["auth-token"] = authState.jwt;
-    const res = await axios.get(URL + "/class/views/" + authState.user.class_);
-    const st = authState;
-    st.user.className = res.data.class_.name;
-    setAuthState(st);
-  };
-
   return (
     <AuthContext.Provider
       value={{
         LogIn,
+        Logout,
         authState,
         setAuthState,
-        getClassName,
         getUser,
         setAuthState,
       }}

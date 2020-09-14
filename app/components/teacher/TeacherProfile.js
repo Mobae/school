@@ -12,17 +12,13 @@ const AttendanceIcon = (props) => (
   <Avatar.Icon {...props} icon="book" size={45} />
 );
 
+const StudentsIcon = (props) => (
+  <Avatar.Icon {...props} icon="contacts" size={45} />
+);
+
 const TeacherProfile = ({ navigation }) => {
-  const { authState, getClassName } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
   const { user } = authState;
-
-  useEffect(() => {
-    getClassName();
-  }, []);
-
-  useEffect(() => {
-    console.log(className);
-  }, [className]);
   return (
     <Fragment>
       <Card style={styles}>
@@ -40,6 +36,15 @@ const TeacherProfile = ({ navigation }) => {
             title="Attendance"
             subtitle="View Attendance"
             left={AttendanceIcon}
+          />
+        </TouchableRipple>
+      </Card>
+      <Card style={styles}>
+        <TouchableRipple onPress={() => navigation.push("Students")}>
+          <Card.Title
+            title="Students"
+            subtitle="View Students"
+            left={StudentsIcon}
           />
         </TouchableRipple>
       </Card>

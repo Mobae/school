@@ -2,6 +2,9 @@ import React from "react";
 import { StyleSheet } from "react-native";
 
 const adminStyles = StyleSheet.create({
+    scroll: {
+        marginBottom: 5,
+    },
     card: {
         margin: 10,
         marginBottom: 0,

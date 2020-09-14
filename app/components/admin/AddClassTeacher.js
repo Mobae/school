@@ -9,7 +9,7 @@ import AddClass from "./AddClass";
 import adminStyles from './AdminStyles';
 import {AdminContext} from '../../context/AdminContext';
 
-const AddClassTeacher = ({ classTeacherModalOpen, setClassTeacherModalOpen, navigation, setPin1 }) => {
+const AddClassTeacher = ({ classTeacherModalOpen, setClassTeacherModalOpen, navigation, setPin1, pin1, setFlag }) => {
 
     const { adminState, currClass, getTeachers, classObj, addClassTeacher, setCurrClass } = React.useContext(AdminContext);
     
@@ -55,7 +55,8 @@ const AddClassTeacher = ({ classTeacherModalOpen, setClassTeacherModalOpen, navi
                             addClassTeacher(values);                  // SUMITTING CLASS VALUE
                             setClassTeacherModalOpen(false);
                             setPin1(currClass);
-                            navigation.navigate('ClassView');
+                            setFlag(false);
+                            navigation.navigate('ClassList');
                         }}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (

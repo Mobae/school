@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, Fragment } from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import {
   Card,
   DataTable,
@@ -28,12 +28,16 @@ const monthNames = [
 ];
 
 const MonthData = (props) => {
+  const date = new Date(props.date).toISOString().substr(0, 10);
   return (
-    <TouchableOpacity onPress={() => navigation.push("Month")}>
-      <DataTable.Row style={{ backgroundColor: "#b3ffc6" }}>
-        <DataTable.Cell>{props.name}</DataTable.Cell>
-        <DataTable.Cell>13/30</DataTable.Cell>
-        <DataTable.Cell>85</DataTable.Cell>
+    <TouchableOpacity>
+      <DataTable.Row
+        style={{
+          backgroundColor: props.status === "P" ? "#b3ffc6" : "#ffb3b3",
+        }}
+      >
+        <DataTable.Cell>{date}</DataTable.Cell>
+        <DataTable.Cell>{props.status}</DataTable.Cell>
       </DataTable.Row>
     </TouchableOpacity>
   );
@@ -42,6 +46,7 @@ const MonthData = (props) => {
 const StudentAttendance = ({ navigation }) => {
   const initialMonth = new Date().getMonth() + 1;
   const [month, setMonth] = useState(initialMonth);
+  const [monthData, setMonthData] = useState([]);
   const { authState } = useContext(AuthContext);
   const { user } = authState;
   const [attState, setAttState] = useState({
@@ -64,6 +69,7 @@ const StudentAttendance = ({ navigation }) => {
     );
     const data = res.data.data;
     console.log(data);
+    setMonthData(data);
     const p = data.filter((d) => d.status === "P");
     setAttState({
       tDays: data.length,
@@ -92,16 +98,21 @@ const StudentAttendance = ({ navigation }) => {
       />
       <View style={{ zIndex: 1 }}>
         <Card style={styles.card}>
-          <TouchableRipple>
-            <Fragment>
-              <Card.Title title="Attendance" subtitle={monthNames[month - 1]} />
-              <Card.Content style={{ marginBottom: 12 }}>
-                <Paragraph>Present Days: {attState.pDays}</Paragraph>
-                <Paragraph>Total Days: {attState.tDays}</Paragraph>
-                <Paragraph>Percent: {attState.percentage + "%"}</Paragraph>
-              </Card.Content>
-            </Fragment>
-          </TouchableRipple>
+          <Card.Title title="Attendance" subtitle={monthNames[month - 1]} />
+          <Card.Content style={{ marginBottom: 12 }}>
+            <Paragraph>Present Days: {attState.pDays}</Paragraph>
+            <Paragraph>Total Days: {attState.tDays}</Paragraph>
+            <Paragraph>Percent: {attState.percentage + "%"}</Paragraph>
+          </Card.Content>
+          <DataTable>
+            <DataTable.Header>
+              <DataTable.Title>Date</DataTable.Title>
+              <DataTable.Title>Attendance</DataTable.Title>
+            </DataTable.Header>
+            {monthData.map((d) => (
+              <MonthData date={d.date} status={d.status} key={d._id} />
+            ))}
+          </DataTable>
         </Card>
       </View>
     </Fragment>
@@ -109,12 +120,6 @@ const StudentAttendance = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  profile_info: {
-    padding: 20,
-    display: "flex",
-    flexDirection: "row",
-    marginTop: 50,
-  },
   card: { margin: 10, marginBottom: 0, marginTop: 15, paddingTop: 5 },
 });
 

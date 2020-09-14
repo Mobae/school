@@ -8,7 +8,7 @@ import adminStyles from "./AdminStyles";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const TeacherList = () => {
-  const { adminState, getTeachers } = React.useContext(AdminContext);
+  const { adminState, getTeachers, getAllStudents } = React.useContext(AdminContext);
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filtered, setFiltered] = React.useState(adminState.classes);
@@ -16,9 +16,9 @@ const TeacherList = () => {
       setSearchQuery(query);
     };
 
-//   React.useEffect(() => {
-//     getTeachers();
-//   }, [])
+  React.useEffect(() => {
+    getAllStudents();
+  }, [])
 
   React.useEffect(() => {
     if(searchQuery === ''){
@@ -40,20 +40,33 @@ const TeacherList = () => {
             value={searchQuery}
 
         />
+        <View style={adminStyles.scroll}>
         <ScrollView>
-        { filtered.map(teacher => (
-            <View key={teacher._id}>
+        { 
+            filtered ? (
+                filtered.map(teacher => (
+                    <View key={teacher._id}>
+                        <Card style={adminStyles.card}>
+                            <Card.Title
+                                title={teacher.name}
+                                subtitle={teacher.email}
+                                left={LeftContent}
+                            />
+                            <Card.Content></Card.Content>
+                        </Card>
+                    </View>
+                )) 
+            ) : (
                 <Card style={adminStyles.card}>
-                    <Card.Title
-                        title={teacher.name}
-                        subtitle={teacher.email}
-                        left={LeftContent}
+                    <Card.Title 
+                        title="None"
+                        left={LeftContent} 
                     />
-                    <Card.Content></Card.Content>
                 </Card>
-            </View>
-        )) }
+            )
+        }
         </ScrollView>
+        </View>
     </View>
   );
 };
