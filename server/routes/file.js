@@ -1,7 +1,7 @@
 const express = require('express');
 const fileRouter = express.Router();
 const mongoose = require('mongoose');
-const File = require('../models/file');
+const File = require('../models/File');
 
 module.exports = (upload) => {
     const url = process.env.MONGO_URI;
