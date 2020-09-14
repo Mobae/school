@@ -271,7 +271,23 @@ router.post("/login", async (req, res) => {
       const token = jwt.sign(payload, process.env.JWT_SECRET);
       return res.json({ token, name, email, rank, teacherClass });
     }
-  } else {
+  }
+  user = await Admin.findOne({ email });
+  if (user) {
+    console.log("hi");
+    const { name, rank } = user;
+    const passMatches = await bcrypt.compare(password, user.password);
+    if (passMatches) {
+      const payload = {
+        data: {
+          id: user.id,
+        },
+      };
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      return res.json({ token, name, email, rank });
+    }
+  }
+  else {
     return res.status(400).json({ msg: "Invalid credentials" });
   }
 });
