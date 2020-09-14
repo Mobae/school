@@ -45,6 +45,7 @@ app.use("/documents", fileRouter(upload));
 // **
 // CHAT
 // **
+const io = require("socket.io");
 const http = require("http").Server(app);
 const socket = io(http);
 
