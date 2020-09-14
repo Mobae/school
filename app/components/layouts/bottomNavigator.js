@@ -129,21 +129,13 @@ const ProfileRoute = () => {
   useEffect(() => {
     getUser();
   }, []);
-  // console.log(rank);
-  // switch (rank) {
-  //   case "2":
-  //     return null;
-  //   case "1":
-  //     return <TeacherStackScreen />;
-  //   case "0":
-  //     return <StudentStackScreen />;
-  // }
   return rank === "1" ? (
     <TeacherStackScreen />
   ) : rank === "0" ? (
     <StudentStackScreen />
-  ) : null;
-  // return <AdminStack />;
+  ) : rank === "2" ? (
+    <AdminStack />
+  ) :  null ;
 };
 
 const MyComponent = () => {
