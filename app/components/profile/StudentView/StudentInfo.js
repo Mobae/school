@@ -67,7 +67,7 @@ const StudentInfo = () => {
               <Text style={styles.details}>DOB: {info.admissionNo}</Text>
             </View>
             <View style={styles.info}>
-              <Text style={styles.details}>Buss Route: {info.busNo}</Text>
+              <Text style={styles.details}>Bus Route: {info.busNo}</Text>
             </View>
             <View style={styles.info}>
               <Text style={styles.details}>Aadhar No.: {info.admissionNo}</Text>
