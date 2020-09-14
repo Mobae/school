@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { ScrollView } from "react-native";
 import { IconButton } from "react-native-paper";
 import axios from "axios";
+import { useIsFocused } from "@react-navigation/native";
 
 import { AuthContext } from "../../context/AuthContext";
 import { URL } from "../../config";
@@ -10,6 +11,7 @@ import styles from "./styles";
 import NoticeCard from "./NoticeCard";
 
 const ClassNotice = ({ navigation }) => {
+  const isFocused = useIsFocused();
   const [notices, setNotices] = useState([]);
   const {
     authState: { user },
@@ -24,7 +26,7 @@ const ClassNotice = ({ navigation }) => {
 
   useEffect(() => {
     getNotices();
-  }, []);
+  }, [isFocused]);
 
   return (
     <Fragment>
