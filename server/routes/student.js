@@ -69,6 +69,12 @@ router.get("/initial", auth, async (req, res) => {
         student,
       });
     }
+    const admin = await Admin.findById(req.body.data.id);
+    if (admin) {
+      return res.json({
+        admin,
+      });
+    }
   } catch (err) {
     res.status(500).json({ err });
     console.log(err);
