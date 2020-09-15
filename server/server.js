@@ -46,7 +46,7 @@ app.use("/documents", fileRouter(upload));
 /**
 CHAT
 **/
-const server = app.listen(process.env.PORT);
+const server = app.listen(8810);
 const io = require("socket.io").listen(server);
 // const http = require("http").Server(app);
 // const socket = io(http);
