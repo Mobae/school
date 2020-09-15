@@ -136,6 +136,10 @@ router.post("/class", async (req, res) => {
     date,
     studentId: attendances[0].studentId,
   });
+  console.log({
+    date,
+    studentId: attendances[0].studentId,
+  });
   console.log(exists);
   if (exists.length === 0) {
     let data = attendances.map((at) => {
