@@ -51,8 +51,11 @@ const socketIO = require("socket.io");
 const server = http.createServer(app);
 const io = socketIO(server);
 
-io.on("connection", () => {
+io.on("connection", (socket) => {
   console.log("user connected");
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
 });
 
 // app.listen(process.env.PORT, () =>
