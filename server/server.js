@@ -18,6 +18,7 @@ app.use("/class", require("./routes/class"));
 app.use("/admin", require("./routes/admin"));
 app.use("/classnotice", require("./routes/classnotice"));
 app.use("/schoolnotice", require("./routes/schoolnotice"));
+app.use("/update", require("./routes/update"));
 const fileRouter = require("./routes/file");
 
 // creating a storage engine
@@ -42,16 +43,25 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 app.use("/documents", fileRouter(upload));
 
-// **
-// CHAT
-// **
-const http = require("http").Server(app);
-const socket = io(http);
+/**
+CHAT
+**/
+const http = require("http");
+const socketIO = require("socket.io");
+const server = http.createServer(app);
+const io = socketIO(server);
 
-socket.on("connection", () => {
+io.on("connection", (socket) => {
   console.log("user connected");
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
 });
 
-app.listen(process.env.PORT, () =>
-  console.log(`Server runnning on ${process.env.PORT}`)
-);
+// app.listen(process.env.PORT, () =>
+//   console.log(`Server runnning on ${process.env.PORT}`)
+// );
+
+server.listen(process.env.PORT, () => {
+  console.log(`Server runnning on ${process.env.PORT}`);
+});
