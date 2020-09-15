@@ -46,17 +46,19 @@ app.use("/documents", fileRouter(upload));
 /**
 CHAT
 **/
-// const io = require("socket.io");
-// const http = require("http").Server(app);
-// const socket = io(http);
+const http = require("http");
+const socketIO = require("socket.io");
+const server = http.createServer(app);
+const io = socketIO(server);
 
-const server = require("http").createServer(app);
-const io = require("socket.io").listen(server);
-
-io.socket.on("connection", () => {
+io.on("connection", () => {
   console.log("user connected");
 });
 
-app.listen(process.env.PORT || 3000, () =>
-  console.log(`Server runnning on ${process.env.PORT}`)
-);
+// app.listen(process.env.PORT, () =>
+//   console.log(`Server runnning on ${process.env.PORT}`)
+// );
+
+server.listen(process.env.PORT, () => {
+  console.log(`Server runnning on ${process.env.PORT}`);
+});
