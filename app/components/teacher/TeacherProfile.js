@@ -26,28 +26,36 @@ const TeacherProfile = ({ navigation }) => {
         <Card.Title title="Profile" subtitle={user.name} left={ProfileIcon} />
         <Card.Content>
           <Paragraph>Email: {user.email}</Paragraph>
-          <Paragraph>Class teacher of {user.className}</Paragraph>
+          {user.class_ ? (
+            <Paragraph>Class teacher of {user.className}</Paragraph>
+          ) : (
+            <Paragraph>Subject Teacher</Paragraph>
+          )}
         </Card.Content>
         {/* </TouchableRipple> */}
       </Card>
-      <Card style={styles}>
-        <TouchableRipple onPress={() => navigation.push("Attendance")}>
-          <Card.Title
-            title="Attendance"
-            subtitle="View Attendance"
-            left={AttendanceIcon}
-          />
-        </TouchableRipple>
-      </Card>
-      <Card style={styles}>
-        <TouchableRipple onPress={() => navigation.push("Students")}>
-          <Card.Title
-            title="Students"
-            subtitle="View Students"
-            left={StudentsIcon}
-          />
-        </TouchableRipple>
-      </Card>
+      {user.class_ ? (
+        <Fragment>
+          <Card style={styles}>
+            <TouchableRipple onPress={() => navigation.push("Attendance")}>
+              <Card.Title
+                title="Attendance"
+                subtitle="View Attendance"
+                left={AttendanceIcon}
+              />
+            </TouchableRipple>
+          </Card>
+          <Card style={styles}>
+            <TouchableRipple onPress={() => navigation.push("Students")}>
+              <Card.Title
+                title="Students"
+                subtitle="View Students"
+                left={StudentsIcon}
+              />
+            </TouchableRipple>
+          </Card>
+        </Fragment>
+      ) : null}
     </Fragment>
   );
 };

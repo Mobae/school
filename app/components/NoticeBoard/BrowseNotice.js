@@ -1,19 +1,19 @@
-import React, { Fragment, useContext } from 'react';
-import { Card, Avatar, TouchableRipple } from 'react-native-paper';
-import { StyleSheet } from 'react-native';
+import React, { Fragment, useContext } from "react";
+import { Card, Avatar, TouchableRipple } from "react-native-paper";
+import { StyleSheet } from "react-native";
 
-import globalStyles from '../styles/global';
-import { AuthContext } from '../../context/AuthContext';
+import globalStyles from "../styles/global";
+import { AuthContext } from "../../context/AuthContext";
 
 const SchoolIcon = (props) => (
-  <Avatar.Icon {...props} icon="school" style={{ backgroundColor: '#000' }} />
+  <Avatar.Icon {...props} icon="school" style={{ backgroundColor: "#000" }} />
 );
 
 const ClassIcon = (props) => (
   <Avatar.Icon
     {...props}
     icon="account-multiple-outline"
-    style={{ backgroundColor: '#000' }}
+    style={{ backgroundColor: "#000" }}
   />
 );
 
@@ -24,7 +24,7 @@ const BrowseNotice = ({ navigation }) => {
   return (
     <Fragment>
       <Card style={globalStyles.card}>
-        <TouchableRipple onPress={() => navigation.push('School Notice Board')}>
+        <TouchableRipple onPress={() => navigation.push("School Notice Board")}>
           <Fragment>
             <Card.Title
               title="School Notices"
@@ -35,15 +35,15 @@ const BrowseNotice = ({ navigation }) => {
           </Fragment>
         </TouchableRipple>
       </Card>
-      {user.rank === '2' ? null : (
+      {user.rank === "2" || !user.class_ ? null : (
         <Card style={globalStyles.card}>
           <TouchableRipple
-            onPress={() => navigation.push('Class Notice Board')}
+            onPress={() => navigation.push("Class Notice Board")}
           >
             <Fragment>
               <Card.Title
                 title="Class Notices"
-                subtitle={'Notice board for Class ' + user.className}
+                subtitle={"Notice board for Class " + user.className}
                 left={ClassIcon}
               />
               <Card.Content style={globalStyles.cardContent}></Card.Content>
@@ -57,10 +57,10 @@ const BrowseNotice = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   p: {
-    color: '#606060',
+    color: "#606060",
   },
   button: {
-    marginLeft: 'auto',
+    marginLeft: "auto",
   },
   card: {
     margin: 10,
