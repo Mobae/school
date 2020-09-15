@@ -140,7 +140,7 @@ router.post("/class", async (req, res) => {
   const exists = await Attendance.find({
     date: {
       $gte: new Date(date),
-      $lt: new Date(date + 1),
+      $lt: new Date(date) + 1,
     },
     studentId: attendances[0].studentId,
   });
