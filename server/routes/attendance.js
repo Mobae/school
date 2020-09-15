@@ -133,9 +133,11 @@ router.post("/", auth, async (req, res) => {
 router.post("/class", async (req, res) => {
   let { date, attendances } = req.body;
   date = date.slice(0, 10);
+  const gte = new Date(date);
+  const lt = gte.setDate(gte.getDate() + 1);
   console.log({
-    $gte: new Date(date),
-    $lt: new Date(date) + 1,
+    $gte: gte,
+    $lt: lt,
   });
   const exists = await Attendance.find({
     date: {
