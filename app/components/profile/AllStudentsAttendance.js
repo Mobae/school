@@ -8,6 +8,7 @@ import {
   Portal,
   Provider as PaperProvider,
 } from "react-native-paper";
+import { useIsFocused } from "@react-navigation/native";
 import axios from "axios";
 
 import { URL } from "../../config";
@@ -64,6 +65,7 @@ const DataRow = (props) => {
 };
 
 const AllStudentsAttendance = ({ navigation }) => {
+  const isFocused = useIsFocused();
   const [studentList, setStudentList] = useState([]);
   const {
     authState: { user },
@@ -89,7 +91,8 @@ const AllStudentsAttendance = ({ navigation }) => {
 
   useEffect(() => {
     getStudents();
-  }, []);
+    return () => console.log("clean up");
+  }, [isFocused]);
 
   return (
     <React.Fragment>

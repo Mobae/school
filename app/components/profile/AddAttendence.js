@@ -9,7 +9,7 @@ import {
   Portal,
   Provider as PaperProvider,
 } from "react-native-paper";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import axios from "axios";
 
@@ -54,7 +54,7 @@ const StudentRow = (props) => {
   );
 };
 
-const AddAttendence = () => {
+const AddAttendence = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
@@ -113,13 +113,31 @@ const AddAttendence = () => {
       });
       if (res.data.error) {
         console.log(res.data.error);
+        createErrorAlert();
       } else {
         console.log(res.data);
+        createSuccessAlert();
       }
     } catch (err) {
       console.log(err);
     }
   };
+
+  const createErrorAlert = () =>
+    Alert.alert(
+      "Error",
+      "Attendance for this day already exists, try editing it.",
+      [{ text: "OK", onPress: () => navigation.navigate("Attendance") }],
+      { cancelable: false }
+    );
+
+  const createSuccessAlert = () =>
+    Alert.alert(
+      "Success",
+      "Attendance added.",
+      [{ text: "OK", onPress: () => navigation.navigate("Attendance") }],
+      { cancelable: false }
+    );
 
   useEffect(() => {
     getStudents();
