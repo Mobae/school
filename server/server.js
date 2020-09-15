@@ -55,12 +55,12 @@ io.on("connection", (socket) => {
   console.log(`user connected ${socket.id}`);
   socket.on("sendMessage", (data) => {
     console.log(`DATA: ${data.text}`);
-    socket.broadcast.to(data.room).emit("message", data.text);
+    socket.to(data.room).emit("message", data.text);
   });
 
   socket.on("join", (classId) => {
     socket.join(classId);
-    socket.broadcast.to(classId).emit("joinSuccess", "welcome");
+    socket.to(classId).emit("joinSuccess", "welcome");
   });
 
   socket.on("disconnect", () => {
