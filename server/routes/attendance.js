@@ -134,7 +134,7 @@ router.post("/class", async (req, res) => {
   let { date, attendances } = req.body;
   date = date.slice(0, 10);
   const gte = new Date(date);
-  const lt = gte.setDate(gte.getDate() + 1);
+  const lt = new Date(gte.getTime() + 1000 * 60 * 60 * 24);
   console.log({
     $gte: gte,
     $lt: lt,
