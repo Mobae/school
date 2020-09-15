@@ -5,10 +5,16 @@ import { StyleSheet } from 'react-native';
 import globalStyles from '../styles/global';
 import { AuthContext } from '../../context/AuthContext';
 
-const SchoolIcon = (props) => <Avatar.Icon {...props} icon="school" />;
+const SchoolIcon = (props) => (
+  <Avatar.Icon {...props} icon="school" style={{ backgroundColor: '#000' }} />
+);
 
 const ClassIcon = (props) => (
-  <Avatar.Icon {...props} icon="account-multiple-outline" />
+  <Avatar.Icon
+    {...props}
+    icon="account-multiple-outline"
+    style={{ backgroundColor: '#000' }}
+  />
 );
 
 const BrowseNotice = ({ navigation }) => {
