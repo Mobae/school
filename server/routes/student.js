@@ -66,7 +66,6 @@ router.get("/initial", auth, async (req, res) => {
       if (cls) {
         student.className = cls.name;
       }
-      console.log(cls.name, student.className);
       return res.json({
         student,
       });
