@@ -1,25 +1,12 @@
 import * as React from 'react';
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
-import { Button, View, StyleSheet, Text, Image, Linking } from 'react-native';
+import { View, StyleSheet, Text, Image, Linking } from 'react-native';
 
 const Update = () => {
-  const [visible, setVisible] = React.useState(false);
-  const showDialog = () => setVisible(true);
-  const hideDialog = () => setVisible(false);
+  const [visible, setVisible] = React.useState(true);
   return (
     <View style={styles.container}>
-      <Button
-        title='Show Dialog'
-        onPress={() => {
-          showDialog();
-        }}
-      />
-      <Dialog
-        visible={visible}
-        onTouchOutside={() => {
-          hideDialog();
-        }}
-      >
+      <Dialog visible={visible}>
         <DialogContent
           style={{
             backgroundColor: '#7575a3',

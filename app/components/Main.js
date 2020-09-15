@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useEffect, Fragment, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios';
@@ -7,28 +7,30 @@ import Login from './auth/Login';
 import BottomNavigator from './layouts/bottomNavigator';
 import { ActivityIndicator } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
+import Update from '../components/Update/Update';
 
 const Stack = createStackNavigator();
 
 const Main = () => {
   const { authState, getUser, setAuthState } = useContext(AuthContext);
   const { isLoggedIn } = authState;
+  const [updateObj, setUpdateObj] = useState({
+    update: false,
+  });
   const url = 'https://school-server-testing.herokuapp.com';
-  const updateId = '5f5fb9c061af454f9c6c0189';
+  const updateId = '5f60dfc028525200044bd6fa';
+  const abcd = url + '/update/view/' + updateId;
 
   const getJwt = async () => {
     const jwt = AsyncStorage.getItem('@jwt');
     return jwt;
   };
   const getUpdates = async () => {
-    const res = await axios.get(url + '/view/' + updateId);
-    console.log(res.data);
-    console.log(
-      'kachra sa stafsdlnlnvs sldnfnfsddskbdkjbk jbk bkbsakbfkbdfkb $$$$$$$$$$$$$$$$$$$$$$$$$$$$%%%%%%%%%%%%%%%%%%%%%%%%##'
-    );
+    const res = await axios.get(abcd);
+    setUpdateObj(res.data.data);
   };
   useEffect(() => {
-    // getUpdates();
+    getUpdates();
     AsyncStorage.getItem('@jwt').then((jwt) => {
       console.log(jwt);
       if (jwt) {
@@ -41,7 +43,12 @@ const Main = () => {
     console.log(authState);
   }, [authState]);
 
-  return <Fragment>{!isLoggedIn ? <Login /> : <BottomNavigator />}</Fragment>;
+  if (!updateObj.status) {
+    return <Fragment>{!isLoggedIn ? <Login /> : <BottomNavigator />}</Fragment>;
+  } else {
+    return <Update />;
+  }
+
   // return <BottomNavigator />;
 };
 
