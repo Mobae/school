@@ -29,6 +29,9 @@ const styles = {
   loading: {
     alignSelf: 'center',
   },
+  chatIcon: {
+    backgroundColor: '#1CB289',
+  },
 };
 
 export default styles;
