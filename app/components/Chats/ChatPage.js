@@ -30,12 +30,15 @@ const ChatPage = () => {
         },
       },
     ]);
-    socket.on("joinSuccess", (data) => {
-      console.log(data);
-    });
     return () => {
       socket.close();
     };
+  }, []);
+
+  useEffect(() => {
+    socket.on("joinSuccess", (data) => {
+      console.log(data);
+    });
   }, []);
   // const onSend = useCallback((messages = []) => {
   //   setMessages((previousMessages) =>

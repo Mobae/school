@@ -53,6 +53,7 @@ const io = socketIO(server);
 
 io.on("connection", (socket) => {
   console.log(`user connected ${socket.id}`);
+
   socket.on("sendMessage", (data) => {
     console.log(`DATA: ${data.text}`);
     socket.to(data.room).emit("message", data.text);
@@ -60,6 +61,7 @@ io.on("connection", (socket) => {
 
   socket.on("join", (classId) => {
     socket.join(classId);
+    console.log(classId);
     socket.to(classId).emit("joinSuccess", "welcome");
   });
 
