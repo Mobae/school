@@ -48,10 +48,10 @@ CHAT
 **/
 const server = app.listen(process.env.PORT);
 const io = require("socket.io").listen(server);
-const http = require("http").Server(app);
-const socket = io(http);
+// const http = require("http").Server(app);
+// const socket = io(http);
 
-socket.on("connection", () => {
+io.on("connection", () => {
   console.log("user connected");
 });
 
