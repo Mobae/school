@@ -149,8 +149,8 @@ router.post("/class", async (req, res) => {
     });
     try {
       console.log(data);
-      // const result = await Attendance.insertMany(data);
-      // res.json({ result });
+      const result = await Attendance.insertMany(data);
+      res.json({ result });
     } catch (err) {
       res.status(500).json({ error: "Server error" });
     }
