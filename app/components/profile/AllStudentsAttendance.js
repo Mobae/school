@@ -109,7 +109,7 @@ const AllStudentsAttendance = ({ navigation }) => {
                 name={student.name}
                 key={student._id}
                 rollNo={student.rollNo}
-                att={((student.pt.p / student.pt.t) * 100).toFixed(2)}
+                att={((student.pt.p / student.pt.t) * 100).toFixed(2) + "%"}
               />
             ))}
             <DataTable.Pagination

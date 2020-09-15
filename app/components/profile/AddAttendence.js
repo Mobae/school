@@ -111,10 +111,10 @@ const AddAttendence = () => {
         date,
         attendances,
       });
-      if (res.data.data) {
-        console.log(res.data.data);
-      } else if (res.data.error) {
+      if (res.data.error) {
         console.log(res.data.error);
+      } else {
+        console.log(res.data);
       }
     } catch (err) {
       console.log(err);
