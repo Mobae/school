@@ -1,9 +1,9 @@
-const express = require("express");
-const path = require("path");
-const crypto = require("crypto");
-const multer = require("multer");
-const GridFsStorage = require("multer-gridfs-storage");
-require("dotenv").config();
+const express = require('express');
+const path = require('path');
+const crypto = require('crypto');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+require('dotenv').config();
 
 const connectDB = require("./db");
 
@@ -11,15 +11,15 @@ const app = express();
 connectDB();
 
 app.use(express.json());
-app.use("/auth", require("./routes/auth"));
-app.use("/student", require("./routes/student"));
-app.use("/attendance", require("./routes/attendance"));
-app.use("/class", require("./routes/class"));
-app.use("/admin", require("./routes/admin"));
-app.use("/classnotice", require("./routes/classnotice"));
-app.use("/schoolnotice", require("./routes/schoolnotice"));
-app.use("/update", require("./routes/update"));
-const fileRouter = require("./routes/file");
+app.use('/auth', require('./routes/auth'));
+app.use('/student', require('./routes/student'));
+app.use('/attendance', require('./routes/attendance'));
+app.use('/class', require('./routes/class'));
+app.use('/admin', require('./routes/admin'));
+app.use('/classnotice', require('./routes/classnotice'));
+app.use('/schoolnotice', require('./routes/schoolnotice'));
+app.use('/update', require('./routes/update'));
+const fileRouter = require('./routes/file');
 
 // creating a storage engine
 const storage = new GridFsStorage({
@@ -30,10 +30,10 @@ const storage = new GridFsStorage({
         if (err) {
           return reject(err);
         }
-        const filename = buf.toString("hex") + path.extname(file.originalname);
+        const filename = buf.toString('hex') + path.extname(file.originalname);
         const fileInfo = {
           filename: filename,
-          bucketName: "uploads",
+          bucketName: 'uploads',
         };
         resolve(fileInfo);
       });
@@ -41,7 +41,7 @@ const storage = new GridFsStorage({
   },
 });
 const upload = multer({ storage });
-app.use("/documents", fileRouter(upload));
+app.use('/documents', fileRouter(upload));
 
 /**
 CHAT
