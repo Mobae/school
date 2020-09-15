@@ -5,11 +5,13 @@ const Update = require('../models/Update');
 
 router.post('/add', async (req, res) => {
   try {
-    const update = req.body.update;
+    const status = req.body.status;
     const description = req.body.description;
+    const URL = req.body.URL;
     const payload = {
-      update,
+      status,
       description,
+      URL,
     };
     console.log(payload);
     const newUpdate = await Update.create(payload);
@@ -50,11 +52,14 @@ router.post('/edit/:id', async (req, res) => {
   try {
     console.log(req.params.id);
     const update_ = await Update.findById(req.params.id);
-    if (req.body.update) {
-      update_.update = req.body.update;
+    if (req.body.status) {
+      update_.status = req.body.status;
     }
     if (req.body.description) {
       update_.description = req.body.description;
+    }
+    if (req.body.URL) {
+      update_.URL = req.body.URL;
     }
 
     await update_.save();
