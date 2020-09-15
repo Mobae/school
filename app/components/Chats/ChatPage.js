@@ -7,13 +7,13 @@ import { URL } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
 
 const ChatPage = () => {
+  const [socket] = useState(io(URL));
   const [messages, setMessages] = useState([]);
   const {
     authState: { user },
   } = useContext(AuthContext);
 
   useEffect(() => {
-    const socket = io(URL);
     setMessages([
       {
         _id: 1,
@@ -26,13 +26,20 @@ const ChatPage = () => {
         },
       },
     ]);
+    return () => {
+      socket.close();
+    };
   }, []);
+  // const onSend = useCallback((messages = []) => {
+  //   setMessages((previousMessages) =>
+  //     GiftedChat.append(previousMessages, messages)
+  //   );
+  // }, []);
 
-  const onSend = useCallback((messages = []) => {
-    setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, messages)
-    );
-  }, []);
+  const onSend = (msg) => {
+    socket.emit("message", "hello");
+    console.log(msg);
+  };
 
   return (
     <GiftedChat
