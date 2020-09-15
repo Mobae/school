@@ -30,7 +30,7 @@ const ChatPage = () => {
         },
       },
     ]);
-    socket.on("message", (data) => {
+    socket.on("joinSuccess", (data) => {
       console.log(data);
     });
     return () => {
