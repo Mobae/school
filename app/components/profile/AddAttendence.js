@@ -110,6 +110,7 @@ const AddAttendence = () => {
       date,
       attendances,
     });
+    console.log(res.data.data);
   };
 
   useEffect(() => {

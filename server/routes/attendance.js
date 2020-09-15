@@ -141,15 +141,15 @@ router.post("/class", async (req, res) => {
       at.date = date;
       return at;
     });
-    console.log(data);
     try {
-      const result = await Attendance.insertMany(data);
-      res.json({ result });
+      console.log(data);
+      // const result = await Attendance.insertMany(data);
+      // res.json({ result });
     } catch (err) {
       res.status(500).json({ error: "Server error" });
     }
-
-    // Attendance.insertMany(data);
+  } else {
+    res.status(400).json({ error: "Attendance already exists" });
   }
 });
 
