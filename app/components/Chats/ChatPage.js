@@ -14,6 +14,7 @@ const ChatPage = () => {
   } = useContext(AuthContext);
 
   useEffect(() => {
+    socket.emit("initial", user.class_);
     setMessages([
       {
         _id: 1,

@@ -56,6 +56,9 @@ io.on("connection", (socket) => {
   socket.on("message", (data) => {
     console.log(`DATA: ${data}`);
   });
+  socket.on("initial", (classId) => {
+    console.log(classId);
+  });
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
