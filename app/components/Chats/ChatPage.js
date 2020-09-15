@@ -6,14 +6,16 @@ import io from "socket.io-client";
 import { URL } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
 
+let socket;
+
 const ChatPage = () => {
-  const [socket] = useState(io(URL));
   const [messages, setMessages] = useState([]);
   const {
     authState: { user },
   } = useContext(AuthContext);
 
   useEffect(() => {
+    socket = io(URL);
     socket.emit("initial", user.class_);
     setMessages([
       {
@@ -38,8 +40,7 @@ const ChatPage = () => {
   // }, []);
 
   const onSend = (msg) => {
-    socket.emit("message", "hello");
-    console.log(msg);
+    socket.emit("message", msg[0].text);
   };
 
   return (
