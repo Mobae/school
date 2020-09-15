@@ -5,7 +5,7 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 require('dotenv').config();
 
-const connectDB = require('./db');
+const connectDB = require("./db");
 
 const app = express();
 connectDB();
@@ -43,17 +43,37 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 app.use('/documents', fileRouter(upload));
 
-// **
-// CHAT
-// **
-const io = require('socket.io');
-const http = require('http').Server(app);
-const socket = io(http);
+/**
+CHAT
+**/
+const http = require("http");
+const socketIO = require("socket.io");
+const server = http.createServer(app);
+const io = socketIO(server);
 
-socket.on('connection', () => {
-  console.log('user connected');
+io.on("connection", (socket) => {
+  console.log(`user connected ${socket.id}`);
+
+  socket.on("sendMessage", (data) => {
+    console.log(`DATA: ${data.text}`);
+    socket.to(data.room).emit("message", data.text);
+  });
+
+  socket.on("join", (classId) => {
+    socket.join(classId);
+    console.log(classId);
+    socket.to(classId).emit("joinSuccess", "welcome");
+  });
+
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
 });
 
-app.listen(process.env.PORT, () =>
-  console.log(`Server runnning on ${process.env.PORT}`)
-);
+// app.listen(process.env.PORT, () =>
+//   console.log(`Server runnning on ${process.env.PORT}`)
+// );
+
+server.listen(process.env.PORT, () => {
+  console.log(`Server runnning on ${process.env.PORT}`);
+});

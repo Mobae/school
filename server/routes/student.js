@@ -63,8 +63,9 @@ router.get("/initial", auth, async (req, res) => {
       let cls = await Class.findById(student.teacherClass);
       student = student.toJSON();
       delete student.password;
-      student.className = cls.name;
-      console.log(cls.name, student.className);
+      if (cls) {
+        student.className = cls.name;
+      }
       return res.json({
         student,
       });
@@ -292,8 +293,7 @@ router.post("/login", async (req, res) => {
       const token = jwt.sign(payload, process.env.JWT_SECRET);
       return res.json({ token, name, email, rank });
     }
-  }
-  else {
+  } else {
     return res.status(400).json({ msg: "Invalid credentials" });
   }
 });

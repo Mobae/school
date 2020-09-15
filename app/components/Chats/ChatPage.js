@@ -1,38 +1,78 @@
-import React, { Fragment, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { TextInput, IconButton } from 'react-native-paper';
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
+import { GiftedChat } from "react-native-gifted-chat";
+import io from "socket.io-client";
+
+import { URL } from "../../config";
+import { AuthContext } from "../../context/AuthContext";
+
+let socket;
 
 const ChatPage = () => {
-  const [chatText, setChatText] = useState('');
+  const [messages, setMessages] = useState([]);
+  const [room, setRoom] = useState("");
+  const {
+    authState: { user },
+  } = useContext(AuthContext);
+
+  useEffect(() => {
+    socket = io(URL);
+    socket.emit("join", user.class_);
+    setMessages([
+      {
+        _id: 1,
+        text: "Hello developer",
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: "Aryan Singh",
+          avatar: "https://placeimg.com/140/140/any",
+        },
+      },
+    ]);
+    return () => {
+      socket.close();
+    };
+  }, []);
+
+  useEffect(() => {
+    socket.on("joinSuccess", (data) => {
+      console.log(data);
+    });
+  }, []);
+  // const onSend = useCallback((messages = []) => {
+  //   setMessages((previousMessages) =>
+  //     GiftedChat.append(previousMessages, messages)
+  //   );
+  // }, []);
+
+  const onSend = (msg) => {
+    socket.emit("sendMessage", { text: msg[0].text, room: user.class_ });
+  };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.chat}></View>
-      <View style={styles.input}>
-        <IconButton icon="plus" size={30} />
-        <TextInput
-          value={chatText}
-          placeholder="Send Message"
-          style={{ width: '100%' }}
-          onChangeText={(chatText) => setChatText(chatText)}
-        />
-      </View>
-    </View>
+    <GiftedChat
+      messages={messages}
+      onSend={(messages) => onSend(messages)}
+      user={{
+        _id: user._id,
+      }}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
   },
   chat: {
     // height: '100%',
   },
   input: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
   },
 });
 
