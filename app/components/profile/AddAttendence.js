@@ -92,20 +92,24 @@ const AddAttendence = () => {
   const updateAttendance = (_id, status) => {
     let att = [...attendances];
     console.log(_id, status);
-    const index = att.findIndex((at) => at._id === _id);
+    const index = att.findIndex((at) => at.studentId === _id);
     console.log(index);
     if (index !== -1) {
       let item = { ...att[index], status: status };
       att[index] = item;
       setAttendances(att);
     } else {
-      att.push({ _id, status });
+      att.push({ studentId: _id, status });
       setAttendances(att);
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log(date, attendances);
+    const res = await axios.post(URL + "/attendance/class", {
+      date,
+      attendances,
+    });
   };
 
   useEffect(() => {
