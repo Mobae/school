@@ -10,13 +10,14 @@ let socket;
 
 const ChatPage = () => {
   const [messages, setMessages] = useState([]);
+  const [room, setRoom] = useState("");
   const {
     authState: { user },
   } = useContext(AuthContext);
 
   useEffect(() => {
     socket = io(URL);
-    socket.emit("initial", user.class_);
+    socket.emit("join", user.class_);
     setMessages([
       {
         _id: 1,
@@ -29,6 +30,9 @@ const ChatPage = () => {
         },
       },
     ]);
+    socket.on("message", (data) => {
+      console.log(data);
+    });
     return () => {
       socket.close();
     };
@@ -40,7 +44,7 @@ const ChatPage = () => {
   // }, []);
 
   const onSend = (msg) => {
-    socket.emit("message", msg[0].text);
+    socket.emit("sendMessage", msg[0].text);
   };
 
   return (

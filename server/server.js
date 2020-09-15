@@ -53,12 +53,15 @@ const io = socketIO(server);
 
 io.on("connection", (socket) => {
   console.log(`user connected ${socket.id}`);
-  socket.on("message", (data) => {
-    console.log(`DATA: ${data}`);
+  socket.on("sendMessage", (data) => {
+    console.log(`DATA: ${data.text}`);
+    socket.broadcast.to(data.room).emit("message", data.text);
   });
-  socket.on("initial", (classId) => {
-    console.log(classId);
+
+  socket.on("join", (classId) => {
+    socket.join(classId);
   });
+
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
