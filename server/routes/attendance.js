@@ -133,8 +133,15 @@ router.post("/", auth, async (req, res) => {
 router.post("/class", async (req, res) => {
   let { date, attendances } = req.body;
   date = date.slice(0, 10);
+  console.log(date: {
+    $gte: new Date(date),
+    $lt: new Date(date + 1),
+  });
   const exists = await Attendance.find({
-    date,
+    date: {
+      $gte: new Date(date),
+      $lt: new Date(date + 1),
+    },
     studentId: attendances[0].studentId,
   });
   console.log({
@@ -149,8 +156,8 @@ router.post("/class", async (req, res) => {
     });
     try {
       console.log(data);
-      const result = await Attendance.insertMany(data);
-      res.json({ result });
+      // const result = await Attendance.insertMany(data);
+      // res.json({ result });
     } catch (err) {
       res.status(500).json({ error: "Server error" });
     }
