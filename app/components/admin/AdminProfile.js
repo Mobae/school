@@ -18,7 +18,6 @@ const AdminProfile = ({ navigation }) => {
   const [ studentModalOpen, setStudentModalOpen ] = React.useState(false);
 
   React.useEffect(() => {
-    console.log("Entered all data !!!!!!!!!");
     getAllData();
   }, []);
 
