@@ -132,31 +132,33 @@ router.post("/", auth, async (req, res) => {
 
 router.post("/class", async (req, res) => {
   let { date, attendances } = req.body;
-  date = date.slice(0, 10);
-  const gte = new Date(date);
-  const lt = new Date(gte.getTime() + 1000 * 60 * 60 * 24);
-  const exists = await Attendance.find({
-    date: {
-      $gte: gte,
-      $lt: lt,
-    },
-    studentId: attendances[0].studentId,
-  });
-  console.log(exists);
-  if (exists.length === 0) {
-    let data = attendances.map((at) => {
-      at.date = date;
-      return at;
+  if (date && attendances.length !== 0) {
+    date = date.slice(0, 10);
+    const gte = new Date(date);
+    const lt = new Date(gte.getTime() + 1000 * 60 * 60 * 24);
+    const exists = await Attendance.find({
+      date: {
+        $gte: gte,
+        $lt: lt,
+      },
+      studentId: attendances[0].studentId,
     });
-    try {
-      console.log(data);
-      // const result = await Attendance.insertMany(data);
-      // res.json({ result });
-    } catch (err) {
-      res.status(500).json({ error: "Server error" });
+    console.log(exists);
+    if (exists.length === 0) {
+      let data = attendances.map((at) => {
+        at.date = date;
+        return at;
+      });
+      try {
+        console.log(data);
+        // const result = await Attendance.insertMany(data);
+        // res.json({ result });
+      } catch (err) {
+        res.status(500).json({ error: "Server error" });
+      }
+    } else {
+      res.json({ error: "Attendance already exists" });
     }
-  } else {
-    res.json({ error: "Attendance already exists" });
   }
 });
 
