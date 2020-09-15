@@ -5,12 +5,51 @@ import {
   Title,
   DataTable,
   FAB,
+  Portal,
   Provider as PaperProvider,
 } from "react-native-paper";
 import axios from "axios";
 
 import { URL } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
+
+const Fab = ({ navigation }) => {
+  const [state, setState] = React.useState({ open: false });
+
+  const onStateChange = ({ open }) => setState({ open });
+
+  const { open } = state;
+
+  return (
+    <PaperProvider>
+      <Portal>
+        <FAB.Group
+          open={open}
+          icon={open ? "calendar-today" : "plus"}
+          fabStyle={{ backgroundColor: "#6200EE" }}
+          actions={[
+            {
+              icon: "pencil",
+              label: "Edit Attendance",
+              onPress: () => console.log("Pressed star"),
+            },
+            {
+              icon: "plus",
+              label: "Add Attendance",
+              onPress: () => navigation.push("Add Attendance"),
+            },
+          ]}
+          onStateChange={onStateChange}
+          onPress={() => {
+            if (open) {
+              // do something if the speed dial is open
+            }
+          }}
+        />
+      </Portal>
+    </PaperProvider>
+  );
+};
 
 const DataRow = (props) => {
   return (
@@ -84,13 +123,7 @@ const AllStudentsAttendance = ({ navigation }) => {
           </DataTable>
         </View>
       </PaperProvider>
-      <FAB
-        style={styles.fab}
-        small
-        icon="account-multiple-plus"
-        label="Add Attendance"
-        onPress={() => navigation.push("Add Attendance")}
-      />
+      <Fab navigation={navigation} />
       <StatusBar style="auto" />
     </React.Fragment>
   );
