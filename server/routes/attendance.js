@@ -133,7 +133,7 @@ router.post("/", auth, async (req, res) => {
 router.post("/class", async (req, res) => {
   let { date, attendances } = req.body;
   date = date.slice(0, 10);
-  console.log(date: {
+  console.log({
     $gte: new Date(date),
     $lt: new Date(date + 1),
   });
