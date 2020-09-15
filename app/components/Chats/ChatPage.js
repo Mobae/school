@@ -7,9 +7,10 @@ import { URL } from "../../config";
 
 const ChatPage = () => {
   const [chatText, setChatText] = useState("");
+
   useEffect(() => {
     const socket = io(URL);
-  });
+  }, []);
 
   return (
     <View style={styles.container}>
