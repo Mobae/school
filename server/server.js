@@ -53,6 +53,9 @@ const io = socketIO(server);
 
 io.on("connection", (socket) => {
   console.log("user connected");
+  socket.on("message", (data) => {
+    console.log(`DATA: ${data}`);
+  });
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
