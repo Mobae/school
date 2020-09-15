@@ -104,8 +104,12 @@ const AddAttendence = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log(date, attendances);
+    const res = await axios.post(URL + "/attendance/class", {
+      date,
+      attendances,
+    });
   };
 
   useEffect(() => {

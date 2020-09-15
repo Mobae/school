@@ -132,6 +132,7 @@ router.post("/", auth, async (req, res) => {
 
 router.post("/class", async (req, res) => {
   const { date, attendances } = req.body;
+  console.log(date, attendance);
   const exists = await Attendance.find({ date, studentId: attendances[0]._id });
   console.log(exists);
 });
