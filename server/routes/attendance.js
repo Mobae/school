@@ -156,7 +156,7 @@ router.post("/class", async (req, res) => {
       res.status(500).json({ error: "Server error" });
     }
   } else {
-    res.status(400).json({ error: "Attendance already exists" });
+    res.json({ error: "Attendance already exists" });
   }
 });
 
