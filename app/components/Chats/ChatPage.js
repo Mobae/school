@@ -9,7 +9,7 @@ const ChatPage = () => {
   const [chatText, setChatText] = useState("");
 
   useEffect(() => {
-    const socket = io(URL);
+    const socket = io("https://school-server-testing.herokuapp.com");
   }, []);
 
   return (
