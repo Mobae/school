@@ -52,7 +52,7 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 io.on("connection", (socket) => {
-  console.log("user connected ${socket.id}");
+  console.log(`user connected ${socket.id}`);
   socket.on("message", (data) => {
     console.log(`DATA: ${data}`);
   });
