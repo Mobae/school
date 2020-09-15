@@ -44,7 +44,7 @@ const ChatPage = () => {
   // }, []);
 
   const onSend = (msg) => {
-    socket.emit("sendMessage", msg[0].text);
+    socket.emit("sendMessage", { text: msg[0].text, room: user.class_ });
   };
 
   return (

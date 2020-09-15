@@ -53,9 +53,10 @@ const io = socketIO(server);
 
 io.on("connection", (socket) => {
   console.log(`user connected ${socket.id}`);
-  socket.on("sendMessage", (data) => {
+  socket.on("sendMessage", (data, callback) => {
     console.log(`DATA: ${data.text}`);
     socket.broadcast.to(data.room).emit("message", data.text);
+    callback();
   });
 
   socket.on("join", (classId) => {
