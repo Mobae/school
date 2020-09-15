@@ -9,13 +9,14 @@ const AdminContextProvider = (props) => {
   const initialState = { teachers: [], students: [], classes: [], allStudents: [] };
   const [adminState, setAdminState] = useState(initialState);
   const [loading, setLoading] = useState(false);
+  const [profileLoading, setProfileLoading] = useState(false);
   const [currClass, setCurrClass] = useState("");
   const [classObj, setClassObj] = useState({});
   const [flag, setFlag] = useState(false);
   const [redirect, setRedirect] = useState('hello');
 
   const getAllData = async () => {
-    setLoading(true);
+    setProfileLoading(true);
     let res1 = await axios.get(url + "/class/all");
     let res2 = await axios.get(url + "/student/teachers/all");
     let res3 = await axios.get(url + "/student/students/all");
@@ -28,6 +29,7 @@ const AdminContextProvider = (props) => {
       class_: adminState.class_,
       allStudents: res3.data.data
     });
+    setProfileLoading(false);
   }
 
   // 1 Getting All Classes
@@ -227,6 +229,7 @@ const AdminContextProvider = (props) => {
         classObj,
         flag, setFlag,
         loading, setLoading,
+        profileLoading, setProfileLoading,
         redirect, setRedirect,
       }}
     >
