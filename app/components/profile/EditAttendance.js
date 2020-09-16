@@ -133,6 +133,10 @@ const AddAttendence = ({ navigation }) => {
 
   const handleSubmit = async () => {
     console.log(date, attendances);
+    const res = await axios.post(URL + "/attendance/class/update", {
+      date,
+      attendances,
+    });
     // try {
     //   const res = await axios.post(URL + "/attendance/class", {
     //     date,
