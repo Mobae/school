@@ -190,4 +190,31 @@ router.post("/class/day", async (req, res) => {
   }
 });
 
+router.post("/class/update", async (req, res) => {
+  let { date, attendances } = req.body;
+  console.log(date, attendances);
+  if (date && attendances.length !== 0) {
+    date = date.slice(0, 10);
+    const gte = new Date(date);
+    const lt = new Date(gte.getTime() + 1000 * 60 * 60 * 24);
+    console.log(gte, lt);
+    for (let i = 0; i < attendances.length; i++) {
+      let updated = await Attendance.findOneAndUpdate(
+        {
+          date: {
+            $gte: gte,
+            $lt: lt,
+          },
+          studentId: attendances[i].studentId,
+        },
+        {
+          status: attendances[i].status,
+        },
+        { useFindAndModify: false }
+      );
+    }
+    res.json({ success: "success" });
+  }
+});
+
 module.exports = router;

@@ -93,26 +93,34 @@ const AddAttendence = ({ navigation }) => {
   const [attendances, setAttendances] = useState([]);
 
   const getStudents = async () => {
-    const res = await axios.get(URL + "/class/students/" + user.class_);
-    setStudents(res.data.data);
+    try {
+      const res = await axios.get(URL + "/class/students/" + user.class_);
+      setStudents(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const getAttendances = async () => {
-    const res = await axios.post(URL + "/attendance/class/day/", {
-      date,
-      students,
-    });
-    if (res.data.error) {
-      console.log(res.data);
-      setAttendances([]);
-    } else {
-      let attList = res.data.attendances;
-      attList = attList.map((at) => {
-        const student = students.find((st) => st._id === at.studentId);
-        at.name = student.name;
-        return at;
+    try {
+      const res = await axios.post(URL + "/attendance/class/day/", {
+        date,
+        students,
       });
-      setAttendances(attList);
+      if (res.data.error) {
+        console.log(res.data);
+        setAttendances([]);
+      } else {
+        let attList = res.data.attendances;
+        attList = attList.map((at) => {
+          const student = students.find((st) => st._id === at.studentId);
+          at.name = student.name;
+          return at;
+        });
+        setAttendances(attList);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -133,6 +141,17 @@ const AddAttendence = ({ navigation }) => {
 
   const handleSubmit = async () => {
     console.log(date, attendances);
+    try {
+      const res = await axios.post(URL + "/attendance/class/update", {
+        date,
+        attendances,
+      });
+      console.log(res);
+      createSuccessAlert();
+    } catch (err) {
+      console.log(err);
+      createErrorAlert();
+    }
     // try {
     //   const res = await axios.post(URL + "/attendance/class", {
     //     date,
@@ -153,7 +172,7 @@ const AddAttendence = ({ navigation }) => {
   const createErrorAlert = () =>
     Alert.alert(
       "Error",
-      "Attendance for this day already exists, try editing it.",
+      "An unexpected error occured.",
       [{ text: "OK", onPress: () => navigation.navigate("Attendance") }],
       { cancelable: false }
     );
@@ -161,7 +180,7 @@ const AddAttendence = ({ navigation }) => {
   const createSuccessAlert = () =>
     Alert.alert(
       "Success",
-      "Attendance added.",
+      "Attendance edited.",
       [{ text: "OK", onPress: () => navigation.navigate("Attendance") }],
       { cancelable: false }
     );
