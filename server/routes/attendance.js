@@ -199,19 +199,7 @@ router.post("/class/update", async (req, res) => {
     const lt = new Date(gte.getTime() + 1000 * 60 * 60 * 24);
     console.log(gte, lt);
     for (let i = 0; i < attendances.length; i++) {
-      // let updated = await Attendance.findOneAndUpdate(
-      //   {
-      //     date: {
-      //       $gte: gte,
-      //       $lt: lt,
-      //     },
-      //     studentId: attendances[i].studentId,
-      //   },
-      //   {
-      //     status: attendances[i].status,
-      //   }
-      // );
-      console.log(
+      let updated = await Attendance.findOneAndUpdate(
         {
           date: {
             $gte: gte,
@@ -224,7 +212,7 @@ router.post("/class/update", async (req, res) => {
         }
       );
     }
-    res.json({ date, attendances, gte, lt });
+    res.json({ success: "success" });
   }
 });
 
