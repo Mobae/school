@@ -90,7 +90,9 @@ const AllStudentsAttendance = ({ navigation }) => {
   };
 
   useEffect(() => {
-    getStudents();
+    if (isFocused) {
+      getStudents();
+    }
     return () => console.log("clean up");
   }, [isFocused]);
 

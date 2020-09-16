@@ -85,8 +85,12 @@ const AddAttendence = ({ navigation }) => {
   const [attendances, setAttendances] = useState([]);
 
   const getStudents = async () => {
-    const res = await axios.get(URL + "/class/students/" + user.class_);
-    setStudents(res.data.data);
+    try {
+      const res = await axios.get(URL + "/class/students/" + user.class_);
+      setStudents(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const updateAttendance = (_id, status) => {
