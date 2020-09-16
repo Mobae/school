@@ -133,11 +133,17 @@ const AddAttendence = ({ navigation }) => {
 
   const handleSubmit = async () => {
     console.log(date, attendances);
-    const res = await axios.post(URL + "/attendance/class/update", {
-      date,
-      attendances,
-    });
-    console.log(res);
+    try {
+      const res = await axios.post(URL + "/attendance/class/update", {
+        date,
+        attendances,
+      });
+      console.log(res);
+      createSuccessAlert();
+    } catch (err) {
+      console.log(err);
+      createErrorAlert();
+    }
     // try {
     //   const res = await axios.post(URL + "/attendance/class", {
     //     date,
@@ -166,7 +172,7 @@ const AddAttendence = ({ navigation }) => {
   const createSuccessAlert = () =>
     Alert.alert(
       "Success",
-      "Attendance added.",
+      "Attendance edited.",
       [{ text: "OK", onPress: () => navigation.navigate("Attendance") }],
       { cancelable: false }
     );

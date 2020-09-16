@@ -209,7 +209,8 @@ router.post("/class/update", async (req, res) => {
         },
         {
           status: attendances[i].status,
-        }
+        },
+        { useFindAndModify: false }
       );
     }
     res.json({ success: "success" });
