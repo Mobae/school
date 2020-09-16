@@ -245,7 +245,7 @@ const AdminContextProvider = (props) => {
         adminState,
         currClass,
         setCurrClass,
-        classObj,
+        classObj, setClassObj,
         flag,
         setFlag,
         loading,

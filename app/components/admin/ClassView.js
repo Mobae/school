@@ -13,6 +13,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import AddClassTeacher from './AddClassTeacher';
 import AddSubTeacher from './AddSubTeacher';
 import adminStyles from './AdminStyles';
+import axios from 'axios';
 const LeftContent = (props) => (
   <Avatar.Icon
     {...props}
@@ -30,9 +31,11 @@ const studentsIcon = (props) => (
 );
 
 const ClassView = ({ navigation }) => {
+  const url = 'https://school-server-testing.herokuapp.com';
   const {
     getCurrClassTeachers,
     classObj,
+    setClassObj,
     currClass,
     flag,
     setFlag,
@@ -43,6 +46,29 @@ const ClassView = ({ navigation }) => {
   const [subTeacherModalOpen, setSubTeacherModalOpen] = React.useState(false);
   const [pin1, setPin1] = React.useState(false);
   const [pin2, setPin2] = React.useState(false);
+
+  const removeTeacher = async(value) => {
+    try {
+      const payload = {
+        teacher: value,
+        class: currClass
+      }
+      const res = await axios.post( url + '/class/remove/subTeacher/', payload );
+      console.log(res.data);
+
+      const newSubTeachers = classObj.subTeachers.filter((teacher) => {
+        if(teacher._id != value){
+          return teacher;
+        }
+      });
+      setClassObj({
+        classTeacher: classObj.classTeacher,
+        subTeachers: newSubTeachers
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   React.useEffect(() => {
     getCurrClassTeachers();
@@ -131,6 +157,9 @@ const ClassView = ({ navigation }) => {
           {classObj.subTeachers.map((teacher) => (
             <Card style={adminStyles.card} key={teacher._id}>
               <Card.Title title={teacher.name} left={LeftContent} />
+              <Card.Actions>
+                <Button onPress={() => removeTeacher(teacher._id)}>Remove</Button>
+              </Card.Actions>
             </Card>
           ))}
         </ScrollView>
