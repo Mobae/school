@@ -198,6 +198,32 @@ router.post("/class/update", async (req, res) => {
     const gte = new Date(date);
     const lt = new Date(gte.getTime() + 1000 * 60 * 60 * 24);
     console.log(gte, lt);
+    for (let i = 0; i < attendances.length; i++) {
+      // let updated = await Attendance.findOneAndUpdate(
+      //   {
+      //     date: {
+      //       $gte: gte,
+      //       $lt: lt,
+      //     },
+      //     studentId: attendances[i].studentId,
+      //   },
+      //   {
+      //     status: attendances[i].status,
+      //   }
+      // );
+      console.log(
+        {
+          date: {
+            $gte: gte,
+            $lt: lt,
+          },
+          studentId: attendances[i].studentId,
+        },
+        {
+          status: attendances[i].status,
+        }
+      );
+    }
     res.json({ date, attendances, gte, lt });
   }
 });
