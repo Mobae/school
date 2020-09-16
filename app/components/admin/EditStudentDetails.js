@@ -40,7 +40,6 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
   const editStudent = async (values) => {
     try {
       values.studentId = user._id;
-      console.log(values);
       const res = await axios.post(url + "/student/update/student", values);
       setReload(!reload);
       navigation.navigate("AllStudentList");
@@ -116,7 +115,7 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
                       onTextChange: (text) => console.log(text),
                     }}
                     onItemSelect={(item) => {
-                      values.studentClass = item.classId;
+                      values.classId = item.classId;
                     }}
                     defaultIndex={defaultClassIndex}
                     containerStyle={{ padding: 1 }}
