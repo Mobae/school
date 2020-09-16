@@ -32,7 +32,7 @@ const Fab = ({ navigation }) => {
             {
               icon: "pencil",
               label: "Edit Attendance",
-              onPress: () => console.log("Pressed star"),
+              onPress: () => navigation.push("Edit Attendance"),
             },
             {
               icon: "plus",

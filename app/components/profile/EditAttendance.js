@@ -89,10 +89,13 @@ const AddAttendence = ({ navigation }) => {
     setStudents(res.data.data);
   };
 
-  const getAttendances = () => {
-    const res = await axios.post(URL + "/attendance/class/day/", {date, students});
+  const getAttendances = async () => {
+    const res = await axios.post(URL + "/attendance/class/day/", {
+      date,
+      students,
+    });
     console.log(res.data);
-  }
+  };
 
   const updateAttendance = (_id, status) => {
     let att = [...attendances];
@@ -235,14 +238,14 @@ const AddAttendence = ({ navigation }) => {
               <DataTable.Title style={styles.present}>Present</DataTable.Title>
               <DataTable.Title style={styles.absent}>Absent</DataTable.Title>
             </DataTable.Header>
-            {students.map((st) => (
+            {/* {students.map((st) => (
               <StudentRow
                 name={st.name}
                 key={st._id}
                 _id={st._id}
                 updateAttendance={updateAttendance}
               />
-            ))}
+            ))} */}
           </DataTable>
         </View>
       </PaperProvider>

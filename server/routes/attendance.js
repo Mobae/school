@@ -171,7 +171,7 @@ router.post("/class/day", async (req, res) => {
     const lt = new Date(gte.getTime() + 1000 * 60 * 60 * 24);
     let attendances = [];
     for (let i = 0; i < students.length; i++) {
-      const exists = await Attendance.find({
+      const exists = await Attendance.findOne({
         date: {
           $gte: gte,
           $lt: lt,

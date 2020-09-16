@@ -11,6 +11,7 @@ import IndividualMonth from "../profile/StudentView/IndividualMonth";
 import StudentInfo from "../profile/StudentView/StudentInfo";
 import AllStudentAttendance from "../profile/AllStudentsAttendance";
 import AddAttendance from "../profile/AddAttendence";
+import EditAttendance from "../profile/EditAttendance";
 import Notice from "../NoticeBoard/Notice";
 import ClassNotice from "../NoticeBoard/ClassNotice";
 import NoticeForm from "../NoticeBoard/NoticeForm";
@@ -93,6 +94,10 @@ const TeacherStackScreen = () => {
           component={AllStudentAttendance}
         />
         <TeacherStack.Screen name="Add Attendance" component={AddAttendance} />
+        <TeacherStack.Screen
+          name="Edit Attendance"
+          component={EditAttendance}
+        />
         <TeacherStack.Screen name="Students" component={Students} />
         <TeacherStack.Screen name="Student Details" component={StudentDetail} />
       </TeacherStack.Navigator>
@@ -132,10 +137,10 @@ const ProfileRoute = () => {
   return rank === "1" ? (
     <TeacherStackScreen />
   ) : rank === "0" ? (
-    <StudentStackScreen /> 
+    <StudentStackScreen />
   ) : rank === "2" ? (
     <AdminStack />
-  ) :  null ;
+  ) : null;
 };
 
 const MyComponent = () => {
