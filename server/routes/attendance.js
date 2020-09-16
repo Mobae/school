@@ -198,6 +198,7 @@ router.post("/class/update", async (req, res) => {
     const gte = new Date(date);
     const lt = new Date(gte.getTime() + 1000 * 60 * 60 * 24);
     console.log(gte, lt);
+    res.json({ date, attendances, gte, lt });
   }
 });
 

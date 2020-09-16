@@ -137,6 +137,7 @@ const AddAttendence = ({ navigation }) => {
       date,
       attendances,
     });
+    console.log(res);
     // try {
     //   const res = await axios.post(URL + "/attendance/class", {
     //     date,
