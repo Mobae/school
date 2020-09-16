@@ -164,7 +164,7 @@ const AddAttendence = ({ navigation }) => {
   const createErrorAlert = () =>
     Alert.alert(
       "Error",
-      "Attendance for this day already exists, try editing it.",
+      "An unexpected error occured.",
       [{ text: "OK", onPress: () => navigation.navigate("Attendance") }],
       { cancelable: false }
     );
