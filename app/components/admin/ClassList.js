@@ -14,7 +14,7 @@ const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 import adminStyles from './AdminStyles';
 
 const ClassList = ({ navigation }) => {
-  const { adminState, setCurrClass, currClass, setFlag } = React.useContext(
+  const { adminState, setCurrClass, currClass, setFlag, reload, getClasses } = React.useContext(
     AdminContext
   );
 
@@ -37,6 +37,10 @@ const ClassList = ({ navigation }) => {
       );
     }
   }, [searchQuery]);
+
+  React.useEffect(() => {
+    getClasses();
+  }, [reload])
 
   return (
     <View>

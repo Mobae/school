@@ -121,9 +121,11 @@ router.post("/update/student", async (req, res) => {
 
     if (req.body.classId) {
       const oldClass = await Class.findById(student.studentClass);
-      oldClass.students = oldClass.students.filter(
-        (student) => student == studentId
-      );
+      oldClass.students = oldClass.students.filter((student_) => {
+        if(student_.student != student.id){
+          return student_;
+        }
+      });
       oldClass.save();
 
       const class_ = await Class.findById(req.body.classId);
@@ -135,6 +137,7 @@ router.post("/update/student", async (req, res) => {
       name: req.body.name || student.name,
       email: req.body.email || student.email,
       studentClass: req.body.classId || student.studentClass,
+      info: req.body.info || student.info,
     });
     student.save();
     return res.status(201).json({

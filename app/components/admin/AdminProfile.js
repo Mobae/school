@@ -49,6 +49,7 @@ const AdminProfile = ({ navigation }) => {
     adminState,
     profileLoading,
     getAllData,
+    reload,
   } = React.useContext(AdminContext);
   const [classModalOpen, setClassModalOpen] = React.useState(false);
   const [teacherModalOpen, setTeacherModalOpen] = React.useState(false);

@@ -2,26 +2,33 @@ import React, { Fragment } from "react";
 import {
   View,
   Text,
+  Modal,
   TouchableWithoutFeedback,
   Keyboard,
-  Modal,
 } from "react-native";
 import { Headline, TextInput, Button, FAB } from "react-native-paper";
 import { Formik } from "formik";
 import SearchableDropdown from "react-native-searchable-dropdown";
+import axios from "axios";
 import { ScrollView } from "react-native-gesture-handler";
 
 import { AdminContext } from "../../context/AdminContext";
 import globalStyles from "../styles/global";
 import adminStyles from "./AdminStyles";
 
-const AddStudent = ({
-  addStudent,
-  studentModalOpen,
-  setStudentModalOpen,
-  navigation,
-}) => {
-  const { adminState } = React.useContext(AdminContext);
+const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
+  const url = "https://school-server-testing.herokuapp.com";
+
+  const {
+    adminState,
+    getAllStudents,
+    getAllData,
+    reload,
+    setReload,
+  } = React.useContext(AdminContext);
+
+  let firstName = user.name.split(" ")[0];
+  let lastName = user.name.split(" ")[1];
 
   var classes = adminState.classes.map((class_) => {
     return {
@@ -30,37 +37,45 @@ const AddStudent = ({
     };
   });
 
+  const editStudent = async (values) => {
+    try {
+      values.studentId = user._id;
+      console.log(values);
+      const res = await axios.post(url + "/student/update/student", values);
+      setReload(!reload);
+      navigation.navigate("AllStudentList");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  let defaultClass = classes.filter(
+    (class_) => class_.classId == user.studentClass
+  );
+  let defaultClassIndex = classes.indexOf(defaultClass[0]);
+
   return (
-    <Modal visible={studentModalOpen}>
+    <Modal visible={editModal} animationType="slide">
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={adminStyles.modalContent}>
-          <Text></Text>
-          <Headline style={globalStyles.headline}>Add Student</Headline>
           <Fragment>
+            <Text></Text>
+            <Headline style={globalStyles.headline}>Edit Student</Headline>
+            <Text></Text>
+            <Text></Text>
             <Formik
               initialValues={{
-                firstName: "",
-                lastName: "",
-                email: "",
-                studentClass: "",
+                firstName: firstName,
+                lastName: lastName,
+                email: user.email,
+                classId: "",
                 rank: "0",
-                info: {
-                  address: " ",
-                  motherName: " ",
-                  fatherName: " ",
-                  gaurdianName: " ",
-                  rollNo: " ",
-                  admissionNo: " ",
-                  busNo: " ",
-                  phone: " ",
-                },
+                info: user.info
               }}
               onSubmit={(values, actions) => {
                 actions.resetForm();
-                navigation.navigate("AdminProfile");
-                setStudentModalOpen(false);
-                addStudent(values); // SUBMITTING STUDENT VALUE
-                // console.log(values);
+                openEditModal(false);
+                editStudent(values); // SUBMITTING STUDENT VALUE
               }}
             >
               {({ handleChange, handleBlur, handleSubmit, values }) => (
@@ -103,6 +118,7 @@ const AddStudent = ({
                     onItemSelect={(item) => {
                       values.studentClass = item.classId;
                     }}
+                    defaultIndex={defaultClassIndex}
                     containerStyle={{ padding: 1 }}
                     itemStyle={{
                       padding: 10,
@@ -188,15 +204,15 @@ const AddStudent = ({
               )}
             </Formik>
           </Fragment>
+          <FAB
+            style={adminStyles.fab}
+            icon="backburger"
+            onPress={() => openEditModal(false)}
+          />
         </View>
       </TouchableWithoutFeedback>
-      <FAB
-        style={adminStyles.fab}
-        icon="backburger"
-        onPress={() => setStudentModalOpen(false)}
-      />
     </Modal>
   );
 };
 
-export default AddStudent;
+export default EditStudent;

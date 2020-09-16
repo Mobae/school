@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,9 +6,14 @@ import {
   ImageBackground,
   ScrollView,
 } from "react-native";
-import { List, Provider as PaperProvider } from "react-native-paper";
+import { List, Provider as PaperProvider, FAB } from "react-native-paper";
+
+import EditStudent from './EditStudentDetails';
 
 const StudentInfo = (props) => {
+
+  const [ editModal, openEditModal ] = useState(false);
+
   const { user, class_ } = props.route.params;
   useEffect(() => {
     console.log(user);
@@ -17,6 +22,9 @@ const StudentInfo = (props) => {
   return (
     <React.Fragment>
       <PaperProvider>
+
+        <EditStudent user={user} editModal={editModal} openEditModal={openEditModal} navigation={props.navigation} />
+
         <View style={{ alignItems: "center", margin: 20 }}>
           <View style={styles.info}>
             <ImageBackground
@@ -34,9 +42,6 @@ const StudentInfo = (props) => {
 
         <React.Fragment>
           <ScrollView>
-            <View style={styles.info}>
-              <Text style={styles.details}>Class: {class_}</Text>
-            </View>
             <View style={styles.info}>
               <Text style={styles.details}>
                 Admission No.: {user.info.admissionNo}
@@ -103,6 +108,11 @@ const StudentInfo = (props) => {
             </List.Accordion>
           </ScrollView>
         </React.Fragment>
+        <FAB
+          style={styles.fab}
+          icon="account-edit"
+          onPress={() => openEditModal(true)}
+        />
       </PaperProvider>
     </React.Fragment>
   );

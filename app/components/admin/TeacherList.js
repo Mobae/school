@@ -8,7 +8,7 @@ import adminStyles from "./AdminStyles";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const TeacherList = () => {
-  const { adminState, getTeachers, getAllStudents } = React.useContext(AdminContext);
+  const { adminState, getTeachers, getAllStudents, reload } = React.useContext(AdminContext);
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filtered, setFiltered] = React.useState(adminState.classes);
@@ -17,7 +17,7 @@ const TeacherList = () => {
     };
 
   React.useEffect(() => {
-    getAllStudents();
+    getTeachers();
   }, [])
 
   React.useEffect(() => {
