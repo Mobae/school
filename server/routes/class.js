@@ -85,7 +85,12 @@ router.get("/students/:classId", async (req, res) => {
     console.log(req.params.classId);
 
     const class_ = await Class.findById(req.params.classId);
-    const students = await Student.find({ studentClass: class_._id });
+    let students = await Student.find({ studentClass: class_._id });
+    students.map((st) => {
+      st.toJSON();
+      delete st.password;
+      return st;
+    });
 
     res.status(200).json({
       sucess: true,
@@ -134,7 +139,7 @@ router.post("/classTeacher", async (req, res) => {
   try {
     const class_ = await Class.findById(req.body.class);
     const teacher = await Teacher.findById(req.body.teacher);
-    if(teacher.teacherClass){
+    if (teacher.teacherClass) {
       const oldClass = await Class.findById(teacher.teacherClass);
       oldClass.classTeacher = null;
       oldClass.save();

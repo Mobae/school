@@ -151,13 +151,10 @@ const AddAttendence = ({ navigation }) => {
     getStudents();
   }, []);
 
-  // useEffect(() => {
-  //   console.log(attendances);
-  // }, [attendances]);
-
   useEffect(() => {
+    console.log(date, students);
     getAttendances();
-  }, [students]);
+  }, [students, date]);
 
   return (
     <React.Fragment>

@@ -176,7 +176,7 @@ router.post("/class/day", async (req, res) => {
           $gte: gte,
           $lt: lt,
         },
-        studentId: students[i].studentId,
+        studentId: students[i]._id,
       });
       if (exists) {
         attendances.push(exists);
