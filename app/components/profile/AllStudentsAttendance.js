@@ -5,12 +5,52 @@ import {
   Title,
   DataTable,
   FAB,
+  Portal,
   Provider as PaperProvider,
 } from "react-native-paper";
+import { useIsFocused } from "@react-navigation/native";
 import axios from "axios";
 
 import { URL } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
+
+const Fab = ({ navigation }) => {
+  const [state, setState] = React.useState({ open: false });
+
+  const onStateChange = ({ open }) => setState({ open });
+
+  const { open } = state;
+
+  return (
+    <PaperProvider>
+      <Portal>
+        <FAB.Group
+          open={open}
+          icon={open ? "calendar-today" : "plus"}
+          fabStyle={{ backgroundColor: "#6200EE" }}
+          actions={[
+            {
+              icon: "pencil",
+              label: "Edit Attendance",
+              onPress: () => navigation.push("Edit Attendance"),
+            },
+            {
+              icon: "plus",
+              label: "Add Attendance",
+              onPress: () => navigation.push("Add Attendance"),
+            },
+          ]}
+          onStateChange={onStateChange}
+          onPress={() => {
+            if (open) {
+              // do something if the speed dial is open
+            }
+          }}
+        />
+      </Portal>
+    </PaperProvider>
+  );
+};
 
 const DataRow = (props) => {
   return (
@@ -25,6 +65,7 @@ const DataRow = (props) => {
 };
 
 const AllStudentsAttendance = ({ navigation }) => {
+  const isFocused = useIsFocused();
   const [studentList, setStudentList] = useState([]);
   const {
     authState: { user },
@@ -50,7 +91,8 @@ const AllStudentsAttendance = ({ navigation }) => {
 
   useEffect(() => {
     getStudents();
-  }, []);
+    return () => console.log("clean up");
+  }, [isFocused]);
 
   return (
     <React.Fragment>
@@ -70,7 +112,7 @@ const AllStudentsAttendance = ({ navigation }) => {
                 name={student.name}
                 key={student._id}
                 rollNo={student.rollNo}
-                att={((student.pt.p / student.pt.t) * 100).toFixed(2)}
+                att={((student.pt.p / student.pt.t) * 100).toFixed(2) + "%"}
               />
             ))}
             <DataTable.Pagination
@@ -84,13 +126,7 @@ const AllStudentsAttendance = ({ navigation }) => {
           </DataTable>
         </View>
       </PaperProvider>
-      <FAB
-        style={styles.fab}
-        small
-        icon="account-multiple-plus"
-        label="Add Attendance"
-        onPress={() => navigation.push("Add Attendance")}
-      />
+      <Fab navigation={navigation} />
       <StatusBar style="auto" />
     </React.Fragment>
   );

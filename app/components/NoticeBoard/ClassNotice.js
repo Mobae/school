@@ -26,6 +26,7 @@ const ClassNotice = ({ navigation }) => {
 
   useEffect(() => {
     getNotices();
+    return () => console.log("clean up");
   }, [isFocused]);
 
   return (

@@ -130,4 +130,64 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
+router.post("/class", async (req, res) => {
+  let { date, attendances } = req.body;
+  if (date && attendances.length !== 0) {
+    date = date.slice(0, 10);
+    const gte = new Date(date);
+    const lt = new Date(gte.getTime() + 1000 * 60 * 60 * 24);
+    const exists = await Attendance.find({
+      date: {
+        $gte: gte,
+        $lt: lt,
+      },
+      studentId: attendances[0].studentId,
+    });
+    console.log(exists);
+    if (exists.length === 0) {
+      let data = attendances.map((at) => {
+        at.date = date;
+        return at;
+      });
+      try {
+        console.log(data);
+        const result = await Attendance.insertMany(data);
+        res.json({ result });
+      } catch (err) {
+        res.status(500).json({ error: "Server error" });
+      }
+    } else {
+      res.json({ error: "Attendance already exists" });
+    }
+  }
+});
+
+router.post("/class/day", async (req, res) => {
+  let { date, students } = req.body;
+  console.log(date, students);
+  if (date && students.length !== 0) {
+    date = date.slice(0, 10);
+    const gte = new Date(date);
+    const lt = new Date(gte.getTime() + 1000 * 60 * 60 * 24);
+    let attendances = [];
+    for (let i = 0; i < students.length; i++) {
+      const exists = await Attendance.findOne({
+        date: {
+          $gte: gte,
+          $lt: lt,
+        },
+        studentId: students[i]._id,
+      });
+      if (exists) {
+        attendances.push(exists);
+      }
+    }
+    if (attendances.length >= 1) {
+      res.json({ attendances });
+    } else {
+      res.json({ error: "Attendance for this day does not exist" });
+    }
+  }
+});
+
 module.exports = router;

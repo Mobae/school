@@ -1,38 +1,83 @@
-import * as React from "react";
-import { View, Text } from "react-native";
-import { Avatar, Button, Card } from "react-native-paper";
+import * as React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Avatar, Button, Card, ActivityIndicator } from 'react-native-paper';
 
 import AddClass from './AddClass';
 import AddTeacher from './AddTeacher';
 import AddStudent from './AddStudent';
-import {AdminContext} from '../../context/AdminContext';
+import { AdminContext } from '../../context/AdminContext';
 
-import adminStyles from "./AdminStyles";
+import adminStyles from './AdminStyles';
 
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
+const attendanceIcon = (props) => (
+  <Avatar.Icon
+    {...props}
+    icon="clipboard-text"
+    style={{ backgroundColor: '#00674D' }}
+  />
+);
+
+const classesIcon = (props) => (
+  <Avatar.Icon
+    {...props}
+    icon="presentation"
+    style={{ backgroundColor: '#2E6E80' }}
+  />
+);
+
+const teachersIcon = (props) => (
+  <Avatar.Icon {...props} icon="teach" style={{ backgroundColor: '#8A3B37' }} />
+);
+
+const studentsIcon = (props) => (
+  <Avatar.Icon
+    {...props}
+    icon="clipboard-account"
+    color="#fff"
+    style={{ backgroundColor: '#EF5758' }}
+  />
+);
+
 const AdminProfile = ({ navigation }) => {
-  const { 
+  const {
     addClass,
     addTeacher,
-    addStudent, 
+    addStudent,
     adminState,
-    profileLoading, 
-    getAllData } = React.useContext(AdminContext);
-  const [ classModalOpen, setClassModalOpen ] = React.useState(false);
-  const [ teacherModalOpen, setTeacherModalOpen ] = React.useState(false);
-  const [ studentModalOpen, setStudentModalOpen ] = React.useState(false);
+    profileLoading,
+    getAllData,
+  } = React.useContext(AdminContext);
+  const [classModalOpen, setClassModalOpen] = React.useState(false);
+  const [teacherModalOpen, setTeacherModalOpen] = React.useState(false);
+  const [studentModalOpen, setStudentModalOpen] = React.useState(false);
 
   React.useEffect(() => {
     getAllData();
   }, []);
 
-  if(!profileLoading) {
+  if (!profileLoading) {
     return (
       <View>
-        <AddClass navigation={navigation} addClass={addClass} classModalOpen={classModalOpen} setClassModalOpen={setClassModalOpen} />
-        <AddTeacher navigation={navigation} addTeacher={addTeacher} teacherModalOpen={teacherModalOpen} setTeacherModalOpen={setTeacherModalOpen} />
-        <AddStudent navigation={navigation} addStudent={addStudent} studentModalOpen={studentModalOpen} setStudentModalOpen={setStudentModalOpen} />
+        <AddClass
+          navigation={navigation}
+          addClass={addClass}
+          classModalOpen={classModalOpen}
+          setClassModalOpen={setClassModalOpen}
+        />
+        <AddTeacher
+          navigation={navigation}
+          addTeacher={addTeacher}
+          teacherModalOpen={teacherModalOpen}
+          setTeacherModalOpen={setTeacherModalOpen}
+        />
+        <AddStudent
+          navigation={navigation}
+          addStudent={addStudent}
+          studentModalOpen={studentModalOpen}
+          setStudentModalOpen={setStudentModalOpen}
+        />
 
         {/* // ATTENDANCE CARD */}
         <View>
@@ -40,7 +85,7 @@ const AdminProfile = ({ navigation }) => {
             <Card.Title
               title="Attendance"
               subtitle="View Attendance"
-              left={LeftContent}
+              left={attendanceIcon}
             />
             <Card.Content></Card.Content>
           </Card>
@@ -50,24 +95,38 @@ const AdminProfile = ({ navigation }) => {
         <Text></Text>
         <View>
           <Card style={adminStyles.card}>
-            <Card.Title title="Classes" left={LeftContent} />
+            <Card.Title title="Classes" left={classesIcon} />
             <Card.Actions>
-              <Button onPress={() => navigation.navigate('ClassList')}>VIEW</Button>
-              <Button onPress={() => setClassModalOpen(true)} >ADD</Button>
+              <Button
+                onPress={() => navigation.navigate('ClassList')}
+                color="#2E6E80"
+              >
+                VIEW
+              </Button>
+              <Button onPress={() => setClassModalOpen(true)} color="#2E6E80">
+                ADD
+              </Button>
             </Card.Actions>
           </Card>
         </View>
 
-        {/* // TEAHERS CARD */}
+        {/* // TEACHERS CARD */}
         <Text></Text>
         <View>
           <Card style={adminStyles.card}>
-            <Card.Title title="Teachers" left={LeftContent} />
+            <Card.Title title="Teachers" left={teachersIcon} />
             <Card.Actions>
-              <Button onPress={() => {
-                navigation.navigate('TeacherList');
-              }} >VIEW</Button>
-              <Button onPress={() => setTeacherModalOpen(true)} >ADD</Button>
+              <Button
+                onPress={() => {
+                  navigation.navigate('TeacherList');
+                }}
+                color="#8A3B37"
+              >
+                VIEW
+              </Button>
+              <Button onPress={() => setTeacherModalOpen(true)} color="#8A3B37">
+                ADD
+              </Button>
             </Card.Actions>
           </Card>
         </View>
@@ -76,14 +135,19 @@ const AdminProfile = ({ navigation }) => {
         <Text></Text>
         <View>
           <Card style={adminStyles.card}>
-            <Card.Title title="Students" left={LeftContent} />
+            <Card.Title title="Students" left={studentsIcon} />
             <Card.Actions>
-              <Button onPress={() => {
-                navigation.navigate('AllStudentList');
-              }}>
+              <Button
+                onPress={() => {
+                  navigation.navigate('AllStudentList');
+                }}
+                color="#EF5758"
+              >
                 VIEW
               </Button>
-              <Button  onPress={() => setStudentModalOpen(true)}>ADD</Button>
+              <Button onPress={() => setStudentModalOpen(true)} color="#EF5758">
+                ADD
+              </Button>
             </Card.Actions>
           </Card>
         </View>
@@ -91,15 +155,28 @@ const AdminProfile = ({ navigation }) => {
     );
   } else {
     return (
-      <Card style={adminStyles.card}>
-        <Card.Title 
-          title="Loading...."
-          left={LeftContent} 
+      <View style={styles.container}>
+        <ActivityIndicator
+          animating={true}
+          size="large"
+          style={styles.loading}
         />
-      </Card>
-    )
+      </View>
+    );
   }
-  
 };
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: '100%',
+    width: '100%',
+  },
+  loading: {
+    alignSelf: 'center',
+  },
+});
 
 export default AdminProfile;

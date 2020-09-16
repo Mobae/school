@@ -17,6 +17,14 @@ import { AuthContext } from "../../context/AuthContext";
 import { URL } from "../../config";
 
 const StudentRow = (props) => {
+  useEffect(() => {
+    if (props.status === "P") {
+      setChecked("present");
+    }
+    if (props.status === "A") {
+      setChecked("absent");
+    }
+  }, [props.status]);
   const [checked, setChecked] = React.useState(0);
   return (
     <DataTable.Row>
@@ -89,6 +97,25 @@ const AddAttendence = ({ navigation }) => {
     setStudents(res.data.data);
   };
 
+  const getAttendances = async () => {
+    const res = await axios.post(URL + "/attendance/class/day/", {
+      date,
+      students,
+    });
+    if (res.data.error) {
+      console.log(res.data);
+      setAttendances([]);
+    } else {
+      let attList = res.data.attendances;
+      attList = attList.map((at) => {
+        const student = students.find((st) => st._id === at.studentId);
+        at.name = student.name;
+        return at;
+      });
+      setAttendances(attList);
+    }
+  };
+
   const updateAttendance = (_id, status) => {
     let att = [...attendances];
     console.log(_id, status);
@@ -106,21 +133,21 @@ const AddAttendence = ({ navigation }) => {
 
   const handleSubmit = async () => {
     console.log(date, attendances);
-    try {
-      const res = await axios.post(URL + "/attendance/class", {
-        date,
-        attendances,
-      });
-      if (res.data.error) {
-        console.log(res.data.error);
-        createErrorAlert();
-      } else {
-        console.log(res.data);
-        createSuccessAlert();
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   const res = await axios.post(URL + "/attendance/class", {
+    //     date,
+    //     attendances,
+    //   });
+    //   if (res.data.error) {
+    //     console.log(res.data.error);
+    //     createErrorAlert();
+    //   } else {
+    //     console.log(res.data);
+    //     createSuccessAlert();
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
 
   const createErrorAlert = () =>
@@ -146,6 +173,11 @@ const AddAttendence = ({ navigation }) => {
   useEffect(() => {
     console.log(attendances);
   }, [attendances]);
+
+  useEffect(() => {
+    console.log(date, students);
+    getAttendances();
+  }, [students, date]);
 
   return (
     <React.Fragment>
@@ -226,14 +258,21 @@ const AddAttendence = ({ navigation }) => {
               <DataTable.Title style={styles.present}>Present</DataTable.Title>
               <DataTable.Title style={styles.absent}>Absent</DataTable.Title>
             </DataTable.Header>
-            {students.map((st) => (
-              <StudentRow
-                name={st.name}
-                key={st._id}
-                _id={st._id}
-                updateAttendance={updateAttendance}
-              />
-            ))}
+            {attendances.length !== 0 ? (
+              attendances.map((st) => (
+                <StudentRow
+                  name={st.name}
+                  key={st._id}
+                  _id={st.studentId}
+                  status={st.status}
+                  updateAttendance={updateAttendance}
+                />
+              ))
+            ) : (
+              <Paragraph style={{ alignSelf: "center", marginTop: 10 }}>
+                Attendance for this day does not exist
+              </Paragraph>
+            )}
           </DataTable>
         </View>
       </PaperProvider>

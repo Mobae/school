@@ -6,14 +6,18 @@ import io from "socket.io-client";
 import { URL } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
 
+let socket;
+
 const ChatPage = () => {
-  const [socket] = useState(io(URL));
   const [messages, setMessages] = useState([]);
+  const [room, setRoom] = useState("");
   const {
     authState: { user },
   } = useContext(AuthContext);
 
   useEffect(() => {
+    socket = io(URL);
+    socket.emit("join", user.class_);
     setMessages([
       {
         _id: 1,
@@ -30,6 +34,12 @@ const ChatPage = () => {
       socket.close();
     };
   }, []);
+
+  useEffect(() => {
+    socket.on("joinSuccess", (data) => {
+      console.log(data);
+    });
+  }, []);
   // const onSend = useCallback((messages = []) => {
   //   setMessages((previousMessages) =>
   //     GiftedChat.append(previousMessages, messages)
@@ -37,8 +47,7 @@ const ChatPage = () => {
   // }, []);
 
   const onSend = (msg) => {
-    socket.emit("message", "hello");
-    console.log(msg);
+    socket.emit("sendMessage", { text: msg[0].text, room: user.class_ });
   };
 
   return (

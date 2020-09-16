@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Avatar, Card, IconButton, TouchableRipple } from 'react-native-paper';
-import { View, TouchableOpacity } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import styles from '../NoticeBoard/styles';
 
 const ChatHome = ({ navigation }) => {
   return (
@@ -11,7 +12,14 @@ const ChatHome = ({ navigation }) => {
             <Card.Title
               title="Chats"
               subtitle="Talk with teachers !!"
-              left={(props) => <Avatar.Icon {...props} icon="wechat" />}
+              left={(props) => (
+                <Avatar.Icon
+                  {...props}
+                  icon="wechat"
+                  color="#fff"
+                  style={styles.chatIcon}
+                />
+              )}
             />
           </TouchableRipple>
         </Card>
@@ -24,7 +32,11 @@ const ChatHome = ({ navigation }) => {
               title="Files"
               subtitle="Get your files"
               left={(props) => (
-                <Avatar.Icon {...props} icon="file-document-box-multiple" />
+                <Avatar.Icon
+                  {...props}
+                  icon="file-document-box-multiple"
+                  style={{ backgroundColor: '#3D64A4' }}
+                />
               )}
             />
           </TouchableRipple>
