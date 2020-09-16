@@ -13,7 +13,21 @@ import { ScrollView } from 'react-native-gesture-handler';
 import AddClassTeacher from './AddClassTeacher';
 import AddSubTeacher from './AddSubTeacher';
 import adminStyles from './AdminStyles';
-const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+const LeftContent = (props) => (
+  <Avatar.Icon
+    {...props}
+    icon="folder"
+    style={{ backgroundColor: '#2E6E80' }}
+  />
+);
+
+const studentsIcon = (props) => (
+  <Avatar.Icon
+    {...props}
+    icon="format-list-checkbox"
+    style={{ backgroundColor: '#2E6E80' }}
+  />
+);
 
 const ClassView = ({ navigation }) => {
   const {
@@ -62,7 +76,7 @@ const ClassView = ({ navigation }) => {
               }}
             >
               <React.Fragment>
-                <Card.Title title="Students" left={LeftContent} />
+                <Card.Title title="Students" left={studentsIcon} />
                 <Card.Content></Card.Content>
               </React.Fragment>
             </TouchableRipple>
@@ -128,6 +142,7 @@ const ClassView = ({ navigation }) => {
         <ActivityIndicator
           animating={true}
           size="large"
+          color="#2E6E80"
           style={adminStyles.loading}
         />
       </View>
