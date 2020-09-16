@@ -7,7 +7,7 @@ import {AdminContext} from '../../context/AdminContext';
 import adminStyles from "./AdminStyles";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
-const StudentList = () => {
+const StudentList = ({ navigation }) => {
   const { adminState, getAllStudents } = React.useContext(AdminContext);
 
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -43,7 +43,15 @@ const StudentList = () => {
         <ScrollView>
         { filtered.map(student => (
             <View key={student._id}>
-                <Card style={adminStyles.card}>
+                <Card 
+                    style={adminStyles.card} 
+                    onPress={() => 
+                        navigation.navigate("Student Details", {
+                            user: student,
+                            class_: student.studentClass
+                        })
+                    }
+                >
                     <Card.Title
                         title={student.name}
                         subtitle={student.email}

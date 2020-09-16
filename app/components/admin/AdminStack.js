@@ -11,6 +11,9 @@ import TeacherList from "./TeacherList";
 import StudentList from "./StudentList";
 import ClassView from './ClassView';
 import AllStudentList from './AllStudentList';
+import AttendanceClassList from './AttendanceClassList';
+import StudentAttendance from './StudentAttendance';
+import StudentDetail from './StudentDetail';
 
 import { AuthContext } from "../../context/AuthContext";
 
@@ -48,10 +51,13 @@ function AdminStack() {
           }}
         />
         <Stack.Screen name="ClassList" component={ClassList} />
+        <Stack.Screen name="AttendanceClassList" component={AttendanceClassList} />
         <Stack.Screen name="TeacherList" component={TeacherList} />
         <Stack.Screen name="StudentList" component={StudentList} />
         <Stack.Screen name="AllStudentList" component={AllStudentList} />
         <Stack.Screen name="ClassView" component={ClassView} />
+        <Stack.Screen name="StudentAttendance" component={StudentAttendance} />
+        <Stack.Screen name="Student Details" component={StudentDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   );
