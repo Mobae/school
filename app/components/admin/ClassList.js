@@ -10,7 +10,13 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { AdminContext } from '../../context/AdminContext';
-const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+const LeftContent = (props) => (
+  <Avatar.Icon
+    {...props}
+    icon="presentation"
+    style={{ backgroundColor: '#2E6E80' }}
+  />
+);
 import adminStyles from './AdminStyles';
 
 const ClassList = ({ navigation }) => {
@@ -43,7 +49,7 @@ const ClassList = ({ navigation }) => {
   }, [reload])
 
   return (
-    <View>
+    <React.Fragment>
       <Searchbar
         placeholder="Search class.."
         onChangeText={onChangeSearch}
@@ -77,7 +83,7 @@ const ClassList = ({ navigation }) => {
           )}
         </ScrollView>
       </View>
-    </View>
+    </React.Fragment>
   );
 };
 

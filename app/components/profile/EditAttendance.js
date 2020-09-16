@@ -190,11 +190,6 @@ const AddAttendence = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
-    console.log(attendances);
-  }, [attendances]);
-
-  useEffect(() => {
-    console.log(date, students);
     getAttendances();
   }, [students, date]);
 
@@ -205,37 +200,22 @@ const AddAttendence = ({ navigation }) => {
           <Portal>
             <Dialog visible={visible} onDismiss={hideDialog}>
               <Dialog.Title>Save Attendance</Dialog.Title>
-              {attendances.length === students.length ? (
-                <Fragment>
-                  <Dialog.Content>
-                    <Paragraph style={styles.byline}>Are you sure?</Paragraph>
-                  </Dialog.Content>
-                  <Dialog.Actions>
-                    <Button
-                      onPress={() => {
-                        hideDialog();
-                        handleSubmit();
-                      }}
-                      style={styles.yes}
-                    >
-                      Yes
-                    </Button>
-                  </Dialog.Actions>
-                </Fragment>
-              ) : (
-                <Fragment>
-                  <Dialog.Content>
-                    <Paragraph style={styles.byline}>
-                      Some attendances were left blank
-                    </Paragraph>
-                  </Dialog.Content>
-                  <Dialog.Actions>
-                    <Button onPress={hideDialog} style={styles.yes}>
-                      Ok
-                    </Button>
-                  </Dialog.Actions>
-                </Fragment>
-              )}
+              <Fragment>
+                <Dialog.Content>
+                  <Paragraph style={styles.byline}>Are you sure?</Paragraph>
+                </Dialog.Content>
+                <Dialog.Actions>
+                  <Button
+                    onPress={() => {
+                      hideDialog();
+                      handleSubmit();
+                    }}
+                    style={styles.yes}
+                  >
+                    Yes
+                  </Button>
+                </Dialog.Actions>
+              </Fragment>
             </Dialog>
           </Portal>
         </View>
