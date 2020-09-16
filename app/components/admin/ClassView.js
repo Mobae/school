@@ -41,8 +41,8 @@ const ClassView = ({ navigation }) => {
     false
   );
   const [subTeacherModalOpen, setSubTeacherModalOpen] = React.useState(false);
-  const [pin1, setPin1] = React.useState('');
-  const [pin2, setPin2] = React.useState('');
+  const [pin1, setPin1] = React.useState(false);
+  const [pin2, setPin2] = React.useState(false);
 
   React.useEffect(() => {
     getCurrClassTeachers();

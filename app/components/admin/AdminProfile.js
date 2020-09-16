@@ -8,6 +8,7 @@ import AddStudent from './AddStudent';
 import { AdminContext } from '../../context/AdminContext';
 
 import adminStyles from './AdminStyles';
+import AttendanceClassList from './AttendanceClassList';
 
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
@@ -48,6 +49,7 @@ const AdminProfile = ({ navigation }) => {
     adminState,
     profileLoading,
     getAllData,
+    reload,
   } = React.useContext(AdminContext);
   const [classModalOpen, setClassModalOpen] = React.useState(false);
   const [teacherModalOpen, setTeacherModalOpen] = React.useState(false);
@@ -81,7 +83,7 @@ const AdminProfile = ({ navigation }) => {
 
         {/* // ATTENDANCE CARD */}
         <View>
-          <Card style={adminStyles.card}>
+          <Card style={adminStyles.card} onPress={() => navigation.navigate(AttendanceClassList)}>
             <Card.Title
               title="Attendance"
               subtitle="View Attendance"

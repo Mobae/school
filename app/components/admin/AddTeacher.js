@@ -33,7 +33,8 @@ const AddTeacher = ({ addTeacher, teacherModalOpen, setTeacherModalOpen, navigat
                             actions.resetForm();
                             addTeacher(values);          // SUBMITTING TEACHER VALUE
                             setTeacherModalOpen(false);
-                            navigation.navigate('TeacherList');
+                            navigation.navigate('AdminProfile');
+                            navigation.push('TeacherList')
                         }}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (

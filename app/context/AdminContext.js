@@ -13,6 +13,7 @@ const AdminContextProvider = (props) => {
     allStudents: [],
   };
   const [adminState, setAdminState] = useState(initialState);
+  const [reload, setReload] = useState(false);
   const [loading, setLoading] = useState(false);
   const [profileLoading, setProfileLoading] = useState(false);
   const [currClass, setCurrClass] = useState('');
@@ -34,6 +35,7 @@ const AdminContextProvider = (props) => {
       class_: adminState.class_,
       allStudents: res3.data.data,
     });
+    setReload(!reload);
     setProfileLoading(false);
   };
 
@@ -88,6 +90,7 @@ const AdminContextProvider = (props) => {
         class_: adminState.class_,
         allStudents: adminState.allStudents,
       });
+      setReload(!reload);
       // console.log(adminState.classes);
     } catch (err) {
       console.log(err);
@@ -127,6 +130,7 @@ const AdminContextProvider = (props) => {
         class_: adminState.class_,
         allStudents: adminState.allStudents,
       });
+      setReload(!reload);
     } catch (err) {
       console.log(err);
     }
@@ -187,6 +191,7 @@ const AdminContextProvider = (props) => {
         class_: adminState.class_,
         allStudents: adminState.allStudents,
       });
+      setReload(!reload);
     } catch (err) {
       console.log(err);
     }
@@ -249,6 +254,7 @@ const AdminContextProvider = (props) => {
         setProfileLoading,
         redirect,
         setRedirect,
+        reload, setReload,
       }}
     >
       {props.children}

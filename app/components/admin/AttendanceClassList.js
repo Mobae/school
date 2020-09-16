@@ -10,17 +10,11 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { AdminContext } from '../../context/AdminContext';
-const LeftContent = (props) => (
-  <Avatar.Icon
-    {...props}
-    icon="presentation"
-    style={{ backgroundColor: '#2E6E80' }}
-  />
-);
+const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 import adminStyles from './AdminStyles';
 
-const ClassList = ({ navigation }) => {
-  const { adminState, setCurrClass, currClass, setFlag, reload, getClasses } = React.useContext(
+const AttendanceClassList = ({ navigation }) => {
+  const { adminState, setCurrClass, currClass, setFlag } = React.useContext(
     AdminContext
   );
 
@@ -44,12 +38,8 @@ const ClassList = ({ navigation }) => {
     }
   }, [searchQuery]);
 
-  React.useEffect(() => {
-    getClasses();
-  }, [reload])
-
   return (
-    <React.Fragment>
+    <View>
       <Searchbar
         placeholder="Search class.."
         onChangeText={onChangeSearch}
@@ -65,7 +55,7 @@ const ClassList = ({ navigation }) => {
                     onPress={() => {
                       setCurrClass(class_._id);
                       setFlag(false);
-                      navigation.navigate('ClassView');
+                      navigation.navigate('StudentAttendance');
                     }}
                   >
                     <React.Fragment>
@@ -83,8 +73,8 @@ const ClassList = ({ navigation }) => {
           )}
         </ScrollView>
       </View>
-    </React.Fragment>
+    </View>
   );
 };
 
-export default ClassList;
+export default AttendanceClassList;

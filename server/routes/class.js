@@ -185,4 +185,32 @@ router.post("/subTeacher", async (req, res) => {
   }
 });
 
+router.post("/remove/subTeacher", async(req, res) => {
+  try {
+    const class_ = await Class.findById(req.body.class);
+    const subTeacher = await Teacher.findById(req.body.teacher);
+    class_.subTeachers = class_.subTeachers.filter((teacher) => {
+      if(teacher.teacher != subTeacher.id){
+        return teacher;
+      }
+    });
+    class_.save();
+    subTeacher.teacherSubClasses = subTeacher.teacherSubClasses.filter((c) => {
+      if(c.class != class_.id){
+        return c;
+      }
+    })
+    subTeacher.save();
+    return res.json({
+      success: true
+    });
+  } catch (err) {
+    console.log(err);
+    return res.json({ 
+      sucess: false,
+      error: err
+    });
+  }
+})
+
 module.exports = router;

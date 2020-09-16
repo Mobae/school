@@ -54,9 +54,10 @@ const AddClassTeacher = ({ classTeacherModalOpen, setClassTeacherModalOpen, navi
                             actions.resetForm();
                             addClassTeacher(values);                  // SUMITTING CLASS VALUE
                             setClassTeacherModalOpen(false);
-                            setPin1(currClass);
+                            setPin1(!pin1);
                             setFlag(false);
                             navigation.navigate('ClassList');
+                            navigation.push('ClassView');
                         }}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (
