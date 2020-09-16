@@ -88,7 +88,7 @@ router.get("/students/:classId", async (req, res) => {
     let students = await Student.find({ studentClass: class_._id });
     students.map((st) => {
       st.toJSON();
-      delete st.password;
+      st.password = null;
       return st;
     });
 
