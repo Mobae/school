@@ -162,4 +162,31 @@ router.post("/class", async (req, res) => {
   }
 });
 
+router.post("/class/day", async (req, res) => {
+  let { date, students } = req.body;
+  if (date && students.length !== 0) {
+    date = date.slice(0, 10);
+    const gte = new Date(date);
+    const lt = new Date(gte.getTime() + 1000 * 60 * 60 * 24);
+    let attendances = [];
+    for (let i = 0; i < students.length; i++) {
+      const exists = await Attendance.find({
+        date: {
+          $gte: gte,
+          $lt: lt,
+        },
+        studentId: students[i].studentId,
+      });
+      if (exists) {
+        attendances.push(exists);
+      }
+    }
+    if (attendances.length >= 1) {
+      res.json({ attendances });
+    } else {
+      res.json({ error: "Attendance for this day does not exist" });
+    }
+  }
+});
+
 module.exports = router;
