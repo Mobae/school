@@ -17,7 +17,7 @@ import axios from 'axios';
 const LeftContent = (props) => (
   <Avatar.Icon
     {...props}
-    icon="folder"
+    icon='teach'
     style={{ backgroundColor: '#2E6E80' }}
   />
 );
@@ -25,7 +25,7 @@ const LeftContent = (props) => (
 const studentsIcon = (props) => (
   <Avatar.Icon
     {...props}
-    icon="format-list-checkbox"
+    icon='format-list-checkbox'
     style={{ backgroundColor: '#2E6E80' }}
   />
 );
@@ -47,28 +47,28 @@ const ClassView = ({ navigation }) => {
   const [pin1, setPin1] = React.useState(false);
   const [pin2, setPin2] = React.useState(false);
 
-  const removeTeacher = async(value) => {
+  const removeTeacher = async (value) => {
     try {
       const payload = {
         teacher: value,
-        class: currClass
-      }
-      const res = await axios.post( url + '/class/remove/subTeacher/', payload );
+        class: currClass,
+      };
+      const res = await axios.post(url + '/class/remove/subTeacher/', payload);
       console.log(res.data);
 
       const newSubTeachers = classObj.subTeachers.filter((teacher) => {
-        if(teacher._id != value){
+        if (teacher._id != value) {
           return teacher;
         }
       });
       setClassObj({
         classTeacher: classObj.classTeacher,
-        subTeachers: newSubTeachers
+        subTeachers: newSubTeachers,
       });
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   React.useEffect(() => {
     getCurrClassTeachers();
@@ -102,7 +102,7 @@ const ClassView = ({ navigation }) => {
               }}
             >
               <React.Fragment>
-                <Card.Title title="Students" left={studentsIcon} />
+                <Card.Title title='Students' left={studentsIcon} />
                 <Card.Content></Card.Content>
               </React.Fragment>
             </TouchableRipple>
@@ -116,10 +116,13 @@ const ClassView = ({ navigation }) => {
             {classObj.classTeacher[0] !== undefined ? (
               <View>
                 <Card style={styles.cardClass}>
-                  <Card.Title title="Class Teacher" style={{ color: 'white' }} />
+                  <Card.Title
+                    title='Class Teacher'
+                    style={{ color: 'white' }}
+                  />
                   <Card.Actions>
                     <Button onPress={() => setClassTeacherModalOpen(true)}>
-                      EDIT
+                      <Text style = {{color: '#660033'}}>EDIT</Text>
                     </Button>
                   </Card.Actions>
                 </Card>
@@ -133,7 +136,7 @@ const ClassView = ({ navigation }) => {
             ) : (
               <View>
                 <Card style={adminStyles.card}>
-                  <Card.Title title="Class Teacher" />
+                  <Card.Title title='Class Teacher' />
                   <Card.Actions>
                     <Button onPress={() => setClassTeacherModalOpen(true)}>
                       ADD
@@ -141,17 +144,17 @@ const ClassView = ({ navigation }) => {
                   </Card.Actions>
                 </Card>
                 <Card style={adminStyles.card}>
-                  <Card.Title title="None" left={LeftContent} />
+                  <Card.Title title='None' left={LeftContent} />
                 </Card>
               </View>
             )}
           </TouchableRipple>
 
           <Card style={styles.cardSub}>
-            <Card.Title title="Subject teachers" />
+            <Card.Title title='Subject teachers' />
             <Card.Actions>
               <Button onPress={() => setSubTeacherModalOpen(true)}>
-              <Text style={{ color: 'black' }} >Add</Text>
+                <Text style={{ color: 'black' }}>Add</Text>
               </Button>
             </Card.Actions>
           </Card>
@@ -161,7 +164,7 @@ const ClassView = ({ navigation }) => {
               <Card.Title title={teacher.name} left={LeftContent} />
               <Card.Actions style={{ left: 250, top: -45, height: 20 }}>
                 <Button onPress={() => removeTeacher(teacher._id)}>
-                  <Text style={{ color: 'red' }} >Remove</Text>
+                  <Text style={{ color: 'red' }}>Remove</Text>
                 </Button>
               </Card.Actions>
             </Card>
@@ -174,8 +177,8 @@ const ClassView = ({ navigation }) => {
       <View style={adminStyles.container}>
         <ActivityIndicator
           animating={true}
-          size="large"
-          color="#2E6E80"
+          size='large'
+          color='#2E6E80'
           style={adminStyles.loading}
         />
       </View>
@@ -197,8 +200,8 @@ const styles = StyleSheet.create({
   cardStudent: {
     margin: 10,
     marginBottom: 0,
-    backgroundColor: '#1A88EE'
-  }
-})
+    backgroundColor: '#1A88EE',
+  },
+});
 
 export default ClassView;

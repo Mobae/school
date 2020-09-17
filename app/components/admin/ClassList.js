@@ -13,16 +13,21 @@ import { AdminContext } from '../../context/AdminContext';
 const LeftContent = (props) => (
   <Avatar.Icon
     {...props}
-    icon="presentation"
+    icon='google-classroom'
     style={{ backgroundColor: '#2E6E80' }}
   />
 );
 import adminStyles from './AdminStyles';
 
 const ClassList = ({ navigation }) => {
-  const { adminState, setCurrClass, currClass, setFlag, reload, getClasses } = React.useContext(
-    AdminContext
-  );
+  const {
+    adminState,
+    setCurrClass,
+    currClass,
+    setFlag,
+    reload,
+    getClasses,
+  } = React.useContext(AdminContext);
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filtered, setFiltered] = React.useState(adminState.classes);
@@ -46,12 +51,12 @@ const ClassList = ({ navigation }) => {
 
   React.useEffect(() => {
     getClasses();
-  }, [reload])
+  }, [reload]);
 
   return (
     <React.Fragment>
       <Searchbar
-        placeholder="Search class.."
+        placeholder='Search class..'
         onChangeText={onChangeSearch}
         value={searchQuery}
       />
@@ -78,7 +83,7 @@ const ClassList = ({ navigation }) => {
             ))
           ) : (
             <Card style={adminStyles.card}>
-              <Card.Title title="None" left={LeftContent} />
+              <Card.Title title='None' left={LeftContent} />
             </Card>
           )}
         </ScrollView>

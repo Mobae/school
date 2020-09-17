@@ -9,7 +9,7 @@ const Update = () => {
       <Dialog visible={visible}>
         <DialogContent
           style={{
-            backgroundColor: '#7575a3',
+            backgroundColor: 'white',
           }}
         >
           <View style={{ margin: 25, alignItems: 'center' }}>
@@ -17,14 +17,14 @@ const Update = () => {
               source={require('../../logo.png')}
               style={{ width: 245, height: 85 }}
             />
-            <Text style={{ fontWeight: 'bold', color: 'white', fontSize: 20 }}>
+            <Text style={{ fontWeight: 'bold', color: 'black', fontSize: 20 }}>
               Checking For Updates !!
             </Text>
-            <Text style={{ fontWeight: '900', color: 'white', fontSize: 16 }}>
+            <Text style={{ fontWeight: '900', color: 'black', fontSize: 16 }}>
               Description:
             </Text>
             <Text
-              style={{ color: 'red', fontSize: 16 }}
+              style={{ color: 'blue', fontSize: 16 }}
               onPress={() => Linking.openURL('http://google.com')}
             >
               Tap to download the latest version.
