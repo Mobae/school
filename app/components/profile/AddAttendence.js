@@ -17,7 +17,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { URL } from "../../config";
 
 const StudentRow = (props) => {
-  const [checked, setChecked] = React.useState(0);
+  const [checked, setChecked] = React.useState("present");
   return (
     <DataTable.Row>
       <DataTable.Cell style={styles.name}>{props.name}</DataTable.Cell>
