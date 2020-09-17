@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import {
   Avatar,
   Button,
@@ -95,7 +95,7 @@ const ClassView = ({ navigation }) => {
           setSubTeacherModalOpen={setSubTeacherModalOpen}
         />
         <ScrollView>
-          <Card style={adminStyles.card}>
+          <Card style={styles.cardStudent}>
             <TouchableRipple
               onPress={() => {
                 navigation.navigate('StudentList');
@@ -115,8 +115,8 @@ const ClassView = ({ navigation }) => {
           >
             {classObj.classTeacher[0] !== undefined ? (
               <View>
-                <Card style={adminStyles.card}>
-                  <Card.Title title="Class Teacher" />
+                <Card style={styles.cardClass}>
+                  <Card.Title title="Class Teacher" style={{ color: 'white' }} />
                   <Card.Actions>
                     <Button onPress={() => setClassTeacherModalOpen(true)}>
                       EDIT
@@ -147,18 +147,22 @@ const ClassView = ({ navigation }) => {
             )}
           </TouchableRipple>
 
-          <Card style={adminStyles.card}>
+          <Card style={styles.cardSub}>
             <Card.Title title="Subject teachers" />
             <Card.Actions>
-              <Button onPress={() => setSubTeacherModalOpen(true)}>ADD</Button>
+              <Button onPress={() => setSubTeacherModalOpen(true)}>
+              <Text style={{ color: 'black' }} >Add</Text>
+              </Button>
             </Card.Actions>
           </Card>
 
           {classObj.subTeachers.map((teacher) => (
             <Card style={adminStyles.card} key={teacher._id}>
               <Card.Title title={teacher.name} left={LeftContent} />
-              <Card.Actions>
-                <Button onPress={() => removeTeacher(teacher._id)}>Remove</Button>
+              <Card.Actions style={{ left: 250, top: -45, height: 20 }}>
+                <Button onPress={() => removeTeacher(teacher._id)}>
+                  <Text style={{ color: 'red' }} >Remove</Text>
+                </Button>
               </Card.Actions>
             </Card>
           ))}
@@ -178,5 +182,23 @@ const ClassView = ({ navigation }) => {
     );
   }
 };
+
+const styles = StyleSheet.create({
+  cardClass: {
+    margin: 10,
+    marginBottom: 0,
+    backgroundColor: '#FAA723',
+  },
+  cardSub: {
+    margin: 10,
+    marginBottom: 0,
+    backgroundColor: '#85eb63',
+  },
+  cardStudent: {
+    margin: 10,
+    marginBottom: 0,
+    backgroundColor: '#1A88EE'
+  }
+})
 
 export default ClassView;

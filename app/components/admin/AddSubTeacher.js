@@ -70,7 +70,7 @@ const AddClassTeacher = ({ subTeacherModalOpen, setSubTeacherModalOpen, navigati
                             addSubTeacher(values);                  // SUMITTING SUB TEACHER VALUE
                             setSubTeacherModalOpen(false);
                             setPin2(!pin2);
-                            navigation.push('ClassView');
+                            navigation.navigate('ClassView');
                         }}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (
