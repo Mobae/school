@@ -14,6 +14,22 @@ const FileSchema = new Schema({
         required: true,
         type: String,
     },
+    length: {
+        required: true,
+        type: String,
+    },
+    contentType: {
+        required: true,
+        type: String,
+    },
+    classId: {
+        required: true,
+        type: String,
+    },
+    teacherName: {
+        required: true,
+        type: String,
+    },
     createdAt: {
         default: Date.now(),
         type: Date,

@@ -2,6 +2,7 @@ const express = require('express');
 const fileRouter = express.Router();
 const mongoose = require('mongoose');
 const File = require('../models/File');
+const Teacher = require('../models/Teacher');
 
 module.exports = (upload) => {
     const url = process.env.MONGO_URI;
@@ -34,18 +35,24 @@ module.exports = (upload) => {
                         });
                     }
 
+                    const teacher = Teacher.findById(req.body.teacherId);
+
                     let newFile = new File({
                         caption: req.body.caption,
                         filename: req.file.filename,
                         fileId: req.file.id,
+                        length: req.file.length,
+                        contentType: req.file.contentType,
+                        classId: req.body.classId,
+                        teacherName: teacher.name
                     });
 
                     newFile.save()
-                        .then((image) => {
+                        .then((file) => {
 
                             res.status(200).json({
                                 success: true,
-                                image,
+                                file,
                             });
                         })
                         .catch(err => res.status(500).json(err));
