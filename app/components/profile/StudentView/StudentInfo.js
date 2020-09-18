@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 import {
   View,
   Text,
@@ -8,11 +8,11 @@ import {
   ImageBackground,
   ScrollView,
   TouchableOpacity,
-} from "react-native";
-import { List, Provider as PaperProvider } from "react-native-paper";
-import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
+} from 'react-native';
+import { List, Provider as PaperProvider } from 'react-native-paper';
+import { MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 
-import { AuthContext } from "../../../context/AuthContext";
+import { AuthContext } from '../../../context/AuthContext';
 
 const StudentInfo = () => {
   const { authState } = useContext(AuthContext);
@@ -23,17 +23,17 @@ const StudentInfo = () => {
   return (
     <React.Fragment>
       <PaperProvider>
-        <View style={{ alignItems: "center", margin: 20 }}>
+        <View style={{ alignItems: 'center', margin: 20 }}>
           <View style={styles.info}>
             <ImageBackground
               source={{
-                uri: "https://api.adorable.io/avatars/80/abott@adorable.png",
+                uri: 'https://api.adorable.io/avatars/80/abott@adorable.png',
               }}
               style={{ height: 100, width: 100 }}
               imageStyle={{ borderRadius: 15 }}
             />
           </View>
-          <Text style={{ marginTop: 10, fontSize: 18, fontWeight: "bold" }}>
+          <Text style={{ marginTop: 10, fontSize: 18, fontWeight: 'bold' }}>
             {user.name}
           </Text>
         </View>
@@ -59,7 +59,7 @@ const StudentInfo = () => {
             </View>
             <View style={styles.info}>
               <Text style={styles.details}>
-                Phone Number: {"+91 " + info.phone}
+                Phone Number: {'+91 ' + info.phone}
               </Text>
             </View>
             <View style={styles.info}>
@@ -68,9 +68,9 @@ const StudentInfo = () => {
               </Text>
             </View>
             <List.Accordion
-              title="Parent Details"
-              titleStyle={{ alignSelf: "flex-start" }}
-              left={(props) => <List.Icon {...props} icon="account-child" />}
+              title='Parent Details'
+              titleStyle={{ alignSelf: 'flex-start' }}
+              left={(props) => <List.Icon {...props} icon='account-child' />}
             >
               <ScrollView>
                 <View style={styles.info}>
@@ -104,84 +104,84 @@ const StudentInfo = () => {
               </ScrollView>
             </List.Accordion>
             <View style={styles.info}>
-              <View style={{ flexDirection: "column" }}>
+              <View style={{ flexDirection: 'column' }}>
                 <Text>Change Password: </Text>
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: 'row' }}>
                   <MaterialCommunityIcons
-                    name="lock-outline"
+                    name='lock-outline'
                     size={24}
-                    color="black"
+                    color='black'
                     style={{ margin: 10 }}
                   />
 
                   <TextInput
                     style={{
                       margin: 10,
-                      alignSelf: "flex-start",
+                      alignSelf: 'flex-start',
                       marginBottom: 0,
                     }}
-                    autoCapitalize="none"
+                    autoCapitalize='none'
                     secureTextEntry={true}
-                    placeholder="Enter old password"
+                    placeholder='Enter old password'
                   />
                   <TouchableOpacity>
                     <FontAwesome
-                      name="eye"
+                      name='eye'
                       size={30}
-                      color="black"
+                      color='black'
                       style={{ margin: 10, marginTop: 8 }}
                     />
                   </TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: 'row' }}>
                   <MaterialCommunityIcons
-                    name="lock-outline"
+                    name='lock-outline'
                     size={24}
-                    color="black"
+                    color='black'
                     style={{ margin: 10 }}
                   />
 
                   <TextInput
                     style={{
                       margin: 10,
-                      alignSelf: "flex-start",
+                      alignSelf: 'flex-start',
                       marginBottom: 0,
                     }}
-                    autoCapitalize="none"
+                    autoCapitalize='none'
                     secureTextEntry={true}
-                    placeholder="Enter new password"
+                    placeholder='Enter new password'
                   />
                   <TouchableOpacity>
                     <FontAwesome
-                      name="eye"
+                      name='eye'
                       size={30}
-                      color="black"
+                      color='black'
                       style={{ margin: 10, marginTop: 8 }}
                     />
                   </TouchableOpacity>
                 </View>
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: 'row' }}>
                   <MaterialCommunityIcons
-                    name="lock-outline"
+                    name='lock-outline'
                     size={24}
-                    color="black"
+                    color='black'
                     style={{ margin: 10 }}
                   />
                   <TextInput
                     style={{
                       margin: 10,
-                      alignSelf: "flex-start",
+                      alignSelf: 'flex-start',
                       marginBottom: 0,
                     }}
                     secureTextEntry={true}
-                    autoCapitalize="none"
-                    placeholder="Confirm password"
+                    autoCapitalize='none'
+                    placeholder='Confirm password'
                   />
                   <TouchableOpacity>
                     <FontAwesome
-                      name="eye"
+                      name='eye'
                       size={30}
-                      color="black"
+                      color='black'
                       style={{ margin: 10, marginTop: 8 }}
                     />
                   </TouchableOpacity>
@@ -190,10 +190,10 @@ const StudentInfo = () => {
             </View>
             <View style={{ margin: 20, marginHorizontal: 40 }}>
               <Button
-                mode="contained"
-                title="save"
-                color="#6200EE"
-                onPress={() => console.log("Pressed")}
+                mode='contained'
+                title='save'
+                color='#d43629'
+                onPress={() => console.log('Pressed')}
               ></Button>
             </View>
           </ScrollView>
@@ -207,31 +207,31 @@ export default StudentInfo;
 
 const styles = StyleSheet.create({
   info: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 30,
     marginBottom: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#f2f2f2",
+    borderBottomColor: '#f2f2f2',
     paddingBottom: 5,
     margin: 20,
   },
   details: {
     fontSize: 15,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   fab: {
-    position: "absolute",
+    position: 'absolute',
     margin: 16,
     right: 0,
     bottom: 0,
   },
   parentInfo: {
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   parentInfoText1: {
     fontSize: 15,
-    fontWeight: "500",
-    fontWeight: "bold",
+    fontWeight: '500',
+    fontWeight: 'bold',
   },
   parentInfoText2: {
     marginLeft: 20,

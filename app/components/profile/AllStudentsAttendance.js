@@ -27,7 +27,7 @@ const Fab = ({ navigation }) => {
         <FAB.Group
           open={open}
           icon={open ? "calendar-today" : "plus"}
-          fabStyle={{ backgroundColor: "#6200EE" }}
+          fabStyle={{ backgroundColor: "#00ad00" }}
           actions={[
             {
               icon: "pencil",
