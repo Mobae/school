@@ -1,35 +1,54 @@
-import React, { useContext, useState, useEffect, Fragment } from "react";
-import { View } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { BottomNavigation, Text, IconButton } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React, { useContext, useState, useEffect, Fragment } from 'react';
+import { View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { BottomNavigation, Text, IconButton } from 'react-native-paper';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import StudentProfile from "../student/StudentProfile";
-import TeacherProfile from "../teacher/TeacherProfile";
-import StudentAttendance from "../profile/StudentView/StudentAttendance";
-import IndividualMonth from "../profile/StudentView/IndividualMonth";
-import StudentInfo from "../profile/StudentView/StudentInfo";
-import AllStudentAttendance from "../profile/AllStudentsAttendance";
-import AddAttendance from "../profile/AddAttendence";
-import EditAttendance from "../profile/EditAttendance";
-import Notice from "../NoticeBoard/Notice";
-import ClassNotice from "../NoticeBoard/ClassNotice";
-import NoticeForm from "../NoticeBoard/NoticeForm";
-import BrowseNotice from "../NoticeBoard/BrowseNotice";
-import Students from "../teacher/Students";
-import StudentDetail from "../teacher/StudentDetail";
+import StudentProfile from '../student/StudentProfile';
+import TeacherProfile from '../teacher/TeacherProfile';
+import StudentAttendance from '../profile/StudentView/StudentAttendance';
+import IndividualMonth from '../profile/StudentView/IndividualMonth';
+import StudentInfo from '../profile/StudentView/StudentInfo';
+import AllStudentAttendance from '../profile/AllStudentsAttendance';
+import AddAttendance from '../profile/AddAttendence';
+import EditAttendance from '../profile/EditAttendance';
+import Notice from '../NoticeBoard/Notice';
+import ClassNotice from '../NoticeBoard/ClassNotice';
+import NoticeForm from '../NoticeBoard/NoticeForm';
+import BrowseNotice from '../NoticeBoard/BrowseNotice';
+import Students from '../teacher/Students';
+import StudentDetail from '../teacher/StudentDetail';
 
-import { AuthContext } from "../../context/AuthContext";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import { AuthContext } from '../../context/AuthContext';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-import AdminStack from "../admin/AdminStack";
-import ChatStack from "../Chats/ChatStack";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import AdminStack from '../admin/AdminStack';
+import ChatStack from '../Chats/ChatStack';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const StudentStack = createStackNavigator();
 const TeacherStack = createStackNavigator();
 const NoticeStack = createStackNavigator();
+
+const barStyle = (rank) => {
+  // CD2430 - student
+  // 20335A - admin
+  // 0a6605 - teacher
+  switch (rank) {
+    case '2':
+      return '#20335A';
+      break;
+    case '1':
+      return '#0a6605';
+      break;
+    case '0':
+      return '#CD2430';
+      break;
+    default:
+      break;
+  }
+};
 
 const logout = (
   <MaterialCommunityIcons
@@ -43,12 +62,12 @@ const LogoutButton = () => {
   const { Logout } = useContext(AuthContext);
   return (
     <TouchableOpacity onPress={() => Logout()}>
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: 'row' }}>
         <Text
           style={{
-            marginTop: "auto",
-            marginBottom: "auto",
-            color: "#ef5350",
+            marginTop: 'auto',
+            marginBottom: 'auto',
+            color: '#ef5350',
           }}
         >
           Logout
@@ -134,21 +153,25 @@ const ProfileRoute = () => {
   useEffect(() => {
     getUser();
   }, []);
-  return rank === "1" ? (
+  return rank === '1' ? (
     <TeacherStackScreen />
-  ) : rank === "0" ? (
+  ) : rank === '0' ? (
     <StudentStackScreen />
-  ) : rank === "2" ? (
+  ) : rank === '2' ? (
     <AdminStack />
   ) : null;
 };
 
 const MyComponent = () => {
   const [index, setIndex] = React.useState(1);
+  const { authState } = useContext(AuthContext);
+  const {
+    user: { rank },
+  } = authState;
   const [routes] = useState([
-    { key: "chat", title: "Chat", icon: "forum-outline" },
-    { key: "profile", title: "Profile", icon: "face-profile" },
-    { key: "notice", title: "Notice", icon: "format-list-checkbox" },
+    { key: 'chat', title: 'Chat', icon: 'forum-outline' },
+    { key: 'profile', title: 'Profile', icon: 'face-profile' },
+    { key: 'notice', title: 'Notice', icon: 'format-list-checkbox' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
@@ -164,6 +187,7 @@ const MyComponent = () => {
         onIndexChange={setIndex}
         renderScene={renderScene}
         shifting={true}
+        barStyle={{ backgroundColor: barStyle(rank) }}
       />
       <StatusBar style="auto" />
     </Fragment>
