@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const File = require('../models/File');
 const Teacher = require('../models/Teacher');
 
-module.exports = (upload) => {
+module.exports =  (upload) => {
     const url = process.env.MONGO_URI;
     const connect = mongoose.createConnection(
                         url, 
@@ -24,7 +24,7 @@ module.exports = (upload) => {
         POST: Upload a single image/file to File collection
     */
     fileRouter.route('/')
-        .post(upload.single('file'), (req, res, next) => {
+        .post(upload.single('file'),   (req, res, next) => {
             // check for existing images
             File.findOne({ caption: req.body.caption })
                 .then((image) => {
@@ -35,27 +35,35 @@ module.exports = (upload) => {
                         });
                     }
 
-                    const teacher = Teacher.findById(req.body.teacherId);
+                    console.log('file***************************');
+                    console.log(req.file);
+                    Teacher.findOne(
+                        { _id: req.body.teacherId },
+                        (err, obj) => {
+                            if(err)
+                                throw err;
 
-                    let newFile = new File({
-                        caption: req.body.caption,
-                        filename: req.file.filename,
-                        fileId: req.file.id,
-                        length: req.file.length,
-                        contentType: req.file.contentType,
-                        classId: req.body.classId,
-                        teacherName: teacher.name
-                    });
-
-                    newFile.save()
-                        .then((file) => {
-
-                            res.status(200).json({
-                                success: true,
-                                file,
+                            let newFile = new File({
+                                caption: req.body.caption,
+                                filename: req.file.filename,
+                                fileId: req.file.id,
+                                length: req.file.size,
+                                contentType: req.file.contentType,
+                                classId: req.body.classId,
+                                teacherName: obj.name
                             });
-                        })
-                        .catch(err => res.status(500).json(err));
+
+                            newFile.save()
+                                .then((file) => {
+
+                                    res.status(200).json({
+                                        success: true,
+                                        file,
+                                    });
+                                })
+                                .catch(err => res.status(500).json(err));
+                        }
+                    );
                 })
                 .catch(err => res.status(500).json(err));
         })
