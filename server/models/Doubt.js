@@ -7,6 +7,7 @@ const DoubtSchema = mongoose.Schema({
   author: String,
   date: { type: Date, default: Date.now },
   replies: Array,
+  status: { type: String, default: "active" },
 });
 
 module.exports = mongoose.model("Doubt", DoubtSchema);
