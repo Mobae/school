@@ -80,6 +80,7 @@ module.exports =  (upload) => {
     */
     fileRouter.route('/class/:classId')
         .get((req, res) => {
+            // console.log(req.params.classId)
             File.find({ classId: req.params.classId })
                 .then(files_ => {
                     res.status(200).json({
