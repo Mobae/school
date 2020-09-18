@@ -1,19 +1,35 @@
-import React, { Fragment, useContext, useEffect } from "react";
-import { StyleSheet } from "react-native";
-import { Avatar, Card, Paragraph, TouchableRipple } from "react-native-paper";
+import React, { Fragment, useContext, useEffect } from 'react';
+import { StyleSheet } from 'react-native';
+import { Avatar, Card, Paragraph, TouchableRipple } from 'react-native-paper';
 
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from '../../context/AuthContext';
 
 const ProfileIcon = (props) => (
-  <Avatar.Icon {...props} icon="account" size={45} />
+  <Avatar.Icon
+    {...props}
+    icon='account'
+    size={45}
+    style={{ backgroundColor: '#249c12' }}
+  />
 );
 
 const AttendanceIcon = (props) => (
-  <Avatar.Icon {...props} icon="book" size={45} />
+  <Avatar.Icon
+    {...props}
+    icon='book'
+    size={45}
+    style={{ backgroundColor: '#249c12' }}
+  />
 );
 
 const StudentsIcon = (props) => (
-  <Avatar.Icon {...props} icon="contacts" size={45} />
+  <Avatar.Icon
+    {...props}
+    icon='contacts'
+    size={45}
+    color='white'
+    style={{ backgroundColor: '#249c12' }}
+  />
 );
 
 const TeacherProfile = ({ navigation }) => {
@@ -23,7 +39,7 @@ const TeacherProfile = ({ navigation }) => {
     <Fragment>
       <Card style={styles}>
         {/* <TouchableRipple> */}
-        <Card.Title title="Profile" subtitle={user.name} left={ProfileIcon} />
+        <Card.Title title='Profile' subtitle={user.name} left={ProfileIcon} />
         <Card.Content>
           <Paragraph>Email: {user.email}</Paragraph>
           {user.class_ ? (
@@ -37,19 +53,19 @@ const TeacherProfile = ({ navigation }) => {
       {user.class_ ? (
         <Fragment>
           <Card style={styles}>
-            <TouchableRipple onPress={() => navigation.push("Attendance")}>
+            <TouchableRipple onPress={() => navigation.push('Attendance')}>
               <Card.Title
-                title="Attendance"
-                subtitle="View Attendance"
+                title='Attendance'
+                subtitle='View Attendance'
                 left={AttendanceIcon}
               />
             </TouchableRipple>
           </Card>
           <Card style={styles}>
-            <TouchableRipple onPress={() => navigation.push("Students")}>
+            <TouchableRipple onPress={() => navigation.push('Students')}>
               <Card.Title
-                title="Students"
-                subtitle="View Students"
+                title='Students'
+                subtitle='View Students'
                 left={StudentsIcon}
               />
             </TouchableRipple>
