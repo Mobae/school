@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect } from 'react';
-import { Keyboard, View, ImageBackground,StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Headline, TextInput, Button } from 'react-native-paper';
 import { Formik } from 'formik';
@@ -35,7 +35,7 @@ const Login = () => {
             <TextInput
               mode='outlined'
               label='Password'
-              style = {{marginVertical: 10}}
+              style={{ marginVertical: 10 }}
               autoCapitalize='none'
               secureTextEntry={true}
               onChangeText={handleChange('password')}
@@ -60,4 +60,3 @@ const Login = () => {
 };
 
 export default Login;
-
