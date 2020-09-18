@@ -38,14 +38,16 @@ module.exports = (upload) => {
                         caption: req.body.caption,
                         filename: req.file.filename,
                         fileId: req.file.id,
+                        length: req.file.length,
+                        contentType: req.file.contentType
                     });
 
                     newFile.save()
-                        .then((image) => {
+                        .then((file) => {
 
                             res.status(200).json({
                                 success: true,
-                                image,
+                                file,
                             });
                         })
                         .catch(err => res.status(500).json(err));
