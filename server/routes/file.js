@@ -34,9 +34,6 @@ module.exports =  (upload) => {
                             message: 'File already exists',
                         });
                     }
-
-                    console.log('file***************************');
-                    console.log(req.file);
                     Teacher.findOne(
                         { _id: req.body.teacherId },
                         (err, obj) => {
@@ -77,6 +74,21 @@ module.exports =  (upload) => {
                 })
                 .catch(err => res.status(500).json(err));
         });
+
+    /*
+        GET : All files of a class
+    */
+    fileRouter.route('/class/:classid')
+        .get((req, res) => {
+            File.find({ classId: req.params.classId })
+                .then(files_ => {
+                    res.status(200).json({
+                        success: true,
+                        files: files_
+                    });
+                })
+                .catch(err => res.status(500).json(err));
+        })
 
     /*
         GET: Delete an image from the collection
