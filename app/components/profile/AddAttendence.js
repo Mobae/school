@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, Fragment } from 'react';
+import React, { useContext, useState, useEffect, Fragment } from "react";
 import {
   DataTable,
   RadioButton,
@@ -8,30 +8,30 @@ import {
   Dialog,
   Portal,
   Provider as PaperProvider,
-} from 'react-native-paper';
-import { StyleSheet, View, Alert } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import axios from 'axios';
+} from "react-native-paper";
+import { StyleSheet, View, Alert } from "react-native";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import axios from "axios";
 
-import { AuthContext } from '../../context/AuthContext';
-import { URL } from '../../config';
+import { AuthContext } from "../../context/AuthContext";
+import { URL } from "../../config";
 
 const StudentRow = (props) => {
-  const [checked, setChecked] = React.useState('present');
+  const [checked, setChecked] = React.useState(0);
   return (
     <DataTable.Row>
       <DataTable.Cell style={styles.name}>{props.name}</DataTable.Cell>
       <DataTable.Cell style={styles.present}>
         <View style={styles.RadioButton}>
           <RadioButton
-            value='present'
-            status={checked === 'present' ? 'checked' : 'unchecked'}
+            value="present"
+            status={checked === "present" ? "checked" : "unchecked"}
             onPress={() => {
-              props.updateAttendance(props._id, 'P');
-              setChecked('present');
+              props.updateAttendance(props._id, "P");
+              setChecked("present");
             }}
-            color='green'
-            uncheckedColor='grey'
+            color="green"
+            uncheckedColor="grey"
           />
         </View>
       </DataTable.Cell>
@@ -39,14 +39,14 @@ const StudentRow = (props) => {
         <View style={styles.RadioButtonAb}>
           <RadioButton
             style={{ paddingRight: 20 }}
-            value='present'
-            status={checked === 'absent' ? 'checked' : 'unchecked'}
+            value="present"
+            status={checked === "absent" ? "checked" : "unchecked"}
             onPress={() => {
-              props.updateAttendance(props._id, 'A');
-              setChecked('absent');
+              props.updateAttendance(props._id, "A");
+              setChecked("absent");
             }}
-            color='red'
-            uncheckedColor='grey'
+            color="red"
+            uncheckedColor="grey"
           />
         </View>
       </DataTable.Cell>
@@ -56,12 +56,12 @@ const StudentRow = (props) => {
 
 const AddAttendence = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState('date');
+  const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
+    setShow(Platform.OS === "ios");
     setDate(currentDate);
   };
 
@@ -71,7 +71,7 @@ const AddAttendence = ({ navigation }) => {
   };
 
   const showDatepicker = () => {
-    showMode('date');
+    showMode("date");
   };
 
   const [visible, setVisible] = React.useState(false);
@@ -86,7 +86,7 @@ const AddAttendence = ({ navigation }) => {
 
   const getStudents = async () => {
     try {
-      const res = await axios.get(URL + '/class/students/' + user.class_);
+      const res = await axios.get(URL + "/class/students/" + user.class_);
       setStudents(res.data.data);
     } catch (err) {
       console.log(err);
@@ -111,7 +111,7 @@ const AddAttendence = ({ navigation }) => {
   const handleSubmit = async () => {
     console.log(date, attendances);
     try {
-      const res = await axios.post(URL + '/attendance/class', {
+      const res = await axios.post(URL + "/attendance/class", {
         date,
         attendances,
       });
@@ -129,17 +129,17 @@ const AddAttendence = ({ navigation }) => {
 
   const createErrorAlert = () =>
     Alert.alert(
-      'Error',
-      'Attendance for this day already exists, try editing it.',
-      [{ text: 'OK', onPress: () => navigation.navigate('Attendance') }],
+      "Error",
+      "Attendance for this day already exists, try editing it.",
+      [{ text: "OK", onPress: () => navigation.navigate("Attendance") }],
       { cancelable: false }
     );
 
   const createSuccessAlert = () =>
     Alert.alert(
-      'Success',
-      'Attendance added.',
-      [{ text: 'OK', onPress: () => navigation.navigate('Attendance') }],
+      "Success",
+      "Attendance added.",
+      [{ text: "OK", onPress: () => navigation.navigate("Attendance") }],
       { cancelable: false }
     );
 
@@ -195,14 +195,14 @@ const AddAttendence = ({ navigation }) => {
         <View>
           <View>
             <Button
-              icon='calendar'
-              mode='contained'
+              icon="calendar"
+              mode="contained"
               onPress={showDatepicker}
               style={{
                 margin: 10,
                 marginRight: 80,
                 marginLeft: 80,
-                backgroundColor: '#33b233',
+                backgroundColor: "#33b233",
               }}
             >
               {date.toString().substr(0, 16)}
@@ -210,19 +210,19 @@ const AddAttendence = ({ navigation }) => {
           </View>
           {show && (
             <DateTimePicker
-              testID='dateTimePicker'
+              testID="dateTimePicker"
               value={date}
               mode={mode}
               is24Hour={true}
-              display='default'
+              display="default"
               onChange={onChange}
             />
           )}
         </View>
         <IconButton
-          icon='content-save'
+          icon="content-save"
           style={styles.fab}
-          color='white'
+          color="white"
           size={40}
           onPress={() => {
             showDialog();
@@ -253,13 +253,13 @@ const AddAttendence = ({ navigation }) => {
 const styles = StyleSheet.create({
   datepicker: {
     width: 200,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   present: {
     // marginLeft: 10,
-    justifyContent: 'flex-end',
-    position: 'relative',
-    paddingHorizontal: 'auto',
+    justifyContent: "flex-end",
+    position: "relative",
+    paddingHorizontal: "auto",
   },
   presentChecked: {
     paddingLeft: 215,
@@ -273,8 +273,8 @@ const styles = StyleSheet.create({
     height: 32,
   },
   absent: {
-    justifyContent: 'flex-end',
-    position: 'relative',
+    justifyContent: "flex-end",
+    position: "relative",
     width: 20,
   },
   RadioButtonAb: {
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     height: 32,
   },
   chip: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     marginTop: 10,
   },
   yes: {
@@ -290,16 +290,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   byline: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   fab: {
-    position: 'absolute',
+    position: "absolute",
     margin: 16,
     right: 18,
     bottom: 0,
     height: 63,
     borderRadius: 50,
-    backgroundColor: '#00ad00',
+    backgroundColor: "#00ad00",
     width: 63,
   },
 });
