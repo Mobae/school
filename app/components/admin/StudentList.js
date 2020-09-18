@@ -11,7 +11,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import { AdminContext } from '../../context/AdminContext';
 import adminStyles from './AdminStyles';
-const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+const LeftContent = (props) => <Avatar.Icon {...props} icon="human-child" color = 'white' style = {{backgroundColor: '#EF5758'}}/>;
 
 const StudentList = () => {
   const { adminState, getStudents, loading } = React.useContext(AdminContext);

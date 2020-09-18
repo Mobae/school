@@ -10,7 +10,13 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { AdminContext } from '../../context/AdminContext';
-const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+const LeftContent = (props) => (
+  <Avatar.Icon
+    {...props}
+    icon='account-group'
+    style={{ backgroundColor: '#00674D' }}
+  />
+);
 import adminStyles from './AdminStyles';
 
 const AttendanceClassList = ({ navigation }) => {
@@ -41,7 +47,7 @@ const AttendanceClassList = ({ navigation }) => {
   return (
     <View>
       <Searchbar
-        placeholder="Search class.."
+        placeholder='Search class..'
         onChangeText={onChangeSearch}
         value={searchQuery}
       />
@@ -68,7 +74,7 @@ const AttendanceClassList = ({ navigation }) => {
             ))
           ) : (
             <Card style={adminStyles.card}>
-              <Card.Title title="None" left={LeftContent} />
+              <Card.Title title='None' left={LeftContent} />
             </Card>
           )}
         </ScrollView>
