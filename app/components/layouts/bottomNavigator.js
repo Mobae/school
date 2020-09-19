@@ -37,7 +37,7 @@ const barStyle = (rank) => {
   // 0a6605 - teacher
   switch (rank) {
     case '2':
-      return '#20335A';
+      return '#62536A';
       break;
     case '1':
       return '#0a6605';
