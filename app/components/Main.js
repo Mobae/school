@@ -13,7 +13,9 @@ import { URL } from "../config";
 const Stack = createStackNavigator();
 
 const Main = () => {
-  const { authState, getUser, setAuthState } = useContext(AuthContext);
+  const { authState, getUser, setAuthState, initialState } = useContext(
+    AuthContext
+  );
   const { isLoggedIn } = authState;
   const [updateObj, setUpdateObj] = useState({
     update: false,
@@ -39,10 +41,13 @@ const Main = () => {
             "auth-token": jwt,
           },
         })
-        .then((verified) => console.log(verified));
-      if (jwt) {
-        setAuthState({ ...authState, isLoggedIn: true, token: jwt });
-      }
+        .then((verified) => {
+          if (verified.data.success === "true") {
+            setAuthState({ ...authState, isLoggedIn: true, token: jwt });
+          } else {
+            setAuthState(initialState);
+          }
+        });
     });
   }, []);
 

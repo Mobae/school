@@ -81,6 +81,7 @@ const AuthContextProvider = (props) => {
         setAuthState,
         getUser,
         setAuthState,
+        initialState,
       }}
     >
       {props.children}
