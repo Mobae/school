@@ -14,21 +14,21 @@ const Add = () => {
     try {
       console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
       console.log(file);
-      // const data = new FormData();
-      // data.append("classId", "5f6252205181b70004f5d909");
-      // data.append("teacherId", "5f6250b55181b70004f5d906");
-      // data.append("caption", "from app");
-      // data.append("file", file);
-      // console.log(data);
-      // const config = {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data; ",
-      //   },
-      // };
-      // const url = "https://school-server-testing.herokuapp.com/documents/";
+      const data = new FormData();
+      data.append("classId", "5f6252205181b70004f5d909");
+      data.append("teacherId", "5f6250b55181b70004f5d906");
+      data.append("caption", "from app");
+      data.append("file", file);
+      console.log(data);
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data; ",
+        },
+      };
+      const url = "https://school-server-testing.herokuapp.com/documents/";
 
-      // const res = await axios.post(url, data, config);
-      // // const res = await axios.get(url);
+      const res = await axios.post(url, data);
+      // const res = await axios.get(url);
       // console.log(res.data);
     } catch (err) {
       console.log(err);

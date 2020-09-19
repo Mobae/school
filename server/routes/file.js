@@ -38,39 +38,39 @@ module.exports =  (upload) => {
             File.findOne({ caption: req.body.caption })
                 .then((image) => {
                     console.log(req.file);
-                    if (image) {
-                        return res.status(200).json({
-                            success: false,
-                            message: 'File already exists',
-                        });
-                    }
-                    Teacher.findOne(
-                        { _id: req.body.teacherId },
-                        (err, obj) => {
-                            if(err)
-                                throw err;
+                    // if (image) {
+                    //     return res.status(200).json({
+                    //         success: false,
+                    //         message: 'File already exists',
+                    //     });
+                    // }
+                    // Teacher.findOne(
+                    //     { _id: req.body.teacherId },
+                    //     (err, obj) => {
+                    //         if(err)
+                    //             throw err;
 
-                            let newFile = new File({
-                                caption: req.body.caption,
-                                filename: req.file.filename,
-                                fileId: req.file.id,
-                                length: req.file.size,
-                                contentType: req.file.contentType,
-                                classId: req.body.classId,
-                                teacherName: obj.name
-                            });
+                    //         let newFile = new File({
+                    //             caption: req.body.caption,
+                    //             filename: req.file.filename,
+                    //             fileId: req.file.id,
+                    //             length: req.file.size,
+                    //             contentType: req.file.contentType,
+                    //             classId: req.body.classId,
+                    //             teacherName: obj.name
+                    //         });
 
-                            newFile.save()
-                                .then((file) => {
+                    //         newFile.save()
+                    //             .then((file) => {
 
-                                    res.status(200).json({
-                                        success: true,
-                                        file,
-                                    });
-                                })
-                                .catch(err => res.status(500).json(err));
-                        }
-                    );
+                    //                 res.status(200).json({
+                    //                     success: true,
+                    //                     file,
+                    //                 });
+                    //             })
+                    //             .catch(err => res.status(500).json(err));
+                    //     }
+                    // );
                 })
                 .catch(err => res.status(500).json(err));
         })
