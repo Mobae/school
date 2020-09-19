@@ -5,7 +5,7 @@ const auth = require("../middleware/auth");
 
 router.get("/login", auth, (req, res) => {
   if (req.body.data) {
-    console.log(req.body.data);
+    console.log("hi", req.body.data);
   } else {
     console.log("no data");
   }

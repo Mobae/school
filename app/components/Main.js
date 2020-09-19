@@ -8,6 +8,7 @@ import BottomNavigator from "./layouts/bottomNavigator";
 import { ActivityIndicator } from "react-native-paper";
 import AsyncStorage from "@react-native-community/async-storage";
 import Update from "../components/Update/Update";
+import { URL } from "../config";
 
 const Stack = createStackNavigator();
 
@@ -32,7 +33,13 @@ const Main = () => {
   useEffect(() => {
     getUpdates();
     AsyncStorage.getItem("@jwt").then((jwt) => {
-      console.log(jwt);
+      const verified = axios
+        .get(URL + "/auth/login", {
+          headers: {
+            "auth-token": jwt,
+          },
+        })
+        .then((verified) => console.log(verified));
       if (jwt) {
         setAuthState({ ...authState, isLoggedIn: true, token: jwt });
       }
