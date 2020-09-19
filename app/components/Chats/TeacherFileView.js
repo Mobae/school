@@ -80,7 +80,7 @@ const Files = ({ navigation, route }) => {
     <FAB
         style={styles.fab}
         icon="plus"
-        onPress={() => navigation.navigate('AddFile')}
+        onPress={() => navigation.navigate('Add')}
     />
     </React.Fragment>
   );
