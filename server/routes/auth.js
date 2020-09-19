@@ -9,6 +9,7 @@ router.get("/login", (req, res) => {
   const { data } = jwt.verify(token, process.env.JWT_SECRET);
   if (data) {
     res.json({ success: "true" });
+    console.log(data);
   } else {
     res.json({ success: "false" });
   }
