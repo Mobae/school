@@ -23,11 +23,21 @@ module.exports =  (upload) => {
     /*
         POST: Upload a single image/file to File collection
     */
+
+    fileRouter.route('/test')
+        .post((req, res) => {
+            console.log(req);
+        })
+        .get((req, res) => {
+            console.log('helllo');
+        })
+
     fileRouter.route('/')
         .post(upload.single('file'),   (req, res, next) => {
             // check for existing images
             File.findOne({ caption: req.body.caption })
                 .then((image) => {
+                    console.log(req.file);
                     if (image) {
                         return res.status(200).json({
                             success: false,
