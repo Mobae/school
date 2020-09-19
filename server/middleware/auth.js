@@ -26,4 +26,5 @@ module.exports = async function (req, res, next) {
     console.log(user);
     next();
   }
+  console.log("USER", user);
 };
