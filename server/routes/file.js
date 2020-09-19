@@ -37,6 +37,7 @@ module.exports =  (upload) => {
             // check for existing images
             File.findOne({ caption: req.body.caption })
                 .then((image) => {
+                    console.log('routeeeeeeeeeeeeeeeeeeeeeeeeee');
                     console.log(req.file);
                     // if (image) {
                     //     return res.status(200).json({
