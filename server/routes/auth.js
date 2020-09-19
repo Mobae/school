@@ -1,13 +1,16 @@
 const { Router } = require("express");
+const jwt = require("jsonwebtoken");
 router = Router();
 
 const auth = require("../middleware/auth");
 
-router.get("/login", auth, (req, res) => {
-  if (req.body.data) {
-    console.log("hi", req.body.data);
+router.get("/login", (req, res) => {
+  const token = req.get("auth-token");
+  const { data } = jwt.verify(token, process.env.JWT_SECRET);
+  if (data) {
+    res.json({ success: "true" });
   } else {
-    console.log("no data");
+    res.json({ success: "false" });
   }
 });
 
