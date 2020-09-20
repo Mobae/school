@@ -3,8 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import axios from "axios";
 
-import DocumentPicker from 'react-native-document-picker';
-// import * as DocumentPicker from "expo-document-picker";
+import * as DocumentPicker from "expo-document-picker";
 
 const Add = () => {
   const [file, setFile] = React.useState(null);
@@ -34,19 +33,13 @@ const Add = () => {
 
   const selFile = async () => {
     try {
-      // DocumentPicker.getDocumentAsync().then((res) => {
-      //   console.log(res);
-      //   setFile(res);
-      // });
+      DocumentPicker.getDocumentAsync().then((res) => {
+        console.log(res);
+        setFile(res);
+      });
+      console.log('res : ' + JSON.stringify(res));
 
-    const res = await DocumentPicker.pick({
-      type: [DocumentPicker.types.allFiles],
-    });
-
-    console.log('res : ' + JSON.stringify(res));
-
-    setFile(res);
-
+      setFile(res);
     } catch (error) {
       console.log(error);
     }
