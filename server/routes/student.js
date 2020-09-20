@@ -51,6 +51,8 @@ router.get("/initial", auth, async (req, res) => {
     console.log(req.body.data);
     let student = await Student.findById(req.body.data.id);
     if (student) {
+      console.log('student:::::::::::::::::::::::::::');
+      console.log(student);
       let cls = await Class.findById(student.studentClass);
       student = student.toJSON();
       delete student.password;
@@ -62,6 +64,8 @@ router.get("/initial", auth, async (req, res) => {
     }
     student = await Teacher.findById(req.body.data._id);
     if (student) {
+      console.log('teacher:::::::::::::::::::::::::::');
+      console.log(student);
       let cls = await Class.findById(student.teacherClass);
       student = student.toJSON();
       delete student.password;
@@ -74,6 +78,8 @@ router.get("/initial", auth, async (req, res) => {
     }
     student = await Admin.findById(req.body.data.id);
     if (student) {
+      console.log('admin:::::::::::::::::::::::::::');
+      console.log(student);
       return res.json({
         student,
       });
