@@ -47,6 +47,8 @@ router.get("/teachers/all", async (req, res) => {
 
 router.get("/initial", auth, async (req, res) => {
   try {
+    console.log("Entered students !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"):
+    console.log(req.body.data);
     let student = await Student.findById(req.body.data.id);
     if (student) {
       let cls = await Class.findById(student.studentClass);
