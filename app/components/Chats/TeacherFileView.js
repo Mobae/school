@@ -8,26 +8,37 @@ import {
   TouchableRipple,
   ActivityIndicator,
   FAB,
+  Searchbar
 } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import adminStyles from '../admin/AdminStyles';
+import { AuthContext } from '../../context/AuthContext';
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const Files = ({ navigation, route }) => {
   const url = 'https://school-server-testing.herokuapp.com';
   const [files, setFiles] = React.useState(null);
+  const [filtered, setFiltered] = React.useState();
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const [ flag, setFlag ] = React.useState(false);
+  const { authState } = React.useContext(AuthContext);
+  const { user } = authState;
 
   const { class_ } = route.params;
 
+  const onChangeSearch = (query) => {
+    setSearchQuery(query);
+  };
+
   const getFiles = async () => {
     try {
-      console.log(url + '/documents/class/'+  class_);
-
       let res = await axios.get(url + '/documents/class/' + class_);
       const files_ = res.data.files;
       setFiles(files_);
+      setSearchQuery(' ');
+      setSearchQuery('');
     } catch (err) {
       console.log(err);
     }
@@ -35,15 +46,33 @@ const Files = ({ navigation, route }) => {
 
   React.useEffect(() => {
     getFiles();
-    console.log(files);
-  }, []);
+  }, [flag]);
+
+  React.useEffect(() => {
+    if (searchQuery === '') {
+      setFiltered(files);
+    } else {
+      setFiltered(
+        files.filter((file) => {
+          if (file.caption.toLowerCase().includes(searchQuery.toLowerCase())) {
+            return file;
+          }
+        })
+      );
+    }
+  }, [searchQuery]);
 
   return (
     <React.Fragment>
+    <Searchbar
+      placeholder='Search class..'
+      onChangeText={onChangeSearch}
+      value={searchQuery}
+    />
     <ScrollView>
       <View style={styles.viewStyle}>
-        {files ? (
-          files.map((file) => (
+        {filtered ? (
+          filtered.map((file) => (
             <View key={file._id}>
               <Card style={{ marginTop: 10, backgroundColor: '#eee' }}>
                 <TouchableRipple onPress={() => {}}>
@@ -51,13 +80,13 @@ const Files = ({ navigation, route }) => {
                     <Card.Content>
                       <Title>{file.caption}</Title>
                       <Paragraph>{file.filename}</Paragraph>
-                      <Paragraph>Subject:</Paragraph>
+                      <Paragraph>Teacher :{file.teacherName} </Paragraph>
                       <View style={{ flexDirection: 'row' }}>
-                        <Paragraph>Date:</Paragraph>
+                        <Paragraph>Date: {}</Paragraph>
                         <Paragraph
                           style={{ marginLeft: 160, marginBottom: 10 }}
                         >
-                          Size:
+                          Size: {parseInt(file.length)/1000} kb
                         </Paragraph>
                       </View>
                     </Card.Content>
@@ -80,7 +109,12 @@ const Files = ({ navigation, route }) => {
     <FAB
         style={styles.fab}
         icon="plus"
-        onPress={() => navigation.navigate('Add')}
+        onPress={() => navigation.navigate('Add', {
+          classId: class_,
+          teacherId: user._id,
+          flag,
+          setFlag
+        })}
     />
     </React.Fragment>
   );
