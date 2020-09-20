@@ -8,11 +8,14 @@ import BottomNavigator from "./layouts/bottomNavigator";
 import { ActivityIndicator } from "react-native-paper";
 import AsyncStorage from "@react-native-community/async-storage";
 import Update from "../components/Update/Update";
+import { URL } from "../config";
 
 const Stack = createStackNavigator();
 
 const Main = () => {
-  const { authState, getUser, setAuthState } = useContext(AuthContext);
+  const { authState, getUser, setAuthState, initialState } = useContext(
+    AuthContext
+  );
   const { isLoggedIn } = authState;
   const [updateObj, setUpdateObj] = useState({
     update: false,
@@ -32,10 +35,19 @@ const Main = () => {
   useEffect(() => {
     getUpdates();
     AsyncStorage.getItem("@jwt").then((jwt) => {
-      console.log(jwt);
-      if (jwt) {
-        setAuthState({ ...authState, isLoggedIn: true, token: jwt });
-      }
+      const verified = axios
+        .get(URL + "/auth/login", {
+          headers: {
+            "auth-token": jwt,
+          },
+        })
+        .then((verified) => {
+          if (verified.data.success === "true") {
+            setAuthState({ ...authState, isLoggedIn: true, token: jwt });
+          } else {
+            setAuthState(initialState);
+          }
+        });
     });
   }, []);
 

@@ -37,13 +37,13 @@ const barStyle = (rank) => {
   // 0a6605 - teacher
   switch (rank) {
     case '2':
-      return '#20335A';
+      return '#62536A';
       break;
     case '1':
       return '#0a6605';
       break;
     case '0':
-      return '#CD2430';
+      return '#3b3691';
       break;
     default:
       break;
@@ -52,9 +52,9 @@ const barStyle = (rank) => {
 
 const logout = (
   <MaterialCommunityIcons
-    name="logout"
+    name='logout'
     size={100}
-    color="red"
+    color='red'
     style={{ marginRight: 15 }}
   />
 );
@@ -72,7 +72,7 @@ const LogoutButton = () => {
         >
           Logout
         </Text>
-        <IconButton icon="logout" color="#ef5350" style={{ marginLeft: 0 }} />
+        <IconButton icon='logout' color='#ef5350' style={{ marginLeft: 0 }} />
       </View>
     </TouchableOpacity>
   );
@@ -83,15 +83,15 @@ const StudentStackScreen = () => {
     <NavigationContainer>
       <StudentStack.Navigator>
         <StudentStack.Screen
-          name="JMRD"
+          name='JMRD'
           component={StudentProfile}
           options={{
             headerRight: () => <LogoutButton />,
           }}
         />
-        <StudentStack.Screen name="Profile" component={StudentInfo} />
-        <StudentStack.Screen name="Attendance" component={StudentAttendance} />
-        <StudentStack.Screen name="Month" component={IndividualMonth} />
+        <StudentStack.Screen name='Profile' component={StudentInfo} />
+        <StudentStack.Screen name='Attendance' component={StudentAttendance} />
+        <StudentStack.Screen name='Month' component={IndividualMonth} />
       </StudentStack.Navigator>
     </NavigationContainer>
   );
@@ -102,23 +102,23 @@ const TeacherStackScreen = () => {
     <NavigationContainer>
       <TeacherStack.Navigator>
         <TeacherStack.Screen
-          name="JMRD"
+          name='JMRD'
           component={TeacherProfile}
           options={{
             headerRight: () => <LogoutButton />,
           }}
         />
         <TeacherStack.Screen
-          name="Attendance"
+          name='Attendance'
           component={AllStudentAttendance}
         />
-        <TeacherStack.Screen name="Add Attendance" component={AddAttendance} />
+        <TeacherStack.Screen name='Add Attendance' component={AddAttendance} />
         <TeacherStack.Screen
-          name="Edit Attendance"
+          name='Edit Attendance'
           component={EditAttendance}
         />
-        <TeacherStack.Screen name="Students" component={Students} />
-        <TeacherStack.Screen name="Student Details" component={StudentDetail} />
+        <TeacherStack.Screen name='Students' component={Students} />
+        <TeacherStack.Screen name='Student Details' component={StudentDetail} />
       </TeacherStack.Navigator>
     </NavigationContainer>
   );
@@ -128,10 +128,10 @@ const NoticeStackScreen = () => {
   return (
     <NavigationContainer>
       <NoticeStack.Navigator>
-        <NoticeStack.Screen name="Notice Board" component={BrowseNotice} />
-        <NoticeStack.Screen name="School Notice Board" component={Notice} />
-        <NoticeStack.Screen name="Class Notice Board" component={ClassNotice} />
-        <NoticeStack.Screen name="New Notice" component={NoticeForm} />
+        <NoticeStack.Screen name='Notice Board' component={BrowseNotice} />
+        <NoticeStack.Screen name='School Notice Board' component={Notice} />
+        <NoticeStack.Screen name='Class Notice Board' component={ClassNotice} />
+        <NoticeStack.Screen name='New Notice' component={NoticeForm} />
       </NoticeStack.Navigator>
     </NavigationContainer>
   );
@@ -169,13 +169,13 @@ const MyComponent = () => {
     user: { rank },
   } = authState;
   const [routes] = useState([
-    { key: 'chat', title: 'Chat', icon: 'forum-outline' },
+    { key: 'home', title: 'Home', icon: 'home-outline' },
     { key: 'profile', title: 'Profile', icon: 'face-profile' },
     { key: 'notice', title: 'Notice', icon: 'format-list-checkbox' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    chat: ChatRoute,
+    home: ChatRoute,
     profile: ProfileRoute,
     notice: NoticeRoute,
   });
@@ -189,7 +189,7 @@ const MyComponent = () => {
         shifting={true}
         barStyle={{ backgroundColor: barStyle(rank) }}
       />
-      <StatusBar style="auto" />
+      <StatusBar style='auto' />
     </Fragment>
   );
 };

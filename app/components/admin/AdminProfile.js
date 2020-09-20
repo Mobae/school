@@ -1,6 +1,12 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Avatar, Button, Card, ActivityIndicator } from 'react-native-paper';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import {
+  Avatar,
+  Button,
+  Card,
+  ActivityIndicator,
+  Paragraph,
+} from 'react-native-paper';
 
 import AddClass from './AddClass';
 import AddTeacher from './AddTeacher';
@@ -82,80 +88,101 @@ const AdminProfile = ({ navigation }) => {
         />
 
         {/* // ATTENDANCE CARD */}
-        <View>
-          <Card
-            style={adminStyles.card}
-            onPress={() => navigation.navigate(AttendanceClassList)}
-          >
-            <Card.Title
-              title='Attendance'
-              subtitle='View Attendance'
-              left={attendanceIcon}
-            />
-            <Card.Content></Card.Content>
-          </Card>
-        </View>
+        <ScrollView>
+          <View>
+            <Card
+              style={adminStyles.card}
+              onPress={() => navigation.navigate('AttendanceClassList')}
+            >
+              <Card.Title
+                title='Attendance'
+                subtitle='View Attendance'
+                left={attendanceIcon}
+              />
+              <Card.Content>
+                <Paragraph>View All Students Attendance</Paragraph>
+              </Card.Content>
+            </Card>
+          </View>
 
-        {/* // CLASS CARD/ */}
-        <Text></Text>
-        <View>
-          <Card style={adminStyles.card}>
-            <Card.Title title='Classes' left={classesIcon} />
-            <Card.Actions>
-              <Button
-                onPress={() => navigation.navigate('ClassList')}
-                color='#2E6E80'
-              >
-                VIEW
-              </Button>
-              <Button onPress={() => setClassModalOpen(true)} color='#2E6E80'>
-                ADD
-              </Button>
-            </Card.Actions>
-          </Card>
-        </View>
+          {/* // CLASS CARD/ */}
+          <Text></Text>
+          <View>
+            <Card style={adminStyles.card}>
+              <Card.Title title='Classes' left={classesIcon} />
+              <Card.Content>
+                <Paragraph>
+                  Overview of Class Teacher, Subject Teacher and Students
+                </Paragraph>
+              </Card.Content>
+              <Card.Actions>
+                <Button
+                  onPress={() => navigation.navigate('ClassList')}
+                  color='#2E6E80'
+                >
+                  VIEW
+                </Button>
+                <Button onPress={() => setClassModalOpen(true)} color='#2E6E80'>
+                  ADD
+                </Button>
+              </Card.Actions>
+            </Card>
+          </View>
 
-        {/* // TEACHERS CARD */}
-        <Text></Text>
-        <View>
-          <Card style={adminStyles.card}>
-            <Card.Title title='Teachers' left={teachersIcon} />
-            <Card.Actions>
-              <Button
-                onPress={() => {
-                  navigation.navigate('TeacherList');
-                }}
-                color='#8A3B37'
-              >
-                VIEW
-              </Button>
-              <Button onPress={() => setTeacherModalOpen(true)} color='#8A3B37'>
-                ADD
-              </Button>
-            </Card.Actions>
-          </Card>
-        </View>
+          {/* // TEACHERS CARD */}
+          <Text></Text>
+          <View>
+            <Card style={adminStyles.card}>
+              <Card.Title title='Teachers' left={teachersIcon} />
+              <Card.Content>
+                <Paragraph>Add or Remove Teachers</Paragraph>
+              </Card.Content>
+              <Card.Actions>
+                <Button
+                  onPress={() => {
+                    navigation.navigate('TeacherList');
+                  }}
+                  color='#8A3B37'
+                >
+                  VIEW
+                </Button>
+                <Button
+                  onPress={() => setTeacherModalOpen(true)}
+                  color='#8A3B37'
+                >
+                  ADD
+                </Button>
+              </Card.Actions>
+            </Card>
+          </View>
 
-        {/* // STUDENT CARD */}
-        <Text></Text>
-        <View>
-          <Card style={adminStyles.card}>
-            <Card.Title title='Students' left={studentsIcon} />
-            <Card.Actions>
-              <Button
-                onPress={() => {
-                  navigation.navigate('AllStudentList');
-                }}
-                color='#EF5758'
-              >
-                VIEW
-              </Button>
-              <Button onPress={() => setStudentModalOpen(true)} color='#EF5758'>
-                ADD
-              </Button>
-            </Card.Actions>
-          </Card>
-        </View>
+          {/* // STUDENT CARD */}
+          <Text></Text>
+          <View>
+            <Card style={adminStyles.card}>
+              <Card.Title title='Students' left={studentsIcon} />
+              <Card.Content>
+                <Paragraph>All Students List</Paragraph>
+              </Card.Content>
+              <Card.Actions>
+                <Button
+                  onPress={() => {
+                    navigation.navigate('AllStudentList');
+                  }}
+                  color='#EF5758'
+                >
+                  VIEW
+                </Button>
+                <Button
+                  onPress={() => setStudentModalOpen(true)}
+                  color='#EF5758'
+                >
+                  ADD
+                </Button>
+              </Card.Actions>
+            </Card>
+          </View>
+        </ScrollView>
       </View>
     );
   } else {

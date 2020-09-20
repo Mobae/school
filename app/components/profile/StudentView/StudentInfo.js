@@ -192,7 +192,7 @@ const StudentInfo = () => {
               <Button
                 mode='contained'
                 title='save'
-                color='#d43629'
+                color='#4a3b82'
                 onPress={() => console.log('Pressed')}
               ></Button>
             </View>

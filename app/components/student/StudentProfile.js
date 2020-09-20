@@ -11,11 +11,11 @@ import {
 import { AuthContext } from "../../context/AuthContext";
 
 const ProfileIcon = (props) => (
-  <Avatar.Icon {...props} icon="account" size={45} style = {{backgroundColor: '#d43629'}} />
+  <Avatar.Icon {...props} icon="account" size={45} style = {{backgroundColor: '#4a3b82'}} />
 );
 
 const AttendanceIcon = (props) => (
-  <Avatar.Icon {...props} icon="book" size={45} style = {{backgroundColor: '#d43629'}} />
+  <Avatar.Icon {...props} icon="book" size={45} style = {{backgroundColor: '#4a3b82'}} />
 );
 
 const StudentProfile = ({ navigation }) => {

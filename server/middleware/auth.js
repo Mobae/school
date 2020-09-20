@@ -26,4 +26,7 @@ module.exports = async function (req, res, next) {
     console.log(user);
     next();
   }
+  if (user === null) {
+    res.json({ success: "false" });
+  }
 };

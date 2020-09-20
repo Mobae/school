@@ -36,7 +36,7 @@ module.exports =  (upload) => {
         .post(upload.single('file'),   (req, res, next) => {
             File.findOne({ caption: req.body.caption })
                 .then((image) => {
-                    console.log('Rooooooooooooooooooourrrrrrrrrrrrrrrrrr');
+                    console.log('routeeeeeeeeeeeeeeeeeeeeeeeeee');
                     console.log(req.file);
                     if (image) {
                         return res.status(200).json({
