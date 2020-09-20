@@ -33,11 +33,11 @@ const NoticeStack = createStackNavigator();
 
 const barStyle = (rank) => {
   // CD2430 - student
-  // 20335A - admin
+  // 2D5264 - imp admin color
   // 0a6605 - teacher
   switch (rank) {
     case '2':
-      return '#AC2020';
+      return '#2D5264';
       break;
     case '1':
       return '#0a6605';

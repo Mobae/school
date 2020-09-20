@@ -1,6 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Button, TextInput, ActivityIndicator } from 'react-native-paper';
+import {
+  Button,
+  TextInput,
+  ActivityIndicator,
+  Paragraph,
+} from 'react-native-paper';
 import axios from 'axios';
 
 import * as DocumentPicker from 'expo-document-picker';
@@ -94,6 +99,8 @@ const Add = ({ navigation, route }) => {
               submit
             </Button>
           )}
+
+          <Paragraph>Note: Please Upload a .pdf file</Paragraph>
         </View>
       </View>
     );

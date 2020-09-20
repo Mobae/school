@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   FAB,
   Searchbar,
+  Button,
 } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -28,13 +29,6 @@ const Files = ({ navigation, route }) => {
 
   const { class_ } = route.params;
 
-  const date = new Date();
-  const todayDate = date.getDate();
-  const month = date.getMonth();
-  const year = date.getFullYear();
-
-  const displayDate = `${todayDate}-${month}-${year}`;
-
   const onChangeSearch = (query) => {
     setSearchQuery(query);
   };
@@ -50,6 +44,22 @@ const Files = ({ navigation, route }) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const download = async (filename) => {
+    const headers = {
+      'Content-Disposition': `attachment;filename=${filename}`,
+      'Content-Type': 'application/octet-stream',
+    };
+    console.log(
+      `https://school-server-testing.herokuapp.com/documents/file/${filename}`
+    );
+    const res = await axios.get(
+      `https://school-server-testing.herokuapp.com/documents/file/${filename}`,
+      headers
+    );
+
+    console.log(res);
   };
 
   React.useEffect(() => {
@@ -87,15 +97,31 @@ const Files = ({ navigation, route }) => {
                     <React.Fragment>
                       <Card.Content>
                         <Title>{file.caption}</Title>
-                        {/* <Paragraph>{file.filename}</Paragraph> */}
+
                         <Paragraph>Teacher :{file.teacherName} </Paragraph>
-                        <View style={{ flexDirection: 'row' }}>
-                          <Paragraph>Date: {displayDate}</Paragraph>
+                        <View
+                        // style={{
+                        //   display: 'flex',
+                        //   flexDirection: 'column',
+                        // }}
+                        >
+                          <Paragraph>
+                            Date: {file.createdAt.slice(0, 10)}
+                          </Paragraph>
                           <Paragraph
-                            style={{ marginLeft: 160, marginBottom: 10 }}
+                            style={{
+                              // alignSelf: 'flex-end',
+                              marginBottom: 10,
+                            }}
                           >
                             Size: {parseInt(file.length) / 1000} kb
                           </Paragraph>
+                          <Button
+                            icon="folder"
+                            onPress={() => download(file.filename)}
+                          >
+                            Download
+                          </Button>
                         </View>
                       </Card.Content>
                     </React.Fragment>
