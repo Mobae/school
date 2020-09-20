@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { Avatar, Card, IconButton, TouchableRipple } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import styles from '../NoticeBoard/styles';
@@ -6,17 +6,35 @@ import styles from '../NoticeBoard/styles';
 import { AuthContext } from '../../context/AuthContext';
 
 const ChatHome = ({ navigation }) => {
-
   const { authState, getUser } = useContext(AuthContext);
   const {
     user: { rank, class_ },
   } = authState;
 
-  if(rank === '0'){
-    const nav = 'StudentFileView';
-  } else if(rank === '1') {
-    const nav = 'StudentFileView';
-  }
+  // if (rank === '0') {
+  //   const nav = 'StudentFileView';
+  // } else if (rank === '1') {
+  //   const nav = 'StudentFileView';
+  // }
+  // const [nav, setNav] = useState('');
+
+  // if (rank === '1') {
+  //   setNav('ClassList');
+  // } else {
+  //   setNav('StudentFileView');
+  // }
+
+  const Nav = () => {
+    const [nav, setNav] = useState('');
+
+    if (rank === '1') {
+      setNav('ClassList');
+    } else {
+      setNav('StudentFileView');
+    }
+    console.log(nav);
+    return nav;
+  };
 
   return (
     <Fragment>

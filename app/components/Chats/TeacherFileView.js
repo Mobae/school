@@ -8,7 +8,7 @@ import {
   TouchableRipple,
   ActivityIndicator,
   FAB,
-  Searchbar
+  Searchbar,
 } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -22,11 +22,18 @@ const Files = ({ navigation, route }) => {
   const [files, setFiles] = React.useState(null);
   const [filtered, setFiltered] = React.useState();
   const [searchQuery, setSearchQuery] = React.useState('');
-  const [ flag, setFlag ] = React.useState(false);
+  const [flag, setFlag] = React.useState(false);
   const { authState } = React.useContext(AuthContext);
   const { user } = authState;
 
   const { class_ } = route.params;
+
+  const date = new Date();
+  const todayDate = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+
+  const displayDate = `${todayDate}-${month}-${year}`;
 
   const onChangeSearch = (query) => {
     setSearchQuery(query);
@@ -39,6 +46,7 @@ const Files = ({ navigation, route }) => {
       setFiles(files_);
       setSearchQuery(' ');
       setSearchQuery('');
+      console.log(date);
     } catch (err) {
       console.log(err);
     }
@@ -64,58 +72,60 @@ const Files = ({ navigation, route }) => {
 
   return (
     <React.Fragment>
-    <Searchbar
-      placeholder='Search class..'
-      onChangeText={onChangeSearch}
-      value={searchQuery}
-    />
-    <ScrollView>
-      <View style={styles.viewStyle}>
-        {filtered ? (
-          filtered.map((file) => (
-            <View key={file._id}>
-              <Card style={{ marginTop: 10, backgroundColor: '#eee' }}>
-                <TouchableRipple onPress={() => {}}>
-                  <React.Fragment>
-                    <Card.Content>
-                      <Title>{file.caption}</Title>
-                      <Paragraph>{file.filename}</Paragraph>
-                      <Paragraph>Teacher :{file.teacherName} </Paragraph>
-                      <View style={{ flexDirection: 'row' }}>
-                        <Paragraph>Date: {}</Paragraph>
-                        <Paragraph
-                          style={{ marginLeft: 160, marginBottom: 10 }}
-                        >
-                          Size: {parseInt(file.length)/1000} kb
-                        </Paragraph>
-                      </View>
-                    </Card.Content>
-                  </React.Fragment>
-                </TouchableRipple>
-              </Card>
+      <Searchbar
+        placeholder="Search class.."
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+      />
+      <ScrollView>
+        <View style={styles.viewStyle}>
+          {filtered ? (
+            filtered.map((file) => (
+              <View key={file._id}>
+                <Card style={{ marginTop: 10, backgroundColor: '#eee' }}>
+                  <TouchableRipple onPress={() => {}}>
+                    <React.Fragment>
+                      <Card.Content>
+                        <Title>{file.caption}</Title>
+                        {/* <Paragraph>{file.filename}</Paragraph> */}
+                        <Paragraph>Teacher :{file.teacherName} </Paragraph>
+                        <View style={{ flexDirection: 'row' }}>
+                          <Paragraph>Date: {displayDate}</Paragraph>
+                          <Paragraph
+                            style={{ marginLeft: 160, marginBottom: 10 }}
+                          >
+                            Size: {parseInt(file.length) / 1000} kb
+                          </Paragraph>
+                        </View>
+                      </Card.Content>
+                    </React.Fragment>
+                  </TouchableRipple>
+                </Card>
+              </View>
+            ))
+          ) : (
+            <View style={styles.container}>
+              <ActivityIndicator
+                animating={true}
+                size="large"
+                style={styles.loading}
+              />
             </View>
-          ))
-        ) : (
-          <View style={styles.container}>
-            <ActivityIndicator
-              animating={true}
-              size="large"
-              style={styles.loading}
-            />
-          </View>
-        )}
-      </View>
-    </ScrollView>
-    <FAB
+          )}
+        </View>
+      </ScrollView>
+      <FAB
         style={styles.fab}
         icon="plus"
-        onPress={() => navigation.navigate('Add', {
-          classId: class_,
-          teacherId: user._id,
-          flag,
-          setFlag
-        })}
-    />
+        onPress={() =>
+          navigation.navigate('Add', {
+            classId: class_,
+            teacherId: user._id,
+            flag,
+            setFlag,
+          })
+        }
+      />
     </React.Fragment>
   );
 };
