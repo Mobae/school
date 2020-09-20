@@ -51,6 +51,7 @@ const AuthContextProvider = (props) => {
   const getUser = async () => {
     axios.defaults.headers["auth-token"] = await AsyncStorage.getItem("@jwt");
     const res = await axios.get(URL + "/student/initial");
+    console.log('initial route response')
     console.log(res.data);
     // TODO
     // if(!res.data.student) {

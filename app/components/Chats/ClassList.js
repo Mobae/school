@@ -47,7 +47,6 @@ const FileClassList = ({ navigation }) => {
   };
 
   React.useEffect(() => {
-    console.log('Entered classssssssssssss')
     getClasses();
   }, [])
 
