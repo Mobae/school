@@ -85,7 +85,7 @@ router.get("/initial", auth, async (req, res) => {
       });
     }
   } catch (err) {
-    return res.json({ err });
+    return res.json({ status: 'fuck you' });
     console.log("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror");
     console.log(err);
   }
