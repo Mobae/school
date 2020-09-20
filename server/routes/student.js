@@ -86,7 +86,7 @@ router.get("/initial", auth, async (req, res) => {
     }
   } catch (err) {
     return res.json({ err });
-    console.log("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror');
+    console.log("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrror");
     console.log(err);
   }
 });
