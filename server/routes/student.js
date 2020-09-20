@@ -60,7 +60,7 @@ router.get("/initial", auth, async (req, res) => {
         student,
       });
     }
-    student = await Teacher.findById(req.body.data.id);
+    student = await Teacher.findById(req.body.data._id);
     if (student) {
       let cls = await Class.findById(student.teacherClass);
       student = student.toJSON();
