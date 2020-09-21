@@ -22,25 +22,22 @@ const NoticeForm = ({ navigation }) => {
   const hideDialog = () => setVisible(false);
 
   const {
-    authState: {
-      user: { rank, class_, name },
-    },
+    authState: { user },
   } = useContext(AuthContext);
 
   const handleSubmit = async (values) => {
-    const { title, description } = values;
+    const { title, description, author } = values;
     const date = new Date();
     const payload = {
       title,
       description,
       date,
-      teacherClass: class_,
-      author: name,
+      author,
     };
     console.log(payload);
-    const res = await axios.post(URL + "/classnotice", payload);
+    const res = await axios.post(URL + "/schoolnotice", payload);
     console.log(res.data);
-    navigation.navigate("Class Notice Board");
+    navigation.navigate("School Notice Board");
   };
 
   return (
@@ -58,6 +55,14 @@ const NoticeForm = ({ navigation }) => {
                 onChangeText={handleChange("title")}
                 onBlur={handleBlur("title")}
                 value={values.title}
+              />
+              <TextInput
+                mode="outlined"
+                label="Author"
+                onChangeText={handleChange("author")}
+                onBlur={handleBlur("author")}
+                value={values.author}
+                style={{ marginTop: 10 }}
               />
               <TextInput
                 mode="outlined"

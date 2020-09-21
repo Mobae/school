@@ -1,15 +1,17 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
-import { ScrollView, View } from 'react-native';
-import { IconButton, ActivityIndicator } from 'react-native-paper';
-import axios from 'axios';
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { ScrollView, View } from "react-native";
+import { IconButton, ActivityIndicator } from "react-native-paper";
+import { useIsFocused } from "@react-navigation/native";
+import axios from "axios";
 
-import { AuthContext } from '../../context/AuthContext';
-import { URL } from '../../config';
-import styles from './styles';
+import { AuthContext } from "../../context/AuthContext";
+import { URL } from "../../config";
+import styles from "./styles";
 
-import NoticeCard from './NoticeCard';
+import NoticeCard from "./NoticeCard";
 
 const Notice = ({ navigation }) => {
+  const isFocused = useIsFocused();
   const { authState } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const {
@@ -19,9 +21,9 @@ const Notice = ({ navigation }) => {
 
   const getSchoolNotices = async () => {
     setLoading(true);
-    const res = await axios.get(URL + '/schoolnotice', {
+    const res = await axios.get(URL + "/schoolnotice", {
       headers: {
-        'auth-token': authState.token,
+        "auth-token": authState.token,
       },
     });
     setNotices(res.data.notices);
@@ -30,7 +32,7 @@ const Notice = ({ navigation }) => {
 
   useEffect(() => {
     getSchoolNotices();
-  }, []);
+  }, [isFocused]);
 
   return (
     <Fragment>
@@ -58,13 +60,13 @@ const Notice = ({ navigation }) => {
         </View>
       )}
 
-      {rank === '2' ? (
+      {rank === "2" ? (
         <IconButton
           icon="plus"
           style={styles.fab}
           color="white"
           size={40}
-          onPress={() => navigation.push('New Notice')}
+          onPress={() => navigation.push("New School Notice")}
         />
       ) : null}
     </Fragment>

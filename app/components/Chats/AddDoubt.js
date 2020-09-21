@@ -18,7 +18,10 @@ import { URL } from "../../config";
 const NoticeForm = ({ navigation }) => {
   const [visible, setVisible] = React.useState(false);
 
+  const [postUrl, setPostUrl] = React.useState("");
+
   const showDialog = () => setVisible(true);
+
   const hideDialog = () => setVisible(false);
 
   const {
@@ -28,6 +31,11 @@ const NoticeForm = ({ navigation }) => {
   } = useContext(AuthContext);
 
   const handleSubmit = async (values) => {
+    if (rank === "2") {
+      setPostUrl("schoolnotice");
+    } else if (rank === "1") {
+      setPostUrl("classnotice");
+    }
     const { title, description } = values;
     const date = new Date();
     const payload = {
@@ -38,9 +46,13 @@ const NoticeForm = ({ navigation }) => {
       author: name,
     };
     console.log(payload);
-    const res = await axios.post(URL + "/classnotice", payload);
+    const res = await axios.post(URL + `/${postUrl}`, payload);
     console.log(res.data);
-    navigation.navigate("Class Notice Board");
+    if (postUrl === "schoolnotice") {
+      navigation.navigate("School Notice Board");
+    } else if (postUrl === "classnotice") {
+      navigation.navigate("Class Notice Board");
+    }
   };
 
   return (
