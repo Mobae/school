@@ -10,6 +10,7 @@ router.get("/", auth, async (req, res) => {
   console.log("hi");
   try {
     const notices = await SchoolNotice.find({ status: "active" });
+    console.log(notices);
     res.status(200).json({ notices });
   } catch (err) {
     console.log(err);

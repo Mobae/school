@@ -16,7 +16,7 @@ const ClassNotice = ({ navigation }) => {
   const {
     authState: { user },
   } = useContext(AuthContext);
-  const { rank } = user;
+  const { rank, class_ } = user;
 
   const getNotices = async () => {
     const notices = await axios.get(URL + "/classnotice/" + user.class_);

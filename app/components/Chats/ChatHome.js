@@ -1,9 +1,9 @@
-import React, { Fragment, useContext, useState } from 'react';
-import { Avatar, Card, IconButton, TouchableRipple } from 'react-native-paper';
-import { View, StyleSheet } from 'react-native';
-import styles from '../NoticeBoard/styles';
+import React, { Fragment, useContext, useState } from "react";
+import { Avatar, Card, IconButton, TouchableRipple } from "react-native-paper";
+import { View, StyleSheet } from "react-native";
+import styles from "../NoticeBoard/styles";
 
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from "../../context/AuthContext";
 
 const ChatHome = ({ navigation }) => {
   const { authState, getUser } = useContext(AuthContext);
@@ -25,12 +25,12 @@ const ChatHome = ({ navigation }) => {
   // }
 
   const Nav = () => {
-    const [nav, setNav] = useState('');
+    const [nav, setNav] = useState("");
 
-    if (rank === '1') {
-      setNav('ClassList');
+    if (rank === "1") {
+      setNav("ClassList");
     } else {
-      setNav('StudentFileView');
+      setNav("StudentFileView");
     }
     console.log(nav);
     return nav;
@@ -40,10 +40,10 @@ const ChatHome = ({ navigation }) => {
     <Fragment>
       <View style={{ margin: 10, marginBottom: 0 }}>
         <Card>
-          <TouchableRipple onPress={() => navigation.navigate('Chat')}>
+          <TouchableRipple onPress={() => navigation.navigate("Doubts Corner")}>
             <Card.Title
-              title="Chats"
-              subtitle="Talk with teachers !!"
+              title="Doubts"
+              subtitle="Clarify your doubts"
               left={(props) => (
                 <Avatar.Icon
                   {...props}
@@ -59,7 +59,7 @@ const ChatHome = ({ navigation }) => {
 
       <View style={{ margin: 10 }}>
         <Card>
-          <TouchableRipple onPress={() => navigation.navigate('ClassList')}>
+          <TouchableRipple onPress={() => navigation.navigate("ClassList")}>
             <Card.Title
               title="Files"
               subtitle="Get your files"
@@ -67,7 +67,7 @@ const ChatHome = ({ navigation }) => {
                 <Avatar.Icon
                   {...props}
                   icon="file-document-box-multiple"
-                  style={{ backgroundColor: '#3D64A4' }}
+                  style={{ backgroundColor: "#3D64A4" }}
                 />
               )}
             />
