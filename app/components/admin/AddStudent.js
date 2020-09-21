@@ -55,6 +55,7 @@ const AddStudent = ({
                   admissionNo: " ",
                   busNo: " ",
                   phone: " ",
+                  dob: " ",
                 },
               }}
               onSubmit={(values, actions) => {
@@ -161,6 +162,13 @@ const AddStudent = ({
                       onChangeText={handleChange("info.admissionNo")}
                       onBlur={handleBlur("info.admissionNo")}
                       value={values.info.admissionNo}
+                    />
+                    <TextInput
+                      mode="outlined"
+                      label="Date of Birth"
+                      onChangeText={handleChange("info.dob")}
+                      onBlur={handleBlur("info.dob")}
+                      value={values.info.dob}
                     />
                     <TextInput
                       mode="outlined"
