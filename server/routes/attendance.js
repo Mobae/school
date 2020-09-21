@@ -150,7 +150,7 @@ router.post("/class", auth, teacher, async (req, res) => {
   }
 });
 
-router.post("/class/day", teacher, async (req, res) => {
+router.post("/class/day", auth, teacher, async (req, res) => {
   let { date, students } = req.body;
   console.log(date, students);
   if (date && students.length !== 0) {
@@ -178,7 +178,7 @@ router.post("/class/day", teacher, async (req, res) => {
   }
 });
 
-router.post("/class/update", teacher, async (req, res) => {
+router.post("/class/update", auth, teacher, async (req, res) => {
   let { date, attendances } = req.body;
   console.log(date, attendances);
   if (date && attendances.length !== 0) {

@@ -1,11 +1,25 @@
-import React, { createContext, useState, useEffect, Fragment } from 'react';
-import axios from 'axios';
-import AsyncStorage from '@react-native-community/async-storage';
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  Fragment,
+  useContext,
+} from "react";
+import axios from "axios";
+import AsyncStorage from "@react-native-community/async-storage";
+
+import { AuthContext } from "./AuthContext";
 
 export const AdminContext = createContext();
 
 const AdminContextProvider = (props) => {
-  const url = 'https://school-server-testing.herokuapp.com';
+  const {
+    authState: { token },
+  } = useContext(AuthContext);
+  const headers = {
+    "auth-token": token,
+  };
+  const url = "https://school-server-testing.herokuapp.com";
   const initialState = {
     teachers: [],
     students: [],
@@ -16,18 +30,18 @@ const AdminContextProvider = (props) => {
   const [reload, setReload] = useState(false);
   const [loading, setLoading] = useState(false);
   const [profileLoading, setProfileLoading] = useState(false);
-  const [currClass, setCurrClass] = useState('');
+  const [currClass, setCurrClass] = useState("");
   const [classObj, setClassObj] = useState({});
   const [flag, setFlag] = useState(false);
-  const [redirect, setRedirect] = useState('hello');
+  const [redirect, setRedirect] = useState("hello");
 
-  const [ studentFlag, setStudentFlag ] = React.useState(false);
+  const [studentFlag, setStudentFlag] = React.useState(false);
 
   const getAllData = async () => {
     setProfileLoading(true);
-    let res1 = await axios.get(url + '/class/all');
-    let res2 = await axios.get(url + '/student/teachers/all');
-    let res3 = await axios.get(url + '/student/students/all');
+    let res1 = await axios.get(url + "/class/all", { headers });
+    let res2 = await axios.get(url + "/student/teachers/all", { headers });
+    let res3 = await axios.get(url + "/student/students/all", { headers });
 
     setCurrClass(res1.data.data[0]._id);
     setAdminState({
@@ -46,7 +60,7 @@ const AdminContextProvider = (props) => {
     try {
       // console.log("Entered get all classes !!!");
       setLoading(true);
-      let res = await axios.get(url + '/class/all');
+      let res = await axios.get(url + "/class/all", { headers });
       setLoading(false);
       const classes = res.data.data;
       let curr = classes[0]._id;
@@ -66,7 +80,9 @@ const AdminContextProvider = (props) => {
   const getCurrClassTeachers = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(url + '/class/teachers/' + currClass);
+      const res = await axios.get(url + "/class/teachers/" + currClass, {
+        headers,
+      });
       const data = res.data.data;
       setClassObj(data);
       setFlag(true);
@@ -79,7 +95,7 @@ const AdminContextProvider = (props) => {
     try {
       // console.log(class_);
       setLoading(true);
-      const res = await axios.post(url + '/class/add', class_);
+      const res = await axios.post(url + "/class/add", class_, { headers });
       setLoading(false);
       // console.log(res.data);
       const newClass = res.data.data;
@@ -102,7 +118,7 @@ const AdminContextProvider = (props) => {
   const getTeachers = async () => {
     try {
       setLoading(true);
-      let res = await axios.get(url + '/student/teachers/all');
+      let res = await axios.get(url + "/student/teachers/all", { headers });
       setLoading(false);
       const teachers = res.data.data;
 
@@ -121,7 +137,7 @@ const AdminContextProvider = (props) => {
   const addTeacher = async (teacher) => {
     try {
       setLoading(true);
-      const res = await axios.post(url + '/student/add', teacher);
+      const res = await axios.post(url + "/student/add", teacher, { headers });
       setLoading(false);
       const newTeacher = res.data;
 
@@ -141,7 +157,9 @@ const AdminContextProvider = (props) => {
   const getStudents = async () => {
     try {
       setLoading(true);
-      let res = await axios.get(url + '/class/students/' + currClass);
+      let res = await axios.get(url + "/class/students/" + currClass, {
+        headers,
+      });
       const students = res.data.data;
 
       setAdminState({
@@ -160,7 +178,7 @@ const AdminContextProvider = (props) => {
   const getAllStudents = async () => {
     try {
       // setLoading(true);
-      let res = await axios.get(url + '/student/students/all');
+      let res = await axios.get(url + "/student/students/all", { headers });
       setLoading(false);
       const allStudents = res.data.data;
       // console.log(res.data);
@@ -182,7 +200,7 @@ const AdminContextProvider = (props) => {
   const addStudent = async (student) => {
     try {
       setLoading(true);
-      const res = await axios.post(url + '/student/add', student);
+      const res = await axios.post(url + "/student/add", student, { headers });
       setLoading(false);
       const newStudent = res.data;
 
@@ -193,7 +211,7 @@ const AdminContextProvider = (props) => {
         class_: adminState.class_,
         allStudents: [...adminState.allStudents, newStudent],
       });
-      console.log(adminState.allStudents)
+      console.log(adminState.allStudents);
       setReload(!reload);
     } catch (err) {
       console.log(err);
@@ -203,7 +221,9 @@ const AdminContextProvider = (props) => {
   const addClassTeacher = async (values) => {
     try {
       setLoading(true);
-      let res = await axios.post(url + '/class/classTeacher/', values);
+      let res = await axios.post(url + "/class/classTeacher/", values, {
+        headers,
+      });
       setLoading(false);
       // console.log(res.data.data);
     } catch (err) {
@@ -215,7 +235,9 @@ const AdminContextProvider = (props) => {
   const addSubTeacher = async (values) => {
     try {
       setLoading(true);
-      let res = await axios.post(url + '/class/subTeacher/', values);
+      let res = await axios.post(url + "/class/subTeacher/", values, {
+        headers,
+      });
       setLoading(false);
       // console.log(res.data.data);
     } catch (err) {
@@ -248,7 +270,8 @@ const AdminContextProvider = (props) => {
         adminState,
         currClass,
         setCurrClass,
-        classObj, setClassObj,
+        classObj,
+        setClassObj,
         flag,
         setFlag,
         loading,
@@ -257,8 +280,10 @@ const AdminContextProvider = (props) => {
         setProfileLoading,
         redirect,
         setRedirect,
-        reload, setReload,
-        studentFlag, setStudentFlag,
+        reload,
+        setReload,
+        studentFlag,
+        setStudentFlag,
       }}
     >
       {props.children}

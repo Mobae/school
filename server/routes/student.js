@@ -6,13 +6,14 @@ const router = express.Router();
 
 const { trimObj, genRandPass } = require("../utils/common");
 const auth = require("../middleware/auth");
+const { admin } = require("../middleware/rank");
 
 const Student = require("../models/Student");
 const Teacher = require("../models/Teacher");
 const Class = require("../models/Class");
 const Admin = require("../models/Admin");
 
-router.get("/students/all", async (req, res) => {
+router.get("/students/all", auth, admin, async (req, res) => {
   try {
     const students = await Student.find();
 
@@ -28,7 +29,7 @@ router.get("/students/all", async (req, res) => {
   }
 });
 
-router.get("/teachers/all", async (req, res) => {
+router.get("/teachers/all", auth, admin, async (req, res) => {
   try {
     const teachers = await Teacher.find();
     console.log(teachers);
@@ -77,7 +78,7 @@ router.get("/initial", auth, async (req, res) => {
       });
     }
   } catch (err) {
-    return res.json({ status: 'fuck you' });
+    return res.json({ status: "bad" });
     console.log(err);
   }
 });
@@ -97,11 +98,10 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
-router.get("/teacher/:teacherId", async (req, res) => {
+router.get("/teacher/:teacherId", auth, teacher, async (req, res) => {
   try {
     const teacher = await Teacher.findById(req.params.teacherId);
     console.log(teacher);
-
     return res.status(200).json({
       success: true,
       data: teacher,
@@ -114,7 +114,7 @@ router.get("/teacher/:teacherId", async (req, res) => {
   }
 });
 
-router.post("/update/student", async (req, res) => {
+router.post("/update/student", auth, admin, async (req, res) => {
   try {
     const studentId = req.body.studentId;
     const student = await Student.findById(studentId);
@@ -122,7 +122,7 @@ router.post("/update/student", async (req, res) => {
     if (req.body.classId) {
       const oldClass = await Class.findById(student.studentClass);
       oldClass.students = oldClass.students.filter((student_) => {
-        if(student_.student != student.id){
+        if (student_.student != student.id) {
           return student_;
         }
       });
@@ -150,7 +150,7 @@ router.post("/update/student", async (req, res) => {
   }
 });
 
-router.post("/update/teacher", async (req, res) => {
+router.post("/update/teacher", auth, admin, async (req, res) => {
   try {
     const teacherId = req.body.teacherId;
     const teacher = await Teacher.findById(teacherId);
@@ -170,7 +170,7 @@ router.post("/update/teacher", async (req, res) => {
   }
 });
 
-router.post("/add", async (req, res) => {
+router.post("/add", auth, admin, async (req, res) => {
   let obj = req.body;
   obj = trimObj(obj);
   const {

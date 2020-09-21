@@ -3,7 +3,10 @@ const router = Router();
 
 const Doubt = require("../models/Doubt");
 
-router.get("/:classId", async (req, res) => {
+const auth = require("../middleware/auth");
+const { teacher, admin } = require("../middleware/rank");
+
+router.get("/:classId", auth, async (req, res) => {
   try {
     const doubts = await Doubt.find({ class: classId, status: "active" });
     res.json({ doubts });
@@ -13,7 +16,7 @@ router.get("/:classId", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const { class_, author, title, description } = req.body;
   try {
     const doubt = new Doubt({ class: class_, author, title, description });
@@ -25,7 +28,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/reply", async (req, res) => {
+router.post("/reply", auth, teacher, async (req, res) => {
   try {
     const { reply, _id } = req.body;
     const doubt = (await Doubt.findById(_id)).toJSON();
@@ -37,7 +40,7 @@ router.post("/reply", async (req, res) => {
   }
 });
 
-router.post("/archive", async (req, res) => {
+router.post("/archive", auth, admin, async (req, res) => {
   const { id_ } = req.body;
   if (id_) {
     try {

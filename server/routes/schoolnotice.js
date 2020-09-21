@@ -18,7 +18,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", auth, admin, async (req, res) => {
   console.log("hi");
   try {
     const { title, description, author, date } = req.body;

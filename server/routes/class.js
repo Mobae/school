@@ -4,6 +4,7 @@ const Teacher = require("../models/Teacher");
 const Student = require("../models/Student");
 
 const auth = require("../middleware/auth");
+const { teacher, admin } = require("../middleware/rank");
 
 router = Router();
 
@@ -21,7 +22,7 @@ router.get("/views/:id", auth, async (req, res) => {
   }
 });
 
-router.get("/all", async (req, res) => {
+router.get("/all", auth, admin, async (req, res) => {
   try {
     const classes = await Class.find();
 
@@ -39,7 +40,7 @@ router.get("/all", async (req, res) => {
   }
 });
 
-router.get("/view/:classId", async (req, res) => {
+router.get("/view/:classId", auth, teacher, async (req, res) => {
   try {
     const class_ = await Class.findById(req.params.classId);
 
@@ -57,7 +58,7 @@ router.get("/view/:classId", async (req, res) => {
   }
 });
 
-router.post("/add", async (req, res) => {
+router.post("/add", auth, admin, async (req, res) => {
   try {
     const name = req.body.name;
     const payload = {
@@ -80,7 +81,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.get("/students/:classId", async (req, res) => {
+router.get("/students/:classId", auth, teacher, async (req, res) => {
   try {
     console.log(req.params.classId);
 
@@ -106,7 +107,7 @@ router.get("/students/:classId", async (req, res) => {
   }
 });
 
-router.get("/teachers/:classId", async (req, res) => {
+router.get("/teachers/:classId", auth, admin, async (req, res) => {
   try {
     console.log(req.params.classId);
 
@@ -135,7 +136,7 @@ router.get("/teachers/:classId", async (req, res) => {
   }
 });
 
-router.post("/classTeacher", async (req, res) => {
+router.post("/classTeacher", auth, admin, async (req, res) => {
   try {
     const class_ = await Class.findById(req.body.class);
     const teacher = await Teacher.findById(req.body.teacher);
@@ -167,7 +168,7 @@ router.post("/classTeacher", async (req, res) => {
   }
 });
 
-router.post("/subTeacher", async (req, res) => {
+router.post("/subTeacher", auth, admin, async (req, res) => {
   try {
     const class_ = await Class.findById(req.body.class);
     const subTeacher = req.body.teacher;
@@ -185,32 +186,32 @@ router.post("/subTeacher", async (req, res) => {
   }
 });
 
-router.post("/remove/subTeacher", async(req, res) => {
+router.post("/remove/subTeacher", auth, admin, async (req, res) => {
   try {
     const class_ = await Class.findById(req.body.class);
     const subTeacher = await Teacher.findById(req.body.teacher);
     class_.subTeachers = class_.subTeachers.filter((teacher) => {
-      if(teacher.teacher != subTeacher.id){
+      if (teacher.teacher != subTeacher.id) {
         return teacher;
       }
     });
     class_.save();
     subTeacher.teacherSubClasses = subTeacher.teacherSubClasses.filter((c) => {
-      if(c.class != class_.id){
+      if (c.class != class_.id) {
         return c;
       }
-    })
+    });
     subTeacher.save();
     return res.json({
-      success: true
+      success: true,
     });
   } catch (err) {
     console.log(err);
-    return res.json({ 
+    return res.json({
       sucess: false,
-      error: err
+      error: err,
     });
   }
-})
+});
 
 module.exports = router;
