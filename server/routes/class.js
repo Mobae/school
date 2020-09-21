@@ -142,7 +142,9 @@ router.get("/teacher/classes/:teacherId", async (req, res) => {
     const classes = await Class.find({
       subTeachers: { $elemMatch: { teacher: req.params.teacherId } },
     });
-    classes.push(homeClass);
+    if(homeClass){
+      classes.push(homeClass);
+    }
     res.status(200).json({
       sucess: true,
       data: classes,
