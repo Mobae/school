@@ -31,28 +31,19 @@ const NoticeForm = ({ navigation }) => {
   } = useContext(AuthContext);
 
   const handleSubmit = async (values) => {
-    if (rank === "2") {
-      setPostUrl("schoolnotice");
-    } else if (rank === "1") {
-      setPostUrl("classnotice");
-    }
-    const { title, description } = values;
+    const { title, description, author } = values;
     const date = new Date();
     const payload = {
       title,
       description,
       date,
-      teacherClass: class_,
-      author: name,
+      author,
+      class_,
     };
     console.log(payload);
-    const res = await axios.post(URL + `/${postUrl}`, payload);
+    const res = await axios.post(URL + "/doubt", payload);
     console.log(res.data);
-    if (postUrl === "schoolnotice") {
-      navigation.navigate("School Notice Board");
-    } else if (postUrl === "classnotice") {
-      navigation.navigate("Class Notice Board");
-    }
+    navigation.navigate("Doubts Corner");
   };
 
   return (
