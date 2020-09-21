@@ -118,7 +118,7 @@ const FileClassList = ({ navigation }) => {
       </View>
     );
   } else {
-    // getClasses();
+    getClasses();
     return (
       <View style={styles.container}>
         <ActivityIndicator
