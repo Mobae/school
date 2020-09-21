@@ -29,7 +29,8 @@ const AddClass = ({ addClass, classModalOpen, setClassModalOpen, navigation }) =
                             addClass(values);                  // SUMITTING CLASS VALUE
                             setClassModalOpen(false);
                             navigation.navigate('AdminProfile');
-                            navigation.push('ClassList')
+                            navigation.navigate('ClassList');
+                            navigation.navigate('AdminProfile');
                         }}
                     >
                         {({ handleChange, handleBlur, handleSubmit, values }) => (

@@ -20,6 +20,8 @@ const AddStudent = ({
   studentModalOpen,
   setStudentModalOpen,
   navigation,
+  studentFlag,
+  setStudentFlag
 }) => {
   const { adminState } = React.useContext(AdminContext);
 
@@ -57,10 +59,12 @@ const AddStudent = ({
               }}
               onSubmit={(values, actions) => {
                 actions.resetForm();
-                navigation.navigate("AdminProfile");
                 setStudentModalOpen(false);
                 addStudent(values); // SUBMITTING STUDENT VALUE
-                // console.log(values);
+                setStudentFlag(!studentFlag);
+                navigation.navigate("AdminProfile");
+                navigation.navigate("AllStudentList");
+                navigation.navigate("AdminProfile");
               }}
             >
               {({ handleChange, handleBlur, handleSubmit, values }) => (

@@ -8,7 +8,7 @@ import adminStyles from "./AdminStyles";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="human-child" color = 'white' style = {{backgroundColor: '#EF5758'}} />;
 
 const StudentList = ({ navigation }) => {
-  const { adminState, getAllStudents, reload } = React.useContext(AdminContext);
+  const { adminState, getAllStudents, reload, studentFlag } = React.useContext(AdminContext);
 
   const [searchQuery, setSearchQuery] = React.useState('');
   const [filtered, setFiltered] = React.useState(adminState.allStudents);
@@ -18,7 +18,7 @@ const StudentList = ({ navigation }) => {
 
   React.useEffect(() => {
     getAllStudents();
-  }, [reload])
+  }, [studentFlag])
 
   React.useEffect(() => {
     if(searchQuery === ''){

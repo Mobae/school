@@ -21,6 +21,8 @@ const AdminContextProvider = (props) => {
   const [flag, setFlag] = useState(false);
   const [redirect, setRedirect] = useState('hello');
 
+  const [ studentFlag, setStudentFlag ] = React.useState(false);
+
   const getAllData = async () => {
     setProfileLoading(true);
     let res1 = await axios.get(url + '/class/all');
@@ -189,8 +191,9 @@ const AdminContextProvider = (props) => {
         students: [],
         classes: adminState.classes,
         class_: adminState.class_,
-        allStudents: adminState.allStudents,
+        allStudents: [...adminState.allStudents, newStudent],
       });
+      console.log(adminState.allStudents)
       setReload(!reload);
     } catch (err) {
       console.log(err);
@@ -255,6 +258,7 @@ const AdminContextProvider = (props) => {
         redirect,
         setRedirect,
         reload, setReload,
+        studentFlag, setStudentFlag,
       }}
     >
       {props.children}

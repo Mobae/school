@@ -113,7 +113,7 @@ const Files = ({ navigation, route }) => {
           classId: class_,
           teacherId: user._id,
           flag,
-          setFlag
+          setFlag: setFlag
         })}
     />
     </React.Fragment>
