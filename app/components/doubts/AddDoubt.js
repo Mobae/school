@@ -27,6 +27,7 @@ const NoticeForm = ({ navigation }) => {
   const {
     authState: {
       user: { rank, class_, name },
+      token,
     },
   } = useContext(AuthContext);
 
@@ -41,7 +42,11 @@ const NoticeForm = ({ navigation }) => {
       class_,
     };
     console.log(payload);
-    const res = await axios.post(URL + "/doubt", payload);
+    const res = await axios.post(URL + "/doubt", payload, {
+      headers: {
+        "auth-token": token,
+      },
+    });
     console.log(res.data);
     navigation.navigate("Doubts Corner");
   };

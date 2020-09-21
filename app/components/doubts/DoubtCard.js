@@ -15,7 +15,7 @@ import styles from "./styles";
 const DoubtIcon = () => {
   return (
     <Avatar.Icon
-      icon="wechat"
+      icon="comment"
       size={45}
       style={{ backgroundColor: "#63211A" }}
     />

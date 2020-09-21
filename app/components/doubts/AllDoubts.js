@@ -5,8 +5,13 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { View } from "react-native";
 import { FAB } from "react-native-paper";
+import { useIsFocused } from "@react-navigation/native";
 import { ActivityIndicator } from "react-native-paper";
+import axios from "axios";
+
+import styles from "./styles";
 
 import { AuthContext } from "../../context/AuthContext";
 
