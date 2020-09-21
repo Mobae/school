@@ -6,8 +6,10 @@ const adminStyles = StyleSheet.create({
     marginBottom: 5,
   },
   card: {
-    margin: 10,
-    marginBottom: 0,
+    // margin: 10,
+    // marginBottom: 0,
+    marginHorizontal: 10,
+    // marginVertical: 5
   },
   modalToggle: {
     marginBottom: 10,
