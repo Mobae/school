@@ -10,13 +10,14 @@ import {
   FAB,
   Searchbar,
   Button,
+  IconButton,
 } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import adminStyles from '../admin/AdminStyles';
 import { AuthContext } from '../../context/AuthContext';
-const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+const LeftContent = (props) => <Avatar.Icon {...props} icon='folder' />;
 
 const Files = ({ navigation, route }) => {
   const url = 'https://school-server-testing.herokuapp.com';
@@ -83,7 +84,7 @@ const Files = ({ navigation, route }) => {
   return (
     <React.Fragment>
       <Searchbar
-        placeholder="Search class.."
+        placeholder='Search file..'
         onChangeText={onChangeSearch}
         value={searchQuery}
       />
@@ -95,35 +96,39 @@ const Files = ({ navigation, route }) => {
                 <Card style={{ marginTop: 10, backgroundColor: '#eee' }}>
                   <TouchableRipple onPress={() => {}}>
                     <React.Fragment>
-                      <Card.Content>
-                        <Title>{file.caption}</Title>
+                      <View style={{ display: 'flex', flexDirection: 'row' }}>
+                        <View>
+                          <Card.Content>
+                            <Title>{file.caption}</Title>
 
-                        <Paragraph>Teacher :{file.teacherName} </Paragraph>
-                        <View
-                        // style={{
-                        //   display: 'flex',
-                        //   flexDirection: 'column',
-                        // }}
-                        >
-                          <Paragraph>
-                            Date: {file.createdAt.slice(0, 10)}
-                          </Paragraph>
-                          <Paragraph
-                            style={{
-                              // alignSelf: 'flex-end',
-                              marginBottom: 10,
-                            }}
-                          >
-                            Size: {parseInt(file.length) / 1000} kb
-                          </Paragraph>
-                          <Button
-                            icon="folder"
-                            onPress={() => download(file.filename)}
-                          >
-                            Download
-                          </Button>
+                            <Paragraph>Teacher :{file.teacherName} </Paragraph>
+                            <View>
+                              <Paragraph>
+                                Date: {file.createdAt.slice(0, 10)}
+                              </Paragraph>
+                              <Paragraph
+                                style={{
+                                  marginBottom: 10,
+                                }}
+                              >
+                                Size: {parseInt(file.length) / 1000} kb
+                              </Paragraph>
+                            </View>
+                          </Card.Content>
                         </View>
-                      </Card.Content>
+                        <View
+                          style={{ marginLeft: 'auto', alignSelf: 'center' }}
+                        >
+                          <IconButton
+                            icon="download"
+                            size={35}
+                            onPress={() => {
+                              console.log('Pressed');
+                            }}
+                            color="#2D5264"
+                          />
+                        </View>
+                      </View>
                     </React.Fragment>
                   </TouchableRipple>
                 </Card>
@@ -133,23 +138,27 @@ const Files = ({ navigation, route }) => {
             <View style={styles.container}>
               <ActivityIndicator
                 animating={true}
-                size="large"
+                size='large'
                 style={styles.loading}
               />
             </View>
           )}
         </View>
       </ScrollView>
-      <FAB
-        style={styles.fab}
-        icon="plus"
-        onPress={() => navigation.navigate('Add', {
-          classId: class_,
-          teacherId: user._id,
-          flag,
-          setFlag: setFlag
-        })}
-    />
+      {user.rank === '1' ? (
+        <FAB
+          style={styles.fab}
+          icon='plus'
+          onPress={() =>
+            navigation.navigate('Add', {
+              classId: class_,
+              teacherId: user._id,
+              flag,
+              setFlag: setFlag,
+            })
+          }
+        />
+      ) : null}
     </React.Fragment>
   );
 };

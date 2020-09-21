@@ -15,7 +15,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import adminStyles from '../admin/AdminStyles';
 import { AuthContext } from '../../context/AuthContext';
-const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+const LeftContent = (props) => <Avatar.Icon {...props} icon='folder' />;
 
 const StudentFileView = ({ navigation, route }) => {
   const url = 'https://school-server-testing.herokuapp.com';
@@ -26,7 +26,8 @@ const StudentFileView = ({ navigation, route }) => {
   const { authState } = React.useContext(AuthContext);
   const { user } = authState;
 
-  const { class_ } = route.params;
+  const { class_ } = user;
+  // const { class_ } = route.params;
 
   const date = new Date();
   const todayDate = date.getDate();
@@ -41,6 +42,7 @@ const StudentFileView = ({ navigation, route }) => {
 
   const getFiles = async () => {
     try {
+      console.log(url + '/documents/class/' + class_);
       let res = await axios.get(url + '/documents/class/' + class_);
       const files_ = res.data.files;
       setFiles(files_);
@@ -73,7 +75,7 @@ const StudentFileView = ({ navigation, route }) => {
   return (
     <React.Fragment>
       <Searchbar
-        placeholder="Search class.."
+        placeholder='Search Files..'
         onChangeText={onChangeSearch}
         value={searchQuery}
       />
@@ -107,25 +109,25 @@ const StudentFileView = ({ navigation, route }) => {
             <View style={styles.container}>
               <ActivityIndicator
                 animating={true}
-                size="large"
+                size='large'
                 style={styles.loading}
               />
             </View>
           )}
         </View>
       </ScrollView>
-      <FAB
+      {/* <FAB
         style={styles.fab}
-        icon="plus"
+        icon='plus'
         onPress={() =>
           navigation.navigate('Add', {
-            classId: class_,
+            // classId: class_,
             teacherId: user._id,
             flag,
             setFlag,
           })
         }
-      />
+      /> */}
     </React.Fragment>
   );
 };
