@@ -10,6 +10,7 @@ import {
   FAB,
   Searchbar,
   Button,
+  IconButton,
 } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -95,35 +96,39 @@ const Files = ({ navigation, route }) => {
                 <Card style={{ marginTop: 10, backgroundColor: '#eee' }}>
                   <TouchableRipple onPress={() => {}}>
                     <React.Fragment>
-                      <Card.Content>
-                        <Title>{file.caption}</Title>
+                      <View style={{ display: 'flex', flexDirection: 'row' }}>
+                        <View>
+                          <Card.Content>
+                            <Title>{file.caption}</Title>
 
-                        <Paragraph>Teacher :{file.teacherName} </Paragraph>
-                        <View
-                        // style={{
-                        //   display: 'flex',
-                        //   flexDirection: 'column',
-                        // }}
-                        >
-                          <Paragraph>
-                            Date: {file.createdAt.slice(0, 10)}
-                          </Paragraph>
-                          <Paragraph
-                            style={{
-                              // alignSelf: 'flex-end',
-                              marginBottom: 10,
-                            }}
-                          >
-                            Size: {parseInt(file.length) / 1000} kb
-                          </Paragraph>
-                          <Button
-                            icon="folder"
-                            onPress={() => download(file.filename)}
-                          >
-                            Download
-                          </Button>
+                            <Paragraph>Teacher :{file.teacherName} </Paragraph>
+                            <View>
+                              <Paragraph>
+                                Date: {file.createdAt.slice(0, 10)}
+                              </Paragraph>
+                              <Paragraph
+                                style={{
+                                  marginBottom: 10,
+                                }}
+                              >
+                                Size: {parseInt(file.length) / 1000} kb
+                              </Paragraph>
+                            </View>
+                          </Card.Content>
                         </View>
-                      </Card.Content>
+                        <View
+                          style={{ marginLeft: 'auto', alignSelf: 'center' }}
+                        >
+                          <IconButton
+                            icon="download"
+                            size={35}
+                            onPress={() => {
+                              console.log('Pressed');
+                            }}
+                            color="#2D5264"
+                          />
+                        </View>
+                      </View>
                     </React.Fragment>
                   </TouchableRipple>
                 </Card>
@@ -143,13 +148,15 @@ const Files = ({ navigation, route }) => {
       <FAB
         style={styles.fab}
         icon="plus"
-        onPress={() => navigation.navigate('Add', {
-          classId: class_,
-          teacherId: user._id,
-          flag,
-          setFlag: setFlag
-        })}
-    />
+        onPress={() =>
+          navigation.navigate('Add', {
+            classId: class_,
+            teacherId: user._id,
+            flag,
+            setFlag: setFlag,
+          })
+        }
+      />
     </React.Fragment>
   );
 };

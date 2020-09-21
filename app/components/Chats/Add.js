@@ -100,7 +100,9 @@ const Add = ({ navigation, route }) => {
             </Button>
           )}
 
-          <Paragraph>Note: Please Upload a .pdf file</Paragraph>
+          <Paragraph style={{ marginTop: 20 }}>
+            Note: Please Upload a .pdf file
+          </Paragraph>
         </View>
       </View>
     );
