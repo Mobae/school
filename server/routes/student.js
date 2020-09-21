@@ -6,7 +6,7 @@ const router = express.Router();
 
 const { trimObj, genRandPass } = require("../utils/common");
 const auth = require("../middleware/auth");
-const { admin } = require("../middleware/rank");
+const { admin, teacher } = require("../middleware/rank");
 
 const Student = require("../models/Student");
 const Teacher = require("../models/Teacher");
