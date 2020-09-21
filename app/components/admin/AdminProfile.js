@@ -56,6 +56,7 @@ const AdminProfile = ({ navigation }) => {
     profileLoading,
     getAllData,
     reload,
+    studentFlag, setStudentFlag,
   } = React.useContext(AdminContext);
   const [classModalOpen, setClassModalOpen] = React.useState(false);
   const [teacherModalOpen, setTeacherModalOpen] = React.useState(false);
@@ -85,6 +86,8 @@ const AdminProfile = ({ navigation }) => {
           addStudent={addStudent}
           studentModalOpen={studentModalOpen}
           setStudentModalOpen={setStudentModalOpen}
+          studentFlag={studentFlag}
+          setStudentFlag={setStudentFlag}
         />
 
         {/* // ATTENDANCE CARD */}

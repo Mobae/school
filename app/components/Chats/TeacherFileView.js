@@ -143,15 +143,13 @@ const Files = ({ navigation, route }) => {
       <FAB
         style={styles.fab}
         icon="plus"
-        onPress={() =>
-          navigation.navigate('Add', {
-            classId: class_,
-            teacherId: user._id,
-            flag,
-            setFlag,
-          })
-        }
-      />
+        onPress={() => navigation.navigate('Add', {
+          classId: class_,
+          teacherId: user._id,
+          flag,
+          setFlag: setFlag
+        })}
+    />
     </React.Fragment>
   );
 };
