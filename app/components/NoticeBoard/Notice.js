@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import { IconButton, ActivityIndicator } from "react-native-paper";
+import { useIsFocused } from "@react-navigation/native";
 import axios from "axios";
 
 import { AuthContext } from "../../context/AuthContext";
@@ -10,6 +11,7 @@ import styles from "./styles";
 import NoticeCard from "./NoticeCard";
 
 const Notice = ({ navigation }) => {
+  const isFocused = useIsFocused();
   const { authState } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const {
@@ -30,7 +32,7 @@ const Notice = ({ navigation }) => {
 
   useEffect(() => {
     getSchoolNotices();
-  }, []);
+  }, [isFocused]);
 
   return (
     <Fragment>
@@ -64,7 +66,7 @@ const Notice = ({ navigation }) => {
           style={styles.fab}
           color="white"
           size={40}
-          onPress={() => navigation.push("New Notice")}
+          onPress={() => navigation.push("New School Notice")}
         />
       ) : null}
     </Fragment>

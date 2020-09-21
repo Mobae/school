@@ -60,7 +60,7 @@ const ClassNotice = ({ navigation }) => {
           style={styles.fab}
           color="white"
           size={40}
-          onPress={() => navigation.push("New Notice")}
+          onPress={() => navigation.push("New Class Notice")}
         />
       ) : null}
     </Fragment>
