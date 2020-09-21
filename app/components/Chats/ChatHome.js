@@ -80,7 +80,7 @@ const ChatHome = ({ navigation }) => {
       ) : rank === '1' ? (
         <View style={{ margin: 10 }}>
           <Card>
-            <TouchableRipple onPress={() => navigation.navigate('ClassList')}>
+            <TouchableRipple onPress={() => navigation.navigate('TeacherClassList')}>
               <Card.Title
                 title='Files'
                 subtitle='Get your files'

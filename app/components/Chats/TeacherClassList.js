@@ -39,13 +39,14 @@ const FileClassList = ({ navigation }) => {
 
   const { user, token } =  authState;
 
+  console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+  console.log(url + "/class/teacher/classes/" + user._id);
+  console.log(token);
+
+
   const getClasses = async () => {
     try {
-      let res = await axios.get(url + "/class/all", {
-        headers: {
-          "auth-token": token,
-        },
-      });
+      let res = await axios.get(url + "/class/teacher/classes/" + user._id);
       const classes = res.data.data;
       setClasses(classes);
       setFiltered(classes);
