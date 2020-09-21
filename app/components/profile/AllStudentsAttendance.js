@@ -67,13 +67,16 @@ const DataRow = (props) => {
 const AllStudentsAttendance = ({ navigation }) => {
   const isFocused = useIsFocused();
   const [studentList, setStudentList] = useState([]);
-  const {
-    authState: { user },
-  } = useContext(AuthContext);
+  const { authState } = useContext(AuthContext);
+  const { user } = authState;
 
   const getStudents = async () => {
     try {
-      const res = await axios.get(URL + "/attendance/class/" + user.class_);
+      const res = await axios.get(URL + "/attendance/class/" + user.class_, {
+        headers: {
+          "auth-token": authState.token,
+        },
+      });
       console.log(res.data.data);
       const students = res.data.data;
       const pt = students.map((stu) => {

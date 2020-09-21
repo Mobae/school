@@ -6,6 +6,7 @@ const Class = require("../models/Class");
 const Student = require("../models/Student");
 
 const auth = require("../middleware/auth");
+const { teacher } = require("../middleware/rank");
 
 router.get("/student/:id", auth, async (req, res) => {
   console.log("hi from att");
@@ -57,7 +58,7 @@ router.get("/student/:id/:month", auth, async (req, res) => {
   }
 });
 
-router.get("/class/:classId", async (req, res) => {
+router.get("/class/:classId", teacher, async (req, res) => {
   try {
     const cls = (await Class.findById(req.params.classId)).toJSON();
     console.log(cls);
@@ -92,20 +93,6 @@ router.get("/class/:classId", async (req, res) => {
   }
 });
 
-// router.get("/months", async (req, res) => {
-//   const agg = await Attendance.aggregate([
-//     { $project: { month: { $month: "$date" }, studentId: 1, status: 1 } },
-//     {
-//       $group: {
-//         _id: { month: "$month", stid: "$studentId" },
-//         ssum: { $sum: 1 },
-//         stats: "$status",
-//       },
-//     },
-//   ]);
-//   console.log(agg);
-// });
-
 router.post("/", auth, async (req, res) => {
   try {
     const studentId = req.body.studentId;
@@ -131,7 +118,7 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-router.post("/class", async (req, res) => {
+router.post("/class", teacher, async (req, res) => {
   let { date, attendances } = req.body;
   if (date && attendances.length !== 0) {
     date = date.slice(0, 10);
@@ -163,7 +150,7 @@ router.post("/class", async (req, res) => {
   }
 });
 
-router.post("/class/day", async (req, res) => {
+router.post("/class/day", teacher, async (req, res) => {
   let { date, students } = req.body;
   console.log(date, students);
   if (date && students.length !== 0) {
@@ -191,7 +178,7 @@ router.post("/class/day", async (req, res) => {
   }
 });
 
-router.post("/class/update", async (req, res) => {
+router.post("/class/update", teacher, async (req, res) => {
   let { date, attendances } = req.body;
   console.log(date, attendances);
   if (date && attendances.length !== 0) {
