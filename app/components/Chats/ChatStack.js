@@ -4,8 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import Files from "./Files";
 import ChatHome from "./ChatHome";
-import AllDoubts from "./AllDoubts";
-import AddDoubt from "./AddDoubt";
+import AllDoubts from "../doubts/AllDoubts";
+import AddDoubt from "../doubts/AddDoubt";
 import StudentFileView from "./StudentFileView";
 import ClassList from "./ClassList";
 import TeacherFileView from "./TeacherFileView";

@@ -31,7 +31,11 @@ const Notice = ({ navigation }) => {
   };
 
   useEffect(() => {
-    getSchoolNotices();
+    try {
+      getSchoolNotices();
+    } catch (err) {
+      console.log(err);
+    }
   }, [isFocused]);
 
   return (
