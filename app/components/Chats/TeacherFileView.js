@@ -12,6 +12,12 @@ import {
   Button,
   IconButton,
 } from 'react-native-paper';
+
+// import RNFetchBlob from 'rn-fetch-blob';
+import * as MediaLibrary from 'expo-media-library';
+import * as FileSystem from 'expo-file-system';
+import * as Permissions from 'expo-permissions';
+
 import { View, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -47,21 +53,26 @@ const Files = ({ navigation, route }) => {
     }
   };
 
-  const download = async (filename) => {
-    const headers = {
-      'Content-Disposition': `attachment;filename=${filename}`,
-      'Content-Type': 'application/octet-stream',
-    };
-    console.log(
-      `https://school-server-testing.herokuapp.com/documents/file/${filename}`
-    );
-    const res = await axios.get(
-      `https://school-server-testing.herokuapp.com/documents/file/${filename}`,
-      headers
-    );
+  const saveFile = async (fileUri) => {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status === "granted") {
+        const asset = await MediaLibrary.createAssetAsync(fileUri);
+        await MediaLibrary.createAlbumAsync("Download", asset, false);
+        alert('File downloaded !!');
+      }
+  }
 
-    console.log(res);
-  };
+  const downloadFile = (filename, caption) => {
+    const uri = `https://school-server-testing.herokuapp.com/documents/file/${filename}`;
+    let fileUri = FileSystem.documentDirectory + caption + '.pdf';
+    FileSystem.downloadAsync(uri, fileUri)
+    .then(({ uri }) => {
+        saveFile(uri);
+      })
+      .catch(error => {
+        console.error(error);
+      })
+  }
 
   React.useEffect(() => {
     getFiles();
@@ -123,7 +134,8 @@ const Files = ({ navigation, route }) => {
                             icon="download"
                             size={35}
                             onPress={() => {
-                              console.log('Pressed');
+                              // download(file.filename);
+                              downloadFile(file.filename, file.caption);
                             }}
                             color="#2D5264"
                           />
