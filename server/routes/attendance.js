@@ -58,7 +58,7 @@ router.get("/student/:id/:month", auth, async (req, res) => {
   }
 });
 
-router.get("/class/:classId", teacher, async (req, res) => {
+router.get("/class/:classId", auth, teacher, async (req, res) => {
   try {
     const cls = (await Class.findById(req.params.classId)).toJSON();
     console.log(cls);
@@ -93,7 +93,7 @@ router.get("/class/:classId", teacher, async (req, res) => {
   }
 });
 
-router.post("/", auth, async (req, res) => {
+router.post("/", auth, teacher, async (req, res) => {
   try {
     const studentId = req.body.studentId;
     const { status, date } = req.body;
@@ -118,7 +118,7 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-router.post("/class", teacher, async (req, res) => {
+router.post("/class", auth, teacher, async (req, res) => {
   let { date, attendances } = req.body;
   if (date && attendances.length !== 0) {
     date = date.slice(0, 10);
