@@ -92,7 +92,7 @@ const AdminProfile = ({ navigation }) => {
 
         {/* // ATTENDANCE CARD */}
         <ScrollView>
-          <View>
+          <View style = {{marginTop : 10}}>
             <Card
               style={adminStyles.card}
               onPress={() => navigation.navigate('AttendanceClassList')}
@@ -185,6 +185,7 @@ const AdminProfile = ({ navigation }) => {
               </Card.Actions>
             </Card>
           </View>
+          <Text></Text>
         </ScrollView>
       </View>
     );

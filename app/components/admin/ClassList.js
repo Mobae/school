@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   Avatar,
   Button,
@@ -86,6 +86,8 @@ const ClassList = ({ navigation }) => {
               <Card.Title title='None' left={LeftContent} />
             </Card>
           )}
+          <Text></Text>
+          <Text></Text>
         </ScrollView>
       </View>
     </React.Fragment>

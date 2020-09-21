@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet,Text } from 'react-native';
 import {
   Avatar,
   Button,
@@ -101,6 +101,7 @@ const FileClassList = ({ navigation }) => {
                 <Card.Title title='None' left={LeftContent} />
               </Card>
             )}
+            <Text></Text>
           </ScrollView>
         </View>
       </View>

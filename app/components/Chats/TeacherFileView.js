@@ -16,7 +16,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import adminStyles from '../admin/AdminStyles';
 import { AuthContext } from '../../context/AuthContext';
-const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+const LeftContent = (props) => <Avatar.Icon {...props} icon='folder' />;
 
 const Files = ({ navigation, route }) => {
   const url = 'https://school-server-testing.herokuapp.com';
@@ -83,7 +83,7 @@ const Files = ({ navigation, route }) => {
   return (
     <React.Fragment>
       <Searchbar
-        placeholder="Search class.."
+        placeholder='Search file..'
         onChangeText={onChangeSearch}
         value={searchQuery}
       />
@@ -117,7 +117,7 @@ const Files = ({ navigation, route }) => {
                             Size: {parseInt(file.length) / 1000} kb
                           </Paragraph>
                           <Button
-                            icon="folder"
+                            icon='folder'
                             onPress={() => download(file.filename)}
                           >
                             Download
@@ -133,23 +133,27 @@ const Files = ({ navigation, route }) => {
             <View style={styles.container}>
               <ActivityIndicator
                 animating={true}
-                size="large"
+                size='large'
                 style={styles.loading}
               />
             </View>
           )}
         </View>
       </ScrollView>
-      <FAB
-        style={styles.fab}
-        icon="plus"
-        onPress={() => navigation.navigate('Add', {
-          classId: class_,
-          teacherId: user._id,
-          flag,
-          setFlag: setFlag
-        })}
-    />
+      {user.rank === '1' ? (
+        <FAB
+          style={styles.fab}
+          icon='plus'
+          onPress={() =>
+            navigation.navigate('Add', {
+              classId: class_,
+              teacherId: user._id,
+              flag,
+              setFlag: setFlag,
+            })
+          }
+        />
+      ) : null}
     </React.Fragment>
   );
 };
