@@ -13,16 +13,6 @@ import { StyleSheet, View } from 'react-native';
 
 const Stack = createStackNavigator();
 
-{
-  /* <View style={styles.container}>
-        <ActivityIndicator
-          animating={true}
-          size='large'
-          style={styles.loading}
-        />
-      </View> */
-}
-
 const Main = () => {
   const { authState, getUser, setAuthState, initialState } = useContext(
     AuthContext
@@ -32,7 +22,7 @@ const Main = () => {
     update: false,
   });
   const url = 'https://school-server-testing.herokuapp.com';
-  const updateId = '5f60dfc028525200044bd6fa';
+  const updateId = '5f688a63d7fa1400042d5a6c';
   const abcd = url + '/update/view/' + updateId;
 
   const getJwt = async () => {
@@ -67,8 +57,12 @@ const Main = () => {
   }, [authState]);
 
   // if (!updateObj.status) {
-  // if (user.rank === '0' || user.rank === '1' || user.rank === '2') {
-  return <Fragment>{!isLoggedIn ? <Login /> : <BottomNavigator />}</Fragment>;
+    // if (user.rank === '0' || user.rank === '1' || user.rank === '2') {
+    return <Fragment>{!isLoggedIn ? <Login /> : <BottomNavigator />}</Fragment>;
+  // } else {
+  //   return <Update />;
+  // }
+
   // } else {
   //   return (
   //     <View style={styles.container}>
@@ -79,9 +73,6 @@ const Main = () => {
   //       />
   //     </View>
   //   );
-  // }
-  // } else {
-  // return <Update />;
   // }
 
   // return <BottomNavigator />;

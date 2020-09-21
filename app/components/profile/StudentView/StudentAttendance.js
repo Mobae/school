@@ -1,30 +1,36 @@
-import React, { useContext, useEffect, useState, Fragment } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useContext, useEffect, useState, Fragment } from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Text,
+} from 'react-native';
 import {
   Card,
   DataTable,
   Paragraph,
   TouchableRipple,
-} from "react-native-paper";
-import axios from "axios";
-import DropDownPicker from "react-native-dropdown-picker";
+} from 'react-native-paper';
+import axios from 'axios';
+import DropDownPicker from 'react-native-dropdown-picker';
 
-import { AuthContext } from "../../../context/AuthContext";
-import { URL } from "../../../config";
+import { AuthContext } from '../../../context/AuthContext';
+import { URL } from '../../../config';
 
 const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];
 
 const MonthData = (props) => {
@@ -33,7 +39,7 @@ const MonthData = (props) => {
     <TouchableOpacity>
       <DataTable.Row
         style={{
-          backgroundColor: props.status === "P" ? "#b3ffc6" : "#ffb3b3",
+          backgroundColor: props.status === 'P' ? '#b3ffc6' : '#ffb3b3',
         }}
       >
         <DataTable.Cell>{date}</DataTable.Cell>
@@ -57,20 +63,20 @@ const StudentAttendance = ({ navigation }) => {
 
   const getMonthAtt = async () => {
     console.log(
-      URL + "/attendance/student/" + user._id + "/" + month.toString()
+      URL + '/attendance/student/' + user._id + '/' + month.toString()
     );
     const res = await axios.get(
-      URL + "/attendance/student/" + user._id + "/" + month.toString(),
+      URL + '/attendance/student/' + user._id + '/' + month.toString(),
       {
         headers: {
-          "auth-token": authState.token,
+          'auth-token': authState.token,
         },
       }
     );
     const data = res.data.data;
     console.log(data);
     setMonthData(data);
-    const p = data.filter((d) => d.status === "P");
+    const p = data.filter((d) => d.status === 'P');
     setAttState({
       tDays: data.length,
       pDays: p.length,
@@ -89,32 +95,35 @@ const StudentAttendance = ({ navigation }) => {
         items={monthNames.map((m, i) => ({ label: m, value: i + 1 }))}
         defaultValue={month}
         containerStyle={{ height: 60, margin: 10 }}
-        style={{ backgroundColor: "#fafafa" }}
+        style={{ backgroundColor: '#fafafa' }}
         itemStyle={{
-          justifyContent: "flex-start",
+          justifyContent: 'flex-start',
         }}
-        dropDownStyle={{ backgroundColor: "#fafafa" }}
+        dropDownStyle={{ backgroundColor: '#fafafa' }}
         onChangeItem={(item) => setMonth(item.value)}
       />
-      <View style={{ zIndex: 1 }}>
-        <Card style={styles.card}>
-          <Card.Title title="Attendance" subtitle={monthNames[month - 1]} />
-          <Card.Content style={{ marginBottom: 12 }}>
-            <Paragraph>Present Days: {attState.pDays}</Paragraph>
-            <Paragraph>Total Days: {attState.tDays}</Paragraph>
-            <Paragraph>Percent: {attState.percentage + "%"}</Paragraph>
-          </Card.Content>
-          <DataTable>
-            <DataTable.Header>
-              <DataTable.Title>Date</DataTable.Title>
-              <DataTable.Title>Attendance</DataTable.Title>
-            </DataTable.Header>
-            {monthData.map((d) => (
-              <MonthData date={d.date} status={d.status} key={d._id} />
-            ))}
-          </DataTable>
-        </Card>
-      </View>
+      <ScrollView>
+        <View style={{ zIndex: 1 }}>
+          <Card style={styles.card}>
+            <Card.Title title='Attendance' subtitle={monthNames[month - 1]} />
+            <Card.Content style={{ marginBottom: 12 }}>
+              <Paragraph>Present Days: {attState.pDays}</Paragraph>
+              <Paragraph>Total Days: {attState.tDays}</Paragraph>
+              <Paragraph>Percent: {attState.percentage + '%'}</Paragraph>
+            </Card.Content>
+            <DataTable>
+              <DataTable.Header>
+                <DataTable.Title>Date</DataTable.Title>
+                <DataTable.Title>Attendance</DataTable.Title>
+              </DataTable.Header>
+              {monthData.map((d) => (
+                <MonthData date={d.date} status={d.status} key={d._id} />
+              ))}
+            </DataTable>
+          </Card>
+          <Text></Text>
+        </View>
+      </ScrollView>
     </Fragment>
   );
 };
