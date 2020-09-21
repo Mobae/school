@@ -23,6 +23,7 @@ const NoticeForm = ({ navigation }) => {
 
   const {
     authState: {
+      token,
       user: { rank, class_, name },
     },
   } = useContext(AuthContext);
@@ -38,7 +39,11 @@ const NoticeForm = ({ navigation }) => {
       author: name,
     };
     console.log(payload);
-    const res = await axios.post(URL + "/classnotice", payload);
+    const res = await axios.post(URL + "/classnotice", payload, {
+      headers: {
+        "auth-token": token,
+      },
+    });
     console.log(res.data);
     navigation.navigate("Class Notice Board");
   };

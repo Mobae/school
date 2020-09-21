@@ -22,7 +22,7 @@ const NoticeForm = ({ navigation }) => {
   const hideDialog = () => setVisible(false);
 
   const {
-    authState: { user },
+    authState: { user, token },
   } = useContext(AuthContext);
 
   const handleSubmit = async (values) => {
@@ -35,7 +35,9 @@ const NoticeForm = ({ navigation }) => {
       author,
     };
     console.log(payload);
-    const res = await axios.post(URL + "/schoolnotice", payload);
+    const res = await axios.post(URL + "/schoolnotice", payload, {
+      "auth-token": token,
+    });
     console.log(res.data);
     navigation.navigate("School Notice Board");
   };

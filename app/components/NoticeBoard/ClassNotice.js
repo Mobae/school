@@ -15,13 +15,15 @@ const ClassNotice = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [notices, setNotices] = useState([]);
   const {
-    authState: { user },
+    authState: { user, token },
   } = useContext(AuthContext);
   const { rank, class_ } = user;
 
   const getNotices = async () => {
     setLoading(true);
-    const notices = await axios.get(URL + "/classnotice/" + user.class_);
+    const notices = await axios.get(URL + "/classnotice/" + user.class_, {
+      "auth-token": token,
+    });
     setNotices(notices.data.notices);
     setLoading(false);
   };
