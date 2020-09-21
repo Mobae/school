@@ -12,7 +12,7 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 
 import { AdminContext } from "../../context/AdminContext";
-import {} from "../../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 const LeftContent = (props) => (
   <Avatar.Icon
     {...props}
@@ -33,16 +33,20 @@ const FileClassList = ({ navigation }) => {
     setSearchQuery(query);
   };
 
+  const {
+    authState 
+  } = React.useContext(AuthContext);
+
+  const { user, token } =  authState;
+
+  console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+  console.log(url + "/class/teacher/classes/" + user._id);
+  console.log(token);
+
+
   const getClasses = async () => {
-    const {
-      authState: { token },
-    } = React.useContext(AuthContext);
     try {
-      let res = await axios.get(url + "/class/all", {
-        headers: {
-          "auth-token": token,
-        },
-      });
+      let res = await axios.get(url + "/class/teacher/classes/" + user._id);
       const classes = res.data.data;
       setClasses(classes);
       setFiltered(classes);
@@ -115,7 +119,7 @@ const FileClassList = ({ navigation }) => {
       </View>
     );
   } else {
-    getClasses();
+    // getClasses();
     return (
       <View style={styles.container}>
         <ActivityIndicator
