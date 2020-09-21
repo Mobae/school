@@ -9,13 +9,14 @@ import {
   ActivityIndicator,
   FAB,
   Searchbar,
+  IconButton,
 } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import adminStyles from '../admin/AdminStyles';
 import { AuthContext } from '../../context/AuthContext';
-const LeftContent = (props) => <Avatar.Icon {...props} icon='folder' />;
+const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const StudentFileView = ({ navigation, route }) => {
   const url = 'https://school-server-testing.herokuapp.com';
@@ -75,7 +76,7 @@ const StudentFileView = ({ navigation, route }) => {
   return (
     <React.Fragment>
       <Searchbar
-        placeholder='Search Files..'
+        placeholder="Search Files.."
         onChangeText={onChangeSearch}
         value={searchQuery}
       />
@@ -87,19 +88,39 @@ const StudentFileView = ({ navigation, route }) => {
                 <Card style={{ marginTop: 10, backgroundColor: '#eee' }}>
                   <TouchableRipple onPress={() => {}}>
                     <React.Fragment>
-                      <Card.Content>
-                        <Title>{file.caption}</Title>
-                        {/* <Paragraph>{file.filename}</Paragraph> */}
-                        <Paragraph>Teacher :{file.teacherName} </Paragraph>
-                        <View style={{ flexDirection: 'row' }}>
-                          <Paragraph>Date: {displayDate}</Paragraph>
-                          <Paragraph
-                            style={{ marginLeft: 160, marginBottom: 10 }}
-                          >
-                            Size: {parseInt(file.length) / 1000} kb
-                          </Paragraph>
+                      <View style={{ display: 'flex', flexDirection: 'row' }}>
+                        <View>
+                          <Card.Content>
+                            <Title>{file.caption}</Title>
+
+                            <Paragraph>Teacher :{file.teacherName} </Paragraph>
+                            <View>
+                              <Paragraph>
+                                Date: {file.createdAt.slice(0, 10)}
+                              </Paragraph>
+                              <Paragraph
+                                style={{
+                                  marginBottom: 10,
+                                }}
+                              >
+                                Size: {parseInt(file.length) / 1000} kb
+                              </Paragraph>
+                            </View>
+                          </Card.Content>
                         </View>
-                      </Card.Content>
+                        <View
+                          style={{ marginLeft: 'auto', alignSelf: 'center' }}
+                        >
+                          <IconButton
+                            icon="download"
+                            size={35}
+                            onPress={() => {
+                              console.log('Pressed');
+                            }}
+                            color="#2D5264"
+                          />
+                        </View>
+                      </View>
                     </React.Fragment>
                   </TouchableRipple>
                 </Card>
@@ -109,7 +130,7 @@ const StudentFileView = ({ navigation, route }) => {
             <View style={styles.container}>
               <ActivityIndicator
                 animating={true}
-                size='large'
+                size="large"
                 style={styles.loading}
               />
             </View>
