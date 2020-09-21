@@ -1,4 +1,5 @@
 const teacher = async (req, res, next) => {
+  console.log(req.body.data);
   const { rank } = req.body.data;
   if (rank === "1" || rank === "2") {
     next();
