@@ -39,11 +39,6 @@ const FileClassList = ({ navigation }) => {
 
   const { user, token } =  authState;
 
-  console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
-  console.log(url + "/class/teacher/classes/" + user._id);
-  console.log(token);
-
-
   const getClasses = async () => {
     try {
       let res = await axios.get(url + "/class/teacher/classes/" + user._id);
@@ -87,7 +82,7 @@ const FileClassList = ({ navigation }) => {
         />
         <View style={adminStyles.scroll}>
           <ScrollView>
-            {filtered ? (
+            { filtered ? (
               filtered.map((class_) => (
                 <View key={class_._id}>
                   <Card style={adminStyles.card}>
@@ -119,7 +114,7 @@ const FileClassList = ({ navigation }) => {
       </View>
     );
   } else {
-    // getClasses();
+    getClasses();
     return (
       <View style={styles.container}>
         <ActivityIndicator
