@@ -24,7 +24,6 @@ const Notice = ({ navigation }) => {
         "auth-token": authState.token,
       },
     });
-    console.log(res.data);
     setNotices(res.data.notices);
     setLoading(false);
   };
