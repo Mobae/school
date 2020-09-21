@@ -29,8 +29,11 @@ const ClassNotice = ({ navigation }) => {
   };
 
   useEffect(() => {
-    getNotices();
-    return () => console.log("clean up");
+    try {
+      getNotices();
+    } catch (err) {
+      console.log(err);
+    }
   }, [isFocused]);
 
   return (

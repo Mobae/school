@@ -57,7 +57,7 @@ const AllDoubts = ({ navigation }) => {
           <ActivityIndicator
             animating={true}
             size="large"
-            style={{ alignSelf: "center" }}
+            style={styles.loading}
           />
         </View>
       )}
