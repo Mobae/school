@@ -181,6 +181,19 @@ router.post("/update/teacher", auth, admin, async (req, res) => {
   }
 });
 
+router.get("/emailtest", async (req, res) => {
+  const randPass = genRandPass();
+  let info = await transporter.sendMail({
+    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    to: "jakeryam123@gmail.com, cool_aryansingh@rediffmail.com", // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: `<b>Hello world? Your password is ${randPass}</b>`, // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+});
+
 router.post("/add", auth, admin, async (req, res) => {
   let obj = req.body;
   obj = trimObj(obj);
