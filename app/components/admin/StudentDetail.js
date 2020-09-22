@@ -28,7 +28,7 @@ const StudentInfo = (props) => {
     <React.Fragment>
       <PaperProvider>
 
-        {/* <EditStudent user={user} editModal={editModal} openEditModal={openEditModal} navigation={props.navigation} token={token} /> */}
+        <EditStudent user={user} editModal={editModal} openEditModal={openEditModal} navigation={props.navigation} token={token} />
 
         <View style={{ alignItems: "center", margin: 20 }}>
           <View style={styles.info}>
