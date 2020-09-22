@@ -26,9 +26,7 @@ const StudentInfo = () => {
         <View style={{ alignItems: 'center', margin: 20 }}>
           <View style={styles.info}>
             <ImageBackground
-              source={{
-                uri: 'https://api.adorable.io/avatars/80/abott@adorable.png',
-              }}
+              source={require('../../../assets/avatar.png')}
               style={{ height: 100, width: 100 }}
               imageStyle={{ borderRadius: 15 }}
             />

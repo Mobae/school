@@ -37,9 +37,7 @@ const StudentInfo = (props) => {
         <View style={{ alignItems: 'center', margin: 20 }}>
           <View style={styles.info}>
             <ImageBackground
-              source={{
-                uri: 'https://api.adorable.io/avatars/80/abott@adorable.png',
-              }}
+              source={require('../../assets/avatar.png')}
               style={{ height: 100, width: 100 }}
               imageStyle={{ borderRadius: 15 }}
             />
@@ -76,9 +74,9 @@ const StudentInfo = (props) => {
               </Text>
             </View>
             <List.Accordion
-              title="Parent Details"
+              title='Parent Details'
               titleStyle={{ alignSelf: 'flex-start' }}
-              left={(props) => <List.Icon {...props} icon="account-child" />}
+              left={(props) => <List.Icon {...props} icon='account-child' />}
             >
               <ScrollView>
                 <View style={styles.info}>
@@ -119,7 +117,7 @@ const StudentInfo = (props) => {
         </React.Fragment>
         <FAB
           style={styles.fab}
-          icon="account-edit"
+          icon='account-edit'
           onPress={() => openEditModal(true)}
         />
       </PaperProvider>
