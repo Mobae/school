@@ -12,12 +12,26 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 
+<<<<<<< HEAD
+import { AdminContext } from "../../context/AdminContext";
+import { AuthContext } from "../../context/AuthContext";
+import globalStyles from "../styles/global";
+import adminStyles from "./AdminStyles";
+=======
 import { AdminContext } from '../../context/AdminContext';
 import globalStyles from '../styles/global';
 import adminStyles from './AdminStyles';
+>>>>>>> 1f44fd964cbb1e8b04e9c2614ff747aac946f179
 
 const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
   const url = 'https://school-server-testing.herokuapp.com';
+
+  const {
+    authState: { token },
+  } = React.useContext(AuthContext);
+  const headers = {
+    "auth-token": token,
+  };
 
   const {
     adminState,
@@ -40,7 +54,11 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
   const editStudent = async (values) => {
     try {
       values.studentId = user._id;
+<<<<<<< HEAD
+      const res = await axios.post(url + "/student/update/student", values, { headers });
+=======
       const res = await axios.post(url + '/student/update/student', values);
+>>>>>>> 1f44fd964cbb1e8b04e9c2614ff747aac946f179
       setReload(!reload);
       navigation.navigate('AllStudentList');
     } catch (err) {
@@ -64,15 +82,13 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
             <Text></Text>
             <Formik
               initialValues={{
-                firstName: firstName,
-                lastName: lastName,
+                name: user.name,
                 email: user.email,
                 classId: '',
                 rank: '0',
                 info: user.info,
               }}
               onSubmit={(values, actions) => {
-                actions.resetForm();
                 openEditModal(false);
                 editStudent(values); // SUBMITTING STUDENT VALUE
               }}
@@ -80,18 +96,11 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
               {({ handleChange, handleBlur, handleSubmit, values }) => (
                 <View style={globalStyles.view}>
                   <TextInput
-                    mode='outlined'
-                    label='First Name'
-                    onChangeText={handleChange('firstName')}
-                    onBlur={handleBlur('firstName')}
-                    value={values.firstName}
-                  />
-                  <TextInput
-                    mode='outlined'
-                    label='Last Name'
-                    onChangeText={handleChange('lastName')}
-                    onBlur={handleBlur('lastName')}
-                    value={values.lastName}
+                    mode="outlined"
+                    label="Name"
+                    onChangeText={handleChange("name")}
+                    onBlur={handleBlur("name")}
+                    value={values.name}
                   />
                   <TextInput
                     mode='outlined'
