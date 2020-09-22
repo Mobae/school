@@ -37,9 +37,7 @@ const StudentInfo = (props) => {
         <View style={{ alignItems: 'center', margin: 20 }}>
           <View style={styles.info}>
             <ImageBackground
-              source={{
-                uri: 'https://api.adorable.io/avatars/80/abott@adorable.png',
-              }}
+              source={require('../../assets/avatar.png')}
               style={{ height: 100, width: 100 }}
               imageStyle={{ borderRadius: 15 }}
             />
@@ -57,25 +55,28 @@ const StudentInfo = (props) => {
               </Text>
             </View>
             <View style={styles.info}>
+              <Text style={styles.details}>
+                Roll No.: {user.info.rollNo}
+              </Text>
+            </View>
+            <View style={styles.info}>
               <Text style={styles.details}>DOB: {user.info.admissionNo}</Text>
             </View>
             <View style={styles.info}>
-              <Text style={styles.details}>Bus Route: {user.info.busNo}</Text>
-            </View>
-            <View style={styles.info}>
+              <Text style={styles.details}>Bus No. : {user.info.busNo}</Text>
               <Text style={styles.details}>
                 Phone Number: {'+91 ' + user.info.phone}
               </Text>
             </View>
             <View style={styles.info}>
               <Text style={styles.details}>
-                Date of Addmission: {user.info.admissionNo}
+                Phone Number: {"+91 " + user.info.phone}
               </Text>
             </View>
             <List.Accordion
-              title="Parent Details"
+              title='Parent Details'
               titleStyle={{ alignSelf: 'flex-start' }}
-              left={(props) => <List.Icon {...props} icon="account-child" />}
+              left={(props) => <List.Icon {...props} icon='account-child' />}
             >
               <ScrollView>
                 <View style={styles.info}>
@@ -96,6 +97,14 @@ const StudentInfo = (props) => {
                 </View>
                 <View style={styles.info}>
                   <View style={styles.parentInfo}>
+                    <Text style={styles.parentInfoText1}>Guardian's Details:</Text>
+                    <Text style={styles.parentInfoText2}>
+                      Name: {user.info.gaurdianName}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.info}>
+                  <View style={styles.parentInfo}>
                     <Text style={styles.parentInfoText1}>Address:</Text>
                     <Text style={styles.parentInfoText2}>
                       {user.info.address}
@@ -108,7 +117,7 @@ const StudentInfo = (props) => {
         </React.Fragment>
         <FAB
           style={styles.fab}
-          icon="account-edit"
+          icon='account-edit'
           onPress={() => openEditModal(true)}
         />
       </PaperProvider>
