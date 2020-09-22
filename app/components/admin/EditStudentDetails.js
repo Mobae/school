@@ -12,16 +12,10 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 
-<<<<<<< HEAD
 import { AdminContext } from "../../context/AdminContext";
 import { AuthContext } from "../../context/AuthContext";
 import globalStyles from "../styles/global";
 import adminStyles from "./AdminStyles";
-=======
-import { AdminContext } from '../../context/AdminContext';
-import globalStyles from '../styles/global';
-import adminStyles from './AdminStyles';
->>>>>>> 1f44fd964cbb1e8b04e9c2614ff747aac946f179
 
 const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
   const url = 'https://school-server-testing.herokuapp.com';
@@ -54,11 +48,7 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
   const editStudent = async (values) => {
     try {
       values.studentId = user._id;
-<<<<<<< HEAD
       const res = await axios.post(url + "/student/update/student", values, { headers });
-=======
-      const res = await axios.post(url + '/student/update/student', values);
->>>>>>> 1f44fd964cbb1e8b04e9c2614ff747aac946f179
       setReload(!reload);
       navigation.navigate('AllStudentList');
     } catch (err) {
