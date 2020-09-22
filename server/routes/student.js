@@ -1,6 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
 
 const router = express.Router();
 
@@ -12,6 +13,16 @@ const Student = require("../models/Student");
 const Teacher = require("../models/Teacher");
 const Class = require("../models/Class");
 const Admin = require("../models/Admin");
+
+let transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "JMRDDatia@gmail.com",
+    pass: "Homie#123",
+  },
+});
 
 router.get("/students/all", auth, admin, async (req, res) => {
   try {
@@ -190,7 +201,17 @@ router.post("/add", auth, admin, async (req, res) => {
     const name = firstName + " " + lastName;
     let password = genRandPass();
     console.log(`password: ${password}`);
-    const tempPass = "abcd";
+    const tempPass = genRandPass();
+
+    let mailInfo = await transporter.sendMail({
+      from: "jmrd@jmrd.com", // sender address
+      to: email, // list of receivers
+      subject: "Your password for JMRD School App", // Subject line
+      html: `<p>Your password for the app is <b>${tempPass}</b></p>`, // html body
+    });
+
+    console.log("Message sent: %s", mailInfo.messageId);
+
     const salt = await bcrypt.genSalt();
     password = await bcrypt.hash(tempPass, salt);
     if (rank === "0") {
@@ -241,6 +262,63 @@ router.post("/add", auth, admin, async (req, res) => {
       const token = jwt.sign(payload, process.env.JWT_SECRET);
       res.json({ token, name, email, rank });
     }
+  }
+});
+
+router.post("/stu/changepassword", async (req, res) => {
+  const { _id, newPass, oldPass } = req.body;
+  let user = (await Student.findById(_id)).toJSON();
+  if (user) {
+    const verified = await bcrypt.compare(oldPass, user.password);
+    if (verified) {
+      const salt = await bcrypt.genSalt();
+      const newPassSave = await bcrypt.hash(newPass, salt);
+      user.password = newPassSave;
+      await user.save();
+      res.json({ success: "true" });
+    } else {
+      res.status(400).json({ error: "Incorrect password" });
+    }
+  } else {
+    res.status(400).json({ error: "User does not exist" });
+  }
+});
+
+router.post("/tea/changepassword", async (req, res) => {
+  const { _id, newPass, oldPass } = req.body;
+  let user = (await Teacher.findById(_id)).toJSON();
+  if (user) {
+    const verified = await bcrypt.compare(oldPass, user.password);
+    if (verified) {
+      const salt = await bcrypt.genSalt();
+      const newPassSave = await bcrypt.hash(newPass, salt);
+      user.password = newPassSave;
+      await user.save();
+      res.json({ success: "true" });
+    } else {
+      res.status(400).json({ error: "Incorrect password" });
+    }
+  } else {
+    res.status(400).json({ error: "User does not exist" });
+  }
+});
+
+router.post("/adm/changepassword", async (req, res) => {
+  const { _id, newPass, oldPass } = req.body;
+  let user = (await Admin.findById(_id)).toJSON();
+  if (user) {
+    const verified = await bcrypt.compare(oldPass, user.password);
+    if (verified) {
+      const salt = await bcrypt.genSalt();
+      const newPassSave = await bcrypt.hash(newPass, salt);
+      user.password = newPassSave;
+      await user.save();
+      res.json({ success: "true" });
+    } else {
+      res.status(400).json({ error: "Incorrect password" });
+    }
+  } else {
+    res.status(400).json({ error: "User does not exist" });
   }
 });
 

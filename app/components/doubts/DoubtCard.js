@@ -12,35 +12,35 @@ import RBSheet from "react-native-raw-bottom-sheet";
 
 import styles from "./styles";
 
-const NoticeIcon = () => {
+const DoubtIcon = () => {
   return (
     <Avatar.Icon
-      icon="bulletin-board"
+      icon="comment"
       size={45}
       style={{ backgroundColor: "#63211A" }}
     />
   );
 };
 
-const NoticeCard = (props) => {
+const DoubtCard = (props) => {
   const refRBSheet = useRef();
   let { date } = props;
   date = new Date(date).toDateString();
   return (
     <Fragment>
-      <Card style={styles.notice}>
+      <Card style={styles.card}>
         <TouchableRipple onPress={() => refRBSheet.current.open()}>
           <Fragment>
-            <Card.Title title={props.title} subtitle={date} left={NoticeIcon} />
+            <Card.Title title={props.title} subtitle={date} left={DoubtIcon} />
             <Card.Content style={{ marginBottom: 8 }}>
               <Subheading>{props.description}</Subheading>
-              <Paragraph>Issued By: {props.author}</Paragraph>
+              <Paragraph>Doubt by: {props.author}</Paragraph>
             </Card.Content>
           </Fragment>
         </TouchableRipple>
       </Card>
       <RBSheet ref={refRBSheet} closeOnDragDown={true} height={500}>
-        <View style={styles.notice}>
+        <View style={styles.card}>
           <Headline style={styles.headline}>{props.title}</Headline>
           <Paragraph>{props.description}</Paragraph>
         </View>
@@ -49,4 +49,4 @@ const NoticeCard = (props) => {
   );
 };
 
-export default NoticeCard;
+export default DoubtCard;

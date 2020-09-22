@@ -1,17 +1,17 @@
-import React, { useState, useContext, useEffect, Fragment } from "react";
-import { StyleSheet } from "react-native";
-import { Card, Paragraph, TouchableRipple } from "react-native-paper";
-import axios from "axios";
+import React, { useState, useContext, useEffect, Fragment } from 'react';
+import { StyleSheet, ScrollView, Text } from 'react-native';
+import { Card, Paragraph, TouchableRipple } from 'react-native-paper';
+import axios from 'axios';
 
-import { AuthContext } from "../../context/AuthContext";
-import { URL } from "../../config";
+import { AuthContext } from '../../context/AuthContext';
+import { URL } from '../../config';
 
 const StudentCard = (props) => {
   return (
     <Card style={styles}>
       <TouchableRipple
         onPress={() =>
-          props.navigation.push("Student Details", {
+          props.navigation.push('Student Details', {
             user: props.user,
             class_: props.class,
           })
@@ -25,6 +25,7 @@ const StudentCard = (props) => {
           </Card.Content>
         </Fragment>
       </TouchableRipple>
+      <Text></Text>
     </Card>
   );
 };
@@ -35,7 +36,7 @@ const Students = ({ navigation }) => {
   } = useContext(AuthContext);
   const [students, setStudents] = useState([]);
   const getStudents = async () => {
-    const res = await axios.get(URL + "/class/students/" + user.class_);
+    const res = await axios.get(URL + '/class/students/' + user.class_);
     setStudents(res.data.data);
   };
 
@@ -45,17 +46,19 @@ const Students = ({ navigation }) => {
 
   return (
     <Fragment>
-      {students.map((st) => (
-        <StudentCard
-          name={st.name}
-          rollNo={st.info.rollNo}
-          email={st.email}
-          key={st._id}
-          navigation={navigation}
-          user={st}
-          class={user.className}
-        />
-      ))}
+      <ScrollView>
+        {students.map((st) => (
+          <StudentCard
+            name={st.name}
+            rollNo={st.info.rollNo}
+            email={st.email}
+            key={st._id}
+            navigation={navigation}
+            user={st}
+            class={user.className}
+          />
+        ))}
+      </ScrollView>
     </Fragment>
   );
 };

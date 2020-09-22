@@ -14,6 +14,7 @@ const StudentSchema = mongoose.Schema({
     admissionNo: String,
     busNo: String,
     phone: String,
+    dob: String,
   },
 });
 

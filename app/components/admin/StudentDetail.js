@@ -1,46 +1,50 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   ImageBackground,
   ScrollView,
-} from "react-native";
-import { List, Provider as PaperProvider, FAB } from "react-native-paper";
+} from 'react-native';
+import { List, Provider as PaperProvider, FAB } from 'react-native-paper';
 
 import EditStudent from './EditStudentDetails';
-import { AuthContext }  from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 
 const StudentInfo = (props) => {
-
-  const [ editModal, openEditModal ] = useState(false);
-
-  const {
-    authState: { token },
-  } = useContext(AuthContext);
+  const [editModal, openEditModal] = useState(false);
 
   const { user, class_ } = props.route.params;
   useEffect(() => {
     console.log(user);
   });
 
+  const {
+    authState: { token },
+  } = React.useContext(AuthContext);
+
   return (
     <React.Fragment>
       <PaperProvider>
+        <EditStudent
+          user={user}
+          editModal={editModal}
+          openEditModal={openEditModal}
+          navigation={props.navigation}
+          token={token}
+        />
 
-        <EditStudent user={user} editModal={editModal} openEditModal={openEditModal} navigation={props.navigation} token={token} />
-
-        <View style={{ alignItems: "center", margin: 20 }}>
+        <View style={{ alignItems: 'center', margin: 20 }}>
           <View style={styles.info}>
             <ImageBackground
               source={{
-                uri: "https://api.adorable.io/avatars/80/abott@adorable.png",
+                uri: 'https://api.adorable.io/avatars/80/abott@adorable.png',
               }}
               style={{ height: 100, width: 100 }}
               imageStyle={{ borderRadius: 15 }}
             />
           </View>
-          <Text style={{ marginTop: 10, fontSize: 18, fontWeight: "bold" }}>
+          <Text style={{ marginTop: 10, fontSize: 18, fontWeight: 'bold' }}>
             {user.name}
           </Text>
         </View>
@@ -62,6 +66,9 @@ const StudentInfo = (props) => {
             </View>
             <View style={styles.info}>
               <Text style={styles.details}>Bus No. : {user.info.busNo}</Text>
+              <Text style={styles.details}>
+                Phone Number: {'+91 ' + user.info.phone}
+              </Text>
             </View>
             <View style={styles.info}>
               <Text style={styles.details}>
@@ -70,7 +77,7 @@ const StudentInfo = (props) => {
             </View>
             <List.Accordion
               title="Parent Details"
-              titleStyle={{ alignSelf: "flex-start" }}
+              titleStyle={{ alignSelf: 'flex-start' }}
               left={(props) => <List.Icon {...props} icon="account-child" />}
             >
               <ScrollView>
@@ -124,31 +131,31 @@ export default StudentInfo;
 
 const styles = StyleSheet.create({
   info: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 30,
     marginBottom: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#f2f2f2",
+    borderBottomColor: '#f2f2f2',
     paddingBottom: 5,
     margin: 20,
   },
   details: {
     fontSize: 15,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   fab: {
-    position: "absolute",
+    position: 'absolute',
     margin: 16,
     right: 0,
     bottom: 0,
   },
   parentInfo: {
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   parentInfoText1: {
     fontSize: 15,
-    fontWeight: "500",
-    fontWeight: "bold",
+    fontWeight: '500',
+    fontWeight: 'bold',
   },
   parentInfoText2: {
     marginLeft: 20,

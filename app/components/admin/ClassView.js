@@ -15,11 +15,7 @@ import AddSubTeacher from './AddSubTeacher';
 import adminStyles from './AdminStyles';
 import axios from 'axios';
 const LeftContent = (props) => (
-  <Avatar.Icon
-    {...props}
-    icon='teach'
-    style={{ backgroundColor: '#2E6E80' }}
-  />
+  <Avatar.Icon {...props} icon='teach' style={{ backgroundColor: '#2E6E80' }} />
 );
 
 const studentsIcon = (props) => (
@@ -122,7 +118,7 @@ const ClassView = ({ navigation }) => {
                   />
                   <Card.Actions>
                     <Button onPress={() => setClassTeacherModalOpen(true)}>
-                      <Text style = {{color: '#660033'}}>EDIT</Text>
+                      <Text style={{ color: '#660033' }}>EDIT</Text>
                     </Button>
                   </Card.Actions>
                 </Card>
@@ -169,6 +165,7 @@ const ClassView = ({ navigation }) => {
               </Card.Actions>
             </Card>
           ))}
+          <Text></Text>
         </ScrollView>
       </View>
     );

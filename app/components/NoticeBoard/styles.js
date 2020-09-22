@@ -16,7 +16,7 @@ const styles = {
     bottom: 20,
     height: 63,
     borderRadius: 50,
-    backgroundColor: '#6200EE',
+    backgroundColor: '#63211A',
     width: 63,
   },
   container: {
@@ -30,7 +30,7 @@ const styles = {
     alignSelf: 'center',
   },
   chatIcon: {
-    backgroundColor: '#1CB289',
+    backgroundColor: '#00a86b',
   },
 };
 

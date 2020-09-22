@@ -53,7 +53,7 @@ const AdminProfile = ({ navigation }) => {
     addTeacher,
     addStudent,
     adminState,
-    profileLoading,
+    profileLoading, setProfileLoading,
     getAllData,
     reload,
     studentFlag,
