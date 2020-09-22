@@ -18,7 +18,15 @@ import globalStyles from "../styles/global";
 import adminStyles from "./AdminStyles";
 
 const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
+<<<<<<< HEAD
   const url = 'https://school-server-testing.herokuapp.com';
+
+  const headers = {
+    "auth-token": token,
+  };
+=======
+  const url = "https://school-server-testing.herokuapp.com";
+>>>>>>> bd0051db8380138dfaeee6b3d17ad6af4fba3f48
 
   const headers = {
     "auth-token": token,
@@ -32,9 +40,12 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
     setReload,
   } = React.useContext(AdminContext);
 
+<<<<<<< HEAD
   let firstName = user.name.split(' ')[0];
   let lastName = user.name.split(' ')[1];
 
+=======
+>>>>>>> bd0051db8380138dfaeee6b3d17ad6af4fba3f48
   var classes = adminState.classes.map((class_) => {
     return {
       classId: class_._id,
@@ -90,11 +101,18 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
                     value={values.name}
                   />
                   <TextInput
+<<<<<<< HEAD
                     mode='outlined'
                     label='Email'
                     autoCapitalize='none'
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
+=======
+                    mode="outlined"
+                    label="Email"
+                    onChangeText={handleChange("email")}
+                    onBlur={handleBlur("email")}
+>>>>>>> bd0051db8380138dfaeee6b3d17ad6af4fba3f48
                     value={values.email}
                   />
                   <SearchableDropdown
@@ -136,7 +154,18 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
                       value={values.info.address}
                     />
                     <TextInput
+<<<<<<< HEAD
                       mode='outlined'
+=======
+                      mode="outlined"
+                      label="DOB ..."
+                      onChangeText={handleChange("info.dob")}
+                      onBlur={handleBlur("info.dob")}
+                      value={values.info.dob}
+                    />
+                    <TextInput
+                      mode="outlined"
+>>>>>>> bd0051db8380138dfaeee6b3d17ad6af4fba3f48
                       label="Mother's Name"
                       onChangeText={handleChange('info.motherName')}
                       onBlur={handleBlur('info.motherName')}

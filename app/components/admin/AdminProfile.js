@@ -116,7 +116,7 @@ const AdminProfile = ({ navigation }) => {
               <Card.Title title="Classes" left={classesIcon} />
               <Card.Content>
                 <Paragraph>
-                  Overview of Class Teacher
+                  Overview of Classes
                 </Paragraph>
               </Card.Content>
               <Card.Actions>
@@ -139,7 +139,7 @@ const AdminProfile = ({ navigation }) => {
             <Card style={adminStyles.card}>
               <Card.Title title="Teachers" left={teachersIcon} />
               <Card.Content>
-                <Paragraph>Add & View Teachers</Paragraph>
+                <Paragraph>Add & View  Teachers</Paragraph>
               </Card.Content>
               <Card.Actions>
                 <Button
@@ -166,7 +166,7 @@ const AdminProfile = ({ navigation }) => {
             <Card style={adminStyles.card}>
               <Card.Title title="Students" left={studentsIcon} />
               <Card.Content>
-                <Paragraph>All Students List</Paragraph>
+                <Paragraph>View All Students</Paragraph>
               </Card.Content>
               <Card.Actions>
                 <Button
