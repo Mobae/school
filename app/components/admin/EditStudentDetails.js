@@ -13,11 +13,19 @@ import axios from "axios";
 import { ScrollView } from "react-native-gesture-handler";
 
 import { AdminContext } from "../../context/AdminContext";
+import { AuthContext } from "../../context/AuthContext";
 import globalStyles from "../styles/global";
 import adminStyles from "./AdminStyles";
 
 const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
   const url = "https://school-server-testing.herokuapp.com";
+
+  const {
+    authState: { token },
+  } = React.useContext(AuthContext);
+  const headers = {
+    "auth-token": token,
+  };
 
   const {
     adminState,
@@ -40,7 +48,7 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
   const editStudent = async (values) => {
     try {
       values.studentId = user._id;
-      const res = await axios.post(url + "/student/update/student", values);
+      const res = await axios.post(url + "/student/update/student", values, { headers });
       setReload(!reload);
       navigation.navigate("AllStudentList");
     } catch (err) {
@@ -64,15 +72,13 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
             <Text></Text>
             <Formik
               initialValues={{
-                firstName: firstName,
-                lastName: lastName,
+                name: user.name,
                 email: user.email,
                 classId: "",
                 rank: "0",
                 info: user.info
               }}
               onSubmit={(values, actions) => {
-                actions.resetForm();
                 openEditModal(false);
                 editStudent(values); // SUBMITTING STUDENT VALUE
               }}
@@ -81,17 +87,10 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
                 <View style={globalStyles.view}>
                   <TextInput
                     mode="outlined"
-                    label="First Name"
-                    onChangeText={handleChange("firstName")}
-                    onBlur={handleBlur("firstName")}
-                    value={values.firstName}
-                  />
-                  <TextInput
-                    mode="outlined"
-                    label="Last Name"
-                    onChangeText={handleChange("lastName")}
-                    onBlur={handleBlur("lastName")}
-                    value={values.lastName}
+                    label="Name"
+                    onChangeText={handleChange("name")}
+                    onBlur={handleBlur("name")}
+                    value={values.name}
                   />
                   <TextInput
                     mode="outlined"
