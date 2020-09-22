@@ -15,12 +15,12 @@ const Class = require("../models/Class");
 const Admin = require("../models/Admin");
 
 let transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
+  host: "smtp.gmail.com",
   port: 587,
-  secure: false, // true for 465, false for other ports
+  secure: false,
   auth: {
-    user: testAccount.user, // generated ethereal user
-    pass: testAccount.pass, // generated ethereal password
+    user: "JMRDDatia@gmail.com",
+    pass: "Homie#123",
   },
 });
 
@@ -183,7 +183,6 @@ router.post("/update/teacher", auth, admin, async (req, res) => {
 
 router.get("/emailtest", async (req, res) => {
   const randPass = genRandPass();
-  let testAccount = await nodemailer.createTestAccount();
   let info = await transporter.sendMail({
     from: '"Fred Foo 👻" <foo@example.com>', // sender address
     to: "jakeryam123@gmail.com, cool_aryansingh@rediffmail.com", // list of receivers
