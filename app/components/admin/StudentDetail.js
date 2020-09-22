@@ -53,19 +53,19 @@ const StudentInfo = (props) => {
               </Text>
             </View>
             <View style={styles.info}>
+              <Text style={styles.details}>
+                Roll No.: {user.info.rollNo}
+              </Text>
+            </View>
+            <View style={styles.info}>
               <Text style={styles.details}>DOB: {user.info.admissionNo}</Text>
             </View>
             <View style={styles.info}>
-              <Text style={styles.details}>Bus Route: {user.info.busNo}</Text>
+              <Text style={styles.details}>Bus No. : {user.info.busNo}</Text>
             </View>
             <View style={styles.info}>
               <Text style={styles.details}>
                 Phone Number: {"+91 " + user.info.phone}
-              </Text>
-            </View>
-            <View style={styles.info}>
-              <Text style={styles.details}>
-                Date of Addmission: {user.info.admissionNo}
               </Text>
             </View>
             <List.Accordion
@@ -87,6 +87,14 @@ const StudentInfo = (props) => {
                     <Text style={styles.parentInfoText1}>Mother Details:</Text>
                     <Text style={styles.parentInfoText2}>
                       Name: {user.info.motherName}
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.info}>
+                  <View style={styles.parentInfo}>
+                    <Text style={styles.parentInfoText1}>Guardian's Details:</Text>
+                    <Text style={styles.parentInfoText2}>
+                      Name: {user.info.gaurdianName}
                     </Text>
                   </View>
                 </View>
