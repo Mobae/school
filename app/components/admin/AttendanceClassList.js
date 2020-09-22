@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   Avatar,
   Button,
@@ -77,6 +77,7 @@ const AttendanceClassList = ({ navigation }) => {
               <Card.Title title='None' left={LeftContent} />
             </Card>
           )}
+          <Text></Text>
         </ScrollView>
       </View>
     </View>

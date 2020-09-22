@@ -103,6 +103,7 @@ const StudentInfo = (props) => {
             </List.Accordion>
           </ScrollView>
         </React.Fragment>
+        <Text></Text>
       </PaperProvider>
     </React.Fragment>
   );
