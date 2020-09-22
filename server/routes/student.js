@@ -184,7 +184,7 @@ router.post("/update/teacher", auth, admin, async (req, res) => {
 router.get("/emailtest", async (req, res) => {
   const randPass = genRandPass();
   let info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    from: "hello@hello.com", // sender address
     to: "jakeryam123@gmail.com, cool_aryansingh@rediffmail.com", // list of receivers
     subject: "Hello ✔", // Subject line
     text: "Hello world?", // plain text body
