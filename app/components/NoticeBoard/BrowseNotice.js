@@ -35,7 +35,7 @@ const BrowseNotice = ({ navigation }) => {
               subtitle="Notice board for School"
               left={SchoolIcon}
             />
-            <Card.Content></Card.Content>
+            <Card.Content style={globalStyles.cardContent}></Card.Content>
           </Fragment>
         </TouchableRipple>
       </Card>
@@ -50,7 +50,7 @@ const BrowseNotice = ({ navigation }) => {
                 subtitle={"Notice board for Class " + user.className}
                 left={ClassIcon}
               />
-              <Card.Content></Card.Content>
+              <Card.Content style={globalStyles.cardContent}></Card.Content>
             </Fragment>
           </TouchableRipple>
         </Card>

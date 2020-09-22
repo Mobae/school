@@ -55,20 +55,26 @@ const TeacherProfile = ({ navigation }) => {
         <Fragment>
           <Card style={globalStyles.card}>
             <TouchableRipple onPress={() => navigation.push("Attendance")}>
-              <Card.Title
-                title="Attendance"
-                subtitle="View Attendance"
-                left={AttendanceIcon}
-              />
+              <Fragment>
+                <Card.Title
+                  title="Attendance"
+                  subtitle="View Attendance"
+                  left={AttendanceIcon}
+                />
+                <Card.Content style={globalStyles.cardContent}></Card.Content>
+              </Fragment>
             </TouchableRipple>
           </Card>
           <Card style={globalStyles.card}>
             <TouchableRipple onPress={() => navigation.push("Students")}>
-              <Card.Title
-                title="Students"
-                subtitle="View Students"
-                left={StudentsIcon}
-              />
+              <Fragment>
+                <Card.Title
+                  title="Students"
+                  subtitle="View Students"
+                  left={StudentsIcon}
+                />
+                <Card.Content style={globalStyles.cardContent}></Card.Content>
+              </Fragment>
             </TouchableRipple>
           </Card>
         </Fragment>

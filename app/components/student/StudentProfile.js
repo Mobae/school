@@ -45,7 +45,7 @@ const StudentProfile = ({ navigation }) => {
               subtitle={user.name}
               left={ProfileIcon}
             />
-            <Card.Content style={{ marginBottom: 8 }}>
+            <Card.Content style={globalStyles.cardContent}>
               <Paragraph>Email: {user.email}</Paragraph>
               <Paragraph>Class: {user.className}</Paragraph>
             </Card.Content>
@@ -54,11 +54,14 @@ const StudentProfile = ({ navigation }) => {
       </Card>
       <Card style={globalStyles.card}>
         <TouchableRipple onPress={() => navigation.push("Attendance")}>
-          <Card.Title
-            title="Attendance"
-            subtitle="View Attendance"
-            left={AttendanceIcon}
-          />
+          <Fragment>
+            <Card.Title
+              title="Attendance"
+              subtitle="View Attendance"
+              left={AttendanceIcon}
+            />
+            <Card.Content style={globalStyles.cardContent}></Card.Content>
+          </Fragment>
         </TouchableRipple>
       </Card>
     </Fragment>

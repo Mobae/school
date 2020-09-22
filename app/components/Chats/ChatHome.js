@@ -41,18 +41,21 @@ const ChatHome = ({ navigation }) => {
     <Fragment>
       <Card style={globalStyles.card}>
         <TouchableRipple onPress={() => navigation.navigate("Doubts Corner")}>
-          <Card.Title
-            title="Doubts"
-            subtitle="Clarify your doubts"
-            left={(props) => (
-              <Avatar.Icon
-                {...props}
-                icon="wechat"
-                color="#fff"
-                style={styles.chatIcon}
-              />
-            )}
-          />
+          <Fragment>
+            <Card.Title
+              title="Doubts"
+              subtitle="Clarify your doubts"
+              left={(props) => (
+                <Avatar.Icon
+                  {...props}
+                  icon="wechat"
+                  color="#fff"
+                  style={styles.chatIcon}
+                />
+              )}
+            />
+            <Card.Content style={globalStyles.cardContent}></Card.Content>
+          </Fragment>
         </TouchableRipple>
       </Card>
 
@@ -61,17 +64,20 @@ const ChatHome = ({ navigation }) => {
           <TouchableRipple
             onPress={() => navigation.navigate("StudentFileView")}
           >
-            <Card.Title
-              title="Files"
-              subtitle="Get your files"
-              left={(props) => (
-                <Avatar.Icon
-                  {...props}
-                  icon="file-document-box-multiple"
-                  style={{ backgroundColor: "#3D64A4" }}
-                />
-              )}
-            />
+            <Fragment>
+              <Card.Title
+                title="Files"
+                subtitle="Get your files"
+                left={(props) => (
+                  <Avatar.Icon
+                    {...props}
+                    icon="file-document-box-multiple"
+                    style={{ backgroundColor: "#3D64A4" }}
+                  />
+                )}
+              />
+              <Card.Content style={globalStyles.cardContent}></Card.Content>
+            </Fragment>
           </TouchableRipple>
         </Card>
       ) : rank === "1" ? (
@@ -79,33 +85,39 @@ const ChatHome = ({ navigation }) => {
           <TouchableRipple
             onPress={() => navigation.navigate("TeacherClassList")}
           >
-            <Card.Title
-              title="Files"
-              subtitle="Get your files"
-              left={(props) => (
-                <Avatar.Icon
-                  {...props}
-                  icon="file-document-box-multiple"
-                  style={{ backgroundColor: "#3D64A4" }}
-                />
-              )}
-            />
+            <Fragment>
+              <Card.Title
+                title="Files"
+                subtitle="Get your files"
+                left={(props) => (
+                  <Avatar.Icon
+                    {...props}
+                    icon="file-document-box-multiple"
+                    style={{ backgroundColor: "#3D64A4" }}
+                  />
+                )}
+              />
+              <Card.Content style={globalStyles.cardContent}></Card.Content>
+            </Fragment>
           </TouchableRipple>
         </Card>
       ) : rank === "2" ? (
         <Card style={globalStyles.card}>
           <TouchableRipple onPress={() => navigation.navigate("ClassList")}>
-            <Card.Title
-              title="Files"
-              subtitle="Get your files"
-              left={(props) => (
-                <Avatar.Icon
-                  {...props}
-                  icon="file-document-box-multiple"
-                  style={{ backgroundColor: "#3D64A4" }}
-                />
-              )}
-            />
+            <Fragment>
+              <Card.Title
+                title="Files"
+                subtitle="Get your files"
+                left={(props) => (
+                  <Avatar.Icon
+                    {...props}
+                    icon="file-document-box-multiple"
+                    style={{ backgroundColor: "#3D64A4" }}
+                  />
+                )}
+              />
+              <Card.Content style={globalStyles.cardContent}></Card.Content>
+            </Fragment>
           </TouchableRipple>
         </Card>
       ) : null}
