@@ -13,16 +13,13 @@ import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { AdminContext } from "../../context/AdminContext";
-import { AuthContext } from "../../context/AuthContext";
+
 import globalStyles from "../styles/global";
 import adminStyles from "./AdminStyles";
 
-const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
+const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
   const url = 'https://school-server-testing.herokuapp.com';
 
-  const {
-    authState: { token },
-  } = React.useContext(AuthContext);
   const headers = {
     "auth-token": token,
   };
