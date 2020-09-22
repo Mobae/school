@@ -1,19 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useContext, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import React, { useEffect, useContext, useState } from "react";
+import { View, StyleSheet } from "react-native";
 import {
   Title,
   DataTable,
   FAB,
   Portal,
   Provider as PaperProvider,
-} from 'react-native-paper';
-import { useIsFocused } from '@react-navigation/native';
-import axios from 'axios';
+} from "react-native-paper";
+import { useIsFocused } from "@react-navigation/native";
+import axios from "axios";
 
-import { URL } from '../../config';
-import { AuthContext } from '../../context/AuthContext';
-import { ScrollView } from 'react-native-gesture-handler';
+import { URL } from "../../config";
+import { AuthContext } from "../../context/AuthContext";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Fab = ({ navigation }) => {
   const [state, setState] = React.useState({ open: false });
@@ -27,18 +27,18 @@ const Fab = ({ navigation }) => {
       <Portal>
         <FAB.Group
           open={open}
-          icon={open ? 'calendar-today' : 'plus'}
-          fabStyle={{ backgroundColor: '#00ad00' }}
+          icon={open ? "calendar-today" : "plus"}
+          fabStyle={{ backgroundColor: "#00ad00" }}
           actions={[
             {
-              icon: 'pencil',
-              label: 'Edit Attendance',
-              onPress: () => navigation.push('Edit Attendance'),
+              icon: "pencil",
+              label: "Edit Attendance",
+              onPress: () => navigation.push("Edit Attendance"),
             },
             {
-              icon: 'plus',
-              label: 'Add Attendance',
-              onPress: () => navigation.push('Add Attendance'),
+              icon: "plus",
+              label: "Add Attendance",
+              onPress: () => navigation.push("Add Attendance"),
             },
           ]}
           onStateChange={onStateChange}
@@ -73,15 +73,15 @@ const AllStudentsAttendance = ({ navigation }) => {
 
   const getStudents = async () => {
     try {
-      const res = await axios.get(URL + '/attendance/class/' + user.class_, {
+      const res = await axios.get(URL + "/attendance/class/" + user.class_, {
         headers: {
-          'auth-token': authState.token,
+          "auth-token": authState.token,
         },
       });
       console.log(res.data.data);
       const students = res.data.data;
       const pt = students.map((stu) => {
-        const p = stu.attendance.filter((status) => status === 'P').length;
+        const p = stu.attendance.filter((status) => status === "P").length;
         const t = stu.attendance.length;
         const pt = { p, t };
         stu.pt = pt;
@@ -97,7 +97,7 @@ const AllStudentsAttendance = ({ navigation }) => {
     if (isFocused) {
       getStudents();
     }
-    return () => console.log('clean up');
+    return () => console.log("clean up");
   }, [isFocused]);
 
   return (
@@ -113,13 +113,13 @@ const AllStudentsAttendance = ({ navigation }) => {
               <DataTable.Title numeric>Roll No.</DataTable.Title>
               <DataTable.Title numeric>Attendance</DataTable.Title>
             </DataTable.Header>
-            <ScrollView>
+            <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
               {studentList.map((student) => (
                 <DataRow
                   name={student.name}
                   key={student._id}
                   rollNo={student.rollNo}
-                  att={((student.pt.p / student.pt.t) * 100).toFixed(2) + '%'}
+                  att={((student.pt.p / student.pt.t) * 100).toFixed(2) + "%"}
                 />
               ))}
             </ScrollView>
@@ -127,20 +127,20 @@ const AllStudentsAttendance = ({ navigation }) => {
         </View>
       </PaperProvider>
       <Fab navigation={navigation} />
-      <StatusBar style='auto' />
+      <StatusBar style="auto" />
     </React.Fragment>
   );
 };
 
 const styles = StyleSheet.create({
   title: {
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   fab: {
     width: 200,
-    alignSelf: 'center',
+    alignSelf: "center",
     bottom: 50,
-    backgroundColor: '#6200EE',
+    backgroundColor: "#6200EE",
   },
 });
 
