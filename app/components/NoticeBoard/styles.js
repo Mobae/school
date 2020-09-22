@@ -30,7 +30,7 @@ const styles = {
     alignSelf: "center",
   },
   chatIcon: {
-    backgroundColor: "#fff",
+    backgroundColor: "#00a86b",
   },
 };
 
