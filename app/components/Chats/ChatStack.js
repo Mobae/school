@@ -11,7 +11,7 @@ import ClassList from "./ClassList";
 import TeacherFileView from "./TeacherFileView";
 import AddFile from "./AddFile";
 import Add from "./Add";
-import TeacherClassList from './TeacherClassList';
+import TeacherClassList from "./TeacherClassList";
 
 const Stack = createStackNavigator();
 
@@ -19,7 +19,7 @@ function ChatStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="ChatHome" component={ChatHome} />
+        <Stack.Screen name="Home" component={ChatHome} />
         <Stack.Screen name="Files" component={Files} />
         <Stack.Screen name="Doubts Corner" component={AllDoubts} />
         <Stack.Screen name="Add Doubt" component={AddDoubt} />

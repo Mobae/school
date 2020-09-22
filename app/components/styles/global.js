@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
   card: {
     margin: 10,
     marginBottom: 0,
-    paddingBottom: 10,
+    paddingBottom: 8,
+    paddingTop: 4,
   },
   cardContent: {
     marginLeft: 5,
