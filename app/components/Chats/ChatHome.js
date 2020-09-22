@@ -12,19 +12,6 @@ const ChatHome = ({ navigation }) => {
     user: { rank, class_ },
   } = authState;
 
-  // if (rank === '0') {
-  //   const nav = 'StudentFileView';
-  // } else if (rank === '1') {
-  //   const nav = 'StudentFileView';
-  // }
-  // const [nav, setNav] = useState('');
-
-  // if (rank === '1') {
-  //   setNav('ClassList');
-  // } else {
-  //   setNav('StudentFileView');
-  // }
-
   const Nav = () => {
     const [nav, setNav] = useState("");
 
