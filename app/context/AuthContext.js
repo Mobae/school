@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import { Alert } from "react-native";
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
 
@@ -7,7 +8,7 @@ import { URL } from "../config";
 export const AuthContext = createContext();
 
 const AuthContextProvider = (props) => {
-  const initialState = { isLoggedIn: false, jwt: "", user: {} };
+  const initialState = { isLoggedIn: false, token: "", user: {} };
   const [authState, setAuthState] = useState(initialState);
 
   const LogIn = async (values) => {
@@ -40,8 +41,14 @@ const AuthContextProvider = (props) => {
       });
     } catch (error) {
       console.log(error);
+      createErrorAlert();
     }
   };
+
+  const createErrorAlert = () =>
+    Alert.alert("Error", "Invalid Credentials.", [{ text: "OK" }], {
+      cancelable: false,
+    });
 
   const Logout = async () => {
     await AsyncStorage.removeItem("@jwt");
@@ -51,7 +58,7 @@ const AuthContextProvider = (props) => {
   const getUser = async () => {
     axios.defaults.headers["auth-token"] = await AsyncStorage.getItem("@jwt");
     const res = await axios.get(URL + "/student/initial");
-    console.log('initial route response')
+    console.log("initial route response");
     console.log(res.data);
     // TODO
     // if(!res.data.student) {
