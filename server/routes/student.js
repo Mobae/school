@@ -181,22 +181,7 @@ router.post("/update/teacher", auth, admin, async (req, res) => {
   }
 });
 
-router.get("/emailtest", async (req, res) => {
-  console.log("hello");
-  // const randPass = genRandPass();
-  // let info = await transporter.sendMail({
-  //   from: "hello@hello.com", // sender address
-  //   to: "jakeryam123@gmail.com, cool_aryansingh@rediffmail.com", // list of receivers
-  //   subject: "Hello ✔", // Subject line
-  //   text: "Hello world?", // plain text body
-  //   html: `<b>Hello world? Your password is ${randPass}</b>`, // html body
-  // });
-
-  // console.log("Message sent: %s", info.messageId);
-});
-
 router.post("/add", auth, admin, async (req, res) => {
-  let testAccount = await nodemailer.createTestAccount();
   let obj = req.body;
   obj = trimObj(obj);
   const {
@@ -216,15 +201,13 @@ router.post("/add", auth, admin, async (req, res) => {
     const name = firstName + " " + lastName;
     let password = genRandPass();
     console.log(`password: ${password}`);
-    const tempPass = "abcd";
-    const randPass = genRandPass();
+    const tempPass = genRandPass();
 
     let info = await transporter.sendMail({
-      from: '"Fred Foo 👻" <foo@example.com>', // sender address
-      to: "jakeryam123@gmail.com, cool_aryansingh@rediffmail.com", // list of receivers
-      subject: "Hello ✔", // Subject line
-      text: "Hello world?", // plain text body
-      html: "<b>Hello world?</b>", // html body
+      from: "jmrd@jmrd.com", // sender address
+      to: email, // list of receivers
+      subject: "Your password for JMRD School App", // Subject line
+      html: `<p>Your password for the app is <b>${tempPass}</b></p>`, // html body
     });
 
     console.log("Message sent: %s", info.messageId);
@@ -280,6 +263,19 @@ router.post("/add", auth, admin, async (req, res) => {
       res.json({ token, name, email, rank });
     }
   }
+});
+
+router.get("/emailtest/hello", async (req, res) => {
+  console.log("hello");
+  const tempPass = genRandPass();
+  let info = await transporter.sendMail({
+    from: "jmrd@jmrd.com", // sender address
+    to: "jakeryam123@gmail.com, cool_aryansingh@rediffmail.com", // list of receivers
+    subject: "Your password for JMRD School App", // Subject line
+    html: `<p>Your password for the app is <b>${tempPass}</b></p>`, // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
 });
 
 router.post("/login", async (req, res) => {
