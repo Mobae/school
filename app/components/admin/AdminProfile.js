@@ -193,6 +193,7 @@ const AdminProfile = ({ navigation }) => {
           animating={true}
           size='large'
           style={styles.loading}
+          color="#2D5264"
         />
       </View>
     );

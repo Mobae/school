@@ -15,13 +15,13 @@ import AddSubTeacher from './AddSubTeacher';
 import adminStyles from './AdminStyles';
 import axios from 'axios';
 const LeftContent = (props) => (
-  <Avatar.Icon {...props} icon='teach' style={{ backgroundColor: '#2E6E80' }} />
+  <Avatar.Icon {...props} icon="teach" style={{ backgroundColor: '#2E6E80' }} />
 );
 
 const studentsIcon = (props) => (
   <Avatar.Icon
     {...props}
-    icon='format-list-checkbox'
+    icon="format-list-checkbox"
     style={{ backgroundColor: '#2E6E80' }}
   />
 );
@@ -98,56 +98,47 @@ const ClassView = ({ navigation }) => {
               }}
             >
               <React.Fragment>
-                <Card.Title title='Students' left={studentsIcon} />
+                <Card.Title title="Students" left={studentsIcon} />
                 <Card.Content></Card.Content>
               </React.Fragment>
             </TouchableRipple>
           </Card>
 
-          <TouchableRipple
-            onPress={() => {
-              // navigation.navigate('StudentList');
-            }}
-          >
-            {classObj.classTeacher[0] !== undefined ? (
-              <View>
-                <Card style={styles.cardClass}>
-                  <Card.Title
-                    title='Class Teacher'
-                    style={{ color: 'white' }}
-                  />
-                  <Card.Actions>
-                    <Button onPress={() => setClassTeacherModalOpen(true)}>
-                      <Text style={{ color: '#660033' }}>EDIT</Text>
-                    </Button>
-                  </Card.Actions>
-                </Card>
-                <Card style={adminStyles.card}>
-                  <Card.Title
-                    title={classObj.classTeacher[0].name}
-                    left={LeftContent}
-                  />
-                </Card>
-              </View>
-            ) : (
-              <View>
-                <Card style={adminStyles.card}>
-                  <Card.Title title='Class Teacher' />
-                  <Card.Actions>
-                    <Button onPress={() => setClassTeacherModalOpen(true)}>
-                      ADD
-                    </Button>
-                  </Card.Actions>
-                </Card>
-                <Card style={adminStyles.card}>
-                  <Card.Title title='None' left={LeftContent} />
-                </Card>
-              </View>
-            )}
-          </TouchableRipple>
+          {classObj.classTeacher[0] !== undefined ? (
+            <View>
+              <Card style={styles.cardClass}>
+                <Card.Title title="Class Teacher" style={{ color: 'white' }} />
+                <Card.Actions>
+                  <Button onPress={() => setClassTeacherModalOpen(true)}>
+                    <Text style={{ color: '#660033' }}>EDIT</Text>
+                  </Button>
+                </Card.Actions>
+              </Card>
+              <Card style={adminStyles.card}>
+                <Card.Title
+                  title={classObj.classTeacher[0].name}
+                  left={LeftContent}
+                />
+              </Card>
+            </View>
+          ) : (
+            <View>
+              <Card style={adminStyles.card}>
+                <Card.Title title="Class Teacher" />
+                <Card.Actions>
+                  <Button onPress={() => setClassTeacherModalOpen(true)}>
+                    ADD
+                  </Button>
+                </Card.Actions>
+              </Card>
+              <Card style={adminStyles.card}>
+                <Card.Title title="None" left={LeftContent} />
+              </Card>
+            </View>
+          )}
 
           <Card style={styles.cardSub}>
-            <Card.Title title='Subject teachers' />
+            <Card.Title title="Subject teachers" />
             <Card.Actions>
               <Button onPress={() => setSubTeacherModalOpen(true)}>
                 <Text style={{ color: 'black' }}>Add</Text>
@@ -174,8 +165,8 @@ const ClassView = ({ navigation }) => {
       <View style={adminStyles.container}>
         <ActivityIndicator
           animating={true}
-          size='large'
-          color='#2E6E80'
+          size="large"
+          color="#2E6E80"
           style={adminStyles.loading}
         />
       </View>
@@ -197,7 +188,7 @@ const styles = StyleSheet.create({
   cardStudent: {
     margin: 10,
     marginBottom: 0,
-    backgroundColor: '#1A88EE',
+    backgroundColor: '#849EE3',
   },
 });
 

@@ -54,16 +54,17 @@ const ClassNotice = ({ navigation }) => {
         <View style={styles.container}>
           <ActivityIndicator
             animating={true}
-            size='large'
+            size="large"
             style={styles.loading}
+            color="#0a6605"
           />
         </View>
       )}
       {rank === '1' ? (
         <IconButton
-          icon='plus'
+          icon="plus"
           style={styles.fab}
-          color='white'
+          color="white"
           size={40}
           onPress={() => navigation.push('New Class Notice')}
         />

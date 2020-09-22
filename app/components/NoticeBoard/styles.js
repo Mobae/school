@@ -16,7 +16,7 @@ const styles = {
     bottom: 20,
     height: 63,
     borderRadius: 50,
-    backgroundColor: '#63211A',
+    backgroundColor: '#2D5264',
     width: 63,
   },
   container: {

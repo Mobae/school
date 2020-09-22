@@ -11,7 +11,14 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import { AdminContext } from '../../context/AdminContext';
 import adminStyles from './AdminStyles';
-const LeftContent = (props) => <Avatar.Icon {...props} icon="human-child" color = 'white' style = {{backgroundColor: '#EF5758'}}/>;
+const LeftContent = (props) => (
+  <Avatar.Icon
+    {...props}
+    icon="human-child"
+    color="white"
+    style={{ backgroundColor: '#3b3691' }}
+  />
+);
 
 const StudentList = () => {
   const { adminState, getStudents, loading } = React.useContext(AdminContext);
@@ -43,6 +50,7 @@ const StudentList = () => {
             animating={true}
             size="large"
             style={adminStyles.loading}
+            color="#2D5264"
           />
         </View>
       )}

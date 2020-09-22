@@ -1,6 +1,6 @@
-import * as React from "react";
-import axios from "axios";
-import { View, StyleSheet, Text } from "react-native";
+import * as React from 'react';
+import axios from 'axios';
+import { View, StyleSheet, Text } from 'react-native';
 import {
   Avatar,
   Button,
@@ -8,40 +8,38 @@ import {
   Searchbar,
   TouchableRipple,
   ActivityIndicator,
-} from "react-native-paper";
-import { ScrollView } from "react-native-gesture-handler";
+} from 'react-native-paper';
+import { ScrollView } from 'react-native-gesture-handler';
 
-import { AdminContext } from "../../context/AdminContext";
-import { AuthContext } from "../../context/AuthContext";
+import { AdminContext } from '../../context/AdminContext';
+import { AuthContext } from '../../context/AuthContext';
 const LeftContent = (props) => (
   <Avatar.Icon
     {...props}
     icon="account-group"
-    style={{ backgroundColor: "#00674D" }}
+    style={{ backgroundColor: '#00674D' }}
   />
 );
-import adminStyles from "../admin/AdminStyles";
+import adminStyles from '../admin/AdminStyles';
 
 const FileClassList = ({ navigation }) => {
-  const url = "https://school-server-testing.herokuapp.com";
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const url = 'https://school-server-testing.herokuapp.com';
+  const [searchQuery, setSearchQuery] = React.useState('');
   const [classes, setClasses] = React.useState({});
-  const [currClass, setCurrClass] = React.useState("");
+  const [currClass, setCurrClass] = React.useState('');
   const [filtered, setFiltered] = React.useState();
   const [flag, setFlag] = React.useState(false);
   const onChangeSearch = (query) => {
     setSearchQuery(query);
   };
 
-  const {
-    authState 
-  } = React.useContext(AuthContext);
+  const { authState } = React.useContext(AuthContext);
 
-  const { user, token } =  authState;
+  const { user, token } = authState;
 
   const getClasses = async () => {
     try {
-      let res = await axios.get(url + "/class/teacher/classes/" + user._id);
+      let res = await axios.get(url + '/class/teacher/classes/' + user._id);
       const classes = res.data.data;
       setClasses(classes);
       setFiltered(classes);
@@ -59,7 +57,7 @@ const FileClassList = ({ navigation }) => {
 
   React.useEffect(() => {
     console.log(filtered);
-    if (searchQuery === "") {
+    if (searchQuery === '') {
       setFiltered(classes);
     } else {
       setFiltered(
@@ -82,7 +80,7 @@ const FileClassList = ({ navigation }) => {
         />
         <View style={adminStyles.scroll}>
           <ScrollView>
-            { filtered ? (
+            {filtered ? (
               filtered.map((class_) => (
                 <View key={class_._id}>
                   <Card style={adminStyles.card}>
@@ -90,7 +88,7 @@ const FileClassList = ({ navigation }) => {
                       onPress={() => {
                         setCurrClass(class_._id);
                         setFlag(false);
-                        navigation.navigate("TeacherFileView", {
+                        navigation.navigate('TeacherFileView', {
                           class_: class_._id,
                         });
                       }}
@@ -121,6 +119,7 @@ const FileClassList = ({ navigation }) => {
           animating={true}
           size="large"
           style={styles.loading}
+          color="#0a6605"
         />
       </View>
     );
@@ -129,21 +128,21 @@ const FileClassList = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   viewStyle: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
     marginHorizontal: 10,
     marginVertical: 10,
   },
   container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    height: "100%",
-    width: "100%",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: '100%',
+    width: '100%',
   },
   loading: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
 });
 
