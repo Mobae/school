@@ -181,7 +181,7 @@ const AddStudent = ({
                     <TextInput
                       mode='outlined'
                       label='Phone No. '
-                      keyboardType='number-pad'
+                      keyboardType='phone-pad'
                       onChangeText={handleChange('info.phone')}
                       onBlur={handleBlur('info.phone')}
                       value={values.info.phone}
