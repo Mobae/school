@@ -203,14 +203,14 @@ router.post("/add", auth, admin, async (req, res) => {
     console.log(`password: ${password}`);
     const tempPass = genRandPass();
 
-    let info = await transporter.sendMail({
+    let mailInfo = await transporter.sendMail({
       from: "jmrd@jmrd.com", // sender address
       to: email, // list of receivers
       subject: "Your password for JMRD School App", // Subject line
       html: `<p>Your password for the app is <b>${tempPass}</b></p>`, // html body
     });
 
-    console.log("Message sent: %s", info.messageId);
+    console.log("Message sent: %s", mailInfo.messageId);
 
     const salt = await bcrypt.genSalt();
     password = await bcrypt.hash(tempPass, salt);
