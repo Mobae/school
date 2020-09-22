@@ -24,6 +24,10 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
     "auth-token": token,
   };
 
+  const headers = {
+    "auth-token": token,
+  };
+
   const {
     adminState,
     getAllStudents,
@@ -31,9 +35,6 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
     reload,
     setReload,
   } = React.useContext(AdminContext);
-
-  let firstName = user.name.split(' ')[0];
-  let lastName = user.name.split(' ')[1];
 
   var classes = adminState.classes.map((class_) => {
     return {
@@ -136,7 +137,14 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
                       value={values.info.address}
                     />
                     <TextInput
-                      mode='outlined'
+                      mode="outlined"
+                      label="DOB ..."
+                      onChangeText={handleChange("info.dob")}
+                      onBlur={handleBlur("info.dob")}
+                      value={values.info.dob}
+                    />
+                    <TextInput
+                      mode="outlined"
                       label="Mother's Name"
                       onChangeText={handleChange('info.motherName')}
                       onBlur={handleBlur('info.motherName')}

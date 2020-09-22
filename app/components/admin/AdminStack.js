@@ -53,11 +53,11 @@ function AdminStack() {
         />
         <Stack.Screen name="ClassList" component={ClassList} options={{ title: 'All Classes' }} />
         <Stack.Screen name="AttendanceClassList" component={AttendanceClassList} options={{ title: 'All Classes' }} />
-        <Stack.Screen name="TeacherList" component={TeacherList} options={{ title: 'All Teachers' }} />
-        <Stack.Screen name="StudentList" component={StudentList} options={{ title: 'All Students' }} />
+        <Stack.Screen name="TeacherList" component={TeacherList} options={{ title: 'All Classes' }} />
+        <Stack.Screen name="StudentList" component={StudentList} options={{ title: 'Students' }} />
         <Stack.Screen name="AllStudentList" component={AllStudentList} options={{ title: 'All Students' }} />
         <Stack.Screen name="ClassView" component={ClassView} options={{ title: 'Class Overview' }} />
-        <Stack.Screen name="StudentAttendance" component={StudentAttendance} options={{ title: 'Student Attendance' }} />
+        <Stack.Screen name="StudentAttendance" component={StudentAttendance} options={{ title: 'Attendance' }} />
         <Stack.Screen name="Student Details" component={StudentDetail} options={{ title: 'Student Details' }} />
       </Stack.Navigator>
     </NavigationContainer>

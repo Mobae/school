@@ -10,10 +10,15 @@ import { List, Provider as PaperProvider, FAB } from "react-native-paper";
 import { AuthContext } from "../../context/AuthContext";
 
 import EditStudent from './EditStudentDetails';
+import { AuthContext }  from '../../context/AuthContext';
 
 const StudentInfo = (props) => {
 
   const [ editModal, openEditModal ] = useState(false);
+
+  const {
+    authState: { token },
+  } = useContext(AuthContext);
 
   const { user, class_ } = props.route.params;
   useEffect(() => {
@@ -60,11 +65,6 @@ const StudentInfo = (props) => {
             </View>
             <View style={styles.info}>
               <Text style={styles.details}>
-                Aadhar No.: {user.info.admissionNo}
-              </Text>
-            </View>
-            <View style={styles.info}>
-              <Text style={styles.details}>
                 Phone Number: {"+91 " + user.info.phone}
               </Text>
             </View>
@@ -85,9 +85,6 @@ const StudentInfo = (props) => {
                     <Text style={styles.parentInfoText2}>
                       Name: {user.info.fatherName}
                     </Text>
-                    <Text style={styles.parentInfoText2}>
-                      Number: {user.info.fatherName}
-                    </Text>
                   </View>
                 </View>
                 <View style={styles.info}>
@@ -95,9 +92,6 @@ const StudentInfo = (props) => {
                     <Text style={styles.parentInfoText1}>Mother Details:</Text>
                     <Text style={styles.parentInfoText2}>
                       Name: {user.info.motherName}
-                    </Text>
-                    <Text style={styles.parentInfoText2}>
-                      Number: {user.info.motherName}
                     </Text>
                   </View>
                 </View>
