@@ -12,24 +12,16 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import { AdminContext } from "../../context/AdminContext";
+import { AdminContext } from '../../context/AdminContext';
 
-import globalStyles from "../styles/global";
-import adminStyles from "./AdminStyles";
+import globalStyles from '../styles/global';
+import adminStyles from './AdminStyles';
 
 const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
-<<<<<<< HEAD
   const url = 'https://school-server-testing.herokuapp.com';
 
   const headers = {
-    "auth-token": token,
-  };
-=======
-  const url = "https://school-server-testing.herokuapp.com";
->>>>>>> bd0051db8380138dfaeee6b3d17ad6af4fba3f48
-
-  const headers = {
-    "auth-token": token,
+    'auth-token': token,
   };
 
   const {
@@ -40,12 +32,6 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
     setReload,
   } = React.useContext(AdminContext);
 
-<<<<<<< HEAD
-  let firstName = user.name.split(' ')[0];
-  let lastName = user.name.split(' ')[1];
-
-=======
->>>>>>> bd0051db8380138dfaeee6b3d17ad6af4fba3f48
   var classes = adminState.classes.map((class_) => {
     return {
       classId: class_._id,
@@ -56,7 +42,9 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
   const editStudent = async (values) => {
     try {
       values.studentId = user._id;
-      const res = await axios.post(url + "/student/update/student", values, { headers });
+      const res = await axios.post(url + '/student/update/student', values, {
+        headers,
+      });
       setReload(!reload);
       navigation.navigate('AllStudentList');
     } catch (err) {
@@ -70,7 +58,7 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
   let defaultClassIndex = classes.indexOf(defaultClass[0]);
 
   return (
-    <Modal visible={editModal} animationType='slide'>
+    <Modal visible={editModal} animationType="slide">
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={adminStyles.modalContent}>
           <Fragment>
@@ -96,23 +84,16 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
                   <TextInput
                     mode="outlined"
                     label="Name"
-                    onChangeText={handleChange("name")}
-                    onBlur={handleBlur("name")}
+                    onChangeText={handleChange('name')}
+                    onBlur={handleBlur('name')}
                     value={values.name}
                   />
                   <TextInput
-<<<<<<< HEAD
-                    mode='outlined'
-                    label='Email'
-                    autoCapitalize='none'
-                    onChangeText={handleChange('email')}
-                    onBlur={handleBlur('email')}
-=======
                     mode="outlined"
                     label="Email"
-                    onChangeText={handleChange("email")}
-                    onBlur={handleBlur("email")}
->>>>>>> bd0051db8380138dfaeee6b3d17ad6af4fba3f48
+                    autoCapitalize="none"
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
                     value={values.email}
                   />
                   <SearchableDropdown
@@ -147,69 +128,65 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
                   />
                   <ScrollView style={{ marginBottom: 350, marginTop: 8 }}>
                     <TextInput
-                      mode='outlined'
-                      label='Address'
+                      mode="outlined"
+                      label="Address"
                       onChangeText={handleChange('info.address')}
                       onBlur={handleBlur('info.address')}
                       value={values.info.address}
                     />
                     <TextInput
-<<<<<<< HEAD
-                      mode='outlined'
-=======
                       mode="outlined"
                       label="DOB ..."
-                      onChangeText={handleChange("info.dob")}
-                      onBlur={handleBlur("info.dob")}
+                      onChangeText={handleChange('info.dob')}
+                      onBlur={handleBlur('info.dob')}
                       value={values.info.dob}
                     />
                     <TextInput
                       mode="outlined"
->>>>>>> bd0051db8380138dfaeee6b3d17ad6af4fba3f48
                       label="Mother's Name"
                       onChangeText={handleChange('info.motherName')}
                       onBlur={handleBlur('info.motherName')}
                       value={values.info.motherName}
                     />
                     <TextInput
-                      mode='outlined'
+                      mode="outlined"
                       label="Father's Name"
                       onChangeText={handleChange('info.fatherName')}
                       onBlur={handleBlur('info.fatherName')}
                       value={values.info.fatherName}
                     />
                     <TextInput
-                      mode='outlined'
+                      mode="outlined"
                       label="Gaurdian's Name"
                       onChangeText={handleChange('info.gaurdianName')}
                       onBlur={handleBlur('info.gaurdianName')}
                       value={values.info.gaurdianName}
                     />
                     <TextInput
-                      mode='outlined'
-                      label='Roll No.'
+                      mode="outlined"
+                      label="Roll No."
                       onChangeText={handleChange('info.rollNo')}
                       onBlur={handleBlur('info.rollNo')}
                       value={values.info.rollNo}
                     />
                     <TextInput
-                      mode='outlined'
-                      label='Admission No. '
+                      mode="outlined"
+                      label="Admission No. "
                       onChangeText={handleChange('info.admissionNo')}
                       onBlur={handleBlur('info.admissionNo')}
                       value={values.info.admissionNo}
                     />
                     <TextInput
-                      mode='outlined'
-                      label='Bus No. '
+                      mode="outlined"
+                      label="Bus No. "
                       onChangeText={handleChange('info.busNo')}
                       onBlur={handleBlur('info.busNo')}
                       value={values.info.busNo}
                     />
                     <TextInput
-                      mode='outlined'
-                      label='Phone No. '
-                      keyboardType='phone-pad'
+                      mode="outlined"
+                      label="Phone No. "
+                      keyboardType="phone-pad"
                       onChangeText={handleChange('info.phone')}
                       onBlur={handleBlur('info.phone')}
                       value={values.info.phone}
@@ -218,8 +195,8 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
                     <View>
                       <Button
                         onPress={handleSubmit}
-                        title='Submit'
-                        mode='contained'
+                        title="Submit"
+                        mode="contained"
                       >
                         Submit
                       </Button>
@@ -232,7 +209,7 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
           </Fragment>
           <FAB
             style={adminStyles.fab}
-            icon='backburger'
+            icon="backburger"
             onPress={() => openEditModal(false)}
           />
         </View>
