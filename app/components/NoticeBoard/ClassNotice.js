@@ -1,14 +1,14 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
-import { ScrollView, View } from "react-native";
-import { IconButton, ActivityIndicator } from "react-native-paper";
-import axios from "axios";
-import { useIsFocused } from "@react-navigation/native";
+import React, { Fragment, useContext, useEffect, useState } from 'react';
+import { ScrollView, View, Text } from 'react-native';
+import { IconButton, ActivityIndicator } from 'react-native-paper';
+import axios from 'axios';
+import { useIsFocused } from '@react-navigation/native';
 
-import { AuthContext } from "../../context/AuthContext";
-import { URL } from "../../config";
-import styles from "./styles";
+import { AuthContext } from '../../context/AuthContext';
+import { URL } from '../../config';
+import styles from './styles';
 
-import NoticeCard from "./NoticeCard";
+import NoticeCard from './NoticeCard';
 
 const ClassNotice = ({ navigation }) => {
   const isFocused = useIsFocused();
@@ -21,8 +21,8 @@ const ClassNotice = ({ navigation }) => {
 
   const getNotices = async () => {
     setLoading(true);
-    const notices = await axios.get(URL + "/classnotice/" + user.class_, {
-      "auth-token": token,
+    const notices = await axios.get(URL + '/classnotice/' + user.class_, {
+      'auth-token': token,
     });
     setNotices(notices.data.notices);
     setLoading(false);
@@ -54,20 +54,21 @@ const ClassNotice = ({ navigation }) => {
         <View style={styles.container}>
           <ActivityIndicator
             animating={true}
-            size="large"
+            size='large'
             style={styles.loading}
           />
         </View>
       )}
-      {rank === "1" ? (
+      {rank === '1' ? (
         <IconButton
-          icon="plus"
+          icon='plus'
           style={styles.fab}
-          color="white"
+          color='white'
           size={40}
-          onPress={() => navigation.push("New Class Notice")}
+          onPress={() => navigation.push('New Class Notice')}
         />
       ) : null}
+      <Text></Text>
     </Fragment>
   );
 };

@@ -88,6 +88,7 @@ const ClassList = ({ navigation }) => {
           )}
           <Text></Text>
           <Text></Text>
+          <Text></Text>
         </ScrollView>
       </View>
     </React.Fragment>

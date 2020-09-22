@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect, Fragment } from 'react';
 import {
   DataTable,
   RadioButton,
-  Text,
   Button,
   Paragraph,
   IconButton,
@@ -10,12 +9,13 @@ import {
   Portal,
   Provider as PaperProvider,
 } from 'react-native-paper';
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert, Text } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from 'axios';
 
 import { AuthContext } from '../../context/AuthContext';
 import { URL } from '../../config';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const StudentRow = (props) => {
   useEffect(() => {
@@ -247,15 +247,7 @@ const AddAttendence = ({ navigation }) => {
             />
           )}
         </View>
-        <IconButton
-          icon='content-save'
-          style={styles.fab}
-          color='white'
-          size={40}
-          onPress={() => {
-            showDialog();
-          }}
-        />
+
         <View>
           <DataTable>
             <DataTable.Header>
@@ -263,21 +255,42 @@ const AddAttendence = ({ navigation }) => {
               <DataTable.Title style={styles.present}>Present</DataTable.Title>
               <DataTable.Title style={styles.absent}>Absent</DataTable.Title>
             </DataTable.Header>
-            {attendances.length !== 0 ? (
-              attendances.map((st) => (
-                <StudentRow
-                  name={st.name}
-                  key={st._id}
-                  _id={st.studentId}
-                  status={st.status}
-                  updateAttendance={updateAttendance}
-                />
-              ))
-            ) : (
-              <Paragraph style={{ alignSelf: 'center', marginTop: 10 }}>
-                Attendance for this day does not exist
-              </Paragraph>
-            )}
+            <ScrollView>
+              {attendances.length !== 0 ? (
+                attendances.map((st) => (
+                  <StudentRow
+                    name={st.name}
+                    key={st._id}
+                    _id={st.studentId}
+                    status={st.status}
+                    updateAttendance={updateAttendance}
+                  />
+                ))
+              ) : (
+                <Paragraph style={{ alignSelf: 'center', marginTop: 10 }}>
+                  Attendance for this day does not exist
+                </Paragraph>
+              )}
+              <Button
+                onPress={() => {
+                  showDialog();
+                }}
+                icon='content-save'
+                mode='contained'
+                color='#159957'
+                style={styles.btn}
+              >
+                submit
+              </Button>
+              <Text></Text>
+              <Text></Text>
+              <Text></Text>
+              <Text></Text>
+              <Text></Text>
+              <Text></Text>
+              <Text></Text>
+              <Text></Text>
+            </ScrollView>
           </DataTable>
         </View>
       </PaperProvider>
@@ -295,6 +308,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     position: 'relative',
     paddingHorizontal: 'auto',
+  },
+  btn: {
+    marginVertical: 10,
+    width: 200,
+    alignSelf: 'center',
   },
   presentChecked: {
     paddingLeft: 215,
