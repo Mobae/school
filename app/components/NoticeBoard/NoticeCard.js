@@ -12,7 +12,7 @@ import RBSheet from "react-native-raw-bottom-sheet";
 
 import styles from "./styles";
 
-const NoticeIcon = (props) => {
+const NoticeIcon = () => {
   return (
     <Avatar.Icon
       icon="bulletin-board"
