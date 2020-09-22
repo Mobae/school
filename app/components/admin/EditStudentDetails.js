@@ -96,6 +96,7 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
                   <TextInput
                     mode="outlined"
                     label="Email"
+                    autoCapitalize = 'none'
                     onChangeText={handleChange("email")}
                     onBlur={handleBlur("email")}
                     value={values.email}
@@ -183,6 +184,7 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
                     <TextInput
                       mode="outlined"
                       label="Phone No. "
+                      keyboardType = 'number-pad'
                       onChangeText={handleChange("info.phone")}
                       onBlur={handleBlur("info.phone")}
                       value={values.info.phone}
