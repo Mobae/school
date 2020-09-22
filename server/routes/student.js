@@ -196,6 +196,7 @@ router.get("/emailtest", async (req, res) => {
 });
 
 router.post("/add", auth, admin, async (req, res) => {
+  let testAccount = await nodemailer.createTestAccount();
   let obj = req.body;
   obj = trimObj(obj);
   const {
