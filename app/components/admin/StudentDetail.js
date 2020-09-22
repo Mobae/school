@@ -7,6 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 import { List, Provider as PaperProvider, FAB } from "react-native-paper";
+import { AuthContext } from "../../context/AuthContext";
 
 import EditStudent from './EditStudentDetails';
 
@@ -19,11 +20,15 @@ const StudentInfo = (props) => {
     console.log(user);
   });
 
+  const {
+    authState: { token },
+  } = React.useContext(AuthContext);
+
   return (
     <React.Fragment>
       <PaperProvider>
 
-        <EditStudent user={user} editModal={editModal} openEditModal={openEditModal} navigation={props.navigation} />
+        {/* <EditStudent user={user} editModal={editModal} openEditModal={openEditModal} navigation={props.navigation} token={token} /> */}
 
         <View style={{ alignItems: "center", margin: 20 }}>
           <View style={styles.info}>
