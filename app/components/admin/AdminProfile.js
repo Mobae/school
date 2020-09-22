@@ -16,12 +16,12 @@ import { AdminContext } from '../../context/AdminContext';
 import adminStyles from './AdminStyles';
 import AttendanceClassList from './AttendanceClassList';
 
-const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
+const LeftContent = (props) => <Avatar.Icon {...props} icon='folder' />;
 
 const attendanceIcon = (props) => (
   <Avatar.Icon
     {...props}
-    icon="clipboard-text"
+    icon='clipboard-text'
     style={{ backgroundColor: '#00674D' }}
   />
 );
@@ -29,20 +29,20 @@ const attendanceIcon = (props) => (
 const classesIcon = (props) => (
   <Avatar.Icon
     {...props}
-    icon="google-classroom"
+    icon='google-classroom'
     style={{ backgroundColor: '#2E6E80' }}
   />
 );
 
 const teachersIcon = (props) => (
-  <Avatar.Icon {...props} icon="teach" style={{ backgroundColor: '#8A3B37' }} />
+  <Avatar.Icon {...props} icon='teach' style={{ backgroundColor: '#8A3B37' }} />
 );
 
 const studentsIcon = (props) => (
   <Avatar.Icon
     {...props}
-    icon="clipboard-account"
-    color="#fff"
+    icon='clipboard-account'
+    color='#fff'
     style={{ backgroundColor: '#3b3691' }}
   />
 );
@@ -53,7 +53,8 @@ const AdminProfile = ({ navigation }) => {
     addTeacher,
     addStudent,
     adminState,
-    profileLoading, setProfileLoading,
+    profileLoading,
+    setProfileLoading,
     getAllData,
     reload,
     studentFlag,
@@ -93,14 +94,14 @@ const AdminProfile = ({ navigation }) => {
 
         {/* // ATTENDANCE CARD */}
         <ScrollView>
-          <View style = {{marginTop : 10}}>
+          <View style={{ marginTop: 10 }}>
             <Card
               style={adminStyles.card}
               onPress={() => navigation.navigate('AttendanceClassList')}
             >
               <Card.Title
-                title="Attendance"
-                subtitle="View Attendance"
+                title='Attendance'
+                subtitle='View Attendance'
                 left={attendanceIcon}
               />
               <Card.Content>
@@ -110,23 +111,20 @@ const AdminProfile = ({ navigation }) => {
           </View>
 
           {/* // CLASS CARD/ */}
-          <Text></Text>
           <View>
             <Card style={adminStyles.card}>
-              <Card.Title title="Classes" left={classesIcon} />
+              <Card.Title title='Classes' left={classesIcon} />
               <Card.Content>
-                <Paragraph>
-                  Overview of Classes
-                </Paragraph>
+                <Paragraph>Overview of Classes</Paragraph>
               </Card.Content>
               <Card.Actions>
                 <Button
                   onPress={() => navigation.navigate('ClassList')}
-                  color="#2E6E80"
+                  color='#2E6E80'
                 >
                   VIEW
                 </Button>
-                <Button onPress={() => setClassModalOpen(true)} color="#2E6E80">
+                <Button onPress={() => setClassModalOpen(true)} color='#2E6E80'>
                   ADD
                 </Button>
               </Card.Actions>
@@ -134,25 +132,24 @@ const AdminProfile = ({ navigation }) => {
           </View>
 
           {/* // TEACHERS CARD */}
-          <Text></Text>
           <View>
             <Card style={adminStyles.card}>
-              <Card.Title title="Teachers" left={teachersIcon} />
+              <Card.Title title='Teachers' left={teachersIcon} />
               <Card.Content>
-                <Paragraph>Add & View  Teachers</Paragraph>
+                <Paragraph>Add & View Teachers</Paragraph>
               </Card.Content>
               <Card.Actions>
                 <Button
                   onPress={() => {
                     navigation.navigate('TeacherList');
                   }}
-                  color="#8A3B37"
+                  color='#8A3B37'
                 >
                   VIEW
                 </Button>
                 <Button
                   onPress={() => setTeacherModalOpen(true)}
-                  color="#8A3B37"
+                  color='#8A3B37'
                 >
                   ADD
                 </Button>
@@ -161,10 +158,9 @@ const AdminProfile = ({ navigation }) => {
           </View>
 
           {/* // STUDENT CARD */}
-          <Text></Text>
           <View>
             <Card style={adminStyles.card}>
-              <Card.Title title="Students" left={studentsIcon} />
+              <Card.Title title='Students' left={studentsIcon} />
               <Card.Content>
                 <Paragraph>View All Students</Paragraph>
               </Card.Content>
@@ -173,13 +169,13 @@ const AdminProfile = ({ navigation }) => {
                   onPress={() => {
                     navigation.navigate('AllStudentList');
                   }}
-                  color="#3b3691"
+                  color='#3b3691'
                 >
                   VIEW
                 </Button>
                 <Button
                   onPress={() => setStudentModalOpen(true)}
-                  color="#3b3691"
+                  color='#3b3691'
                 >
                   ADD
                 </Button>
@@ -195,7 +191,7 @@ const AdminProfile = ({ navigation }) => {
       <View style={styles.container}>
         <ActivityIndicator
           animating={true}
-          size="large"
+          size='large'
           style={styles.loading}
         />
       </View>
