@@ -16,8 +16,12 @@ import { AdminContext } from "../../context/AdminContext";
 import globalStyles from "../styles/global";
 import adminStyles from "./AdminStyles";
 
-const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
+const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
   const url = "https://school-server-testing.herokuapp.com";
+
+  const headers = {
+    "auth-token": token,
+  };
 
   const {
     adminState,
@@ -26,9 +30,6 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
     reload,
     setReload,
   } = React.useContext(AdminContext);
-
-  let firstName = user.name.split(" ")[0];
-  let lastName = user.name.split(" ")[1];
 
   var classes = adminState.classes.map((class_) => {
     return {
@@ -40,7 +41,7 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
   const editStudent = async (values) => {
     try {
       values.studentId = user._id;
-      const res = await axios.post(url + "/student/update/student", values);
+      const res = await axios.post(url + "/student/update/student", values, { headers });
       setReload(!reload);
       navigation.navigate("AllStudentList");
     } catch (err) {
@@ -64,8 +65,7 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
             <Text></Text>
             <Formik
               initialValues={{
-                firstName: firstName,
-                lastName: lastName,
+                name: user.name,
                 email: user.email,
                 classId: "",
                 rank: "0",
@@ -81,17 +81,10 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
                 <View style={globalStyles.view}>
                   <TextInput
                     mode="outlined"
-                    label="First Name"
-                    onChangeText={handleChange("firstName")}
-                    onBlur={handleBlur("firstName")}
-                    value={values.firstName}
-                  />
-                  <TextInput
-                    mode="outlined"
-                    label="Last Name"
-                    onChangeText={handleChange("lastName")}
-                    onBlur={handleBlur("lastName")}
-                    value={values.lastName}
+                    label="Name"
+                    onChangeText={handleChange("name")}
+                    onBlur={handleBlur("name")}
+                    value={values.name}
                   />
                   <TextInput
                     mode="outlined"
@@ -137,6 +130,13 @@ const EditStudent = ({ user, editModal, openEditModal, navigation }) => {
                       onChangeText={handleChange("info.address")}
                       onBlur={handleBlur("info.address")}
                       value={values.info.address}
+                    />
+                    <TextInput
+                      mode="outlined"
+                      label="DOB ..."
+                      onChangeText={handleChange("info.dob")}
+                      onBlur={handleBlur("info.dob")}
+                      value={values.info.dob}
                     />
                     <TextInput
                       mode="outlined"
