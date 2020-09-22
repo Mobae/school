@@ -13,7 +13,6 @@ import {
   IconButton,
 } from 'react-native-paper';
 
-// import RNFetchBlob from 'rn-fetch-blob';
 import * as MediaLibrary from 'expo-media-library';
 import * as FileSystem from 'expo-file-system';
 import * as Permissions from 'expo-permissions';
@@ -134,7 +133,6 @@ const Files = ({ navigation, route }) => {
                             icon="download"
                             size={35}
                             onPress={() => {
-                              // download(file.filename);
                               downloadFile(file.filename, file.caption);
                             }}
                             color="#2D5264"
