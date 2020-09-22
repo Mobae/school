@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState, Fragment } from "react";
 import { View, StyleSheet } from "react-native";
 import {
   Title,
@@ -101,7 +101,7 @@ const AllStudentsAttendance = ({ navigation }) => {
   }, [isFocused]);
 
   return (
-    <React.Fragment>
+    <Fragment>
       <PaperProvider>
         <View>
           <Title style={styles.title}>Attendance</Title>
@@ -128,7 +128,7 @@ const AllStudentsAttendance = ({ navigation }) => {
       </PaperProvider>
       <Fab navigation={navigation} />
       <StatusBar style="auto" />
-    </React.Fragment>
+    </Fragment>
   );
 };
 

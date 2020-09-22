@@ -1,5 +1,5 @@
-import React, { Fragment, useRef } from 'react';
-import { View } from 'react-native';
+import React, { Fragment, useRef } from "react";
+import { View } from "react-native";
 import {
   Card,
   Avatar,
@@ -7,17 +7,17 @@ import {
   TouchableRipple,
   Subheading,
   Headline,
-} from 'react-native-paper';
-import RBSheet from 'react-native-raw-bottom-sheet';
+} from "react-native-paper";
+import RBSheet from "react-native-raw-bottom-sheet";
 
-import styles from './styles';
+import styles from "./styles";
 
-const NoticeIcon = () => {
+const NoticeIcon = (props) => {
   return (
     <Avatar.Icon
       icon="bulletin-board"
       size={45}
-      style={{ backgroundColor: '#63211A' }}
+      style={{ backgroundColor: "#63211A" }}
     />
   );
 };
