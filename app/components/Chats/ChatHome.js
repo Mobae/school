@@ -1,10 +1,10 @@
-import React, { Fragment, useContext, useState } from "react";
-import { Avatar, Card, IconButton, TouchableRipple } from "react-native-paper";
-import { View, StyleSheet } from "react-native";
-import styles from "../NoticeBoard/styles";
+import React, { Fragment, useContext, useState } from 'react';
+import { Avatar, Card, IconButton, TouchableRipple } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import styles from '../NoticeBoard/styles';
 
-import globalStyles from "../styles/global";
-import { AuthContext } from "../../context/AuthContext";
+import globalStyles from '../styles/global';
+import { AuthContext } from '../../context/AuthContext';
 
 const ChatHome = ({ navigation }) => {
   const { authState, getUser } = useContext(AuthContext);
@@ -13,12 +13,12 @@ const ChatHome = ({ navigation }) => {
   } = authState;
 
   const Nav = () => {
-    const [nav, setNav] = useState("");
+    const [nav, setNav] = useState('');
 
-    if (rank === "1") {
-      setNav("ClassList");
+    if (rank === '1') {
+      setNav('ClassList');
     } else {
-      setNav("StudentFileView");
+      setNav('StudentFileView');
     }
     console.log(nav);
     return nav;
@@ -26,7 +26,7 @@ const ChatHome = ({ navigation }) => {
 
   return (
     <Fragment>
-      <Card style={globalStyles.card}>
+      {/* <Card style={globalStyles.card}>
         <TouchableRipple onPress={() => navigation.navigate("Doubts Corner")}>
           <Fragment>
             <Card.Title
@@ -44,12 +44,12 @@ const ChatHome = ({ navigation }) => {
             <Card.Content style={globalStyles.cardContent}></Card.Content>
           </Fragment>
         </TouchableRipple>
-      </Card>
+      </Card> */}
 
-      {rank === "0" ? (
+      {rank === '0' ? (
         <Card style={globalStyles.card}>
           <TouchableRipple
-            onPress={() => navigation.navigate("StudentFileView")}
+            onPress={() => navigation.navigate('StudentFileView')}
           >
             <Fragment>
               <Card.Title
@@ -59,7 +59,7 @@ const ChatHome = ({ navigation }) => {
                   <Avatar.Icon
                     {...props}
                     icon="file-document-box-multiple"
-                    style={{ backgroundColor: "#3D64A4" }}
+                    style={{ backgroundColor: '#3D64A4' }}
                   />
                 )}
               />
@@ -67,10 +67,10 @@ const ChatHome = ({ navigation }) => {
             </Fragment>
           </TouchableRipple>
         </Card>
-      ) : rank === "1" ? (
+      ) : rank === '1' ? (
         <Card style={globalStyles.card}>
           <TouchableRipple
-            onPress={() => navigation.navigate("TeacherClassList")}
+            onPress={() => navigation.navigate('TeacherClassList')}
           >
             <Fragment>
               <Card.Title
@@ -80,7 +80,7 @@ const ChatHome = ({ navigation }) => {
                   <Avatar.Icon
                     {...props}
                     icon="file-document-box-multiple"
-                    style={{ backgroundColor: "#3D64A4" }}
+                    style={{ backgroundColor: '#3D64A4' }}
                   />
                 )}
               />
@@ -88,9 +88,9 @@ const ChatHome = ({ navigation }) => {
             </Fragment>
           </TouchableRipple>
         </Card>
-      ) : rank === "2" ? (
+      ) : rank === '2' ? (
         <Card style={globalStyles.card}>
-          <TouchableRipple onPress={() => navigation.navigate("ClassList")}>
+          <TouchableRipple onPress={() => navigation.navigate('ClassList')}>
             <Fragment>
               <Card.Title
                 title="Files"
@@ -99,7 +99,7 @@ const ChatHome = ({ navigation }) => {
                   <Avatar.Icon
                     {...props}
                     icon="file-document-box-multiple"
-                    style={{ backgroundColor: "#3D64A4" }}
+                    style={{ backgroundColor: '#3D64A4' }}
                   />
                 )}
               />

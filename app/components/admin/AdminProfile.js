@@ -53,7 +53,8 @@ const AdminProfile = ({ navigation }) => {
     addTeacher,
     addStudent,
     adminState,
-    profileLoading, setProfileLoading,
+    profileLoading,
+    setProfileLoading,
     getAllData,
     reload,
     studentFlag,
@@ -93,7 +94,7 @@ const AdminProfile = ({ navigation }) => {
 
         {/* // ATTENDANCE CARD */}
         <ScrollView>
-          <View style = {{marginTop : 10}}>
+          <View style={{ marginTop: 10 }}>
             <Card
               style={adminStyles.card}
               onPress={() => navigation.navigate('AttendanceClassList')}
@@ -110,14 +111,11 @@ const AdminProfile = ({ navigation }) => {
           </View>
 
           {/* // CLASS CARD/ */}
-          <Text></Text>
           <View>
             <Card style={adminStyles.card}>
               <Card.Title title="Classes" left={classesIcon} />
               <Card.Content>
-                <Paragraph>
-                  Overview of Classes
-                </Paragraph>
+                <Paragraph>Overview of Classes</Paragraph>
               </Card.Content>
               <Card.Actions>
                 <Button
@@ -134,12 +132,11 @@ const AdminProfile = ({ navigation }) => {
           </View>
 
           {/* // TEACHERS CARD */}
-          <Text></Text>
           <View>
             <Card style={adminStyles.card}>
               <Card.Title title="Teachers" left={teachersIcon} />
               <Card.Content>
-                <Paragraph>Add & View  Teachers</Paragraph>
+                <Paragraph>Add & View Teachers</Paragraph>
               </Card.Content>
               <Card.Actions>
                 <Button
@@ -161,7 +158,6 @@ const AdminProfile = ({ navigation }) => {
           </View>
 
           {/* // STUDENT CARD */}
-          <Text></Text>
           <View>
             <Card style={adminStyles.card}>
               <Card.Title title="Students" left={studentsIcon} />
@@ -197,6 +193,7 @@ const AdminProfile = ({ navigation }) => {
           animating={true}
           size="large"
           style={styles.loading}
+          color="#2D5264"
         />
       </View>
     );
