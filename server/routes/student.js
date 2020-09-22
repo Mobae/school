@@ -1,6 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
 
 const router = express.Router();
 
@@ -12,6 +13,16 @@ const Student = require("../models/Student");
 const Teacher = require("../models/Teacher");
 const Class = require("../models/Class");
 const Admin = require("../models/Admin");
+
+let transporter = nodemailer.createTransport({
+  host: "smtp.ethereal.email",
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: testAccount.user, // generated ethereal user
+    pass: testAccount.pass, // generated ethereal password
+  },
+});
 
 router.get("/students/all", auth, admin, async (req, res) => {
   try {
@@ -191,6 +202,18 @@ router.post("/add", auth, admin, async (req, res) => {
     let password = genRandPass();
     console.log(`password: ${password}`);
     const tempPass = "abcd";
+    const randPass = genRandPass();
+
+    let info = await transporter.sendMail({
+      from: '"Fred Foo 👻" <foo@example.com>', // sender address
+      to: "jakeryam123@gmail.com, cool_aryansingh@rediffmail.com", // list of receivers
+      subject: "Hello ✔", // Subject line
+      text: "Hello world?", // plain text body
+      html: "<b>Hello world?</b>", // html body
+    });
+
+    console.log("Message sent: %s", info.messageId);
+
     const salt = await bcrypt.genSalt();
     password = await bcrypt.hash(tempPass, salt);
     if (rank === "0") {
