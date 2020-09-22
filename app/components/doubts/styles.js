@@ -10,9 +10,9 @@ const styles = {
     marginBottom: 0,
   },
   container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
     height: "100%",
     width: "100%",
   },
