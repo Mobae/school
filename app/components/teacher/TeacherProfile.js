@@ -1,34 +1,35 @@
-import React, { Fragment, useContext, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
-import { Avatar, Card, Paragraph, TouchableRipple } from 'react-native-paper';
+import React, { Fragment, useContext, useEffect } from "react";
+import { StyleSheet } from "react-native";
+import { Avatar, Card, Paragraph, TouchableRipple } from "react-native-paper";
 
-import { AuthContext } from '../../context/AuthContext';
+import globalStyles from "../styles/global";
+import { AuthContext } from "../../context/AuthContext";
 
 const ProfileIcon = (props) => (
   <Avatar.Icon
     {...props}
-    icon='account'
+    icon="account"
     size={45}
-    style={{ backgroundColor: '#249c12' }}
+    style={{ backgroundColor: "#249c12" }}
   />
 );
 
 const AttendanceIcon = (props) => (
   <Avatar.Icon
     {...props}
-    icon='book'
+    icon="book"
     size={45}
-    style={{ backgroundColor: '#249c12' }}
+    style={{ backgroundColor: "#249c12" }}
   />
 );
 
 const StudentsIcon = (props) => (
   <Avatar.Icon
     {...props}
-    icon='contacts'
+    icon="contacts"
     size={45}
-    color='white'
-    style={{ backgroundColor: '#249c12' }}
+    color="white"
+    style={{ backgroundColor: "#249c12" }}
   />
 );
 
@@ -37,9 +38,9 @@ const TeacherProfile = ({ navigation }) => {
   const { user } = authState;
   return (
     <Fragment>
-      <Card style={styles}>
+      <Card style={globalStyles.card}>
         {/* <TouchableRipple> */}
-        <Card.Title title='Profile' subtitle={user.name} left={ProfileIcon} />
+        <Card.Title title="Profile" subtitle={user.name} left={ProfileIcon} />
         <Card.Content>
           <Paragraph>Email: {user.email}</Paragraph>
           {user.class_ ? (
@@ -52,22 +53,28 @@ const TeacherProfile = ({ navigation }) => {
       </Card>
       {user.class_ ? (
         <Fragment>
-          <Card style={styles}>
-            <TouchableRipple onPress={() => navigation.push('Attendance')}>
-              <Card.Title
-                title='Attendance'
-                subtitle='View Attendance'
-                left={AttendanceIcon}
-              />
+          <Card style={globalStyles.card}>
+            <TouchableRipple onPress={() => navigation.push("Attendance")}>
+              <Fragment>
+                <Card.Title
+                  title="Attendance"
+                  subtitle="View Attendance"
+                  left={AttendanceIcon}
+                />
+                <Card.Content style={globalStyles.cardContent}></Card.Content>
+              </Fragment>
             </TouchableRipple>
           </Card>
-          <Card style={styles}>
-            <TouchableRipple onPress={() => navigation.push('Students')}>
-              <Card.Title
-                title='Students'
-                subtitle='View Students'
-                left={StudentsIcon}
-              />
+          <Card style={globalStyles.card}>
+            <TouchableRipple onPress={() => navigation.push("Students")}>
+              <Fragment>
+                <Card.Title
+                  title="Students"
+                  subtitle="View Students"
+                  left={StudentsIcon}
+                />
+                <Card.Content style={globalStyles.cardContent}></Card.Content>
+              </Fragment>
             </TouchableRipple>
           </Card>
         </Fragment>
@@ -75,10 +82,5 @@ const TeacherProfile = ({ navigation }) => {
     </Fragment>
   );
 };
-
-const styles = StyleSheet.create({
-  margin: 10,
-  marginBottom: 0,
-});
 
 export default TeacherProfile;

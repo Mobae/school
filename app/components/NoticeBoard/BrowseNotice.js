@@ -6,14 +6,18 @@ import globalStyles from "../styles/global";
 import { AuthContext } from "../../context/AuthContext";
 
 const SchoolIcon = (props) => (
-  <Avatar.Icon {...props} icon="school" style={{ backgroundColor: "#000" }} />
+  <Avatar.Icon
+    {...props}
+    icon="school"
+    style={{ backgroundColor: "#722F37" }}
+  />
 );
 
 const ClassIcon = (props) => (
   <Avatar.Icon
     {...props}
     icon="account-multiple-outline"
-    style={{ backgroundColor: "#000" }}
+    style={{ backgroundColor: "#0892D0" }}
   />
 );
 

@@ -17,9 +17,15 @@ router.get("/:classId", auth, async (req, res) => {
 });
 
 router.post("/", auth, async (req, res) => {
-  const { class_, author, title, description } = req.body;
+  const { class_, author, title, description, date } = req.body;
   try {
-    const doubt = new Doubt({ class: class_, author, title, description });
+    const doubt = new Doubt({
+      class: class_,
+      author,
+      title,
+      description,
+      date,
+    });
     doubt.save();
     res.json({ doubt });
   } catch (err) {

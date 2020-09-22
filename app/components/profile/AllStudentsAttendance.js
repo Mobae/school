@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState, Fragment } from "react";
 import { View, StyleSheet } from "react-native";
 import {
   Title,
@@ -13,6 +13,7 @@ import axios from "axios";
 
 import { URL } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Fab = ({ navigation }) => {
   const [state, setState] = React.useState({ open: false });
@@ -100,7 +101,7 @@ const AllStudentsAttendance = ({ navigation }) => {
   }, [isFocused]);
 
   return (
-    <React.Fragment>
+    <Fragment>
       <PaperProvider>
         <View>
           <Title style={styles.title}>Attendance</Title>
@@ -112,28 +113,22 @@ const AllStudentsAttendance = ({ navigation }) => {
               <DataTable.Title numeric>Roll No.</DataTable.Title>
               <DataTable.Title numeric>Attendance</DataTable.Title>
             </DataTable.Header>
-            {studentList.map((student) => (
-              <DataRow
-                name={student.name}
-                key={student._id}
-                rollNo={student.rollNo}
-                att={((student.pt.p / student.pt.t) * 100).toFixed(2) + "%"}
-              />
-            ))}
-            <DataTable.Pagination
-              page={1}
-              numberOfPages={3}
-              onPageChange={(page) => {
-                console.log(page);
-              }}
-              label="1-2 of 6"
-            />
+            <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+              {studentList.map((student) => (
+                <DataRow
+                  name={student.name}
+                  key={student._id}
+                  rollNo={student.rollNo}
+                  att={((student.pt.p / student.pt.t) * 100).toFixed(2) + "%"}
+                />
+              ))}
+            </ScrollView>
           </DataTable>
         </View>
       </PaperProvider>
       <Fab navigation={navigation} />
       <StatusBar style="auto" />
-    </React.Fragment>
+    </Fragment>
   );
 };
 
