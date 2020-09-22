@@ -53,7 +53,13 @@ const AllDoubts = ({ navigation }) => {
           onPress={() => navigation.navigate("Add Doubt")}
         />
       ) : (
-        <View style={styles.container}>
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+          }}
+        >
           <ActivityIndicator
             animating={true}
             size="large"
