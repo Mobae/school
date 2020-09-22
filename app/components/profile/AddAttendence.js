@@ -9,13 +9,13 @@ import {
   Portal,
   Provider as PaperProvider,
 } from 'react-native-paper';
-import { StyleSheet, View, Alert, ScrollView, Text } from 'react-native';
+import { StyleSheet, View, Alert, Text } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from 'axios';
 
 import { AuthContext } from '../../context/AuthContext';
 import { URL } from '../../config';
-// import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const StudentRow = (props) => {
   const [checked, setChecked] = React.useState(0);
@@ -220,31 +220,38 @@ const AddAttendence = ({ navigation }) => {
             />
           )}
         </View>
-        <IconButton
-          icon='content-save'
-          style={styles.fab}
-          color='white'
-          size={40}
-          onPress={() => {
-            showDialog();
-          }}
-        />
-        <View>
+
+        <View style={{ flex: 2 }}>
           <DataTable>
             <DataTable.Header>
               <DataTable.Title style={styles.name}>Names</DataTable.Title>
               <DataTable.Title style={styles.present}>Present</DataTable.Title>
               <DataTable.Title style={styles.absent}>Absent</DataTable.Title>
             </DataTable.Header>
-
-            {students.map((st) => (
-              <StudentRow
-                name={st.name}
-                key={st._id}
-                _id={st._id}
-                updateAttendance={updateAttendance}
-              />
-            ))}
+            <ScrollView>
+              {students.map((st) => (
+                <StudentRow
+                  name={st.name}
+                  key={st._id}
+                  _id={st._id}
+                  updateAttendance={updateAttendance}
+                />
+              ))}
+              <Button
+                onPress={() => {
+                  showDialog();
+                }}
+                icon='content-save'
+                mode='contained'
+                color='#159957'
+                style={styles.btn}
+              >
+                submit
+              </Button>
+              <Text></Text>
+              <Text></Text>
+              <Text></Text>
+            </ScrollView>
           </DataTable>
         </View>
       </PaperProvider>
@@ -294,10 +301,17 @@ const styles = StyleSheet.create({
   byline: {
     fontWeight: 'bold',
   },
+  btn: {
+    // position: 'absolute',
+    // bottom: 30,
+    marginVertical: 10,
+    width: 200,
+    alignSelf: 'center',
+  },
   fab: {
     position: 'absolute',
     margin: 16,
-    right: 18,
+    right: 35,
     bottom: 0,
     height: 63,
     borderRadius: 50,
