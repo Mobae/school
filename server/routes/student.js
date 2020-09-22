@@ -265,17 +265,61 @@ router.post("/add", auth, admin, async (req, res) => {
   }
 });
 
-router.get("/emailtest/hello", async (req, res) => {
-  console.log("hello");
-  const tempPass = genRandPass();
-  let info = await transporter.sendMail({
-    from: "jmrd@jmrd.com", // sender address
-    to: "jakeryam123@gmail.com, cool_aryansingh@rediffmail.com", // list of receivers
-    subject: "Your password for JMRD School App", // Subject line
-    html: `<p>Your password for the app is <b>${tempPass}</b></p>`, // html body
-  });
+router.post("/stu/changepassword", async (req, res) => {
+  const { _id, newPass, oldPass } = req.body;
+  let user = (await Student.findById(_id)).toJSON();
+  if (user) {
+    const verified = await bcrypt.compare(oldPass, user.password);
+    if (verified) {
+      const salt = await bcrypt.genSalt();
+      const newPassSave = await bcrypt.hash(newPass, salt);
+      user.password = newPassSave;
+      await user.save();
+      res.json({ success: "true" });
+    } else {
+      res.status(400).json({ error: "Incorrect password" });
+    }
+  } else {
+    res.status(400).json({ error: "User does not exist" });
+  }
+});
 
-  console.log("Message sent: %s", info.messageId);
+router.post("/tea/changepassword", async (req, res) => {
+  const { _id, newPass, oldPass } = req.body;
+  let user = (await Teacher.findById(_id)).toJSON();
+  if (user) {
+    const verified = await bcrypt.compare(oldPass, user.password);
+    if (verified) {
+      const salt = await bcrypt.genSalt();
+      const newPassSave = await bcrypt.hash(newPass, salt);
+      user.password = newPassSave;
+      await user.save();
+      res.json({ success: "true" });
+    } else {
+      res.status(400).json({ error: "Incorrect password" });
+    }
+  } else {
+    res.status(400).json({ error: "User does not exist" });
+  }
+});
+
+router.post("/adm/changepassword", async (req, res) => {
+  const { _id, newPass, oldPass } = req.body;
+  let user = (await Admin.findById(_id)).toJSON();
+  if (user) {
+    const verified = await bcrypt.compare(oldPass, user.password);
+    if (verified) {
+      const salt = await bcrypt.genSalt();
+      const newPassSave = await bcrypt.hash(newPass, salt);
+      user.password = newPassSave;
+      await user.save();
+      res.json({ success: "true" });
+    } else {
+      res.status(400).json({ error: "Incorrect password" });
+    }
+  } else {
+    res.status(400).json({ error: "User does not exist" });
+  }
 });
 
 router.post("/login", async (req, res) => {
