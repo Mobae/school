@@ -18,11 +18,7 @@ import globalStyles from "../styles/global";
 import adminStyles from "./AdminStyles";
 
 const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
-  const url = 'https://school-server-testing.herokuapp.com';
-
-  const headers = {
-    "auth-token": token,
-  };
+  const url = "https://school-server-testing.herokuapp.com";
 
   const headers = {
     "auth-token": token,
