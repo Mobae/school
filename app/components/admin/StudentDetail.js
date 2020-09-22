@@ -7,7 +7,6 @@ import {
   ScrollView,
 } from "react-native";
 import { List, Provider as PaperProvider, FAB } from "react-native-paper";
-import { AuthContext } from "../../context/AuthContext";
 
 import EditStudent from './EditStudentDetails';
 import { AuthContext }  from '../../context/AuthContext';
@@ -15,10 +14,6 @@ import { AuthContext }  from '../../context/AuthContext';
 const StudentInfo = (props) => {
 
   const [ editModal, openEditModal ] = useState(false);
-
-  const {
-    authState: { token },
-  } = useContext(AuthContext);
 
   const { user, class_ } = props.route.params;
   useEffect(() => {
