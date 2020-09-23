@@ -1,16 +1,16 @@
-import React, { Fragment, useContext, useEffect } from "react";
-import { StyleSheet } from "react-native";
-import { Avatar, Card, Paragraph, TouchableRipple } from "react-native-paper";
+import React, { Fragment, useContext, useEffect } from 'react';
+import { StyleSheet } from 'react-native';
+import { Avatar, Card, Paragraph, TouchableRipple } from 'react-native-paper';
 
-import globalStyles from "../styles/global";
-import { AuthContext } from "../../context/AuthContext";
+import globalStyles from '../styles/global';
+import { AuthContext } from '../../context/AuthContext';
 
 const ProfileIcon = (props) => (
   <Avatar.Icon
     {...props}
     icon="account"
     size={45}
-    style={{ backgroundColor: "#249c12" }}
+    style={{ backgroundColor: '#249c12' }}
   />
 );
 
@@ -19,7 +19,7 @@ const AttendanceIcon = (props) => (
     {...props}
     icon="book"
     size={45}
-    style={{ backgroundColor: "#249c12" }}
+    style={{ backgroundColor: '#249c12' }}
   />
 );
 
@@ -29,7 +29,7 @@ const StudentsIcon = (props) => (
     icon="contacts"
     size={45}
     color="white"
-    style={{ backgroundColor: "#249c12" }}
+    style={{ backgroundColor: '#249c12' }}
   />
 );
 
@@ -40,7 +40,7 @@ const TeacherProfile = ({ navigation }) => {
     <Fragment>
       <Card style={globalStyles.card}>
         {/* <TouchableRipple> */}
-        <Card.Title title="Profile" subtitle={user.name} left={ProfileIcon} />
+        <Card.Title title={user.name} left={ProfileIcon} />
         <Card.Content>
           <Paragraph>Email: {user.email}</Paragraph>
           {user.class_ ? (
@@ -54,7 +54,7 @@ const TeacherProfile = ({ navigation }) => {
       {user.class_ ? (
         <Fragment>
           <Card style={globalStyles.card}>
-            <TouchableRipple onPress={() => navigation.push("Attendance")}>
+            <TouchableRipple onPress={() => navigation.push('Attendance')}>
               <Fragment>
                 <Card.Title
                   title="Attendance"
@@ -66,7 +66,7 @@ const TeacherProfile = ({ navigation }) => {
             </TouchableRipple>
           </Card>
           <Card style={globalStyles.card}>
-            <TouchableRipple onPress={() => navigation.push("Students")}>
+            <TouchableRipple onPress={() => navigation.push('Students')}>
               <Fragment>
                 <Card.Title
                   title="Students"

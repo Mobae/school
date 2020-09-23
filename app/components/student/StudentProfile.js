@@ -1,22 +1,22 @@
-import React, { Fragment, useContext, useEffect } from "react";
-import { StyleSheet, Text } from "react-native";
+import React, { Fragment, useContext, useEffect } from 'react';
+import { StyleSheet, Text } from 'react-native';
 import {
   Avatar,
   Paragraph,
   Card,
   TouchableRipple,
   Button,
-} from "react-native-paper";
+} from 'react-native-paper';
 
-import globalStyles from "../styles/global";
-import { AuthContext } from "../../context/AuthContext";
+import globalStyles from '../styles/global';
+import { AuthContext } from '../../context/AuthContext';
 
 const ProfileIcon = (props) => (
   <Avatar.Icon
     {...props}
     icon="account"
     size={45}
-    style={{ backgroundColor: "#4a3b82" }}
+    style={{ backgroundColor: '#4a3b82' }}
   />
 );
 
@@ -25,7 +25,7 @@ const AttendanceIcon = (props) => (
     {...props}
     icon="book"
     size={45}
-    style={{ backgroundColor: "#4a3b82" }}
+    style={{ backgroundColor: '#4a3b82' }}
   />
 );
 
@@ -38,13 +38,9 @@ const StudentProfile = ({ navigation }) => {
   return (
     <Fragment>
       <Card style={globalStyles.card}>
-        <TouchableRipple onPress={() => navigation.push("Profile")}>
+        <TouchableRipple onPress={() => navigation.push('Profile')}>
           <Fragment>
-            <Card.Title
-              title="Profile"
-              subtitle={user.name}
-              left={ProfileIcon}
-            />
+            <Card.Title title={user.name} left={ProfileIcon} />
             <Card.Content style={globalStyles.cardContent}>
               <Paragraph>Email: {user.email}</Paragraph>
               <Paragraph>Class: {user.className}</Paragraph>
@@ -53,7 +49,7 @@ const StudentProfile = ({ navigation }) => {
         </TouchableRipple>
       </Card>
       <Card style={globalStyles.card}>
-        <TouchableRipple onPress={() => navigation.push("Attendance")}>
+        <TouchableRipple onPress={() => navigation.push('Attendance')}>
           <Fragment>
             <Card.Title
               title="Attendance"
