@@ -367,6 +367,10 @@ router.post("/forgot/verify", async (req, res) => {
       subject: "Your New Password - JMRD",
       html: `<p>Your new password is <b>${updated.password}</b>, valid for 5 minutes.</p>`,
     });
+    console.log("Message sent: %s", mailInfo.messageId);
+    res.json({ success: "true" });
+  } else {
+    res.status(400).json({ error: "invalid/expired OTP" });
   }
 });
 
