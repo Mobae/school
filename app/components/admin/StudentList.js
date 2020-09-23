@@ -20,7 +20,7 @@ const LeftContent = (props) => (
   />
 );
 
-const StudentList = () => {
+const StudentList = ({ navigation }) => {
   const { adminState, getStudents, loading } = React.useContext(AdminContext);
 
   React.useEffect(() => {
@@ -33,7 +33,15 @@ const StudentList = () => {
         <ScrollView>
           {adminState.students.map((student) => (
             <View key={student._id}>
-              <Card style={adminStyles.card}>
+              <Card
+                style={adminStyles.card}
+                onPress={() =>
+                  navigation.navigate('Student Details', {
+                    user: student,
+                    class_: student.studentClass,
+                  })
+                }
+              >
                 <Card.Title
                   title={student.name}
                   subtitle={student.email}
