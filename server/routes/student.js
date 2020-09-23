@@ -343,10 +343,17 @@ router.post("/forgot/initial", async (req, res) => {
       subject: "Your OTP - JMRD",
       html: `<p>Your 6-digit OTP is <b>${otp.otpStr}</b>, valid for 5 minutes.</p>`,
     });
+    res.json({ _id: user.id });
     console.log("Message sent: %s", mailInfo.messageId);
   } else {
     res.status(400).json({ error: "User does not exist" });
   }
+});
+
+router.post("/verify", async (req, res) => {
+  const { otpStr, _id } = req.body;
+  const otp = Otp.find({ _id, otpStr });
+  console.log(Date.now() - otp.date);
 });
 
 router.post("/login", async (req, res) => {
