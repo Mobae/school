@@ -17,9 +17,7 @@ const TeacherInfo = () => {
       <View style={{ alignItems: 'center', margin: 20 }}>
         <View style={styles.info}>
           <ImageBackground
-            source={{
-              uri: 'https://api.adorable.io/avatars/80/abott@adorable.png',
-            }}
+            source={require('../../assets/avatar.png')}
             style={{ height: 100, width: 100 }}
             imageStyle={{ borderRadius: 15 }}
           />
@@ -31,13 +29,10 @@ const TeacherInfo = () => {
       <React.Fragment>
         <ScrollView>
           <View style={styles.info}>
-            <Text style={styles.details}>Class Teacher: </Text>
+            <Text style={styles.details}>Contact No: </Text>
           </View>
           <View style={styles.info}>
-            <Text style={styles.details}>DOB:</Text>
-          </View>
-          <View style={styles.info}>
-            <Text style={styles.details}>Address: </Text>
+            <Text style={styles.details}>Email: </Text>
           </View>
           <View style={styles.info}>
             <View style={{ flexDirection: 'column' }}>
