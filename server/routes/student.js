@@ -267,7 +267,7 @@ router.post("/add", auth, admin, async (req, res) => {
 
 router.post("/stu/changepassword", auth, async (req, res) => {
   const { _id, newPass, oldPass } = req.body;
-  let user = (await Student.findOne({ id: _id })).toJSON();
+  let user = await Student.findOne({ id: _id });
   console.log(user);
   if (user) {
     const verified = await bcrypt.compare(oldPass, user.password);
@@ -275,8 +275,12 @@ router.post("/stu/changepassword", auth, async (req, res) => {
     if (verified) {
       const salt = await bcrypt.genSalt();
       const newPassSave = await bcrypt.hash(newPass, salt);
-      user.password = newPassSave;
-      await user.save();
+      const updated = await Student.findOneAndUpdate(
+        { id: _id },
+        {
+          password: newPassSave,
+        }
+      );
       res.json({ success: "true" });
     } else {
       res.status(400).json({ error: "Incorrect password" });
