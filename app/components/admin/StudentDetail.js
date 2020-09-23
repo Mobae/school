@@ -55,28 +55,23 @@ const StudentInfo = (props) => {
               </Text>
             </View>
             <View style={styles.info}>
-              <Text style={styles.details}>
-                Roll No.: {user.info.rollNo}
-              </Text>
+              <Text style={styles.details}>Roll No.: {user.info.rollNo}</Text>
             </View>
             <View style={styles.info}>
-              <Text style={styles.details}>DOB: {user.info.admissionNo}</Text>
+              <Text style={styles.details}>DOB: {user.info.dob}</Text>
             </View>
             <View style={styles.info}>
               <Text style={styles.details}>Bus No. : {user.info.busNo}</Text>
+            </View>
+            <View style={styles.info}>
               <Text style={styles.details}>
                 Phone Number: {'+91 ' + user.info.phone}
               </Text>
             </View>
-            <View style={styles.info}>
-              <Text style={styles.details}>
-                Phone Number: {"+91 " + user.info.phone}
-              </Text>
-            </View>
             <List.Accordion
-              title='Parent Details'
+              title="Parent Details"
               titleStyle={{ alignSelf: 'flex-start' }}
-              left={(props) => <List.Icon {...props} icon='account-child' />}
+              left={(props) => <List.Icon {...props} icon="account-child" />}
             >
               <ScrollView>
                 <View style={styles.info}>
@@ -97,7 +92,9 @@ const StudentInfo = (props) => {
                 </View>
                 <View style={styles.info}>
                   <View style={styles.parentInfo}>
-                    <Text style={styles.parentInfoText1}>Guardian's Details:</Text>
+                    <Text style={styles.parentInfoText1}>
+                      Guardian's Details:
+                    </Text>
                     <Text style={styles.parentInfoText2}>
                       Name: {user.info.gaurdianName}
                     </Text>
@@ -117,7 +114,7 @@ const StudentInfo = (props) => {
         </React.Fragment>
         <FAB
           style={styles.fab}
-          icon='account-edit'
+          icon="account-edit"
           onPress={() => openEditModal(true)}
         />
       </PaperProvider>
