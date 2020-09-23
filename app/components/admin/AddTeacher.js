@@ -38,6 +38,9 @@ const AddTeacher = ({
                 lastName: '',
                 email: '',
                 rank: '1',
+                info: {
+                  phoneNo: ''
+                }
               }}
               onSubmit={(values, actions) => {
                 actions.resetForm();
@@ -71,6 +74,14 @@ const AddTeacher = ({
                     onChangeText={handleChange('email')}
                     onBlur={handleBlur('email')}
                     value={values.email}
+                  />
+                  <TextInput
+                    mode='outlined'
+                    label='Contact Number'
+                    autoCapitalize='none'
+                    onChangeText={handleChange('info.phoneNo')}
+                    onBlur={handleBlur('info.phoneNo')}
+                    value={values.info.phoneNo}
                   />
                   <Button
                     style={{ marginTop: 15 }}

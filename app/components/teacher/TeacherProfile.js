@@ -38,7 +38,14 @@ const TeacherProfile = ({ navigation }) => {
   const { user } = authState;
   return (
     <Fragment>
-      <Card style={globalStyles.card}>
+      <Card 
+        style={globalStyles.card}
+        onPress={() => {
+          navigation.navigate('TeacherInfo', {
+            teacher: user
+          })
+        }}
+      >
         {/* <TouchableRipple> */}
         <Card.Title title={user.name} left={ProfileIcon} />
         <Card.Content>

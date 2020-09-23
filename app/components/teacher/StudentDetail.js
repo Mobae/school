@@ -36,29 +36,37 @@ const StudentInfo = (props) => {
               <Text style={styles.details}>Class: {class_}</Text>
             </View>
             <View style={styles.info}>
-              <Text style={styles.details}>
-                Admission No.: {user.info.admissionNo}
-              </Text>
+              {
+                user.info.admissionNo === undefined ? (
+                  <Text style={styles.details}>
+                    Admission No.: 
+                  </Text>
+                ) : (
+                  <Text style={styles.details}>
+                    Admission No.: {user.info.admissionNo}
+                  </Text>
+                )
+              }
             </View>
             <View style={styles.info}>
-              <Text style={styles.details}>DOB: {user.info.admissionNo}</Text>
+              {
+                user.info.dob === undefined ? (
+                  <Text style={styles.details}>
+                    DOB : 
+                  </Text>
+                ) : (
+                  <Text style={styles.details}>
+                    DOB : {user.info.dob}
+                  </Text>
+                )
+              }
             </View>
             <View style={styles.info}>
               <Text style={styles.details}>Bus Route: {user.info.busNo}</Text>
             </View>
             <View style={styles.info}>
               <Text style={styles.details}>
-                Aadhar No.: {user.info.admissionNo}
-              </Text>
-            </View>
-            <View style={styles.info}>
-              <Text style={styles.details}>
                 Phone Number: {'+91 ' + user.info.phone}
-              </Text>
-            </View>
-            <View style={styles.info}>
-              <Text style={styles.details}>
-                Date of Addmission: {user.info.admissionNo}
               </Text>
             </View>
             <List.Accordion
@@ -73,9 +81,6 @@ const StudentInfo = (props) => {
                     <Text style={styles.parentInfoText2}>
                       Name: {user.info.fatherName}
                     </Text>
-                    <Text style={styles.parentInfoText2}>
-                      Number: {user.info.fatherName}
-                    </Text>
                   </View>
                 </View>
                 <View style={styles.info}>
@@ -84,8 +89,13 @@ const StudentInfo = (props) => {
                     <Text style={styles.parentInfoText2}>
                       Name: {user.info.motherName}
                     </Text>
+                  </View>
+                </View>
+                <View style={styles.info}>
+                  <View style={styles.parentInfo}>
+                    <Text style={styles.parentInfoText1}>Gaurdian's Details:</Text>
                     <Text style={styles.parentInfoText2}>
-                      Number: {user.info.motherName}
+                      Name: {user.info.gaurdianName}
                     </Text>
                   </View>
                 </View>
