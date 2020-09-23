@@ -31,12 +31,12 @@ const TeacherInfo = ({ navigation, route }) => {
       <React.Fragment>
         <ScrollView>
           {
-            teacher.phoneNo ? (
+            teacher.info === undefined ? (
+              <View></View>
+            ) : (  
               <View style={styles.info}>
-                <Text style={styles.details}>Contact No: </Text>
+                <Text style={styles.details}>Contact No:    {teacher.info.phoneNo}</Text>
               </View>  
-            ) : (
-                <View></View>
             )
           }
           <View style={styles.info}>
