@@ -26,6 +26,11 @@ const StudentInfo = () => {
   const { authState } = useContext(AuthContext);
   const { user } = authState;
   const [loading, setLoading] = useState(false);
+  const [eye, setEye] = useState({
+    oldPass: true,
+    newPass: true,
+    newPass1: true,
+  });
 
   const { info } = user;
 
@@ -179,7 +184,7 @@ const StudentInfo = () => {
                               marginBottom: 0,
                             }}
                             autoCapitalize="none"
-                            secureTextEntry={true}
+                            secureTextEntry={eye.oldPass}
                             placeholder="Enter old password"
                             onChangeText={handleChange("oldPass")}
                             onBlur={handleBlur("oldPass")}
@@ -189,8 +194,11 @@ const StudentInfo = () => {
                             <FontAwesome
                               name="eye"
                               size={30}
-                              color="black"
+                              color={eye.oldPass === true ? "black" : "#4a3b82"}
                               style={{ margin: 10, marginTop: 8 }}
+                              onPress={() =>
+                                setEye({ ...eye, oldPass: !eye.oldPass })
+                              }
                             />
                           </TouchableOpacity>
                         </View>
@@ -209,7 +217,7 @@ const StudentInfo = () => {
                               marginBottom: 0,
                             }}
                             autoCapitalize="none"
-                            secureTextEntry={true}
+                            secureTextEntry={eye.newPass}
                             placeholder="Enter new password"
                             onChangeText={handleChange("newPass")}
                             onBlur={handleBlur("newPass")}
@@ -219,8 +227,11 @@ const StudentInfo = () => {
                             <FontAwesome
                               name="eye"
                               size={30}
-                              color="black"
+                              color={eye.newPass === true ? "black" : "#4a3b82"}
                               style={{ margin: 10, marginTop: 8 }}
+                              onPress={() =>
+                                setEye({ ...eye, newPass: !eye.newPass })
+                              }
                             />
                           </TouchableOpacity>
                         </View>
@@ -237,7 +248,7 @@ const StudentInfo = () => {
                               alignSelf: "flex-start",
                               marginBottom: 0,
                             }}
-                            secureTextEntry={true}
+                            secureTextEntry={eye.newPass1}
                             autoCapitalize="none"
                             placeholder="Confirm password"
                             onChangeText={handleChange("newPass1")}
@@ -248,8 +259,13 @@ const StudentInfo = () => {
                             <FontAwesome
                               name="eye"
                               size={30}
-                              color="black"
+                              color={
+                                eye.newPass1 === true ? "black" : "#4a3b82"
+                              }
                               style={{ margin: 10, marginTop: 8 }}
+                              onPress={() =>
+                                setEye({ ...eye, newPass1: !eye.newPass1 })
+                              }
                             />
                           </TouchableOpacity>
                         </View>
