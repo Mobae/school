@@ -1,49 +1,49 @@
-import * as React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import * as React from "react";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import {
   Avatar,
   Button,
   Card,
   ActivityIndicator,
   Paragraph,
-} from 'react-native-paper';
+} from "react-native-paper";
 
-import AddClass from './AddClass';
-import AddTeacher from './AddTeacher';
-import AddStudent from './AddStudent';
-import { AdminContext } from '../../context/AdminContext';
+import AddClass from "./AddClass";
+import AddTeacher from "./AddTeacher";
+import AddStudent from "./AddStudent";
+import { AdminContext } from "../../context/AdminContext";
 
-import adminStyles from './AdminStyles';
-import AttendanceClassList from './AttendanceClassList';
+import adminStyles from "./AdminStyles";
+import AttendanceClassList from "./AttendanceClassList";
 
-const LeftContent = (props) => <Avatar.Icon {...props} icon='folder' />;
+const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const attendanceIcon = (props) => (
   <Avatar.Icon
     {...props}
-    icon='clipboard-text'
-    style={{ backgroundColor: '#00674D' }}
+    icon="clipboard-text"
+    style={{ backgroundColor: "#00674D" }}
   />
 );
 
 const classesIcon = (props) => (
   <Avatar.Icon
     {...props}
-    icon='google-classroom'
-    style={{ backgroundColor: '#2E6E80' }}
+    icon="google-classroom"
+    style={{ backgroundColor: "#2E6E80" }}
   />
 );
 
 const teachersIcon = (props) => (
-  <Avatar.Icon {...props} icon='teach' style={{ backgroundColor: '#8A3B37' }} />
+  <Avatar.Icon {...props} icon="teach" style={{ backgroundColor: "#8A3B37" }} />
 );
 
 const studentsIcon = (props) => (
   <Avatar.Icon
     {...props}
-    icon='clipboard-account'
-    color='#fff'
-    style={{ backgroundColor: '#3b3691' }}
+    icon="clipboard-account"
+    color="#fff"
+    style={{ backgroundColor: "#3b3691" }}
   />
 );
 
@@ -94,14 +94,14 @@ const AdminProfile = ({ navigation }) => {
 
         {/* // ATTENDANCE CARD */}
         <ScrollView>
-          <View style={{ marginTop: 10 }}>
+          <View>
             <Card
               style={adminStyles.card}
-              onPress={() => navigation.navigate('AttendanceClassList')}
+              onPress={() => navigation.navigate("AttendanceClassList")}
             >
               <Card.Title
-                title='Attendance'
-                subtitle='View Attendance'
+                title="Attendance"
+                subtitle="View Attendance"
                 left={attendanceIcon}
               />
               <Card.Content>
@@ -113,18 +113,18 @@ const AdminProfile = ({ navigation }) => {
           {/* // CLASS CARD/ */}
           <View>
             <Card style={adminStyles.card}>
-              <Card.Title title='Classes' left={classesIcon} />
+              <Card.Title title="Classes" left={classesIcon} />
               <Card.Content>
                 <Paragraph>Overview of Classes</Paragraph>
               </Card.Content>
               <Card.Actions>
                 <Button
-                  onPress={() => navigation.navigate('ClassList')}
-                  color='#2E6E80'
+                  onPress={() => navigation.navigate("ClassList")}
+                  color="#2E6E80"
                 >
                   VIEW
                 </Button>
-                <Button onPress={() => setClassModalOpen(true)} color='#2E6E80'>
+                <Button onPress={() => setClassModalOpen(true)} color="#2E6E80">
                   ADD
                 </Button>
               </Card.Actions>
@@ -134,22 +134,22 @@ const AdminProfile = ({ navigation }) => {
           {/* // TEACHERS CARD */}
           <View>
             <Card style={adminStyles.card}>
-              <Card.Title title='Teachers' left={teachersIcon} />
+              <Card.Title title="Teachers" left={teachersIcon} />
               <Card.Content>
                 <Paragraph>Add & View Teachers</Paragraph>
               </Card.Content>
               <Card.Actions>
                 <Button
                   onPress={() => {
-                    navigation.navigate('TeacherList');
+                    navigation.navigate("TeacherList");
                   }}
-                  color='#8A3B37'
+                  color="#8A3B37"
                 >
                   VIEW
                 </Button>
                 <Button
                   onPress={() => setTeacherModalOpen(true)}
-                  color='#8A3B37'
+                  color="#8A3B37"
                 >
                   ADD
                 </Button>
@@ -160,22 +160,22 @@ const AdminProfile = ({ navigation }) => {
           {/* // STUDENT CARD */}
           <View>
             <Card style={adminStyles.card}>
-              <Card.Title title='Students' left={studentsIcon} />
+              <Card.Title title="Students" left={studentsIcon} />
               <Card.Content>
                 <Paragraph>View All Students</Paragraph>
               </Card.Content>
               <Card.Actions>
                 <Button
                   onPress={() => {
-                    navigation.navigate('AllStudentList');
+                    navigation.navigate("AllStudentList");
                   }}
-                  color='#3b3691'
+                  color="#3b3691"
                 >
                   VIEW
                 </Button>
                 <Button
                   onPress={() => setStudentModalOpen(true)}
-                  color='#3b3691'
+                  color="#3b3691"
                 >
                   ADD
                 </Button>
@@ -191,7 +191,7 @@ const AdminProfile = ({ navigation }) => {
       <View style={styles.container}>
         <ActivityIndicator
           animating={true}
-          size='large'
+          size="large"
           style={styles.loading}
           color="#2D5264"
         />
@@ -202,14 +202,14 @@ const AdminProfile = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    height: '100%',
-    width: '100%',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    height: "100%",
+    width: "100%",
   },
   loading: {
-    alignSelf: 'center',
+    alignSelf: "center",
   },
 });
 

@@ -19,8 +19,8 @@ let transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: "JMRDDatia@gmail.com",
-    pass: "Homie#123",
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
@@ -265,16 +265,19 @@ router.post("/add", auth, admin, async (req, res) => {
   }
 });
 
-router.post("/stu/changepassword", async (req, res) => {
+router.post("/stu/changepassword", auth, async (req, res) => {
   const { _id, newPass, oldPass } = req.body;
-  let user = (await Student.findById(_id)).toJSON();
+  let user = await Student.findById(_id);
+  console.log(user);
   if (user) {
     const verified = await bcrypt.compare(oldPass, user.password);
+    console.log(verified);
     if (verified) {
       const salt = await bcrypt.genSalt();
       const newPassSave = await bcrypt.hash(newPass, salt);
-      user.password = newPassSave;
-      await user.save();
+      const updated = await Student.findByIdAndUpdate(_id, {
+        password: newPassSave,
+      });
       res.json({ success: "true" });
     } else {
       res.status(400).json({ error: "Incorrect password" });
@@ -284,7 +287,7 @@ router.post("/stu/changepassword", async (req, res) => {
   }
 });
 
-router.post("/tea/changepassword", async (req, res) => {
+router.post("/tea/changepassword", auth, teacher, async (req, res) => {
   const { _id, newPass, oldPass } = req.body;
   let user = (await Teacher.findById(_id)).toJSON();
   if (user) {
@@ -303,7 +306,7 @@ router.post("/tea/changepassword", async (req, res) => {
   }
 });
 
-router.post("/adm/changepassword", async (req, res) => {
+router.post("/adm/changepassword", auth, admin, async (req, res) => {
   const { _id, newPass, oldPass } = req.body;
   let user = (await Admin.findById(_id)).toJSON();
   if (user) {
