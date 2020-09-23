@@ -46,6 +46,8 @@ const storage = new GridFsStorage({
 const upload = multer({ storage });
 app.use("/documents", fileRouter(upload));
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server runnning on ${process.env.PORT}`);
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server runnning on ${PORT}`);
 });

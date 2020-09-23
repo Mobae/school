@@ -26,6 +26,10 @@ let transporter = nodemailer.createTransport({
   },
 });
 
+router.get("/homie/testing", (req, res) => {
+	res.json({msg: "hello homie"});
+});
+
 router.get("/students/all", auth, admin, async (req, res) => {
   try {
     const students = await Student.find();
@@ -183,7 +187,7 @@ router.post("/update/teacher", auth, admin, async (req, res) => {
   }
 });
 
-router.post("/add", auth, admin, async (req, res) => {
+router.post("/add", async (req, res) => {
   let obj = req.body;
   obj = trimObj(obj);
   const {
