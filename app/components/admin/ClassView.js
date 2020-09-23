@@ -14,6 +14,8 @@ import AddClassTeacher from './AddClassTeacher';
 import AddSubTeacher from './AddSubTeacher';
 import adminStyles from './AdminStyles';
 import axios from 'axios';
+import { URL } from '../../config';
+
 const LeftContent = (props) => (
   <Avatar.Icon {...props} icon="teach" style={{ backgroundColor: '#2E6E80' }} />
 );
@@ -27,7 +29,7 @@ const studentsIcon = (props) => (
 );
 
 const ClassView = ({ navigation }) => {
-  const url = 'https://school-server-testing.herokuapp.com';
+  const url = URL;
   const {
     getCurrClassTeachers,
     classObj,

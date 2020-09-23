@@ -7,6 +7,7 @@ import {
   Paragraph,
 } from 'react-native-paper';
 import axios from 'axios';
+import { URL } from '../../config';
 
 import * as DocumentPicker from 'expo-document-picker';
 
@@ -14,7 +15,7 @@ const Add = ({ navigation, route }) => {
   const [file, setFile] = React.useState(null);
   const [caption, setCaption] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
-  const url = 'http://school-server-testing.herokuapp.com/documents/';
+  const url = URL + '/documents/';
 
   const { classId, teacherId, flag } = route.params;
 

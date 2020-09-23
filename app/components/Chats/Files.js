@@ -9,12 +9,12 @@ import {
   ActivityIndicator,
 } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
-
+import { URL } from '../../config';
 import adminStyles from '../admin/AdminStyles';
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const Files = () => {
-  const url = 'https://school-server-testing.herokuapp.com';
+  const url = URL;
   const [files, setFiles] = React.useState(null);
 
   const getFiles = async () => {
