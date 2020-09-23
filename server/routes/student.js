@@ -13,6 +13,7 @@ const Student = require("../models/Student");
 const Teacher = require("../models/Teacher");
 const Class = require("../models/Class");
 const Admin = require("../models/Admin");
+const { findOne, findOneAndUpdate } = require("../models/Student");
 
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -204,10 +205,10 @@ router.post("/add", auth, admin, async (req, res) => {
     const tempPass = genRandPass();
 
     let mailInfo = await transporter.sendMail({
-      from: "jmrd@jmrd.com", // sender address
-      to: email, // list of receivers
-      subject: "Your password for JMRD School App", // Subject line
-      html: `<p>Your password for the app is <b>${tempPass}</b></p>`, // html body
+      from: "jmrd@jmrd.com",
+      to: email,
+      subject: "Your password for JMRD School App",
+      html: `<p>Your password for the app is <b>${tempPass}</b></p>`,
     });
 
     console.log("Message sent: %s", mailInfo.messageId);
@@ -320,6 +321,23 @@ router.post("/adm/changepassword", auth, admin, async (req, res) => {
     } else {
       res.status(400).json({ error: "Incorrect password" });
     }
+  } else {
+    res.status(400).json({ error: "User does not exist" });
+  }
+});
+
+router.post("/forgot/initial", async (req, res) => {
+  const { email } = req.body;
+  const user = await findOne({ email });
+  if (user) {
+    let otp = Math.floor(100000 + Math.random() * 900000);
+    let mailInfo = await transporter.sendMail({
+      from: "jmrd@jmrd.com",
+      to: email,
+      subject: "Forgot password - JMRD",
+      html: `<p>Your 6-digit OTP is <b>${otp}</b>, valid for 5 minutes.</p>`,
+    });
+    console.log("Message sent: %s", mailInfo.messageId);
   } else {
     res.status(400).json({ error: "User does not exist" });
   }
