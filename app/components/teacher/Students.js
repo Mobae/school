@@ -25,23 +25,22 @@ const leftIcon = (props) => {
 
 const StudentCard = (props) => {
   return (
-    <Card style={styles.card}>
-      <TouchableRipple
-        onPress={() =>
-          props.navigation.push('Student Details', {
-            user: props.user,
-            class_: props.class,
-          })
-        }
-      >
-        <Fragment>
-          <Card.Title title={props.name} left={leftIcon} />
-          <Card.Content style={{ marginBottom: 10 }}>
-            <Paragraph>Roll No: {props.rollNo}</Paragraph>
-            <Paragraph>Email: {props.email}</Paragraph>
-          </Card.Content>
-        </Fragment>
-      </TouchableRipple>
+    <Card
+      style={styles.card}
+      onPress={() =>
+        props.navigation.push('Student Details', {
+          user: props.user,
+          class_: props.class,
+        })
+      }
+    >
+      <Fragment>
+        <Card.Title title={props.name} left={leftIcon} />
+        <Card.Content style={{ marginBottom: 10 }}>
+          <Paragraph>Roll No: {props.rollNo}</Paragraph>
+          <Paragraph>Email: {props.email}</Paragraph>
+        </Card.Content>
+      </Fragment>
       <Text></Text>
     </Card>
   );

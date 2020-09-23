@@ -69,14 +69,17 @@ const Add = ({ navigation, route }) => {
           value={caption}
         />
         <Text></Text>
-        <TextInput
-          onPress={selFile}
-          onFocus={selFile}
-          mode="outlined"
-          disabled
-          label="File"
-          value={file == null ? 'Please select a file' : file.name}
-        />
+        {file == null ? null : (
+          <TextInput
+            onPress={selFile}
+            onFocus={selFile}
+            mode="outlined"
+            disabled
+            label="File"
+            value={file.name}
+          />
+        )}
+
         <View style={{ marginTop: 20, widht: '100%' }}>
           {file == null ? (
             <Button

@@ -1,19 +1,20 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useContext, useState, Fragment } from "react";
-import { View, StyleSheet } from "react-native";
+import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useContext, useState, Fragment } from 'react';
+import { View, StyleSheet } from 'react-native';
 import {
   Title,
   DataTable,
   FAB,
   Portal,
+  ActivityIndicator,
   Provider as PaperProvider,
-} from "react-native-paper";
-import { useIsFocused } from "@react-navigation/native";
-import axios from "axios";
+} from 'react-native-paper';
+import { useIsFocused } from '@react-navigation/native';
+import axios from 'axios';
 
-import { URL } from "../../config";
-import { AuthContext } from "../../context/AuthContext";
-import { ScrollView } from "react-native-gesture-handler";
+import { URL } from '../../config';
+import { AuthContext } from '../../context/AuthContext';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Fab = ({ navigation }) => {
   const [state, setState] = React.useState({ open: false });
@@ -27,18 +28,18 @@ const Fab = ({ navigation }) => {
       <Portal>
         <FAB.Group
           open={open}
-          icon={open ? "calendar-today" : "plus"}
-          fabStyle={{ backgroundColor: "#00ad00" }}
+          icon={open ? 'calendar-today' : 'plus'}
+          fabStyle={{ backgroundColor: '#00ad00' }}
           actions={[
             {
-              icon: "pencil",
-              label: "Edit Attendance",
-              onPress: () => navigation.push("Edit Attendance"),
+              icon: 'pencil',
+              label: 'Edit Attendance',
+              onPress: () => navigation.push('Edit Attendance'),
             },
             {
-              icon: "plus",
-              label: "Add Attendance",
-              onPress: () => navigation.push("Add Attendance"),
+              icon: 'plus',
+              label: 'Add Attendance',
+              onPress: () => navigation.push('Add Attendance'),
             },
           ]}
           onStateChange={onStateChange}
@@ -73,15 +74,15 @@ const AllStudentsAttendance = ({ navigation }) => {
 
   const getStudents = async () => {
     try {
-      const res = await axios.get(URL + "/attendance/class/" + user.class_, {
+      const res = await axios.get(URL + '/attendance/class/' + user.class_, {
         headers: {
-          "auth-token": authState.token,
+          'auth-token': authState.token,
         },
       });
       console.log(res.data.data);
       const students = res.data.data;
       const pt = students.map((stu) => {
-        const p = stu.attendance.filter((status) => status === "P").length;
+        const p = stu.attendance.filter((status) => status === 'P').length;
         const t = stu.attendance.length;
         const pt = { p, t };
         stu.pt = pt;
@@ -97,50 +98,72 @@ const AllStudentsAttendance = ({ navigation }) => {
     if (isFocused) {
       getStudents();
     }
-    return () => console.log("clean up");
+    return () => console.log('clean up');
   }, [isFocused]);
 
-  return (
-    <Fragment>
-      <PaperProvider>
-        <View>
-          <Title style={styles.title}>Attendance</Title>
-          <DataTable>
-            <DataTable.Header>
-              <DataTable.Title style={{ flex: 2 }}>
-                Student Name
-              </DataTable.Title>
-              <DataTable.Title numeric>Roll No.</DataTable.Title>
-              <DataTable.Title numeric>Attendance</DataTable.Title>
-            </DataTable.Header>
-            <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
-              {studentList.map((student) => (
-                <DataRow
-                  name={student.name}
-                  key={student._id}
-                  rollNo={student.rollNo}
-                  att={((student.pt.p / student.pt.t) * 100).toFixed(2) + "%"}
-                />
-              ))}
-            </ScrollView>
-          </DataTable>
-        </View>
-      </PaperProvider>
-      <Fab navigation={navigation} />
-      <StatusBar style="auto" />
-    </Fragment>
-  );
+  if (studentList.length != 0) {
+    return (
+      <Fragment>
+        <PaperProvider>
+          <View>
+            <DataTable>
+              <DataTable.Header>
+                <DataTable.Title style={{ flex: 2 }}>
+                  Student Name
+                </DataTable.Title>
+                <DataTable.Title numeric>Roll No.</DataTable.Title>
+                <DataTable.Title numeric>Attendance</DataTable.Title>
+              </DataTable.Header>
+              <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+                {studentList.map((student) => (
+                  <DataRow
+                    name={student.name}
+                    key={student._id}
+                    rollNo={student.rollNo}
+                    att={((student.pt.p / student.pt.t) * 100).toFixed(2) + '%'}
+                  />
+                ))}
+              </ScrollView>
+            </DataTable>
+          </View>
+        </PaperProvider>
+        <Fab navigation={navigation} />
+        <StatusBar style="auto" />
+      </Fragment>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator
+          animating={true}
+          size="large"
+          style={styles.loading}
+          color="#0a6605"
+        />
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
   title: {
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   fab: {
     width: 200,
-    alignSelf: "center",
+    alignSelf: 'center',
     bottom: 50,
-    backgroundColor: "#6200EE",
+    backgroundColor: '#6200EE',
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: '100%',
+    width: '100%',
+  },
+  loading: {
+    alignSelf: 'center',
   },
 });
 
