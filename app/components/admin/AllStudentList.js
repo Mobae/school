@@ -8,8 +8,8 @@ import adminStyles from './AdminStyles';
 const LeftContent = (props) => (
   <Avatar.Icon
     {...props}
-    icon="human-child"
-    color="white"
+    icon='human-child'
+    color='white'
     style={{ backgroundColor: '#3b3691' }}
   />
 );
@@ -46,7 +46,7 @@ const StudentList = ({ navigation }) => {
   return (
     <View>
       <Searchbar
-        placeholder="Search students.."
+        placeholder='Search students..'
         onChangeText={onChangeSearch}
         value={searchQuery}
       />
