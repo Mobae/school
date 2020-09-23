@@ -31,13 +31,15 @@ const TeacherInfo = ({ navigation, route }) => {
       </View>
       <React.Fragment>
         <ScrollView>
-          {teacher.phoneNo ? (
-            <View style={styles.info}>
-              <Text style={styles.details}>Contact No: </Text>
-            </View>
-          ) : (
-            <View></View>
-          )}
+          {
+            teacher.info === undefined ? (
+              <View></View>
+            ) : (  
+              <View style={styles.info}>
+                <Text style={styles.details}>Contact No:    {teacher.info.phoneNo}</Text>
+              </View>  
+            )
+          }
           <View style={styles.info}>
             <Text style={styles.details}>Email: {teacher.email}</Text>
           </View>
