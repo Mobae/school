@@ -36,11 +36,19 @@ const StudentInfo = () => {
       createErrorAlert("The passwords do not match.");
     } else {
       try {
-        const res = await axios.post(URL + "/student/stu/changepassword", {
-          newPass,
-          oldPass,
-          _id: user._id,
-        });
+        const res = await axios.post(
+          URL + "/student/stu/changepassword",
+          {
+            newPass,
+            oldPass,
+            _id: user._id,
+          },
+          {
+            headers: {
+              "auth-token": authState.token,
+            },
+          }
+        );
         console.log(res);
         createSuccessAlert("Password successfully changed.");
       } catch (err) {

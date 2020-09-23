@@ -267,7 +267,7 @@ router.post("/add", auth, admin, async (req, res) => {
 
 router.post("/stu/changepassword", auth, async (req, res) => {
   const { _id, newPass, oldPass } = req.body;
-  let user = (await Student.findById(_id)).toJSON();
+  let user = (await Student.findOne({ id: _id })).toJSON();
   console.log(user);
   if (user) {
     const verified = await bcrypt.compare(oldPass, user.password);
