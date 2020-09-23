@@ -270,10 +270,8 @@ router.post("/add", auth, admin, async (req, res) => {
 router.post("/stu/changepassword", auth, async (req, res) => {
   const { _id, newPass, oldPass } = req.body;
   let user = await Student.findById(_id);
-  console.log(user);
   if (user) {
     const verified = await bcrypt.compare(oldPass, user.password);
-    console.log(verified);
     if (verified) {
       const salt = await bcrypt.genSalt();
       const newPassSave = await bcrypt.hash(newPass, salt);
@@ -291,14 +289,16 @@ router.post("/stu/changepassword", auth, async (req, res) => {
 
 router.post("/tea/changepassword", auth, teacher, async (req, res) => {
   const { _id, newPass, oldPass } = req.body;
-  let user = (await Teacher.findById(_id)).toJSON();
+  let user = await Teacher.findById(_id);
   if (user) {
     const verified = await bcrypt.compare(oldPass, user.password);
+    console.log(verified);
     if (verified) {
       const salt = await bcrypt.genSalt();
       const newPassSave = await bcrypt.hash(newPass, salt);
-      user.password = newPassSave;
-      await user.save();
+      const updated = await Teacher.findByIdAndUpdate(_id, {
+        password: newPassSave,
+      });
       res.json({ success: "true" });
     } else {
       res.status(400).json({ error: "Incorrect password" });
@@ -310,14 +310,16 @@ router.post("/tea/changepassword", auth, teacher, async (req, res) => {
 
 router.post("/adm/changepassword", auth, admin, async (req, res) => {
   const { _id, newPass, oldPass } = req.body;
-  let user = (await Admin.findById(_id)).toJSON();
+  let user = await Admin.findById(_id);
   if (user) {
     const verified = await bcrypt.compare(oldPass, user.password);
+    console.log(verified);
     if (verified) {
       const salt = await bcrypt.genSalt();
       const newPassSave = await bcrypt.hash(newPass, salt);
-      user.password = newPassSave;
-      await user.save();
+      const updated = await Admin.findByIdAndUpdate(_id, {
+        password: newPassSave,
+      });
       res.json({ success: "true" });
     } else {
       res.status(400).json({ error: "Incorrect password" });
@@ -354,6 +356,18 @@ router.post("/forgot/verify", async (req, res) => {
   const { otpStr, _id } = req.body;
   const otp = Otp.find({ _id, otpStr });
   console.log(Date.now() - otp.date);
+  if (Date.now() - otp.date < 5 * 60 * 1000) {
+    const newPass = genRandPass();
+    const updated = await Student.findByIdAndUpdate(_id, {
+      password: newPass,
+    });
+    let mailInfo = await transporter.sendMail({
+      from: "jmrd@jmrd.com",
+      to: email,
+      subject: "Your New Password - JMRD",
+      html: `<p>Your new password is <b>${updated.password}</b>, valid for 5 minutes.</p>`,
+    });
+  }
 });
 
 router.post("/login", async (req, res) => {
