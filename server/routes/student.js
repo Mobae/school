@@ -331,7 +331,8 @@ router.post("/adm/changepassword", auth, admin, async (req, res) => {
 
 router.post("/forgot/initial", async (req, res) => {
   const { email } = req.body;
-  const user = await findOne({ email });
+  let userType;
+  let user = await Student.findOne({ email });
   if (user) {
     let otpStr = Math.floor(100000 + Math.random() * 900000);
     const otp = new Otp({
@@ -345,6 +346,25 @@ router.post("/forgot/initial", async (req, res) => {
       subject: "Your OTP - JMRD",
       html: `<p>Your 6-digit OTP is <b>${otp.otpStr}</b>, valid for 5 minutes.</p>`,
     });
+    userType = "student";
+    res.json({ _id: user.id, userType });
+    console.log("Message sent: %s", mailInfo.messageId);
+  }
+  user = await Teacher.findOne({ email });
+  if (user) {
+    let otpStr = Math.floor(100000 + Math.random() * 900000);
+    const otp = new Otp({
+      userId: user.id,
+      otpStr,
+    });
+    otp.save();
+    let mailInfo = await transporter.sendMail({
+      from: "jmrd@jmrd.com",
+      to: email,
+      subject: "Your OTP - JMRD",
+      html: `<p>Your 6-digit OTP is <b>${otp.otpStr}</b>, valid for 5 minutes.</p>`,
+    });
+    userType = "teacher";
     res.json({ _id: user.id });
     console.log("Message sent: %s", mailInfo.messageId);
   } else {
