@@ -76,7 +76,6 @@ const Students = ({ navigation }) => {
             />
           ))}
           <Text></Text>
-          <Text></Text>
         </ScrollView>
       </Fragment>
     );
