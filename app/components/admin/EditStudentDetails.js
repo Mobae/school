@@ -14,11 +14,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import { AdminContext } from '../../context/AdminContext';
 
+import { URL } from '../../config';
+
 import globalStyles from '../styles/global';
 import adminStyles from './AdminStyles';
 
 const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
-  const url = 'https://school-server-testing.herokuapp.com';
+  const url = URL;
 
   const headers = {
     'auth-token': token,

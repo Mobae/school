@@ -14,6 +14,8 @@ import AddClassTeacher from './AddClassTeacher';
 import AddSubTeacher from './AddSubTeacher';
 import adminStyles from './AdminStyles';
 import axios from 'axios';
+import { URL } from '../../config';
+
 const LeftContent = (props) => (
   <Avatar.Icon {...props} icon="teach" style={{ backgroundColor: '#2E6E80' }} />
 );
@@ -27,7 +29,7 @@ const studentsIcon = (props) => (
 );
 
 const ClassView = ({ navigation }) => {
-  const url = 'https://school-server-testing.herokuapp.com';
+  const url = URL;
   const {
     getCurrClassTeachers,
     classObj,
@@ -106,7 +108,9 @@ const ClassView = ({ navigation }) => {
 
           {classObj.classTeacher[0] !== undefined ? (
             <View>
-              <Card style={styles.cardClass}>
+              <Card 
+                style={styles.cardClass}
+              >
                 <Card.Title title="Class Teacher" style={{ color: 'white' }} />
                 <Card.Actions>
                   <Button onPress={() => setClassTeacherModalOpen(true)}>
@@ -114,7 +118,14 @@ const ClassView = ({ navigation }) => {
                   </Button>
                 </Card.Actions>
               </Card>
-              <Card style={adminStyles.card}>
+              <Card 
+                style={adminStyles.card}
+                onPress={() => {
+                  navigation.navigate('TeacherInfo', {
+                    teacher: classObj.classTeacher[0]
+                  })
+                }}
+              >
                 <Card.Title
                   title={classObj.classTeacher[0].name}
                   left={LeftContent}
@@ -147,7 +158,15 @@ const ClassView = ({ navigation }) => {
           </Card>
 
           {classObj.subTeachers.map((teacher) => (
-            <Card style={adminStyles.card} key={teacher._id}>
+            <Card 
+              style={adminStyles.card} 
+              key={teacher._id}
+              onPress={() => {
+                navigation.navigate('TeacherInfo', {
+                  teacher: teacher
+                })
+              }}
+            >
               <Card.Title title={teacher.name} left={LeftContent} />
               <Card.Actions style={{ left: 250, top: -45, height: 20 }}>
                 <Button onPress={() => removeTeacher(teacher._id)}>

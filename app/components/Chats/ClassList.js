@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native-paper';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import { URL } from '../../config';
 import { AdminContext } from '../../context/AdminContext';
 import { AuthContext } from '../../context/AuthContext';
 const LeftContent = (props) => (
@@ -23,7 +23,7 @@ const LeftContent = (props) => (
 import adminStyles from '../admin/AdminStyles';
 
 const FileClassList = ({ navigation }) => {
-  const url = 'https://school-server-testing.herokuapp.com';
+  const url = URL;
   const [searchQuery, setSearchQuery] = React.useState('');
   const [classes, setClasses] = React.useState({});
   const [currClass, setCurrClass] = React.useState('');

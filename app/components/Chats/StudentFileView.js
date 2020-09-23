@@ -18,13 +18,13 @@ import * as Permissions from "expo-permissions";
 
 import { View, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-
+import { URL } from '../../config';
 import adminStyles from "../admin/AdminStyles";
 import { AuthContext } from "../../context/AuthContext";
 const LeftContent = (props) => <Avatar.Icon {...props} icon="folder" />;
 
 const StudentFileView = ({ navigation, route }) => {
-  const url = "https://school-server-testing.herokuapp.com";
+  const url = URL;
   const [files, setFiles] = React.useState(null);
   const [filtered, setFiltered] = React.useState();
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -70,7 +70,7 @@ const StudentFileView = ({ navigation, route }) => {
   };
 
   const downloadFile = (filename, caption) => {
-    const uri = `https://school-server-testing.herokuapp.com/documents/file/${filename}`;
+    const uri = URL + `/documents/file/${filename}`;
     let fileUri = FileSystem.documentDirectory + caption + ".pdf";
     FileSystem.downloadAsync(uri, fileUri)
       .then(({ uri }) => {

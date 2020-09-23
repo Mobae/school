@@ -8,6 +8,8 @@ import React, {
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
 
+import { URL } from '../config';
+
 import { AuthContext } from "./AuthContext";
 
 export const AdminContext = createContext();
@@ -19,7 +21,7 @@ const AdminContextProvider = (props) => {
   const headers = {
     "auth-token": token,
   };
-  const url = "https://school-server-testing.herokuapp.com";
+  const url = URL;
   const initialState = {
     teachers: [],
     students: [],
