@@ -100,24 +100,24 @@ const StudentInfo = () => {
                 </Text>
               </View>
               <View style={styles.info}>
-                <Text style={styles.details}>DOB: {info.admissionNo}</Text>
+              {
+                user.info.dob === undefined ? (
+                  <Text style={styles.details}>
+                    DOB : 
+                  </Text>
+                ) : (
+                  <Text style={styles.details}>
+                    DOB : {user.info.dob}
+                  </Text>
+                )
+              }
               </View>
               <View style={styles.info}>
                 <Text style={styles.details}>Bus Route: {info.busNo}</Text>
               </View>
               <View style={styles.info}>
                 <Text style={styles.details}>
-                  Aadhar No.: {info.admissionNo}
-                </Text>
-              </View>
-              <View style={styles.info}>
-                <Text style={styles.details}>
                   Phone Number: {"+91 " + info.phone}
-                </Text>
-              </View>
-              <View style={styles.info}>
-                <Text style={styles.details}>
-                  Date of Addmission: {info.admissionNo}
                 </Text>
               </View>
               <List.Accordion
@@ -134,9 +134,6 @@ const StudentInfo = () => {
                       <Text style={styles.parentInfoText2}>
                         Name: {info.fatherName}
                       </Text>
-                      <Text style={styles.parentInfoText2}>
-                        Number: {info.fatherName}
-                      </Text>
                     </View>
                   </View>
                   <View style={styles.info}>
@@ -147,8 +144,15 @@ const StudentInfo = () => {
                       <Text style={styles.parentInfoText2}>
                         Name: {info.motherName}
                       </Text>
+                    </View>
+                  </View>
+                  <View style={styles.info}>
+                    <View style={styles.parentInfo}>
+                      <Text style={styles.parentInfoText1}>
+                        Gaurdian's Details:
+                      </Text>
                       <Text style={styles.parentInfoText2}>
-                        Number: {info.motherName}
+                        Name: {info.gaurdianName}
                       </Text>
                     </View>
                   </View>

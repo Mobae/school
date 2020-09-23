@@ -14,6 +14,7 @@ import AllStudentList from './AllStudentList';
 import AttendanceClassList from './AttendanceClassList';
 import StudentAttendance from './StudentAttendance';
 import StudentDetail from './StudentDetail';
+import TeacherInfo from './TeacherInfo';
 
 import { AuthContext } from '../../context/AuthContext';
 
@@ -90,6 +91,11 @@ function AdminStack() {
           name="Student Details"
           component={StudentDetail}
           options={{ title: 'Student Details' }}
+        />
+        <Stack.Screen
+          name="TeacherInfo"
+          component={TeacherInfo}
+          options={{ title: 'Teacher Information' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -9,7 +9,7 @@ const LeftContent = (props) => (
   <Avatar.Icon {...props} icon='teach' style={{ backgroundColor: '#8A3B37' }} />
 );
 
-const TeacherList = () => {
+const TeacherList = ({ navigation }) => {
   const { adminState, getTeachers, getAllStudents, reload } = React.useContext(
     AdminContext
   );
@@ -50,7 +50,14 @@ const TeacherList = () => {
           {filtered ? (
             filtered.map((teacher) => (
               <View key={teacher._id}>
-                <Card style={adminStyles.card}>
+                <Card 
+                  style={adminStyles.card}
+                  onPress={() => {
+                    navigation.navigate('TeacherInfo', {
+                      teacher: teacher
+                    })
+                  }}
+                >
                   <Card.Title
                     title={teacher.name}
                     subtitle={teacher.email}
