@@ -31,15 +31,15 @@ const TeacherInfo = ({ navigation, route }) => {
       </View>
       <React.Fragment>
         <ScrollView>
-          {
-            teacher.info === undefined ? (
-              <View></View>
-            ) : (  
-              <View style={styles.info}>
-                <Text style={styles.details}>Contact No:    {teacher.info.phoneNo}</Text>
-              </View>  
-            )
-          }
+          {teacher.info === undefined ? (
+            <View></View>
+          ) : (
+            <View style={styles.info}>
+              <Text style={styles.details}>
+                Contact No: {teacher.info.phoneNo}
+              </Text>
+            </View>
+          )}
           <View style={styles.info}>
             <Text style={styles.details}>Email: {teacher.email}</Text>
           </View>
@@ -51,9 +51,9 @@ const TeacherInfo = ({ navigation, route }) => {
                 </Title>
                 <View style={{ flexDirection: 'row', width: '100%' }}>
                   <MaterialCommunityIcons
-                    name="lock-outline"
+                    name='lock-outline'
                     size={24}
-                    color="black"
+                    color='black'
                     style={{ margin: 10 }}
                   />
 
@@ -63,10 +63,10 @@ const TeacherInfo = ({ navigation, route }) => {
                       alignSelf: 'flex-start',
                       marginBottom: 0,
                     }}
-                    autoCapitalize="none"
+                    autoCapitalize='none'
                     secureTextEntry={true}
-                    placeholder="Enter old password"
-                    placeholderTextColor="#000"
+                    placeholder='Enter old password'
+                    placeholderTextColor='#000'
                   />
                   <View
                     style={{
@@ -77,18 +77,18 @@ const TeacherInfo = ({ navigation, route }) => {
                     }}
                   >
                     <FontAwesome
-                      name="eye"
+                      name='eye'
                       size={30}
-                      color="black"
+                      color='black'
                       style={{ margin: 10, marginTop: 8 }}
                     />
                   </View>
                 </View>
                 <View style={{ flexDirection: 'row', width: '100%' }}>
                   <MaterialCommunityIcons
-                    name="lock-outline"
+                    name='lock-outline'
                     size={24}
-                    color="black"
+                    color='black'
                     style={{ margin: 10 }}
                   />
 
@@ -98,10 +98,10 @@ const TeacherInfo = ({ navigation, route }) => {
                       alignSelf: 'flex-start',
                       marginBottom: 0,
                     }}
-                    autoCapitalize="none"
+                    autoCapitalize='none'
                     secureTextEntry={true}
-                    placeholder="Enter new password"
-                    placeholderTextColor="#000"
+                    placeholder='Enter new password'
+                    placeholderTextColor='#000'
                   />
                   <View
                     style={{
@@ -112,18 +112,18 @@ const TeacherInfo = ({ navigation, route }) => {
                     }}
                   >
                     <FontAwesome
-                      name="eye"
+                      name='eye'
                       size={30}
-                      color="black"
+                      color='black'
                       style={{ margin: 10, marginTop: 8 }}
                     />
                   </View>
                 </View>
                 <View style={{ flexDirection: 'row', width: '100%' }}>
                   <MaterialCommunityIcons
-                    name="lock-outline"
+                    name='lock-outline'
                     size={24}
-                    color="black"
+                    color='black'
                     style={{ margin: 10 }}
                   />
                   <TextInput
@@ -133,9 +133,9 @@ const TeacherInfo = ({ navigation, route }) => {
                       marginBottom: 0,
                     }}
                     secureTextEntry={true}
-                    autoCapitalize="none"
-                    placeholder="Confirm password"
-                    placeholderTextColor="#000"
+                    autoCapitalize='none'
+                    placeholder='Confirm password'
+                    placeholderTextColor='#000'
                   />
                   <View
                     style={{
@@ -147,9 +147,9 @@ const TeacherInfo = ({ navigation, route }) => {
                     }}
                   >
                     <FontAwesome
-                      name="eye"
+                      name='eye'
                       size={30}
-                      color="black"
+                      color='black'
                       style={{ margin: 10, marginTop: 8 }}
                     />
                   </View>
@@ -158,9 +158,9 @@ const TeacherInfo = ({ navigation, route }) => {
             </View>
             <View style={{ margin: 20, marginHorizontal: 40 }}>
               <Button
-                mode="contained"
-                title="save"
-                color="#0a6605"
+                mode='contained'
+                title='save'
+                color='#0a6605'
                 onPress={() => console.log('Pressed')}
               ></Button>
             </View>
@@ -176,7 +176,7 @@ export default TeacherInfo;
 const styles = StyleSheet.create({
   info: {
     flexDirection: 'row',
-    marginTop: 30,
+    marginTop: 15,
     borderBottomColor: '#f2f2f2',
     paddingBottom: 5,
     margin: 20,
