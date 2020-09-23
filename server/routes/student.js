@@ -350,7 +350,7 @@ router.post("/forgot/initial", async (req, res) => {
   }
 });
 
-router.post("/verify", async (req, res) => {
+router.post("/forgot/verify", async (req, res) => {
   const { otpStr, _id } = req.body;
   const otp = Otp.find({ _id, otpStr });
   console.log(Date.now() - otp.date);
