@@ -39,8 +39,8 @@ const AddTeacher = ({
                 email: '',
                 rank: '1',
                 info: {
-                  phoneNo: ''
-                }
+                  phoneNo: '',
+                },
               }}
               onSubmit={(values, actions) => {
                 actions.resetForm();
@@ -78,7 +78,7 @@ const AddTeacher = ({
                   <TextInput
                     mode='outlined'
                     label='Contact Number'
-                    autoCapitalize='none'
+                    keyboardType='phone-pad'
                     onChangeText={handleChange('info.phoneNo')}
                     onBlur={handleBlur('info.phoneNo')}
                     value={values.info.phoneNo}
