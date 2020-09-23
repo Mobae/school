@@ -13,6 +13,8 @@ const Student = require("../models/Student");
 const Teacher = require("../models/Teacher");
 const Class = require("../models/Class");
 const Admin = require("../models/Admin");
+const Otp = require("../models/Otp");
+const { findOne, findOneAndUpdate } = require("../models/Student");
 
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -204,10 +206,10 @@ router.post("/add", auth, admin, async (req, res) => {
     const tempPass = genRandPass();
 
     let mailInfo = await transporter.sendMail({
-      from: "jmrd@jmrd.com", // sender address
-      to: email, // list of receivers
-      subject: "Your password for JMRD School App", // Subject line
-      html: `<p>Your password for the app is <b>${tempPass}</b></p>`, // html body
+      from: "jmrd@jmrd.com",
+      to: email,
+      subject: "Your password for JMRD School App",
+      html: `<p>Your password for the app is <b>${tempPass}</b></p>`,
     });
 
     console.log("Message sent: %s", mailInfo.messageId);
@@ -268,10 +270,8 @@ router.post("/add", auth, admin, async (req, res) => {
 router.post("/stu/changepassword", auth, async (req, res) => {
   const { _id, newPass, oldPass } = req.body;
   let user = await Student.findById(_id);
-  console.log(user);
   if (user) {
     const verified = await bcrypt.compare(oldPass, user.password);
-    console.log(verified);
     if (verified) {
       const salt = await bcrypt.genSalt();
       const newPassSave = await bcrypt.hash(newPass, salt);
@@ -289,14 +289,16 @@ router.post("/stu/changepassword", auth, async (req, res) => {
 
 router.post("/tea/changepassword", auth, teacher, async (req, res) => {
   const { _id, newPass, oldPass } = req.body;
-  let user = (await Teacher.findById(_id)).toJSON();
+  let user = await Teacher.findById(_id);
   if (user) {
     const verified = await bcrypt.compare(oldPass, user.password);
+    console.log(verified);
     if (verified) {
       const salt = await bcrypt.genSalt();
       const newPassSave = await bcrypt.hash(newPass, salt);
-      user.password = newPassSave;
-      await user.save();
+      const updated = await Teacher.findByIdAndUpdate(_id, {
+        password: newPassSave,
+      });
       res.json({ success: "true" });
     } else {
       res.status(400).json({ error: "Incorrect password" });
@@ -308,20 +310,67 @@ router.post("/tea/changepassword", auth, teacher, async (req, res) => {
 
 router.post("/adm/changepassword", auth, admin, async (req, res) => {
   const { _id, newPass, oldPass } = req.body;
-  let user = (await Admin.findById(_id)).toJSON();
+  let user = await Admin.findById(_id);
   if (user) {
     const verified = await bcrypt.compare(oldPass, user.password);
+    console.log(verified);
     if (verified) {
       const salt = await bcrypt.genSalt();
       const newPassSave = await bcrypt.hash(newPass, salt);
-      user.password = newPassSave;
-      await user.save();
+      const updated = await Admin.findByIdAndUpdate(_id, {
+        password: newPassSave,
+      });
       res.json({ success: "true" });
     } else {
       res.status(400).json({ error: "Incorrect password" });
     }
   } else {
     res.status(400).json({ error: "User does not exist" });
+  }
+});
+
+router.post("/forgot/initial", async (req, res) => {
+  const { email } = req.body;
+  const user = await findOne({ email });
+  if (user) {
+    let otpStr = Math.floor(100000 + Math.random() * 900000);
+    const otp = new Otp({
+      userId: user.id,
+      otpStr,
+    });
+    otp.save();
+    let mailInfo = await transporter.sendMail({
+      from: "jmrd@jmrd.com",
+      to: email,
+      subject: "Your OTP - JMRD",
+      html: `<p>Your 6-digit OTP is <b>${otp.otpStr}</b>, valid for 5 minutes.</p>`,
+    });
+    res.json({ _id: user.id });
+    console.log("Message sent: %s", mailInfo.messageId);
+  } else {
+    res.status(400).json({ error: "User does not exist" });
+  }
+});
+
+router.post("/forgot/verify", async (req, res) => {
+  const { otpStr, _id } = req.body;
+  const otp = Otp.find({ _id, otpStr });
+  console.log(Date.now() - otp.date);
+  if (Date.now() - otp.date < 5 * 60 * 1000) {
+    const newPass = genRandPass();
+    const updated = await Student.findByIdAndUpdate(_id, {
+      password: newPass,
+    });
+    let mailInfo = await transporter.sendMail({
+      from: "jmrd@jmrd.com",
+      to: email,
+      subject: "Your New Password - JMRD",
+      html: `<p>Your new password is <b>${updated.password}</b>, valid for 5 minutes.</p>`,
+    });
+    console.log("Message sent: %s", mailInfo.messageId);
+    res.json({ success: "true" });
+  } else {
+    res.status(400).json({ error: "invalid/expired OTP" });
   }
 });
 
