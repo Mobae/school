@@ -69,9 +69,9 @@ const StudentInfo = (props) => {
               </Text>
             </View>
             <List.Accordion
-              title="Parent Details"
+              title='Parent Details'
               titleStyle={{ alignSelf: 'flex-start' }}
-              left={(props) => <List.Icon {...props} icon="account-child" />}
+              left={(props) => <List.Icon {...props} icon='account-child' />}
             >
               <ScrollView>
                 <View style={styles.info}>
@@ -108,13 +108,14 @@ const StudentInfo = (props) => {
                     </Text>
                   </View>
                 </View>
+                <Text></Text>
               </ScrollView>
             </List.Accordion>
           </ScrollView>
         </React.Fragment>
         <FAB
           style={styles.fab}
-          icon="account-edit"
+          icon='account-edit'
           onPress={() => openEditModal(true)}
         />
       </PaperProvider>
