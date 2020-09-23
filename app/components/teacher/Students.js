@@ -16,8 +16,8 @@ const leftIcon = (props) => {
   return (
     <Avatar.Icon
       {...props}
-      icon="human-child"
-      color="white"
+      icon='human-child'
+      color='white'
       style={{ backgroundColor: '#3b3691' }}
     />
   );
@@ -36,7 +36,7 @@ const StudentCard = (props) => {
     >
       <Fragment>
         <Card.Title title={props.name} left={leftIcon} />
-        <Card.Content style={{ marginBottom: 10 }}>
+        <Card.Content style={{ marginBottom: -10, marginTop: -10 }}>
           <Paragraph>Roll No: {props.rollNo}</Paragraph>
           <Paragraph>Email: {props.email}</Paragraph>
         </Card.Content>
@@ -75,6 +75,7 @@ const Students = ({ navigation }) => {
               class={user.className}
             />
           ))}
+          <Text></Text>
         </ScrollView>
       </Fragment>
     );
@@ -83,9 +84,9 @@ const Students = ({ navigation }) => {
       <View style={styles.container}>
         <ActivityIndicator
           animating={true}
-          size="large"
+          size='large'
           style={styles.loading}
-          color="#0a6605"
+          color='#0a6605'
         />
       </View>
     );
