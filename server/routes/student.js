@@ -13,6 +13,7 @@ const Student = require("../models/Student");
 const Teacher = require("../models/Teacher");
 const Class = require("../models/Class");
 const Admin = require("../models/Admin");
+const Otp = require("../models/Otp");
 const { findOne, findOneAndUpdate } = require("../models/Student");
 
 let transporter = nodemailer.createTransport({
@@ -330,12 +331,17 @@ router.post("/forgot/initial", async (req, res) => {
   const { email } = req.body;
   const user = await findOne({ email });
   if (user) {
-    let otp = Math.floor(100000 + Math.random() * 900000);
+    let otpStr = Math.floor(100000 + Math.random() * 900000);
+    const otp = new Otp({
+      userId: user.id,
+      otpStr,
+    });
+    otp.save();
     let mailInfo = await transporter.sendMail({
       from: "jmrd@jmrd.com",
       to: email,
-      subject: "Forgot password - JMRD",
-      html: `<p>Your 6-digit OTP is <b>${otp}</b>, valid for 5 minutes.</p>`,
+      subject: "Your OTP - JMRD",
+      html: `<p>Your 6-digit OTP is <b>${otp.otpStr}</b>, valid for 5 minutes.</p>`,
     });
     console.log("Message sent: %s", mailInfo.messageId);
   } else {

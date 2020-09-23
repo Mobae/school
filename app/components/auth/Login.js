@@ -30,9 +30,14 @@ const Login = () => {
     if (!email) {
       createAlert("Error", "Please enter a valid Email.");
     } else {
-      const res = await axios.post(URL + "/student/forgot/initial", {
-        email,
-      });
+      try {
+        const res = await axios.post(URL + "/student/forgot/initial", {
+          email,
+        });
+      } catch (err) {
+        console.log(err);
+        createAlert("Error", "Please enter a valid Email.");
+      }
     }
   };
 
