@@ -99,7 +99,6 @@ const AllStudentsAttendance = ({ navigation }) => {
     <React.Fragment>
       <PaperProvider>
         <View>
-          <Title style={styles.title}>Attendance</Title>
           <View style={{ marginVertical: 10 }}>
             <DataTable>
               <ScrollView>
