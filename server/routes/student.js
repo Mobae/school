@@ -377,24 +377,36 @@ router.post("/forgot/initial", async (req, res) => {
 });
 
 router.post("/forgot/verify", async (req, res) => {
-  const { otpStr, _id, userType } = req.body;
-  const otp = Otp.find({ userId: _id, otpStr });
-  console.log(Date.now() - otp.date);
-  if (Date.now() - otp.date < 5 * 60 * 1000 && otpStr === otp.otpStr) {
+  const { otpStr, _id, userType, email } = req.body;
+  const otp = await Otp.findOne({ userId: _id, otpStr });
+  const timeNow = new Date();
+  const otpTime = new Date(otp.date);
+  let timeDiff = timeNow - otpTime;
+  timeDiff = timeDiff / 60 / 1000;
+  console.log(timeDiff);
+  if (timeDiff < 5 && otpStr === otp.otpStr) {
     const newPass = genRandPass();
     const updated =
       userType === "student"
-        ? await Student.findByIdAndUpdate(_id, {
-            password: newPass,
-          })
-        : await Teacher.findByIdAndUpdate(_id, {
-            password: newPass,
-          });
+        ? await Student.findByIdAndUpdate(
+            _id,
+            {
+              password: newPass,
+            },
+            { useFindAndModify: false }
+          )
+        : await Teacher.findByIdAndUpdate(
+            _id,
+            {
+              password: newPass,
+            },
+            { useFindAndModify: false }
+          );
     let mailInfo = await transporter.sendMail({
       from: "jmrd@jmrd.com",
       to: email,
       subject: "Your New Password - JMRD",
-      html: `<p>Your new password is <b>${updated.password}</b>, valid for 5 minutes.</p>`,
+      html: `<p>Your new password is <b>${updated.password}</b></p>`,
     });
     console.log("Message sent: %s", mailInfo.messageId);
     res.json({ success: "true" });
