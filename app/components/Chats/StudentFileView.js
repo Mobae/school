@@ -151,10 +151,10 @@ const StudentFileView = ({ navigation, route }) => {
                           style={{ marginLeft: 'auto', alignSelf: 'center' }}
                         >
                           <IconButton
-                            icon="upload"
+                            icon="send"
                             size={35}
                             onPress={() => {
-                              Linking.openURL(`mailto:${file.teacherEmail}?subject=${file.caption}&body=Description`);
+                              Linking.openURL(`mailto:${file.teacherEmail}?subject=${file.caption}&body=Attach your submission here.`);
                             }}
                             color="#2D5264"
                           />
