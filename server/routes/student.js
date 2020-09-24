@@ -339,9 +339,11 @@ router.post("/forgot/initial", async (req, res) => {
   let user = await Student.findOne({ email });
   if (user) {
     let otpStr = Math.floor(100000 + Math.random() * 900000);
+    const dt = new Date();
     const otp = new Otp({
       userId: user.id,
       otpStr,
+      date: dt,
     });
     otp.save();
     let mailInfo = await transporter.sendMail({
@@ -357,9 +359,11 @@ router.post("/forgot/initial", async (req, res) => {
   user = await Teacher.findOne({ email });
   if (user) {
     let otpStr = Math.floor(100000 + Math.random() * 900000);
+    const dt = new Date();
     const otp = new Otp({
       userId: user.id,
       otpStr,
+      date: dt,
     });
     otp.save();
     let mailInfo = await transporter.sendMail({
