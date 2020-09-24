@@ -189,7 +189,7 @@ router.post("/update/teacher", auth, admin, async (req, res) => {
 
 router.post("/add", async (req, res) => {
   let obj = req.body;
-  obj = trimObj(obj);
+  obj = JSON.parse(JSON.stringify(obj).replace(/"\s+|\s+"/g,'"'))
   const {
     firstName,
     lastName,
