@@ -13,7 +13,7 @@ import {
   IconButton,
   Text
 } from 'react-native-paper';
-import { Linking } from 'react-native'
+
 
 import * as MediaLibrary from 'expo-media-library';
 import * as FileSystem from 'expo-file-system';
@@ -137,18 +137,6 @@ const Files = ({ navigation, route }) => {
                             size={35}
                             onPress={() => {
                               downloadFile(file.filename, file.caption);
-                            }}
-                            color="#2D5264"
-                          />
-                        </View>
-                        <View
-                          style={{ marginLeft: 'auto', alignSelf: 'center' }}
-                        >
-                          <IconButton
-                            icon="upload"
-                            size={35}
-                            onPress={() => {
-                              Linking.openURL('mailto:support@example.com?subject=SendMail&body=Description');
                             }}
                             color="#2D5264"
                           />
