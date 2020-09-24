@@ -28,6 +28,7 @@ const Login = ({ navigation }) => {
 
   const handleForgot = async (values) => {
     const { email } = values;
+    console.log(values);
     if (!email) {
       createAlert("Error", "Please enter a valid Email.");
     } else {
