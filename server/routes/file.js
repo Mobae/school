@@ -57,7 +57,8 @@ module.exports =  (upload) => {
                                 length: req.file.size,
                                 contentType: req.file.contentType,
                                 classId: req.body.classId,
-                                teacherName: obj.name
+                                teacherName: obj.name,
+                                teacherEmail: obj.email
                             });
 
                             newFile.save()

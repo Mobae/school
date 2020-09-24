@@ -48,7 +48,7 @@ const EditStudent = ({ user, editModal, openEditModal, navigation, token }) => {
         headers,
       });
       setReload(!reload);
-      navigation.navigate('AllStudentList');
+      // navigation.navigate('AllStudentList');
     } catch (err) {
       console.log(err);
     }
