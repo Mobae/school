@@ -1,20 +1,37 @@
 import React, { Fragment } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import { TextInput, Button, Paragraph, Headline } from "react-native-paper";
 import globalStyles from "../styles/global";
+import { Formik } from "formik";
 import axios from "axios";
 
 import { URL } from "../../config";
 
+const createAlert = (title, message) =>
+  Alert.alert(title, message, [{ text: "OK" }], { cancelable: false });
+
 const OTP = (props) => {
+  const { _id, userType, email } = props.route.params;
+  console.log(email, userType);
   const handleSubmit = async (values) => {
-    const { _id, userType } = props.route.params;
-    const otpStr = { values };
-    const res = await axios.post(URL + "/student/forgot/verify", {
-      _id,
-      userType,
-      otpStr,
-    });
+    const { otpStr } = values;
+    try {
+      const res = await axios.post(URL + "/student/forgot/verify", {
+        _id,
+        userType,
+        otpStr,
+        email,
+      });
+      if (res.data.success) {
+        createAlert(
+          "Success",
+          "Please check your email and junk folder for your new password."
+        );
+      }
+    } catch (err) {
+      console.log(err);
+      createAlert("Error", "Invalid/expired OTP");
+    }
   };
   return (
     <View style={{ marginHorizontal: 20, marginVertical: 200 }}>
@@ -23,7 +40,7 @@ const OTP = (props) => {
           Enter OTP sent to :
         </Headline>
         <Headline style={{ fontSize: 18, fontWeight: "bold" }}>
-          example@example.com
+          {email}
         </Headline>
         <Formik
           initialValues={{ otpStr: "" }}
@@ -34,6 +51,8 @@ const OTP = (props) => {
               <TextInput
                 mode="outlined"
                 placeholder="Enter OTP"
+                keyboardType="numeric"
+                maxLength={6}
                 style={{ marginVertical: 20 }}
                 autoCapitalize="none"
                 value={values.otpStr}

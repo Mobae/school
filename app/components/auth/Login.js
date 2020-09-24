@@ -38,7 +38,7 @@ const Login = ({ navigation }) => {
         });
         if (res.data._id) {
           const { _id, userType } = res.data;
-          navigation.push("otp", { _id, userType });
+          navigation.push("otp", { _id, userType, email });
         }
       } catch (err) {
         console.log(err);

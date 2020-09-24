@@ -378,7 +378,7 @@ router.post("/forgot/initial", async (req, res) => {
 
 router.post("/forgot/verify", async (req, res) => {
   const { otpStr, _id, userType } = req.body;
-  const otp = Otp.find({ _id, otpStr });
+  const otp = Otp.find({ userId: _id, otpStr });
   console.log(Date.now() - otp.date);
   if (Date.now() - otp.date < 5 * 60 * 1000 && otpStr === otp.otpStr) {
     const newPass = genRandPass();
