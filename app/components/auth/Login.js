@@ -28,6 +28,7 @@ const Login = ({ navigation }) => {
 
   const handleForgot = async (values) => {
     const { email } = values;
+    console.log(values);
     if (!email) {
       createAlert("Error", "Please enter a valid Email.");
     } else {
@@ -37,7 +38,7 @@ const Login = ({ navigation }) => {
         });
         if (res.data._id) {
           const { _id, userType } = res.data;
-          navigation.push("otp", { _id, userType });
+          navigation.push("otp", { _id, userType, email });
         }
       } catch (err) {
         console.log(err);
