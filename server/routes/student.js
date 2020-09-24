@@ -382,23 +382,24 @@ router.post("/forgot/verify", async (req, res) => {
   const timeNow = new Date();
   const otpTime = new Date(otp.date);
   let timeDiff = timeNow - otpTime;
-  timeDiff = timeDiff / 60 / 1000;
   console.log(timeDiff);
-  if (timeDiff < 5 && otpStr === otp.otpStr) {
+  if (timeDiff < 5*60*1000 && otpStr === otp.otpStr) {
     const newPass = genRandPass();
+    const salt = await bcrypt.genSalt();
+    const newPassSave = await bcrypt.hash(newPass, salt);
     const updated =
       userType === "student"
         ? await Student.findByIdAndUpdate(
             _id,
             {
-              password: newPass,
+              password: newPassSave,
             },
             { useFindAndModify: false }
           )
         : await Teacher.findByIdAndUpdate(
             _id,
             {
-              password: newPass,
+              password: newPassSave,
             },
             { useFindAndModify: false }
           );
@@ -406,7 +407,7 @@ router.post("/forgot/verify", async (req, res) => {
       from: "jmrd@jmrd.com",
       to: email,
       subject: "Your New Password - JMRD",
-      html: `<p>Your new password is <b>${updated.password}</b></p>`,
+      html: `<p>Your new password is <b>${newPass}</b></p>`,
     });
     console.log("Message sent: %s", mailInfo.messageId);
     res.json({ success: "true" });
