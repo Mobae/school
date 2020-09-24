@@ -166,7 +166,7 @@ const AddStudent = ({
                     />
                     <TextInput
                       mode='outlined'
-                      label='Date of Birth'
+                      label='Date of Birth:  DD-MM-YYYY'
                       onChangeText={handleChange('info.dob')}
                       onBlur={handleBlur('info.dob')}
                       value={values.info.dob}

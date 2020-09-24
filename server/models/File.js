@@ -30,6 +30,10 @@ const FileSchema = new Schema({
         required: true,
         type: String,
     },
+    teacherEmail: {
+        required: true,
+        type: String
+    },
     createdAt: {
         default: Date.now(),
         type: Date,
