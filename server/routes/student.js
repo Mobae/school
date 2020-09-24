@@ -27,7 +27,7 @@ let transporter = nodemailer.createTransport({
 });
 
 router.get("/homie/testing", (req, res) => {
-	res.json({msg: "hello homie"});
+  res.json({ msg: "hello homie" });
 });
 
 router.get("/students/all", auth, admin, async (req, res) => {
@@ -189,7 +189,7 @@ router.post("/update/teacher", auth, admin, async (req, res) => {
 
 router.post("/add", async (req, res) => {
   let obj = req.body;
-  obj = trimObj(obj);
+  obj = JSON.parse(JSON.stringify(obj).replace(/"\s+|\s+"/g, '"'));
   const {
     firstName,
     lastName,
@@ -339,9 +339,11 @@ router.post("/forgot/initial", async (req, res) => {
   let user = await Student.findOne({ email });
   if (user) {
     let otpStr = Math.floor(100000 + Math.random() * 900000);
+    const dt = new Date();
     const otp = new Otp({
       userId: user.id,
       otpStr,
+      date: dt,
     });
     otp.save();
     let mailInfo = await transporter.sendMail({
@@ -357,9 +359,11 @@ router.post("/forgot/initial", async (req, res) => {
   user = await Teacher.findOne({ email });
   if (user) {
     let otpStr = Math.floor(100000 + Math.random() * 900000);
+    const dt = new Date();
     const otp = new Otp({
       userId: user.id,
       otpStr,
+      date: dt,
     });
     otp.save();
     let mailInfo = await transporter.sendMail({
@@ -369,7 +373,7 @@ router.post("/forgot/initial", async (req, res) => {
       html: `<p>Your 6-digit OTP is <b>${otp.otpStr}</b>, valid for 5 minutes.</p>`,
     });
     userType = "teacher";
-    res.json({ _id: user.id });
+    res.json({ _id: user.id, userType });
     console.log("Message sent: %s", mailInfo.messageId);
   } else {
     res.status(400).json({ error: "User does not exist" });
@@ -377,19 +381,37 @@ router.post("/forgot/initial", async (req, res) => {
 });
 
 router.post("/forgot/verify", async (req, res) => {
-  const { otpStr, _id } = req.body;
-  const otp = Otp.find({ _id, otpStr });
-  console.log(Date.now() - otp.date);
-  if (Date.now() - otp.date < 5 * 60 * 1000) {
+  const { otpStr, _id, userType, email } = req.body;
+  const otp = await Otp.findOne({ userId: _id, otpStr });
+  const timeNow = new Date();
+  const otpTime = new Date(otp.date);
+  let timeDiff = timeNow - otpTime;
+  console.log(timeDiff);
+  if (timeDiff < 5*60*1000 && otpStr === otp.otpStr) {
     const newPass = genRandPass();
-    const updated = await Student.findByIdAndUpdate(_id, {
-      password: newPass,
-    });
+    const salt = await bcrypt.genSalt();
+    const newPassSave = await bcrypt.hash(newPass, salt);
+    const updated =
+      userType === "student"
+        ? await Student.findByIdAndUpdate(
+            _id,
+            {
+              password: newPassSave,
+            },
+            { useFindAndModify: false }
+          )
+        : await Teacher.findByIdAndUpdate(
+            _id,
+            {
+              password: newPassSave,
+            },
+            { useFindAndModify: false }
+          );
     let mailInfo = await transporter.sendMail({
       from: "jmrd@jmrd.com",
       to: email,
       subject: "Your New Password - JMRD",
-      html: `<p>Your new password is <b>${updated.password}</b>, valid for 5 minutes.</p>`,
+      html: `<p>Your new password is <b>${newPass}</b></p>`,
     });
     console.log("Message sent: %s", mailInfo.messageId);
     res.json({ success: "true" });
